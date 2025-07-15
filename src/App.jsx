@@ -1,18 +1,19 @@
-
 import About from "./sections/About";
 import Header from "./sections/Header";
-import TechMarquee from "./ui/TechMarquee";
-import TechMarqueeEmpty from "./ui/TechMarqueeEmpty.jsx";
+import SplashCursor from "./ui/CustomCursor";
+import TechParallax from "./ui/TechParallax";
 import SmoothScroll from "./utils/SmoothScroll";
+
 function App() {
   return (
     <div>
       <SmoothScroll>
-       
+        <SplashCursor />
+
         <Header />
         <About />
-        <TechMarqueeEmpty />
-        <TechMarquee />
+
+        <TechParallax />
       </SmoothScroll>
     </div>
   );

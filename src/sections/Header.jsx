@@ -1,11 +1,34 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import avatar from "../assets/yoga.png";
 import Navbar from "../components/Navbar";
+import useScrollAnimation from "../utils/useScrollAnimation";
 
 export default function Header() {
+  useScrollAnimation();
+
+  const [showNavbar, setShowNavbar] = useState(true);
+  useEffect(() => {
+    const handleScroll = () => {
+      const headerHeight = window.innerHeight;
+      if (window.scrollY > headerHeight - 100) {
+        setShowNavbar(false);
+      } else {
+        setShowNavbar(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="relative h-screen w-full bg-stone-950 text-white overflow-hidden">
-      <Navbar />
+    <section
+      id="header"
+      className="relative h-screen w-full bg-stone-950 text-white overflow-hidden"
+    >
+      {showNavbar && <Navbar />}
       <motion.h1
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-100, 0, 0, -100] }}

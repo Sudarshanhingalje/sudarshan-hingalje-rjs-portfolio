@@ -1,4 +1,4 @@
-import Marquee from "react-fast-marquee";
+// components/TechParallax.jsx
 import {
   FaCode,
   FaCss3Alt,
@@ -10,12 +10,13 @@ import {
   FaReact,
 } from "react-icons/fa";
 import { SiJira, SiNextdotjs, SiPostman } from "react-icons/si";
+import ParallaxText from "./ParallaxText"; // the file you already made
 
-export default function TechMarquee() {
+export default function TechParallax() {
   return (
-    <section className="bg-yellow-100 transform skew-y-6 py-4">
-      <Marquee gradient={false} speed={60} pauseOnHover={true}>
-        <div className="flex items-center space-x-10 text-black font-bold text-lg px-6">
+    <section className="bg-yellow-100 transform  py-6">
+      <ParallaxText baseVelocity={-10}>
+        <>
           <span className="flex items-center space-x-2">
             <FaReact className="text-blue-600" />
             <span>React</span>
@@ -60,14 +61,14 @@ export default function TechMarquee() {
             <FaGithub className="text-gray-800" />
             <span>GitHub</span>
           </span>
-          <span className="flex items-center">
-            🛠️ Working on:
+          <span className="flex items-center space-x-2">
+            🛠️
             <span className="ml-2 text-purple-900">
-              The Wild Oasis – Internal Hotel System
+              Working on: The Wild Oasis
             </span>
           </span>
-        </div>
-      </Marquee>
+        </>
+      </ParallaxText>
     </section>
   );
 }
