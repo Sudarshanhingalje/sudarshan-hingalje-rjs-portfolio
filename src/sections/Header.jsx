@@ -26,7 +26,7 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative h-screen w-full bg-stone-950 text-white overflow-hidden"
+      className="transition-all duration-500 ease-in-out relative h-screen w-full  bg-stone-950 text-white overflow-hidden"
     >
       {showNavbar && <Navbar />}
       <motion.h1
@@ -61,11 +61,26 @@ export default function Header() {
         </a>
       </motion.div>
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
-        <img
-          src={avatar}
-          alt="Avatar"
-          className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
-        />
+        <div className="relative w-full flex justify-center items-center">
+          {/* Background Video */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 z-0 w-[300px] h-[300px] "
+          >
+            <source src="../src/globe.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          {/* Avatar Image */}
+          <img
+            src={avatar}
+            alt="Avatar"
+            className="relative z-10 w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
+          />
+        </div>
       </div>
     </section>
   );

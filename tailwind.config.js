@@ -5,6 +5,9 @@ export default {
     extend: {
       fontFamily: {
         cinzel: ['"Cinzel"', "serif"],
+        poppins: ["Poppins", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },
