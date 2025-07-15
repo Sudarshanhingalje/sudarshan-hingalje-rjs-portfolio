@@ -14,7 +14,7 @@ import { SiJira, SiNextdotjs, SiPostman } from "react-icons/si";
 
 export default function TechMarquee() {
   return (
-    <section className="bg-yellow-100 transform skew-y-4  py-3">
+    <section className="bg-yellow-100 transform skew-y-6  py-3">
       <Marquee gradient={false} speed={50} pauseOnHover={true}>
         <div className="flex items-center space-x-10 text-black font-bold text-lg">
           <span className="flex items-center space-x-2">

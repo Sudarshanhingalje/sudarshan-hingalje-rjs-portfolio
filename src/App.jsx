@@ -10,10 +10,9 @@ function App() {
       <SmoothScroll>
         <Navbar />
         <Header />
-
-        <About />
         <TechMarqueeEmpty />
         <TechMarquee />
+        <About />
       </SmoothScroll>
     </div>
   );
