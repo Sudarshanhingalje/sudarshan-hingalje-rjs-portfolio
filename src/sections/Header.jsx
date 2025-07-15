@@ -39,8 +39,8 @@ export default function Header() {
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
         <img
           src={avatar}
-          alt="Background"
-          className="w-32 sm:w-40 md:w-48 lg:w-56 xl:w-64 max-w-full h-auto object-contain"
+          alt="Avatar"
+          className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
         />
       </div>
     </section>
