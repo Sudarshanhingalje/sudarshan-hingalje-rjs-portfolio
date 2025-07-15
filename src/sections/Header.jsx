@@ -36,11 +36,11 @@ export default function Header() {
           Contact Me
         </a>
       </motion.div>
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
         <img
           src={avatar}
           alt="Background"
-          className="w-[100px] sm:w-[150px] md:w-[200px] object-contain"
+          className="w-32 sm:w-40 md:w-48 lg:w-56 xl:w-64 max-w-full h-auto object-contain"
         />
       </div>
     </section>
