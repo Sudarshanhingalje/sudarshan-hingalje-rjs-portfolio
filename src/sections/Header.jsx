@@ -35,6 +35,13 @@ export default function Header() {
           Contact Me
         </a>
       </motion.div>
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10">
+        <img
+          src="/src/assets/yoga.png"
+          alt="Background"
+          className="w-[100px] sm:w-[150px] md:w-[200px] object-contain"
+        />
+      </div>
     </section>
   );
 }

@@ -6,13 +6,13 @@ import TechMarqueeEmpty from "./ui/TechMarqueeEmpty.jsx";
 import SmoothScroll from "./utils/SmoothScroll";
 function App() {
   return (
-    <div className="bg-black ">
+    <div>
       <SmoothScroll>
         <Navbar />
         <Header />
+        <About />
         <TechMarqueeEmpty />
         <TechMarquee />
-        <About />
       </SmoothScroll>
     </div>
   );
