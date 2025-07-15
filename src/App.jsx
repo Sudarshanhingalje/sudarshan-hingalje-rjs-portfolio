@@ -1,4 +1,4 @@
-import Navbar from "./components/Navbar";
+
 import About from "./sections/About";
 import Header from "./sections/Header";
 import TechMarquee from "./ui/TechMarquee";
@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <SmoothScroll>
-        <Navbar />
+       
         <Header />
         <About />
         <TechMarqueeEmpty />

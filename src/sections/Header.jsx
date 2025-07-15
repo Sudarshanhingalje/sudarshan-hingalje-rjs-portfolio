@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import avatar from "../assets/yoga.png";
+import Navbar from "../components/Navbar";
 
 export default function Header() {
   return (
     <section className="relative h-screen w-full bg-stone-950 text-white overflow-hidden">
-      {/* Name */}
+      <Navbar />
       <motion.h1
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-100, 0, 0, -100] }}
