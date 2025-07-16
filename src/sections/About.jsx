@@ -64,7 +64,7 @@ const About = () => {
           <img
             src={devImage}
             alt="Developer Sudarshan Hingalje"
-            className="rounded-full  hover:scale-105 transition-transform duration-500  border-green-500 shadow-lg shadow-green-500/500"
+            className="rounded-2xl  hover:scale-105 transition-transform duration-500  border-green-500 shadow-lg shadow-green-500/100"
           />
         </div>
       </motion.div>
