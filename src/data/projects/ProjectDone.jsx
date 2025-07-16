@@ -37,4 +37,21 @@ export const projectsDone = [
     link: "https://the-wild-oasis-website-cabins.vercel.app/", // fallback
     github: "https://github.com/ScrapSavvym24/ScrapSavvy_M24",
   },
+  {
+    title: "Pizza Delivery Application",
+    description:
+      "A full-featured pizza ordering system with real-time cart updates, authentication, Razorpay payment integration, and MongoDB database. Includes REST API, Axios, Redux, and React Router. Watch demo: https://youtu.be/ynnvcnA_rqg?si=MsRwBd-RGUaKEeX0",
+    tech: [
+      "React",
+      "Redux",
+      "React Router",
+      "MongoDB",
+      "Razorpay",
+      "Axios",
+      "REST API",
+      "CSS",
+    ],
+    link: "https://pizza-delivery-application-rose.vercel.app/",
+    github: "https://github.com/Sudarshanhingalje/Pizza-Delivery-Application",
+  },
 ];
