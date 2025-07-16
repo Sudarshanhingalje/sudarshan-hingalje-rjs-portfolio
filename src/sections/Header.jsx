@@ -43,7 +43,7 @@ export default function Header() {
       <motion.div
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: [1], y: [90, 0, 0] }}
-        transition={{ delay: 3.1, duration: 1 }}
+        transition={{ delay: 6, duration: 6 }}
         className="absolute top-[28%] left-4 md:left-10 flex flex-col items-start space-y-6 sm:space-y-8"
       >
         <p className="text-4xl sm:text-6xl md:text-7xl lg:text-[8vw] xl:text-[9vw] font-cinzel leading-tight text-[#d5cdc4]">
