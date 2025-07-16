@@ -22,12 +22,12 @@ export default function useScrollAnimation() {
     });
 
     // ✅ Pin About Section with parallax
-    gsap.to(".about-avatar", {
-      opacity: 0,
+    gsap.to("#about .about-bg", {
+      yPercent: -20,
       scrollTrigger: {
-        trigger: "#skills",
-        start: "top 90%",
-        end: "top 50%",
+        trigger: "#about",
+        start: "top bottom",
+        end: "bottom top",
         scrub: true,
       },
     });
