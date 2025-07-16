@@ -49,7 +49,7 @@ export default function ParallaxText({ children, baseVelocity = 100 }) {
       >
         {Array.from({ length: 6 }).map((_, i) => (
           <span key={i} className="flex gap-8 items-center">
-            {children}
+            {React.Children.toArray(children)}
           </span>
         ))}
       </motion.div>
