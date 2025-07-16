@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-
 import { projectsDone } from "../data/projects/ProjectDone";
+
 const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-[#0d0d0d] text-white">
@@ -23,14 +23,12 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="bg-white/5 border border-white/10 rounded-lg p-6 hover:shadow-xl transition-all"
             >
-              <h3 className="text-xl font-semibold mb-2">
-                {projectsDone.title}
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
               <p className="text-sm text-gray-300 mb-4">
-                {projectsDone.description}
+                {project.description}
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {projectsDone.tech.map((tech, i) => (
+                {project.tech.map((tech, i) => (
                   <span
                     key={i}
                     className="bg-white/10 text-xs px-2 py-1 rounded-full"
@@ -41,7 +39,7 @@ const Projects = () => {
               </div>
               <div className="flex flex-col gap-1 text-sm">
                 <a
-                  href={projectsDone.link}
+                  href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:underline"
@@ -49,7 +47,7 @@ const Projects = () => {
                   🔗 Live Demo →
                 </a>
                 <a
-                  href={projectsDone.github}
+                  href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-green-400 hover:underline"
