@@ -22,10 +22,10 @@ export default function useScrollAnimation() {
     });
 
     // ✅ Pin About Section with parallax
-    gsap.to("#about .about-avatar", {
+    gsap.to(".about-avatar", {
       opacity: 0,
       scrollTrigger: {
-        trigger: "#skills", // fade out as Skills section starts
+        trigger: "#skills",
         start: "top 90%",
         end: "top 50%",
         scrub: true,
