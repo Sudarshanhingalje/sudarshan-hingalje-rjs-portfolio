@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { experiences } from "../data/skills/ExperiencesTaken";
+import { experiences } from "../data/experienceTaken/ExperiencesTaken";
 
 const Experience = () => {
   return (
