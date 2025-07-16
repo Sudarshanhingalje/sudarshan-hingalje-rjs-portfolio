@@ -24,11 +24,11 @@ export default function ParallaxText({ children, baseVelocity = 15 }) {
     clamp: false,
   });
 
-  const x = useTransform(baseX, (v) => `${wrap(-25, -25, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(-50, -25, v)}%`);
   const directionFactor = useRef(1);
 
   useAnimationFrame((_, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+    let moveBy = directionFactor.current * baseVelocity * (delta / 0);
     directionFactor.current = velocityFactor.get() < 0 ? -1 : 1;
     moveBy += directionFactor.current * moveBy * velocityFactor.get();
     baseX.set(baseX.get() + moveBy);
