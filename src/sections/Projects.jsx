@@ -4,7 +4,7 @@ import { projectsDone } from "../data/projects/ProjectDone";
 const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-[#0d0d0d] text-white">
-      <div className="max-w-6xl mx-auto px-4 bg-[#c33535]">
+      <div className="max-w-6xl mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
