@@ -9,9 +9,6 @@ export default {
         inter: ["Inter", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
       },
-      colors: {
-        dark: "#121212",
-      },
     },
   },
   plugins: [],
