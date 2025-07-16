@@ -1,5 +1,5 @@
 import { FaEnvelope, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
-import bgImage from "../assets/brand.png";
+import bgImage from "../assets/brand2.png";
 
 const Footer = () => {
   return (
