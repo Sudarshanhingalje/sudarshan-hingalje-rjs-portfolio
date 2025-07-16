@@ -10,19 +10,21 @@ import {
 } from "framer-motion";
 import { Children, useRef } from "react";
 
-export default function ParallaxText({ children, baseVelocity = 100 }) {
+export default function ParallaxText({ children, baseVelocity = 15 }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400,
+    damping: 40,
+    stiffness: 300,
   });
-  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+
+  // ⚠️ Adjusted to slow it down and make it more subtle
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 1], {
     clamp: false,
   });
 
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(-50, -25, v)}%`);
   const directionFactor = useRef(1);
 
   useAnimationFrame((_, delta) => {
@@ -32,13 +34,12 @@ export default function ParallaxText({ children, baseVelocity = 100 }) {
     baseX.set(baseX.get() + moveBy);
   });
 
-  // ✅ Convert children safely to an array
   const childArray = Children.toArray(children);
 
   return (
     <div className="overflow-hidden whitespace-nowrap w-full">
       <motion.div
-        className="flex gap-12 text-lg font-semibold items-center text-black"
+        className="flex gap-12 text-lg font-semibold items-center text-black dark:text-white"
         style={{ x }}
       >
         {Array.from({ length: 4 }).map((_, i) => (
