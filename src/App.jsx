@@ -9,7 +9,7 @@ import Header from "./sections/Header";
 import Personal from "./sections/Personal";
 import Projects from "./sections/Projects";
 import Skills from "./sections/Skills";
-import SplashCursor from "./ui/CustomCursor";
+import SplashCursor from "./ui/SplashCursor";
 import TechParallax from "./ui/TechParallax";
 import SmoothScroll from "./utils/SmoothScroll";
 import useScrollAnimation from "./utils/useScrollAnimation";
