@@ -5,20 +5,24 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "auto-commit": "node autoCommit.js"
   },
   "dependencies": {
     "@motionone/utils": "^10.18.0",
     "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^12.23.5",
     "gsap": "^3.13.0",
+    "lottie-react": "^2.4.1",
+    "node-cron": "^4.2.1",
     "react": "^18.2.0",
     "react-animated-cursor": "^2.11.2",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.5",
     "react-icons": "^5.5.0",
     "react-parallax-tilt": "^1.7.300",
-    "react-router-dom": "^7.6.3"
+    "react-router-dom": "^7.6.3",
+    "simple-git": "^3.28.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.3",

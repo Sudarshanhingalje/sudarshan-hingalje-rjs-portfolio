@@ -6,96 +6,99 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function useScrollAnimation() {
   useEffect(() => {
-    // Clean up previous scroll triggers
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-    // 🔹 Header Animation
+    // ✅ Header hide on scroll down
     gsap.to("#header", {
-      y: -80,
-      opacity: 0.85,
+      y: -100,
+      opacity: 0,
+      duration: 0.5,
       scrollTrigger: {
         trigger: "#about",
-        start: "top center",
+        start: "top top",
+        end: "bottom top",
         scrub: true,
       },
     });
 
-    // 🔹 About Section
-    gsap.from("#about .about-text", {
+    // ✅ Pin About Section with parallax
+    gsap.to("#about .about-avatar", {
       opacity: 0,
-      y: 60,
-      duration: 1,
       scrollTrigger: {
-        trigger: "#about",
-        start: "top 80%",
-        toggleActions: "play none none reverse",
+        trigger: "#skills", // fade out as Skills section starts
+        start: "top 90%",
+        end: "top 50%",
+        scrub: true,
       },
     });
 
-    gsap.from("#about .about-image", {
-      opacity: 0,
-      x: 100,
-      duration: 1,
-      scrollTrigger: {
-        trigger: "#about",
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    // 🔹 Skills Section
-    gsap.from("#skills", {
-      opacity: 0,
-      y: 100,
-      duration: 1,
+    // ✅ Stagger skill cards using timeline
+    const skillTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#skills",
-        start: "top 85%",
+        start: "top 80%",
         toggleActions: "play none none reverse",
       },
     });
 
-    // 🔹 Projects Section
-    gsap.from("#projects", {
+    skillTimeline.from(".skill-card", {
       opacity: 0,
-      scale: 0.9,
+      y: 30,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "back.out(1.7)",
+    });
+
+    // ✅ Wipe animation between sections
+    const sections = document.querySelectorAll(".section");
+
+    sections.forEach((section, i) => {
+      gsap.from(section, {
+        opacity: 0,
+        y: 100,
+        duration: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
+    // ✅ Project zoom-in effect
+    gsap.from("#projects .project-card", {
+      scale: 0.8,
+      opacity: 0,
+      stagger: 0.2,
       duration: 1,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: "#projects",
-        start: "top 85%",
+        start: "top 80%",
         toggleActions: "play none none reverse",
       },
     });
 
-    // 🔹 Experience Section
-    gsap.from("#experience", {
-      opacity: 0,
-      x: -80,
-      duration: 1,
-      scrollTrigger: {
-        trigger: "#experience",
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
+    // ✅ Experience timeline slide in
+    gsap.utils.toArray(".timeline-item").forEach((el, i) => {
+      gsap.from(el, {
+        x: i % 2 === 0 ? -100 : 100,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
     });
 
-    // 🔹 Personal Section
-    gsap.from("#personal", {
+    // ✅ Contact form bounce
+    gsap.from("#contact .contact-form", {
+      y: 60,
       opacity: 0,
-      y: 80,
       duration: 1,
-      scrollTrigger: {
-        trigger: "#personal",
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    // 🔹 Contact Section
-    gsap.from("#contact", {
-      opacity: 0,
-      y: 100,
-      duration: 1,
+      ease: "bounce.out",
       scrollTrigger: {
         trigger: "#contact",
         start: "top 85%",
@@ -103,33 +106,26 @@ export default function useScrollAnimation() {
       },
     });
 
-    // Smooth fade transition between sections
-    const sections = [
-      "#about",
-      "#skills",
-      "#projects",
-      "#experience",
-      "#personal",
-      "#contact",
-    ];
+    // ✅ Section background fade transitions
+    gsap.utils.toArray(".section").forEach((section, i) => {
+      gsap.fromTo(
+        section,
+        { backgroundColor: "transparent" },
+        {
+          backgroundColor: "#0f0f0f",
+          scrollTrigger: {
+            trigger: section,
+            start: "top center",
+            end: "bottom center",
+            scrub: true,
+          },
+        }
+      );
+    });
 
-    sections.forEach((section, i) => {
-      const next = sections[i + 1];
-      if (next) {
-        gsap.fromTo(
-          section,
-          { opacity: 1 },
-          {
-            opacity: 0.3,
-            scrollTrigger: {
-              trigger: next,
-              start: "top 90%",
-              end: "top 60%",
-              scrub: true,
-            },
-          }
-        );
-      }
+    // Optional: Refresh ScrollTrigger on image load
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh();
     });
   }, []);
 }

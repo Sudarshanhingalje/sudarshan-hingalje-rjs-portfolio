@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import devImage from "../assets/download.png";
+import devImage from "../assets/own.png";
 
 const About = () => {
   return (
@@ -55,16 +55,16 @@ const About = () => {
 
       {/* Right Section - Sticky Avatar */}
       <motion.div
-        className="relative flex justify-center md:justify-end mt-10 md:mt-0"
+        className="relative flex items-center justify-center md:justify-end mt-10 md:mt-0"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="sticky top-24">
+        <div className="about-avatar relative w-full max-w-sm">
           <img
             src={devImage}
             alt="Developer Sudarshan Hingalje"
-            className="w-full max-w-sm rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 border border-cyan-500"
+            className="rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 border border-cyan-500"
           />
         </div>
       </motion.div>

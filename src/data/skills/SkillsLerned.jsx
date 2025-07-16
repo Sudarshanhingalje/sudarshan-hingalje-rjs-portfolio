@@ -1,0 +1,18 @@
+export const skillsLerned = [
+  "Java",
+  "Spring Boot",
+  "React.js",
+  "Next.js",
+  "Tailwind CSS",
+  "Supabase",
+  "PostgreSQL",
+  "MongoDB",
+  "Node.js",
+  "Git & GitHub",
+  "Docker",
+  "HTML5",
+  "CSS3",
+  "JavaScript",
+  "Three.js",
+  "Framer Motion",
+];

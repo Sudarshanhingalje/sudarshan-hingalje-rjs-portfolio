@@ -1,23 +1,6 @@
 import { motion } from "framer-motion";
 
-const skills = [
-  "Java",
-  "Spring Boot",
-  "React.js",
-  "Next.js",
-  "Tailwind CSS",
-  "Supabase",
-  "PostgreSQL",
-  "MongoDB",
-  "Node.js",
-  "Git & GitHub",
-  "Docker",
-  "HTML5",
-  "CSS3",
-  "JavaScript",
-  "Three.js",
-  "Framer Motion",
-];
+import { skillsLerned } from "../data/skills/SkillsLerned";
 
 const Skills = () => {
   return (
@@ -38,7 +21,7 @@ const Skills = () => {
           transition={{ staggerChildren: 0.1 }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
         >
-          {skills.map((skill, index) => (
+          {skillsLerned.map((skill, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}
