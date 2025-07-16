@@ -1,72 +1,52 @@
-// components/TechParallax.jsx
+import { wrap } from "@motionone/utils";
 import {
-  FaCode,
-  FaCss3Alt,
-  FaDocker,
-  FaGithub,
-  FaHtml5,
-  FaJava,
-  FaJs,
-  FaReact,
-} from "react-icons/fa";
-import { SiJira, SiNextdotjs, SiPostman } from "react-icons/si";
-import ParallaxText from "../ui/ParallaxText";
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
+import { Children, useRef } from "react";
 
-export default function TechParallax() {
+export default function ParallaxText({ children, baseVelocity = 100 }) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
+    clamp: false,
+  });
+
+  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
+  const directionFactor = useRef(1);
+
+  useAnimationFrame((_, delta) => {
+    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+    directionFactor.current = velocityFactor.get() < 0 ? -1 : 1;
+    moveBy += directionFactor.current * moveBy * velocityFactor.get();
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  // ✅ Convert children safely to an array
+  const childArray = Children.toArray(children);
+
   return (
-    <section className="bg-yellow-100 transform  py-6">
-      <ParallaxText baseVelocity={50}>
-        <span className="flex items-center space-x-2">
-          <FaReact className="text-blue-600" />
-          <span>React</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <FaHtml5 className="text-orange-600" />
-          <span>HTML5</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <FaCss3Alt className="text-blue-800" />
-          <span>CSS3</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <FaJs className="text-yellow-500" />
-          <span>JavaScript</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <FaJava className="text-red-700" />
-          <span>Java</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <FaCode className="text-purple-800" />
-          <span>C#</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <SiNextdotjs className="text-gray-900" />
-          <span>Next.js</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <FaDocker className="text-blue-500" />
-          <span>Docker</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <SiPostman className="text-orange-500" />
-          <span>Postman</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <SiJira className="text-indigo-600" />
-          <span>Jira</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          <FaGithub className="text-gray-800" />
-          <span>GitHub</span>
-        </span>
-        <span className="flex items-center space-x-2">
-          🛠️
-          <span className="ml-2 text-purple-900">
-            Working on: The Wild Oasis
-          </span>
-        </span>
-      </ParallaxText>
-    </section>
+    <div className="overflow-hidden whitespace-nowrap w-full">
+      <motion.div
+        className="flex gap-12 text-lg font-semibold items-center text-black"
+        style={{ x }}
+      >
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="flex gap-8 items-center">
+            {childArray}
+          </div>
+        ))}
+      </motion.div>
+    </div>
   );
 }
