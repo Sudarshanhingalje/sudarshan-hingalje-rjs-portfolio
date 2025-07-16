@@ -44,7 +44,9 @@ export default function ParallaxText({ children, baseVelocity = 15 }) {
       >
         {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="flex gap-8 items-center">
-            {childArray}
+            {Children.toArray(children).map((child, index) => (
+              <span key={index}>{child}</span>
+            ))}
           </div>
         ))}
       </motion.div>
