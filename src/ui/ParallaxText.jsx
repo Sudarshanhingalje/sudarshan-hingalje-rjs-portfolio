@@ -20,11 +20,11 @@ export default function ParallaxText({ children, baseVelocity = 15 }) {
   });
 
   // ⚠️ Adjusted to slow it down and make it more subtle
-  const velocityFactor = useTransform(smoothVelocity, [0, 100], [0, 1], {
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 1], {
     clamp: false,
   });
 
-  const x = useTransform(baseX, (v) => `${wrap(-50, -25, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(-25, -25, v)}%`);
   const directionFactor = useRef(1);
 
   useAnimationFrame((_, delta) => {
