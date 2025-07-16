@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import { projects } from "../data/projects/ProjectDone";
+import { projectsDone } from "../data/projects/ProjectDone";
 const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-[#0d0d0d] text-white">
@@ -15,7 +15,7 @@ const Projects = () => {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {projects.map((project, index) => (
+          {projectsDone.map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -25,10 +25,10 @@ const Projects = () => {
             >
               <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
               <p className="text-sm text-gray-300 mb-4">
-                {project.description}
+                {projectsDone.description}
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech, i) => (
+                {projectsDone.tech.map((tech, i) => (
                   <span
                     key={i}
                     className="bg-white/10 text-xs px-2 py-1 rounded-full"
@@ -39,7 +39,7 @@ const Projects = () => {
               </div>
               <div className="flex flex-col gap-1 text-sm">
                 <a
-                  href={project.link}
+                  href={projectsDone.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:underline"
@@ -47,7 +47,7 @@ const Projects = () => {
                   🔗 Live Demo →
                 </a>
                 <a
-                  href={project.github}
+                  href={projectsDone.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-green-400 hover:underline"
