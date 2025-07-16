@@ -19,15 +19,18 @@ export default function ParallaxText({ children, baseVelocity = 100 }) {
     damping: 50,
     stiffness: 400,
   });
+
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
     clamp: false,
   });
 
-  const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
-
   const directionFactor = useRef(1);
+
+  // 🔁 Adjust X with parallax effect
   useAnimationFrame((_, delta) => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
+
+    // Direction change on scroll
     if (velocityFactor.get() < 0) directionFactor.current = -1;
     else if (velocityFactor.get() > 0) directionFactor.current = 1;
 
@@ -35,16 +38,19 @@ export default function ParallaxText({ children, baseVelocity = 100 }) {
     baseX.set(baseX.get() + moveBy);
   });
 
+  // 🔄 Wrap content to avoid breaking
+  const x = useTransform(baseX, (v) => `${wrap(-100, 0, v)}%`);
+
   return (
     <div className="overflow-hidden whitespace-nowrap w-full">
       <motion.div
         className="flex gap-12 text-lg font-semibold items-center text-black"
         style={{ x }}
       >
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="flex gap-8 items-center">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <span key={i} className="flex gap-8 items-center">
             {children}
-          </div>
+          </span>
         ))}
       </motion.div>
     </div>
