@@ -15,7 +15,7 @@ import ParallaxText from "../ui/ParallaxText";
 export default function TechParallax() {
   return (
     <section className="bg-yellow-100 transform  py-6">
-      <ParallaxText baseVelocity={50}>
+      <ParallaxText baseVelocity={-50}>
         <span className="flex items-center space-x-2">
           <FaReact className="text-blue-600" />
           <span>React</span>
