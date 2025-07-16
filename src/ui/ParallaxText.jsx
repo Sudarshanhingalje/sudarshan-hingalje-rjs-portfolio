@@ -10,7 +10,7 @@ import {
 } from "framer-motion";
 import { Children, useRef } from "react";
 
-export default function ParallaxText({ children, baseVelocity = 15 }) {
+export default function ParallaxText({ children }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -19,7 +19,6 @@ export default function ParallaxText({ children, baseVelocity = 15 }) {
     stiffness: 300,
   });
 
-  // ⚠️ Adjusted to slow it down and make it more subtle
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 1], {
     clamp: false,
   });
