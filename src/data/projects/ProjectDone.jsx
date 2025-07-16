@@ -1,4 +1,4 @@
-const projects = [
+export const projectsDone = [
   {
     title: "The Wild Oasis (Cabin Booking App)",
     description:
