@@ -68,5 +68,8 @@ export default function TechParallax() {
         </span>
       </ParallaxText>
     </section>
+     <section className="bg-yellow-100 transform skew-y-3 py-6">
+    
+    </section>
   );
 }
