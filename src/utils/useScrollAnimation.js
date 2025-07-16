@@ -22,7 +22,7 @@ export default function useScrollAnimation() {
     });
 
     // ✅ Pin About Section with parallax
-    gsap.to("#about .about-bg", {
+    gsap.to("#about .about-avatar", {
       yPercent: -20,
       scrollTrigger: {
         trigger: "#about",
