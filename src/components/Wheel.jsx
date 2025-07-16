@@ -36,7 +36,7 @@ const SpinningWheel = () => {
         />
 
         {/* Spokes */}
-        {[...Array(8)].map((_, i) => {
+        {[...Array(12)].map((_, i) => {
           const angle = (i * 360) / 8;
           const rad = (angle * Math.PI) / 180;
           const x = 50 + 45 * Math.cos(rad);
