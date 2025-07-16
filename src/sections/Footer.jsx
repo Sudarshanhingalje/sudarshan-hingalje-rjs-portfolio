@@ -4,7 +4,8 @@ import bgImage from "../assets/brand.png";
 const Footer = () => {
   return (
     <footer className="flex flex-col items-center pb-10 bg-[#0b0b0b] text-[#b0b2c3]">
-      <p className="text-xs text-gray-400 py-4">Sudarshan Hingalje © 2025</br>Made with ❤️React Js+vite</p>
+      <p className="text-xs text-gray-400 py-4">Sudarshan Hingalje © 2025</p>
+      Made with ❤️React Js+vite
       <div className="my-4">
         <button
           onClick={() => {
@@ -21,7 +22,6 @@ const Footer = () => {
           />
         </button>
       </div>
-
       <ul className="flex items-center justify-center gap-6 text-xl">
         <li>
           <a
