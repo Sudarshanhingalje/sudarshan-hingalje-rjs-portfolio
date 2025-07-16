@@ -60,11 +60,11 @@ const About = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="about-avatar relative w-full max-w-sm">
+        <div className="about-avatar relative w-full max-w-lg">
           <img
             src={devImage}
             alt="Developer Sudarshan Hingalje"
-            className="rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 border border-cyan-500"
+            className="rounded-full shadow-xl hover:scale-105 transition-transform duration-300 border border-cyan-500"
           />
         </div>
       </motion.div>
