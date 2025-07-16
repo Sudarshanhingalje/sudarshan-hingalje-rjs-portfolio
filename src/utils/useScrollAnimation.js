@@ -105,6 +105,13 @@ export default function useScrollAnimation() {
         toggleActions: "play none none reverse",
       },
     });
+    skillTimeline.from(".footer", {
+      opacity: 0,
+      y: 30,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "back.out(1.7)",
+    });
 
     // ✅ Section background fade transitions
     gsap.utils.toArray(".section").forEach((section, i) => {
