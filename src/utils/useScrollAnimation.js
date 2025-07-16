@@ -26,7 +26,7 @@ export default function useScrollAnimation() {
       yPercent: -20,
       scrollTrigger: {
         trigger: "#about",
-        start: "top bottom",
+        start: "top 80%",
         end: "bottom top",
         scrub: true,
       },
