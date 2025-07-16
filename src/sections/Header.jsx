@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import earthVideo from "../assets/earth.mp4";
 import avatar from "../assets/yoga.png";
 import Navbar from "../components/Navbar";
 import useScrollAnimation from "../utils/useScrollAnimation";
-import earthVideo from "../assets/earth.mp4";
+import 
 
 export default function Header() {
   useScrollAnimation();
@@ -29,6 +30,16 @@ export default function Header() {
       id="header"
       className="transition-all duration-500 ease-in-out relative h-screen w-full  bg-stone-950 text-white overflow-hidden"
     >
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
+        <source src={earthVideo} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
       {showNavbar && <Navbar />}
       <motion.h1
         initial={{ opacity: 0, y: -100 }}
