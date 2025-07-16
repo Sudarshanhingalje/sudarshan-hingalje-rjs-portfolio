@@ -10,7 +10,7 @@ import {
 } from "framer-motion";
 import { Children, useRef } from "react";
 
-export default function ParallaxText({ children }) {
+export default function ParallaxText({ children, baseVelocity = 15 }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
