@@ -39,12 +39,12 @@ export default function ParallaxText({ children, baseVelocity = 15 }) {
   return (
     <div className="overflow-hidden whitespace-nowrap w-full">
       <motion.div
-        className="flex gap-12 text-lg font-semibold items-center text-black dark:text-white"
+        className="flex gap-12 text-lg font-semibold items-center text-black"
         style={{ x }}
       >
         {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="flex gap-8 items-center">
-            {Children.toArray(children).map((child, index) => (
+            {[...Children.toArray(children)].map((child, index) => (
               <span key={index}>{child}</span>
             ))}
           </div>
