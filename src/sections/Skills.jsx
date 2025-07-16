@@ -4,7 +4,10 @@ import { skillsLerned } from "../data/skills/SkillsLerned";
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 bg-[#0f0f0f] text-white relative">
+    <section
+      id="skills"
+      className="skill-card py-20 bg-[#0f0f0f] text-white relative"
+    >
       <div className="max-w-6xl mx-auto px-4 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
