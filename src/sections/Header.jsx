@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import avatar from "../assets/yoga.png";
 import Navbar from "../components/Navbar";
 import useScrollAnimation from "../utils/useScrollAnimation";
+import earthVideo from "../assets/earth.mp4";
 
 export default function Header() {
   useScrollAnimation();
