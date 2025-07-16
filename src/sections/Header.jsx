@@ -4,7 +4,6 @@ import earthVideo from "../assets/earth.mp4";
 import avatar from "../assets/yoga.png";
 import Navbar from "../components/Navbar";
 import useScrollAnimation from "../utils/useScrollAnimation";
-import 
 
 export default function Header() {
   useScrollAnimation();
