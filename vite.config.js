@@ -1,12 +1,13 @@
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
 import { visualizer } from "rollup-plugin-visualizer";
+import { defineConfig } from "vite";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), visualizer({ open: true })],
   build: {
     rollupOptions: {
-      treeshake: false, // 🚫 disable aggressive tree shaking to avoid this bug
+      treeshake: false,
+      // 🚫 disable aggressive tree shaking to avoid this bug
     },
   },
 });
