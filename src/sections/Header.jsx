@@ -32,7 +32,7 @@ export default function Header() {
       <motion.h1
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-100, 0, 0, -100] }}
-        transition={{ duration: 6, ease: "easeInOut" }}
+        transition={{ duration: 8, ease: "easeInOut" }}
         className="absolute top-6 left-4 md:left-10 text-4xl sm:text-5xl md:text-6xl font-cinzel leading-tight tracking-tight text-[#d5cdc4]"
       >
         Sudarshan <br />
