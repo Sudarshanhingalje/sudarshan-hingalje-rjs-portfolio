@@ -23,7 +23,9 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="bg-white/5 border border-white/10 rounded-lg p-6 hover:shadow-xl transition-all"
             >
-              <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+              <h3 className="text-xl font-semibold mb-2">
+                {projectsDone.title}
+              </h3>
               <p className="text-sm text-gray-300 mb-4">
                 {projectsDone.description}
               </p>
