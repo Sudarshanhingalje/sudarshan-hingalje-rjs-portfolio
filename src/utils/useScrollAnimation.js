@@ -25,7 +25,7 @@ export default function useScrollAnimation() {
     gsap.to("#about .about-avatar", {
       yPercent: -20,
       scrollTrigger: {
-        trigger: "#about",
+        trigger: "#skills",
         start: "top 80%",
         end: "bottom top",
         scrub: true,
