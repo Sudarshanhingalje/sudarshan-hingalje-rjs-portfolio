@@ -2,39 +2,42 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
-    title: "The Wild Oasis",
+    title: "The Wild Oasis (Cabin Booking App)",
     description:
-      "A full-stack boutique hotel app with internal admin and customer-facing booking system. Built with Next.js, Tailwind CSS, Supabase, PostgreSQL, and more.",
+      "A full-stack hotel booking platform with both admin and customer interfaces. Built using React, Supabase, styled-components, and React Query.",
     tech: [
-      "Next.js",
-      "Tailwind CSS",
+      "React",
       "Supabase",
-      "PostgreSQL",
-      "Three.js",
-      "NextAuth.js",
+      "Styled-components",
+      "React Query",
+      "React Router",
     ],
-    link: "https://the-wild-oasis.vercel.app/",
+    link: "https://the-wild-oasis-website-cabins.vercel.app/",
+    github: "https://github.com/Sudarshanhingalje/the-wild-oasis-website",
   },
   {
-    title: "Online Vegetable Store",
+    title: "The Wild Oasis (Admin Dashboard)",
     description:
-      "An e-commerce platform built with React.js and Tailwind CSS for seamless browsing, cart management, and checkout.",
-    tech: ["React.js", "Tailwind CSS", "JavaScript"],
-    link: "https://github.com/Sudarshanhingalje/online-vegetable-store",
+      "Admin panel for managing cabin bookings, users, and availability with charts and filters. Developed using React and Supabase.",
+    tech: ["React", "Supabase", "React Query", "Styled-components"],
+    link: "https://hotelthe-wild-oasis.netlify.app/",
+    github: "https://github.com/Sudarshanhingalje/the-wild-oasis",
   },
   {
-    title: "Scrap Savvy - Waste Management System",
+    title: "Fast React Pizza (Redux E-commerce)",
     description:
-      "A digital platform for efficient scrap pickup and recycling service management. Optimized for both users and vendors.",
+      "A modern pizza ordering app built with React and Redux Toolkit. Features real-time cart, checkout, and dynamic UI with Tailwind CSS.",
+    tech: ["React", "Redux Toolkit", "Tailwind CSS"],
+    link: "https://redux-fast-react-pizza.netlify.app/",
+    github: "https://github.com/Sudarshanhingalje/fast-react-pizza",
+  },
+  {
+    title: "ScrapSavvy - Waste Management System",
+    description:
+      "A collaborative scrap collection platform. Users can schedule pickups, vendors manage listings. Built using Firebase for backend.",
     tech: ["HTML", "CSS", "JavaScript", "Firebase"],
-    link: "https://github.com/Sudarshanhingalje/ScrapSavvy",
-  },
-  {
-    title: "Restaurant Reservation System",
-    description:
-      "MongoDB-based reservation app for managing table bookings at restaurants with clean UI.",
-    tech: ["JavaScript", "MongoDB", "Node.js", "HTML", "CSS"],
-    link: "https://github.com/Sudarshanhingalje/restaurant-reservation-system",
+    link: "https://the-wild-oasis-website-cabins.vercel.app/", // fallback
+    github: "https://github.com/ScrapSavvym24/ScrapSavvy_M24",
   },
 ];
 
@@ -74,14 +77,24 @@ const Projects = () => {
                   </span>
                 ))}
               </div>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-400 hover:underline text-sm"
-              >
-                View Project →
-              </a>
+              <div className="flex flex-col gap-1 text-sm">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:underline"
+                >
+                  🔗 Live Demo →
+                </a>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-400 hover:underline"
+                >
+                  🛠 GitHub →
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>
