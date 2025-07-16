@@ -10,7 +10,7 @@ import {
   FaReact,
 } from "react-icons/fa";
 import { SiJira, SiNextdotjs, SiPostman } from "react-icons/si";
-import ParallaxText from "./ParallaxText"; // the file you already made
+import ParallaxText from "./ParallaxText";
 
 export default function TechParallax() {
   return (
