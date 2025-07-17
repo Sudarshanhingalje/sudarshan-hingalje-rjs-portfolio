@@ -40,6 +40,10 @@ export const skillsLerned = [
       { name: "VS Code", image: "vscode.svg" },
       { name: "React Query", image: "reactquery.svg" },
       { name: "Netlify", image: "netlify.svg" },
+      { name: "Canva", image: "canva.svg" },
+      { name: "Notion", image: "notion.svg" },
+      { name: "GitHub", image: "github.svg" },
+      { name: "Jira", image: "jira.svg" },
     ],
   },
 ];
