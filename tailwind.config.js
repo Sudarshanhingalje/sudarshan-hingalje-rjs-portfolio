@@ -19,4 +19,5 @@ export default {
     },
   },
   plugins: [],
+  safelist: ["bg-grid-pattern"],
 };
