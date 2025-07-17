@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import avatar from "../assets/yoga.png";
 import Navbar from "../components/Navbar";
-import Wheel from "../components/Wheel";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
 export default function Header() {
@@ -39,8 +38,7 @@ export default function Header() {
         Sudarshan <br />
         Hingalje
       </motion.h1>
-      <Wheel />
-      {/* Content */}
+
       <motion.div
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: [1], y: [90, 0, 0] }}
