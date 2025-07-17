@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { FcMusic } from "react-icons/fc";
 import bgImage from "../assets/brand2.svg";
 
 export default function Navbar() {
@@ -13,7 +14,7 @@ export default function Navbar() {
         {/* Your name on the left */}
         <div className="text-white text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
           <em>
-            Sudarshan Hingalje
+            Sudarshan Hingalje &nbsp;
             <FcMusic />
           </em>
         </div>
