@@ -13,7 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Header() {
   useScrollAnimation();
   const resumeUrl = getResumeLink();
-
   const [showNavbar, setShowNavbar] = useState(true);
 
   useEffect(() => {
@@ -29,8 +28,11 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative h-screen w-full bg-[#0f0e0e] text-white overflow-hidden"
+      className="relative h-screen w-full text-white overflow-hidden bg-[#0f0e0e]"
     >
+      {/* Grid Background */}
+      <div className="absolute inset-0 z-0 bg-grid-pattern" />
+
       {showNavbar && <Navbar />}
 
       {/* Name Animation */}
@@ -38,7 +40,7 @@ export default function Header() {
         initial={{ opacity: 0, y: -80 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
         transition={{ duration: 8, ease: "easeInOut" }}
-        className="absolute top-6 left-4 md:left-10 text-3xl sm:text-4xl md:text-5xl font-cinzel tracking-tight text-[#d5cdc4]"
+        className="absolute top-6 left-4 md:left-10 text-3xl sm:text-4xl md:text-5xl font-cinzel tracking-tight text-[#d5cdc4] z-10"
       >
         Sudarshan <br /> Hingalje
       </motion.h1>
@@ -48,7 +50,7 @@ export default function Header() {
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 6.2, duration: 1.8, ease: "easeOut" }}
-        className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8"
+        className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8 z-10"
       >
         <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#e7e1da]">
           Full Stack <br />
@@ -57,7 +59,7 @@ export default function Header() {
           </span>
         </p>
 
-        {/* CTA buttons */}
+        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
           <a
             href="#about"
