@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import bgImage from "../assets/brand2.svg";
+import bgImage from "../assets/brand.svg";
 
 export default function Navbar() {
   return (
@@ -23,7 +23,7 @@ export default function Navbar() {
           <img
             src={bgImage}
             alt="Logo"
-            className="h-20 md:h-20  w-full object-contain cursor-pointer"
+            className="h-40 md:h-20  w-full object-contain cursor-pointer"
           />
         </button>
       </motion.nav>
