@@ -3,8 +3,7 @@ import simpleGit from "simple-git";
 
 const git = simpleGit();
 
-// ⏱️ Every 1 minute
-cron.schedule("* * * * *", async () => {
+cron.schedule("5 * * * *", async () => {
   try {
     const status = await git.status();
     if (status.files.length === 0) {
