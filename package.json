@@ -10,6 +10,7 @@
     "auto-commit": "node autoCommit.js"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@motionone/utils": "^10.18.0",
     "@studio-freight/lenis": "^1.0.42",
     "framer-motion": "^12.23.5",
