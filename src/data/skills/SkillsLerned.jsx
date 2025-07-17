@@ -7,6 +7,11 @@ export const skillsLerned = [
       { name: "JavaScript", image: "javascript.svg" },
       { name: "React.js", image: "reactjs.svg" },
       { name: "Redux", image: "redux.svg" },
+      { name: "React Query", image: "reactquery.svg" },
+
+      { name: "react-router-dom", image: "router.svg" },
+      { name: "Bootstrap", image: "bootstrap.svg" },
+
       { name: "Tailwind", image: "tailwind.svg" },
       { name: "Next.js", image: "nextjs.svg" },
       { name: "Vite", image: "vitejs.svg" },
