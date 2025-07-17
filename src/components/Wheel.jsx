@@ -1,114 +1,127 @@
-import { animate, motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+// components/Wheel.jsx
+import { animate, motion, useMotionValue } from "framer-motion";
+import { useCallback, useEffect, useRef, useState } from "react";
+import wheelImg from "../assets/wheel.png";
 
-const SNAP = false; // Set to true if you want snap-to-section rotation
-
-const sections = 6;
-const anglePerSection = 360 / sections;
+const sections = [
+  "home",
+  "about",
+  "skills",
+  "projects",
+  "experience",
+  "personal",
+  "contact",
+];
 
 export default function Wheel() {
-  const wheelRef = useRef(null);
-  const angle = useMotionValue(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const lastY = useRef(0);
-  const velocity = useRef(0);
+  const rotation = useMotionValue(0);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const centerRef = useRef(null);
+  const isDragging = useRef(false);
+  const lastAngle = useRef(null);
 
-  // Rotate on page scroll
+  // 🔄 Scroll-based wheel rotation
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      angle.set(scrollY % 360); // Keep it within 0-360
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY;
+      setLastScrollY(currentY);
+      animate(rotation, rotation.get() + diff * 0.3, {
+        type: "spring",
+        stiffness: 60,
+        damping: 14,
+      });
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [angle]);
+  }, [lastScrollY, rotation]);
 
-  // Mouse wheel rotate
-  useEffect(() => {
-    const handleWheel = (e) => {
-      if (wheelRef.current && wheelRef.current.contains(e.target)) {
-        e.preventDefault();
-        const delta = e.deltaY;
-        angle.set((prev) => prev + delta * 0.5);
-        window.scrollBy({ top: delta, behavior: "smooth" });
-      }
-    };
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, [angle]);
+  // 🌀 Manual mouse wheel rotation
+  const handleManualWheel = useCallback(
+    (e) => {
+      e.preventDefault();
+      const delta = e.deltaY || e.deltaX;
+      const direction = delta > 0 ? 1 : -1;
+      rotateAndScroll(direction);
+    },
+    [rotation]
+  );
 
-  // Drag with mouse
-  useEffect(() => {
-    const handleMouseDown = (e) => {
-      if (wheelRef.current && wheelRef.current.contains(e.target)) {
-        setIsDragging(true);
-        lastY.current = e.clientY;
-      }
-    };
+  const rotateAndScroll = (direction) => {
+    const currentSectionIndex = sections.findIndex((id) => {
+      const el = document.getElementById(id);
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top <= window.innerHeight / 2 &&
+        rect.bottom >= window.innerHeight / 2
+      );
+    });
 
-    const handleMouseMove = (e) => {
-      if (!isDragging) return;
-      const delta = e.clientY - lastY.current;
-      velocity.current = delta;
-      angle.set((prev) => prev + delta);
-      lastY.current = e.clientY;
-    };
+    const nextIndex = Math.min(
+      sections.length - 1,
+      Math.max(0, currentSectionIndex + direction)
+    );
+    const nextSection = document.getElementById(sections[nextIndex]);
 
-    const handleMouseUp = () => {
-      if (isDragging) {
-        setIsDragging(false);
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
 
-        if (SNAP) {
-          const currentAngle = angle.get();
-          const snapped =
-            Math.round(currentAngle / anglePerSection) * anglePerSection;
-          animate(angle, snapped, {
-            type: "spring",
-            stiffness: 200,
-            damping: 20,
-          });
-        }
-      }
-    };
+    animate(rotation, rotation.get() + direction * 60, {
+      type: "spring",
+      stiffness: 70,
+      damping: 12,
+    });
+  };
 
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
+  // ✋ Pointer drag to rotate freely
+  const handlePointerDown = (e) => {
+    isDragging.current = true;
+    lastAngle.current = getAngle(e);
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+  };
 
-    return () => {
-      window.removeEventListener("mousedown", handleMouseDown);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [angle]);
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return;
+    const angle = getAngle(e);
+    if (lastAngle.current !== null) {
+      const diff = angle - lastAngle.current;
+      rotation.set(rotation.get() + diff);
+    }
+    lastAngle.current = angle;
+  };
 
-  const rotate = useTransform(angle, (a) => `rotate(${a}deg)`);
+  const handlePointerUp = () => {
+    isDragging.current = false;
+    lastAngle.current = null;
+    window.removeEventListener("pointermove", handlePointerMove);
+    window.removeEventListener("pointerup", handlePointerUp);
+  };
+
+  const getAngle = (e) => {
+    const rect = centerRef.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    return (Math.atan2(dy, dx) * 180) / Math.PI;
+  };
 
   return (
     <motion.div
-      ref={wheelRef}
-      style={{
-        transform: rotate,
-        width: 300,
-        height: 300,
-        borderRadius: "50%",
-        border: "10px solid #ccc",
-        position: "fixed",
-        top: "10%",
-        left: "50%",
-        translateX: "-50%",
-        zIndex: 999,
-        cursor: isDragging ? "grabbing" : "grab",
-        background: "#111",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#fff",
-        fontSize: "24px",
-      }}
+      ref={centerRef}
+      className="fixed bottom-10 right-10 z-50 w-24 h-24 md:w-32 md:h-32 cursor-grab active:cursor-grabbing select-none"
+      style={{ rotate: rotation }}
+      onWheel={handleManualWheel}
+      onPointerDown={handlePointerDown}
     >
-      🎡 WHEEL
+      <img
+        src={wheelImg}
+        alt="Navigation Wheel"
+        className="w-full h-full object-contain pointer-events-auto"
+      />
     </motion.div>
   );
 }
