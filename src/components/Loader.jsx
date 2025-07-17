@@ -6,7 +6,7 @@ const Loader = () => {
       <img
         src={loaderGif}
         alt="Loading..."
-        className="w-20 h-20 object-contain"
+        className="w-50 h-50 object-contain "
       />
     </div>
   );
