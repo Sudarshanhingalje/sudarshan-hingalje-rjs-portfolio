@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"; // ✅ Add this import
 import { lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
@@ -28,11 +29,25 @@ function App() {
 
   return (
     <Main>
-      <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white">
+      <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white overflow-hidden">
+        {/* ✅ Animated Floating Background Blobs */}
+        <motion.div
+          className="absolute top-[-15%] left-[-10%] w-[350px] h-[350px] bg-pink-500 rounded-full opacity-30 blur-3xl z-0"
+          animate={{ x: [0, 100, 0], y: [0, 100, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-[-15%] right-[-10%] w-[300px] h-[300px] bg-blue-500 rounded-full opacity-25 blur-3xl z-0"
+          animate={{ x: [0, -100, 0], y: [0, -100, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* ✅ Main UI Content */}
         <ErrorBoundary>
           <SmoothScroll>
             <SplashCursor />
             <Wheel />
+
             <div
               className={
                 loading
