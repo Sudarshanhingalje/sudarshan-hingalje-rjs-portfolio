@@ -12,7 +12,7 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return <h2>Something went wrong while loading icons.</h2>;
+      return <h2>Something went wrong while loading icons. Please refresh.</h2>;
     }
     return this.props.children;
   }
