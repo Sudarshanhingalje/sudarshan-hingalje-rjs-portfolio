@@ -2,7 +2,7 @@ export const skillsLerned = [
   {
     category: "Frontend",
     items: [
-      { name: "HTML", image: "/assets/skill/html.svg" },
+      { name: "HTML", image: "../assets/skill/html.svg" },
       { name: "CSS", image: "/assets/skill/css.svg" },
       { name: "JavaScript", image: "/assets/skill/javascript.svg" },
       { name: "React", image: "/assets/skill/react.svg" },
