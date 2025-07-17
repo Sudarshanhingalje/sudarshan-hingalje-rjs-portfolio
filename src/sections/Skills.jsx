@@ -7,7 +7,7 @@ const Skills = () => {
       id="skills"
       className="min-h-screen bg-[#0f1123] text-white py-20 px-6"
     >
-      <h2 className="text-4xl font-plex font-bold text-center text-yellow-300 mb-12">
+      <h2 className="text-4xl font-cinzel font-bold text-center text-yellow-300 mb-12">
         Tech Stack
       </h2>
 
