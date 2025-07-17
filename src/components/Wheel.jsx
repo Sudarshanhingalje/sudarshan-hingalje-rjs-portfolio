@@ -1,61 +1,34 @@
 import { useEffect, useRef } from "react";
+import wheelImg from "/assets/Steering_wheel_ship_1.png"; // adjust path as needed
 
-const SpinningWheel = () => {
+const ScrollWheel = () => {
   const wheelRef = useRef(null);
+  const rotation = useRef(0);
 
   useEffect(() => {
-    const wheel = wheelRef.current;
-    let angle = 0;
-
-    const animate = () => {
-      angle += 1; // Adjust speed here
-      wheel.style.transform = `rotate(${angle}deg)`;
-      requestAnimationFrame(animate);
+    const handleScroll = (e) => {
+      const delta = window.scrollY;
+      const newRotation = delta * 0.2; // adjust speed
+      rotation.current = newRotation;
+      if (wheelRef.current) {
+        wheelRef.current.style.transform = `rotate(${newRotation}deg)`;
+      }
     };
 
-    animate();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-black">
-      <svg
+    <div className="fixed bottom-6 right-6 z-50 pointer-events-none">
+      <img
+        src={wheelImg}
+        alt="Scroll Wheel"
         ref={wheelRef}
-        width="150"
-        height="150"
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* Outer Circle */}
-        <circle
-          cx="50"
-          cy="50"
-          r="45"
-          stroke="#00ffcc"
-          strokeWidth="2"
-          fill="none"
-        />
-
-        {/* Spokes */}
-        {[...Array()].map((_, i) => {
-          const angle = (i * 360) / 8;
-          const rad = (angle * Math.PI) / 180;
-          const x = 50 + 45 * Math.cos(rad);
-          const y = 50 + 45 * Math.sin(rad);
-          return (
-            <line
-              key={i}
-              x1="50"
-              y1="50"
-              x2={x}
-              y2={y}
-              stroke="#00ffcc"
-              strokeWidth="1.5"
-            />
-          );
-        })}
-      </svg>
+        className="w-24 h-24 transition-transform duration-75"
+      />
     </div>
   );
 };
 
-export default SpinningWheel;
+export default ScrollWheel;
