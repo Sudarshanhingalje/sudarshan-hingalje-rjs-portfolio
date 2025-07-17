@@ -13,9 +13,9 @@ export default function Navbar() {
       >
         {/* Your name on the left */}
         <div className="text-white text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
-          <em>Sudarshan Hingalje &nbsp;</em> <FcMusic />
+          <em>Sudarshan Hingalje</em>
         </div>
-
+        <FcMusic />
         {/* Logo on the right */}
         <button
           onClick={() => window.location.reload()}
