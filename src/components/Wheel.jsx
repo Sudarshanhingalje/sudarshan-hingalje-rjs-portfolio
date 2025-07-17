@@ -1,11 +1,11 @@
 // components/Wheel.jsx
 import { animate, motion, useMotionValue } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import wheelImg from "../assets/wheel.png"; // adjust path if needed
 
 const sections = ["home", "about", "skills", "projects", "contact"];
 
 export default function Wheel() {
-  const wheelRef = useRef(null);
   const rotation = useMotionValue(0);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -17,7 +17,8 @@ export default function Wheel() {
       setLastScrollY(currentY);
       animate(rotation, rotation.get() + diff * 0.3, {
         type: "spring",
-        stiffness: 50,
+        stiffness: 60,
+        damping: 12,
       });
     };
 
@@ -52,20 +53,24 @@ export default function Wheel() {
 
     animate(rotation, rotation.get() + direction * 60, {
       type: "spring",
-      stiffness: 60,
+      stiffness: 70,
+      damping: 10,
     });
   };
 
   return (
     <motion.div
-      className="fixed bottom-10 right-10 z-50 w-32 h-32 rounded-full bg-gradient-to-tr from-gray-800 to-gray-900 flex items-center justify-center shadow-lg cursor-grab active:cursor-grabbing"
-      ref={wheelRef}
+      className="fixed bottom-10 right-10 z-50 w-24 h-24 md:w-32 md:h-32 cursor-grab active:cursor-grabbing"
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       onDragEnd={handleWheelRotate}
       style={{ rotate: rotation }}
     >
-      <div className="text-white font-bold text-xl">🌀</div>
+      <img
+        src={wheelImg}
+        alt="Navigation Wheel"
+        className="w-full h-full object-contain select-none pointer-events-none"
+      />
     </motion.div>
   );
 }
