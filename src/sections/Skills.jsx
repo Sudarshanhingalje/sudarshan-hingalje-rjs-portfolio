@@ -4,7 +4,10 @@ import { skillsLerned } from "../data/skills/SkillsLerned"; // adjust path as pe
 
 const Skills = () => {
   return (
-    <section className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center py-16">
+    <section
+      id="skills"
+      className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center py-16"
+    >
       <h2 className="text-4xl font-bold mb-10">Skills</h2>
       <motion.div
         initial={{ opacity: 0, y: 30 }}
