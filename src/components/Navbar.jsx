@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import bgImage from "../assets/brand2.png";
+import bgImage from "../assets/brand2.svg";
 
 export default function Navbar() {
   return (
