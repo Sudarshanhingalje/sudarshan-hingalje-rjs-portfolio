@@ -9,7 +9,7 @@ import {
   FaReact,
 } from "react-icons/fa";
 import {
-  SiAws,
+  SiAmazonaws,
   SiBootstrap,
   SiC,
   SiCplusplus,
@@ -72,7 +72,7 @@ export const skillsLerned = [
       { name: "Git", icon: <FaGitAlt /> },
       { name: "GitHub", icon: <FaGithub /> },
       { name: "Docker", icon: <FaDocker /> },
-      { name: "AWS", icon: <SiAws /> },
+      { name: "AWS", icon: <SiAmazonaws /> },
       { name: "Google Cloud", icon: <SiGooglecloud /> },
     ],
   },
