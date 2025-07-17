@@ -80,7 +80,6 @@ export default function Header() {
             Your browser does not support the video tag.
           </video>
 
-          {/* Avatar Image */}
           <img
             src={avatar}
             alt="Avatar"
