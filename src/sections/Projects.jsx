@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { projectsDone } from "../data/projects/ProjectDone";
+import useScrollAnimation from "../utils/useScrollAnimation";
 
 const Projects = () => {
+  useScrollAnimation();
   return (
     <section id="projects" className="py-20 text-white">
       <div className="max-w-6xl mx-auto px-4">
@@ -14,7 +16,7 @@ const Projects = () => {
           My Projects
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg">
+        <div className="project-card grid grid-cols-1 md:grid-cols-2 gap-10 bg">
           {projectsDone.map((project, index) => (
             <motion.div
               key={index}
