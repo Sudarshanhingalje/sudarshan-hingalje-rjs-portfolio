@@ -1,65 +1,55 @@
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const WheelScrollAnimation = () => {
-  const svgRef = useRef(null);
+const SpinningWheel = () => {
+  const wheelRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(
-      ".spoke",
-      {
-        scaleY: 0,
-        opacity: 0,
-      },
-      {
-        scaleY: 1,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: svgRef.current,
-          start: "top center",
-          end: "bottom center",
-          scrub: true,
-        },
-        transformOrigin: "center",
-        ease: "power2.out",
-      }
-    );
+    const wheel = wheelRef.current;
+    let angle = 0;
+
+    const animate = () => {
+      angle += 1; // Adjust speed here
+      wheel.style.transform = `rotate(${angle}deg)`;
+      requestAnimationFrame(animate);
+    };
+
+    animate();
   }, []);
 
   return (
-    <div className="relative w-full h-screen flex items-center justify-center bg-black">
-      {/* Wheel image */}
-      <img
-        src="/assets/Wheel.png" // replace with your path
-        alt="Wheel"
-        className="absolute w-[300px] h-[300px] object-contain"
-      />
-
-      {/* SVG over wheel */}
+    <div className="flex items-center justify-center h-screen bg-black">
       <svg
-        ref={svgRef}
-        viewBox="0 0 300 300"
-        className="absolute w-[300px] h-[300px]"
+        ref={wheelRef}
+        width="150"
+        height="150"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        {[...Array(8)].map((_, i) => {
-          const angle = (360 / 8) * i;
-          const x = 150 + 100 * Math.cos((angle * Math.PI) / 180);
-          const y = 150 + 100 * Math.sin((angle * Math.PI) / 180);
+        {/* Outer Circle */}
+        <circle
+          cx="50"
+          cy="50"
+          r="45"
+          stroke="#00ffcc"
+          strokeWidth="2"
+          fill="none"
+        />
+
+        {/* Spokes */}
+        {[...Array()].map((_, i) => {
+          const angle = (i * 360) / 8;
+          const rad = (angle * Math.PI) / 180;
+          const x = 50 + 45 * Math.cos(rad);
+          const y = 50 + 45 * Math.sin(rad);
           return (
             <line
               key={i}
-              x1="150"
-              y1="150"
+              x1="50"
+              y1="50"
               x2={x}
               y2={y}
-              stroke="white"
-              strokeWidth="2"
-              className="spoke"
+              stroke="#00ffcc"
+              strokeWidth="1.5"
             />
           );
         })}
@@ -68,4 +58,4 @@ const WheelScrollAnimation = () => {
   );
 };
 
-export default WheelScrollAnimation;
+export default SpinningWheel;
