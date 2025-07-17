@@ -2,6 +2,7 @@ import emailjs from "@emailjs/browser";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,7 +62,7 @@ const Contact = () => {
         "2J7MxQtB47nOOr14W"
       );
 
-      alert("Message sent successfully!");
+      toast.success("Message sent successfully to sudarshan!");
       setFormData({
         reason: "",
         name: "",
@@ -71,7 +72,7 @@ const Contact = () => {
       });
     } catch (error) {
       console.error("Email send failed:", error);
-      alert("Oops! Something went wrong.");
+      toast.error("Oops! Something went wrong.");
     }
   };
 
