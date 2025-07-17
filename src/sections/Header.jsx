@@ -52,26 +52,15 @@ export default function Header() {
           </span>
         </p>
 
-        {/* <a
+        <a
           href="#about"
           className="bg-blue-500 hover:bg-blue-600 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full text-lg sm:text-xl lg:text-2xl transition-all duration-300"
         >
           Contact Me
-        </a> */}
+        </a>
       </motion.div>
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10">
         <div className="relative w-full flex justify-center items-center">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 z-0 w-[300px] h-[300px] "
-          >
-            <source src="../src/globe.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-
           <img
             src={avatar}
             alt="Avatar"
