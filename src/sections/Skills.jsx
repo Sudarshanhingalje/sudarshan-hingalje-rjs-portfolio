@@ -3,7 +3,10 @@ import { skillsLerned } from "../data/skills/SkillsLerned";
 
 const Skills = () => {
   return (
-    <section className="min-h-screen bg-[#0f1123] text-white py-20 px-6">
+    <section
+      id="skills"
+      className="min-h-screen bg-[#0f1123] text-white py-20 px-6"
+    >
       <h2 className="text-4xl font-bold text-center text-yellow-300 mb-12">
         Tech Stack
       </h2>
