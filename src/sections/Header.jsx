@@ -6,6 +6,7 @@ import useScrollAnimation from "../utils/useScrollAnimation";
 
 export default function Header() {
   useScrollAnimation();
+
   const [showNavbar, setShowNavbar] = useState(true);
 
   useEffect(() => {
@@ -23,8 +24,10 @@ export default function Header() {
       id="header"
       className="relative h-screen w-full overflow-hidden bg-[#0f0e0e] text-white transition-all duration-500 ease-in-out"
     >
+      {/* Navbar */}
       {showNavbar && <Navbar />}
 
+      {/* Name Animation */}
       <motion.h1
         initial={{ opacity: 0, y: -80 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
@@ -34,6 +37,7 @@ export default function Header() {
         Sudarshan <br /> Hingalje
       </motion.h1>
 
+      {/* Developer Title + CTA */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
@@ -55,6 +59,7 @@ export default function Header() {
         </a>
       </motion.div>
 
+      {/* Avatar Image */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
