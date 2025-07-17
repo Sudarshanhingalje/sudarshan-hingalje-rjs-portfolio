@@ -8,6 +8,7 @@ import {
   FaNodeJs,
   FaReact,
 } from "react-icons/fa";
+
 import {
   SiAmazonaws,
   SiBootstrap,
@@ -33,26 +34,26 @@ export const skillsLerned = [
   {
     category: "Frontend",
     items: [
-      { name: "JavaScript", icon: <FaJs /> },
-      { name: "React", icon: <FaReact /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss /> },
-      { name: "HTML", icon: <FaHtml5 /> },
-      { name: "CSS", icon: <FaCss3Alt /> },
-      { name: "GSAP", icon: <SiGsap /> },
-      { name: "Framer Motion", icon: <SiFramer /> },
       { name: "Bootstrap", icon: <SiBootstrap /> },
       { name: "C", icon: <SiC /> },
       { name: "C++", icon: <SiCplusplus /> },
+      { name: "CSS", icon: <FaCss3Alt /> },
+      { name: "Framer Motion", icon: <SiFramer /> },
+      { name: "GSAP", icon: <SiGsap /> },
+      { name: "HTML", icon: <FaHtml5 /> },
+      { name: "JavaScript", icon: <FaJs /> },
       { name: "Python", icon: <SiPython /> },
+      { name: "React", icon: <FaReact /> },
+      { name: "Tailwind CSS", icon: <SiTailwindcss /> },
     ],
   },
   {
     category: "Backend",
     items: [
-      { name: "Node.js", icon: <FaNodeJs /> },
-      { name: "Nodemon", icon: <SiNodemon /> },
       { name: "Express.js", icon: <SiExpress /> },
       { name: "Next.js", icon: <SiNextdotjs /> },
+      { name: "Node.js", icon: <FaNodeJs /> },
+      { name: "Nodemon", icon: <SiNodemon /> },
       { name: "React Router", icon: <SiReactrouter /> },
       { name: "Spring Boot", icon: <SiSpringboot /> },
     ],
@@ -62,17 +63,17 @@ export const skillsLerned = [
     items: [
       { name: "MongoDB", icon: <SiMongodb /> },
       { name: "Mongoose", icon: <SiMongoose /> },
-      { name: "PostgreSQL", icon: <SiPostgresql /> },
       { name: "Oracle", icon: <SiOracle /> },
+      { name: "PostgreSQL", icon: <SiPostgresql /> },
     ],
   },
   {
-    category: "Tools",
+    category: "Tools & Cloud",
     items: [
+      { name: "AWS", icon: <SiAmazonaws /> },
+      { name: "Docker", icon: <FaDocker /> },
       { name: "Git", icon: <FaGitAlt /> },
       { name: "GitHub", icon: <FaGithub /> },
-      { name: "Docker", icon: <FaDocker /> },
-      { name: "AWS", icon: <SiAmazonaws /> },
       { name: "Google Cloud", icon: <SiGooglecloud /> },
     ],
   },
