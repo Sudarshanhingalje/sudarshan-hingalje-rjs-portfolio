@@ -1,4 +1,3 @@
-// components/Skills.jsx
 import { motion } from "framer-motion";
 import { skillsLerned } from "../data/skills/SkillsLerned";
 
@@ -6,7 +5,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="min-h-screen text-white font-montserrat py-16 px-6 flex flex-col items-center "
+      className="min-h-screen text-white font-montserrat py-16 px-6 flex flex-col items-center"
     >
       <h2 className="text-4xl font-bold mb-12 text-center text-[#ffc857]">
         Tech Stack
@@ -31,7 +30,6 @@ const Skills = () => {
                   whileTap={{ scale: 0.95 }}
                   className="bg-[#1a1a1a] border border-[#2a2a2a] p-4 rounded-xl shadow hover:shadow-lg text-center transition"
                 >
-                  <div className="text-3xl mb-2">{skill.icon}</div>
                   <div className="text-sm sm:text-base text-gray-300">
                     {skill.name}
                   </div>
