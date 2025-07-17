@@ -1,7 +1,7 @@
-// components/Wheel.jsx
 import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import wheelImg from "../assets/wheel.png";
+import clickSoundFile from "../assets/click.mp3";
+import wheelImg from "../assets/wheel.png"; // ✅ Ensure this image has visible spokes/markings
 
 const sections = [
   "home",
@@ -19,8 +19,15 @@ export default function Wheel() {
   const centerRef = useRef(null);
   const isDragging = useRef(false);
   const lastAngle = useRef(null);
+  const lastTime = useRef(null);
+  const velocity = useRef(0);
 
-  // 🔄 Scroll-based wheel rotation
+  const playClick = () => {
+    const audio = new Audio(clickSoundFile);
+    audio.play().catch(() => {});
+  };
+
+  // 🔄 Scroll-based rotation
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -36,7 +43,7 @@ export default function Wheel() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, rotation]);
 
-  // 🌀 Manual mouse wheel rotation
+  // 🌀 Mouse wheel hover → rotate + scroll
   const handleManualWheel = useCallback(
     (e) => {
       e.preventDefault();
@@ -73,12 +80,15 @@ export default function Wheel() {
       stiffness: 70,
       damping: 12,
     });
+
+    playClick();
   };
 
-  // ✋ Pointer drag to rotate freely
+  // 👆 Drag to rotate
   const handlePointerDown = (e) => {
     isDragging.current = true;
     lastAngle.current = getAngle(e);
+    lastTime.current = Date.now();
     window.addEventListener("pointermove", handlePointerMove);
     window.addEventListener("pointerup", handlePointerUp);
   };
@@ -86,16 +96,37 @@ export default function Wheel() {
   const handlePointerMove = (e) => {
     if (!isDragging.current) return;
     const angle = getAngle(e);
+    const now = Date.now();
+
     if (lastAngle.current !== null) {
       const diff = angle - lastAngle.current;
+      const timeDiff = now - lastTime.current;
+      velocity.current = diff / timeDiff;
+
       rotation.set(rotation.get() + diff);
     }
+
     lastAngle.current = angle;
+    lastTime.current = now;
   };
 
   const handlePointerUp = () => {
     isDragging.current = false;
     lastAngle.current = null;
+    lastTime.current = null;
+
+    const inertiaAngle = velocity.current * 1500;
+    const finalAngle = rotation.get() + inertiaAngle;
+    const snapped = Math.round(finalAngle / 60) * 60;
+
+    animate(rotation, snapped, {
+      type: "spring",
+      stiffness: 80,
+      damping: 18,
+    });
+
+    playClick();
+
     window.removeEventListener("pointermove", handlePointerMove);
     window.removeEventListener("pointerup", handlePointerUp);
   };
@@ -117,6 +148,10 @@ export default function Wheel() {
       onWheel={handleManualWheel}
       onPointerDown={handlePointerDown}
     >
+      {/* 🔺 Visible pointer to show rotation effect */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full z-20 shadow" />
+
+      {/* 🖼️ Wheel image — must have rotation-visible marks */}
       <img
         src={wheelImg}
         alt="Navigation Wheel"
