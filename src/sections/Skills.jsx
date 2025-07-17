@@ -2,29 +2,45 @@ import { motion } from "framer-motion";
 import { skillsLerned } from "../data/skills/SkillsLerned";
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i = 1) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.08,
+      delay: i * 0.07,
       duration: 0.6,
       ease: "easeOut",
     },
   }),
 };
 
+const sectionVariant = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: "easeOut",
+    },
+  },
+};
+
 const Skills = () => {
   return (
-    <section
+    <motion.section
       id="skills"
-      className="min-h-screen text-white font-montserrat pt-8 pb-16 px-4 flex flex-col items-center"
+      variants={sectionVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      className="min-h-screen text-white font-montserrat pt-4 pb-16 px-4 flex flex-col items-center"
     >
       {/* Section Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.6 }}
         className="text-4xl sm:text-5xl font-bold mb-12 text-center text-[#ffc857]"
       >
@@ -39,7 +55,7 @@ const Skills = () => {
             <motion.h3
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5 }}
               className="text-2xl font-semibold mb-6 text-gray-300"
             >
@@ -51,7 +67,7 @@ const Skills = () => {
               className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-5 justify-center"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.1 }}
             >
               {group.items.map((skill, i) => (
                 <motion.div
@@ -75,7 +91,7 @@ const Skills = () => {
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 };
 
