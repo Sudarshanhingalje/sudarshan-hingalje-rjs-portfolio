@@ -166,23 +166,6 @@ export default function Wheel() {
         alt="Navigation Wheel"
         className="w-full h-full object-contain pointer-events-auto"
       />
-
-      {/* 🏷️ Section Labels */}
-      {sections.map((label, i) => {
-        const angle = (360 / sections.length) * i;
-        return (
-          <div
-            key={label}
-            className="absolute left-1/2 top-1/2 text-xs md:text-sm text-white font-semibold"
-            style={{
-              transform: `rotate(${angle}deg) translate(0, -90%) rotate(-${angle}deg)`,
-              transformOrigin: "center center",
-            }}
-          >
-            {label}
-          </div>
-        );
-      })}
     </motion.div>
   );
 }
