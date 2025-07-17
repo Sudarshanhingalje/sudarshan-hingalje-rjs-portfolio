@@ -46,7 +46,7 @@ const Contact = () => {
         "service_ec6uvv4", // ✅ Your EmailJS service ID
         "template_ifxi8iv", // ✅ Template to send message to you
         formRef.current,
-        "YOUR_PUBLIC_KEY" // ✅ Your EmailJS public key
+        "2J7MxQtB47nOOr14W" // ✅ Your EmailJS public key
       );
 
       // 2. Send auto-reply to the user
@@ -58,7 +58,7 @@ const Contact = () => {
           email: formData.email,
           message: formData.message,
         },
-        "YOUR_PUBLIC_KEY"
+        "2J7MxQtB47nOOr14W"
       );
 
       alert("Message sent successfully!");
