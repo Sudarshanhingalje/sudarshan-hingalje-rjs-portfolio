@@ -28,7 +28,7 @@ function App() {
 
   return (
     <Main>
-      <div className="relative min-h-screen bg-[#55a7fe7f] bg-repeat bg-grid-pattern text-white">
+      <div className="relative min-h-screen bg-[#3be0e9aa] bg-repeat bg-grid-pattern text-white">
         <ErrorBoundary>
           <SmoothScroll>
             <SplashCursor />
