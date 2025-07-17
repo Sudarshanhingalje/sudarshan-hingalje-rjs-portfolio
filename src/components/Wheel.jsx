@@ -60,7 +60,7 @@ export default function Wheel() {
 
   return (
     <motion.div
-      className="fixed bottom-10 right-10 z-50 w-24 h-24 md:w-32 md:h-32 cursor-grab active:cursor-grabbing"
+      className="fixed bottom-10 right-10 z-50 w-24 h-24 md:w-32 md:h-32 "
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       onDragEnd={handleWheelRotate}
