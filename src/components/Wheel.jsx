@@ -1,7 +1,7 @@
 import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import clickSoundFile from "../assets/click.mp3"; // Optional click sound
-import wheelImg from "../assets/wheel.png";
+import clickSoundFile from "../assets/click.mp3";
+import wheelImg from "../assets/wheel.png"; // Make sure this has visible markings
 
 const sections = [
   "home",
@@ -27,7 +27,7 @@ export default function Wheel() {
     audio.play().catch(() => {});
   };
 
-  // 🔄 Scroll-based wheel rotation
+  // 🔄 Scroll-based rotation
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -43,7 +43,7 @@ export default function Wheel() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, rotation]);
 
-  // 🌀 Mouse wheel on hover → rotate + scroll
+  // 🌀 Mouse wheel over the wheel → rotate + scroll
   const handleManualWheel = useCallback(
     (e) => {
       e.preventDefault();
@@ -101,8 +101,7 @@ export default function Wheel() {
     if (lastAngle.current !== null) {
       const diff = angle - lastAngle.current;
       const timeDiff = now - lastTime.current;
-      velocity.current = diff / timeDiff; // angle/ms
-
+      velocity.current = diff / timeDiff;
       rotation.set(rotation.get() + diff);
     }
 
@@ -115,11 +114,8 @@ export default function Wheel() {
     lastAngle.current = null;
     lastTime.current = null;
 
-    // ➕ Inertia effect
-    const inertiaAngle = velocity.current * 1500; // scale speed
+    const inertiaAngle = velocity.current * 1500;
     const finalAngle = rotation.get() + inertiaAngle;
-
-    // 🎯 Snap to nearest 60°
     const snapped = Math.round(finalAngle / 60) * 60;
 
     animate(rotation, snapped, {
@@ -151,11 +147,20 @@ export default function Wheel() {
       onWheel={handleManualWheel}
       onPointerDown={handlePointerDown}
     >
+      {/* 🔁 Wheel image (ensure it has visible marks or segments!) */}
       <img
         src={wheelImg}
         alt="Navigation Wheel"
         className="w-full h-full object-contain pointer-events-auto"
       />
+
+      {/* 🔺 Optional: add a rotation indicator */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full shadow-md" />
+
+      {/* 🧪 Optional debug angle display */}
+      {/* <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-xs bg-black text-white px-1 rounded">
+        {Math.round(rotation.get())}°
+      </div> */}
     </motion.div>
   );
 }
