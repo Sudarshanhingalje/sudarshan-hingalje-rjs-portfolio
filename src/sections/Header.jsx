@@ -65,7 +65,7 @@ export default function Header() {
           </a>
 
           <a
-            href="/Sudarshan_Hingalje_CV.pdf"
+            href=
             download
             className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
           >
