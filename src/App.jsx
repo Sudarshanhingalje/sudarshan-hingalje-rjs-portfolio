@@ -29,7 +29,7 @@ function App() {
       <div className="relative bg-gray-100 dark:bg-gray-900">
         <SmoothScroll>
           <SplashCursor />
-
+          <Wheel />
           <div
             className={
               loading
@@ -37,8 +37,6 @@ function App() {
                 : "blur-0 transition-all duration-500"
             }
           >
-            <Wheel />
-
             <Header />
             <About />
             <TechParallax />
