@@ -8,7 +8,6 @@ export default function MusicToggleButton() {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    // Auto play on mount
     audioRef.current.play().catch((err) => {
       console.warn("Autoplay blocked:", err);
     });
