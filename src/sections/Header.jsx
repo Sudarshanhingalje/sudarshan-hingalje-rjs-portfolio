@@ -4,7 +4,7 @@ import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
-export default function Header({ isMusicPlaying, toggleMusic }) {
+export default function Header() {
   useScrollAnimation();
   const [showNavbar, setShowNavbar] = useState(true);
 
@@ -23,12 +23,8 @@ export default function Header({ isMusicPlaying, toggleMusic }) {
       id="header"
       className="relative h-screen w-full overflow-hidden bg-[#0f0e0e] text-white transition-all duration-500 ease-in-out"
     >
-      {/* ✅ Navbar with music control props */}
-      {showNavbar && (
-        <Navbar isMusicPlaying={isMusicPlaying} toggleMusic={toggleMusic} />
-      )}
+      {showNavbar && <Navbar />}
 
-      {/* Rest unchanged */}
       <motion.h1
         initial={{ opacity: 0, y: -80 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
