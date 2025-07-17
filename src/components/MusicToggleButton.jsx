@@ -25,7 +25,7 @@ export default function MusicToggleButton() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music.mp3" loop preload="auto" />
+      <audio ref={audioRef} src="/suzume.mp3" loop preload="auto" />
       <button
         onClick={toggleMusic}
         className={`
