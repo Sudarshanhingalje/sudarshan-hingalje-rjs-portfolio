@@ -9,7 +9,7 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 1.2, ease: "easeOut" }}
-        className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-10 py-3 flex items-center justify-between bg-transparent"
+        className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-10 py-3 flex  justify-between bg-transparent"
       >
         {/* Name on the left */}
         <div className="text-white text-base sm:text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
