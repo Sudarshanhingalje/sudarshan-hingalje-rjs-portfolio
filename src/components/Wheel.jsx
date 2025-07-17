@@ -1,11 +1,11 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import wheel from "../assets/Steering_wheel_ship_1.png";
+import wheelImg from "../assets/wheel.png";
 
 const sections = ["hero", "about", "projects", "contact"];
 
-const ScrollWheelNav = () => {
+const Wheel = () => {
   const [angle, setAngle] = useState(0);
   const controls = useAnimation();
 
@@ -41,7 +41,7 @@ const ScrollWheelNav = () => {
         style={{ originX: 0.5, originY: 0.5 }}
       >
         <img
-          src={wheel}
+          src={wheelImg}
           alt="wheel"
           className="w-full h-full select-none pointer-events-none"
         />
@@ -77,4 +77,4 @@ const ScrollWheelNav = () => {
   );
 };
 
-export default ScrollWheelNav;
+export default Wheel;
