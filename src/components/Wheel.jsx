@@ -16,39 +16,37 @@ const sections = [
 export default function Wheel() {
   const rotation = useMotionValue(0);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const dragStartAngle = useRef(0);
+  const centerRef = useRef(null);
+  const isDragging = useRef(false);
+  const lastAngle = useRef(null);
 
-  // 🔄 Rotate wheel on scroll
+  // 🔄 Scroll-based wheel rotation
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
       const diff = currentY - lastScrollY;
       setLastScrollY(currentY);
-
       animate(rotation, rotation.get() + diff * 0.3, {
         type: "spring",
         stiffness: 60,
         damping: 14,
       });
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, rotation]);
 
-  // 🌀 Rotate + scroll manually using wheel
+  // 🌀 Manual mouse wheel rotation
   const handleManualWheel = useCallback(
     (e) => {
       e.preventDefault();
       const delta = e.deltaY || e.deltaX;
       const direction = delta > 0 ? 1 : -1;
-
       rotateAndScroll(direction);
     },
     [rotation]
   );
 
-  // 🧠 Helper for scrolling & rotating
   const rotateAndScroll = (direction) => {
     const currentSectionIndex = sections.findIndex((id) => {
       const el = document.getElementById(id);
@@ -77,29 +75,52 @@ export default function Wheel() {
     });
   };
 
-  // 🎯 Manual drag to rotate & scroll
-  const handleDragEnd = (_, info) => {
-    const delta = info.offset.x; // horizontal drag
-    const threshold = 30; // adjust as needed
-    if (Math.abs(delta) > threshold) {
-      const direction = delta > 0 ? 1 : -1;
-      rotateAndScroll(direction);
+  // ✋ Pointer drag to rotate freely
+  const handlePointerDown = (e) => {
+    isDragging.current = true;
+    lastAngle.current = getAngle(e);
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return;
+    const angle = getAngle(e);
+    if (lastAngle.current !== null) {
+      const diff = angle - lastAngle.current;
+      rotation.set(rotation.get() + diff);
     }
+    lastAngle.current = angle;
+  };
+
+  const handlePointerUp = () => {
+    isDragging.current = false;
+    lastAngle.current = null;
+    window.removeEventListener("pointermove", handlePointerMove);
+    window.removeEventListener("pointerup", handlePointerUp);
+  };
+
+  const getAngle = (e) => {
+    const rect = centerRef.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    return (Math.atan2(dy, dx) * 180) / Math.PI;
   };
 
   return (
     <motion.div
-      className="fixed bottom-10 right-10 z-50 w-24 h-24 md:w-32 md:h-32 cursor-grab active:cursor-grabbing"
+      ref={centerRef}
+      className="fixed bottom-10 right-10 z-50 w-24 h-24 md:w-32 md:h-32 cursor-grab active:cursor-grabbing select-none"
       style={{ rotate: rotation }}
       onWheel={handleManualWheel}
-      drag="x"
-      dragConstraints={{ left: 0, right: 0 }}
-      onDragEnd={handleDragEnd}
+      onPointerDown={handlePointerDown}
     >
       <img
         src={wheelImg}
         alt="Navigation Wheel"
-        className="w-full h-full object-contain select-none pointer-events-auto"
+        className="w-full h-full object-contain pointer-events-auto"
       />
     </motion.div>
   );
