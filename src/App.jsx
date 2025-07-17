@@ -28,6 +28,7 @@ function App() {
 
   return (
     <Main>
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white">
         <ErrorBoundary>
           <SmoothScroll>
