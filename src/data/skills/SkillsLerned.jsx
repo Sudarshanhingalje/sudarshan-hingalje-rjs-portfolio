@@ -13,6 +13,7 @@ export const skillsLerned = [
       { name: "Tailwind", image: "tailwind.svg" },
       { name: "Next.js", image: "nextjs.svg" },
       { name: "Vite", image: "vitejs.svg" },
+      { name: "styled-components", image: "styledcomponents.svg" },
     ],
   },
   {
