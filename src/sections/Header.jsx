@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
+import { getResumeLink } from "../data/Resume/getResumeLink";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
