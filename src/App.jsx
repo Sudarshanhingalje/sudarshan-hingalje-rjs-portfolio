@@ -1,3 +1,20 @@
+import { useEffect, useState } from "react";
+import Loader from "./components/Loader";
+import Main from "./components/Main";
+import Wheel from "./components/Wheel";
+import About from "./sections/About";
+import Contact from "./sections/Contact";
+import Experience from "./sections/Experience";
+import Footer from "./sections/Footer";
+import Header from "./sections/Header";
+import Personal from "./sections/Personal";
+import Projects from "./sections/Projects";
+import Skills from "./sections/Skills";
+import SplashCursor from "./ui/CustomCursor";
+import TechParallax from "./ui/TechParallax";
+import SmoothScroll from "./utils/SmoothScroll";
+import useScrollAnimation from "./utils/useScrollAnimation";
+
 function App() {
   const [loading, setLoading] = useState(true);
   useScrollAnimation();
@@ -13,9 +30,6 @@ function App() {
         <SmoothScroll>
           <SplashCursor />
 
-          {/* ✅ Wheel is now outside blurred content, so always visible */}
-          <Wheel />
-
           <div
             className={
               loading
@@ -23,6 +37,8 @@ function App() {
                 : "blur-0 transition-all duration-500"
             }
           >
+            <Wheel />
+
             <Header />
             <About />
             <TechParallax />
