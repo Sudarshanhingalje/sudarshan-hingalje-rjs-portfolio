@@ -28,7 +28,7 @@ function App() {
 
   return (
     <Main>
-      <div className="relative min-h-screen bg-[#0b0c10] bg-[url('/stars.svg')] bg-repeat text-white">
+      <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white">
         <ErrorBoundary>
           <SmoothScroll>
             <SplashCursor />
