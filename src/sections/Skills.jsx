@@ -17,7 +17,6 @@ const Skills = () => {
       </h2>
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
-        {/* Left: Categories */}
         <div className="md:w-1/4 flex flex-col gap-6 text-yellow-200 text-xl font-semibold">
           {skillsLerned.map((category) => (
             <button
@@ -34,7 +33,6 @@ const Skills = () => {
           ))}
         </div>
 
-        {/* Right: Filtered Skills */}
         <div className="md:w-3/4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {skillsLerned
             .find((cat) => cat.category === activeCategory)
