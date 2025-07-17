@@ -3,6 +3,7 @@ import Loader from "./components/Loader";
 import Main from "./components/Main";
 import Wheel from "./components/Wheel";
 import SplashCursor from "./ui/CustomCursor";
+import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 import useScrollAnimation from "./utils/useScrollAnimation";
 
@@ -28,36 +29,39 @@ function App() {
   return (
     <Main>
       <div className="relative min-h-screen bg-[#121212] bg-[url('./assets/noise.png')] bg-repeat text-[#1c1c1c]">
-        <SmoothScroll>
-          <SplashCursor />
-          <Wheel />
+        <ErrorBoundary>
+          {" "}
+          <SmoothScroll>
+            <SplashCursor />
+            <Wheel />
 
-          <div
-            className={
-              loading
-                ? "blur-sm brightness-50 pointer-events-none"
-                : "blur-0 transition-all duration-500"
-            }
-          >
-            <Suspense fallback={<Loader />}>
-              <Header />
-              <About />
-              <TechParallax />
-              <Skills />
-              <Projects />
-              <Experience />
-              <Personal />
-              <Contact />
-              <Footer />
-            </Suspense>
-          </div>
-
-          {loading && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
-              <Loader />
+            <div
+              className={
+                loading
+                  ? "blur-sm brightness-50 pointer-events-none"
+                  : "blur-0 transition-all duration-500"
+              }
+            >
+              <Suspense fallback={<Loader />}>
+                <Header />
+                <About />
+                <TechParallax />
+                <Skills />
+                <Projects />
+                <Experience />
+                <Personal />
+                <Contact />
+                <Footer />
+              </Suspense>
             </div>
-          )}
-        </SmoothScroll>
+
+            {loading && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
+                <Loader />
+              </div>
+            )}
+          </SmoothScroll>
+        </ErrorBoundary>
       </div>
     </Main>
   );
