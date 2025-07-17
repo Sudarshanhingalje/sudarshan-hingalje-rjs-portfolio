@@ -9,6 +9,7 @@ export default function useScrollAnimation() {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
     // ✅ Header hide on scroll down
+     useEffect(() => {
     gsap.to("#header", {
       y: -100,
       opacity: 0,
