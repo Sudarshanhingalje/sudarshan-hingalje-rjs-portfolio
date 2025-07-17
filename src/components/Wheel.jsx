@@ -29,10 +29,8 @@ export default function Wheel() {
     audio.play().catch(() => {});
   };
 
-  // Scroll rotation (disabled on small screens)
+  // 🔁 Scroll rotation (non-click)
   useEffect(() => {
-    if (window.innerWidth < 768) return;
-
     const handleScroll = () => {
       const currentY = window.scrollY;
       const diff = currentY - lastScrollY;
@@ -43,12 +41,11 @@ export default function Wheel() {
         damping: 14,
       });
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, rotation]);
 
-  // Mouse wheel rotation
+  // 🌀 Mouse wheel on hover
   const handleManualWheel = useCallback(
     (e) => {
       e.preventDefault();
@@ -59,6 +56,7 @@ export default function Wheel() {
     [rotation]
   );
 
+  // 🔄 Rotate + scroll to section
   const rotateAndScroll = (direction) => {
     const currentSectionIndex = sections.findIndex((id) => {
       const el = document.getElementById(id);
@@ -141,6 +139,7 @@ export default function Wheel() {
     return (Math.atan2(dy, dx) * 180) / Math.PI;
   };
 
+  // 🖱️ Left/Right click to rotate
   const handleClick = (e) => {
     const rect = centerRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
@@ -151,16 +150,16 @@ export default function Wheel() {
   return (
     <motion.div
       ref={centerRef}
-      className="fixed z-50 bottom-[env(safe-area-inset-bottom,2rem)] right-[env(safe-area-inset-right,1rem)] w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 cursor-grab active:cursor-grabbing select-none touch-none"
+      className="fixed bottom-10 right-10 z-50 w-32 h-32 md:w-40 md:h-40 cursor-grab active:cursor-grabbing select-none"
       style={{ rotate: rotation }}
       onWheel={handleManualWheel}
       onPointerDown={handlePointerDown}
       onClick={handleClick}
     >
-      {/* 🔺 Red pointer indicator */}
+      {/* 🔺 Indicator */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full z-20 shadow" />
 
-      {/* ⭕ Wheel graphic */}
+      {/* ⭕ Wheel Image */}
       <img
         src={wheelImg}
         alt="Navigation Wheel"
