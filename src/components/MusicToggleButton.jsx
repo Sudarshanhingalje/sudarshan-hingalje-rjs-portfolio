@@ -30,7 +30,16 @@ export default function MusicToggleButton() {
       <audio ref={audioRef} src="/src/assets/suzume.mp3" loop />
       <button
         onClick={toggleMusic}
-        className="text-3xl p-2 text-white focus:outline-none"
+        className={`
+          fixed bottom-6 right-6 z-50
+          w-14 h-14 rounded-full
+          flex items-center justify-center
+          bg-gradient-to-br from-purple-500 to-pink-500
+          text-white text-3xl shadow-lg
+          transition-all duration-300
+          hover:scale-110 hover:rotate-6 hover:shadow-xl
+          active:scale-95
+        `}
         title={isPlaying ? "Pause Music" : "Play Music"}
       >
         {isPlaying ? <HiMiniMusicalNote /> : <FcMusic />}
