@@ -12,7 +12,7 @@ export default function Navbar() {
       >
         {/* Name on the left */}
         <div className="text-white text-base sm:text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
-          <em>Sudarshan Hingalje</em>
+          <em>fbdvbvbfbgfngfngfnfgn</em>
         </div>
 
         {/* Logo on the right */}
