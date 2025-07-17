@@ -1,34 +1,19 @@
-import { useEffect, useRef } from "react";
-import wheelImg from "../assets/wheel.png"; // adjust path as needed
+import { motion, useScroll, useTransform } from "framer-motion";
 
-const Wheel = () => {
-  const wheelRef = useRef(null);
-  const rotation = useRef(0);
-
-  useEffect(() => {
-    const handleScroll = (e) => {
-      const delta = window.scrollY;
-      const newRotation = delta * 0.2; // adjust speed
-      rotation.current = newRotation;
-      if (wheelRef.current) {
-        wheelRef.current.style.transform = `rotate(${newRotation}deg)`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+const ScrollWheel = () => {
+  const { scrollY } = useScroll();
+  const rotate = useTransform(scrollY, [0, 1000], [0, 360]);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 pointer-events-none">
-      <img
-        src={wheelImg}
-        alt="Scroll Wheel"
-        ref={wheelRef}
-        className="w-24 h-24 transition-transform duration-75"
+    <div className="flex items-center justify-center min-h-[200vh] bg-black">
+      <motion.img
+        src="/assets/wheel.png"
+        alt="Steering Wheel"
+        style={{ rotate }}
+        className="w-40 h-40 pointer-events-none select-none"
       />
     </div>
   );
 };
 
-export default Wheel;
+export default ScrollWheel;
