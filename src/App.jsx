@@ -7,9 +7,7 @@ import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 import useScrollAnimation from "./utils/useScrollAnimation";
 
-// ✅ Import icons and audio
-import { FcMusic } from "react-icons/fc";
-import { HiMiniMusicalNote } from "react-icons/hi2";
+// ✅ Music
 import suzume from "./assets/suzume.mp3";
 
 const About = lazy(() => import("./sections/About"));
@@ -24,8 +22,8 @@ const TechParallax = lazy(() => import("./ui/TechParallax"));
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true); // ✅ music state
-  const audioRef = useRef(null); // ✅ audio ref
+  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRef = useRef(null);
 
   useScrollAnimation();
 
@@ -34,7 +32,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // ✅ Play audio on mount
+  // Play music on mount
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = 0.6;
@@ -42,10 +40,8 @@ function App() {
     }
   }, []);
 
-  // ✅ Toggle play/pause
   const toggleMusic = () => {
     if (!audioRef.current) return;
-
     if (isPlaying) {
       audioRef.current.pause();
     } else {
@@ -56,23 +52,13 @@ function App() {
 
   return (
     <Main>
-      {/* ✅ Global background and audio */}
       <div className="relative min-h-screen bg-[#121212] bg-[url('./assets/noise.png')] bg-repeat text-[#1c1c1c]">
         <ErrorBoundary>
           <SmoothScroll>
             <SplashCursor />
             <Wheel />
 
-            {/* ✅ Music toggle button */}
-            <button
-              onClick={toggleMusic}
-              className="fixed top-4 right-4 z-50 text-white text-2xl bg-black/30 backdrop-blur-sm p-2 rounded-full shadow-lg hover:bg-black/50 transition-all"
-              title={isPlaying ? "Pause Music" : "Play Music"}
-            >
-              {isPlaying ? <HiMiniMusicalNote /> : <FcMusic />}
-            </button>
-
-            {/* ✅ Hidden audio element */}
+            {/* ✅ Hidden audio tag */}
             <audio ref={audioRef} src={suzume} loop preload="auto" />
 
             <div
@@ -83,7 +69,8 @@ function App() {
               }
             >
               <Suspense fallback={<Loader />}>
-                <Header />
+                {/* ✅ Pass props to Header */}
+                <Header isMusicPlaying={isPlaying} toggleMusic={toggleMusic} />
                 <About />
                 <TechParallax />
                 <Skills />
