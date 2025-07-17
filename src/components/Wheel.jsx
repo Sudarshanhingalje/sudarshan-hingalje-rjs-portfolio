@@ -80,7 +80,7 @@ export default function Wheel() {
 
     animate(rotation, rotation.get() + direction * anglePerSection, {
       type: "spring",
-      stiffness: 20,
+      stiffness: 70,
       damping: 12,
     });
 
