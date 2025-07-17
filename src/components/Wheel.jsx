@@ -2,6 +2,7 @@ import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clickSoundFile from "../assets/click.mp3";
 import wheelImg from "../assets/wheel-fixed.svg";
+import MusicToggleButton from "./MusicToggleButton"; // adjust path if needed
 
 const sections = [
   "header",
