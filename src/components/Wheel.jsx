@@ -1,41 +1,51 @@
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import wheelImg from "../assets/wheel.png";
+import wheelImg from "./assets/wheel.png";
 
-const sections = ["hero", "about", "projects", "contact"];
+// Define sections (must match your real IDs)
+const sections = [
+  { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" },
+  { id: "personal", label: "Personal" },
+  { id: "contact", label: "Contact" },
+];
 
 const Wheel = () => {
-  const [angle, setAngle] = useState(0);
   const controls = useAnimation();
 
-  // Map section names to ref & observer
-  const sectionRefs = sections.map(() => useRef());
-  const inViewRefs = sectionRefs.map((ref) =>
-    useInView({ threshold: 0.5, triggerOnce: false })
+  // One observer for each section
+  const sectionRefs = sections.map(({ id }) =>
+    useInView({
+      triggerOnce: false,
+      threshold: 0.5,
+      rootMargin: "-10% 0px",
+    })
   );
 
-  // Rotate on scroll when section enters view
+  // Rotate when a section is in view
   useEffect(() => {
-    inViewRefs.forEach(([ref, inView], i) => {
-      if (inView) {
-        const newAngle = i * 45;
-        setAngle(newAngle);
-        controls.start({ rotate: newAngle });
-      }
-    });
-  }, [inViewRefs.map(([_, inView]) => inView).join(",")]);
+    const activeIndex = sectionRefs.findIndex(([, inView]) => inView);
+    if (activeIndex !== -1) {
+      const angle = activeIndex * (360 / sections.length);
+      controls.start({ rotate: angle });
+    }
+  }, [sectionRefs.map(([, inView]) => inView).join("")]);
 
-  const scrollToSection = (id) => {
+  const scrollTo = (id) => {
     const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <>
-      {/* Fixed wheel */}
+      {/* Wheel: sticky and always visible */}
       <motion.div
-        className="fixed top-4 right-4 z-50 w-24 h-24 md:w-36 md:h-36 cursor-pointer"
+        className="fixed top-1/2 right-4 -translate-y-1/2 z-50 w-24 h-24 md:w-32 md:h-32 cursor-pointer"
         animate={controls}
         transition={{ type: "spring", stiffness: 60 }}
         style={{ originX: 0.5, originY: 0.5 }}
@@ -45,34 +55,31 @@ const Wheel = () => {
           alt="wheel"
           className="w-full h-full select-none pointer-events-none"
         />
-        {/* Invisible clickable segments */}
+        {/* Clickable segments */}
         <div className="absolute inset-0 flex flex-wrap items-center justify-center">
           {sections.map((section, i) => (
             <button
-              key={section}
-              onClick={() => scrollToSection(section)}
+              key={section.id}
+              onClick={() => scrollTo(section.id)}
               className="absolute w-1/2 h-1/2 bg-transparent"
               style={{
-                transform: `rotate(${i * 90}deg) translateY(-50%)`,
+                transform: `rotate(${
+                  i * (360 / sections.length)
+                }deg) translateY(-50%)`,
                 transformOrigin: "50% 100%",
               }}
-              aria-label={`Go to ${section}`}
+              aria-label={`Go to ${section.label}`}
             />
           ))}
         </div>
       </motion.div>
 
-      {/* Dummy content for each section */}
-      {sections.map((section, i) => (
-        <div
-          key={section}
-          id={section}
-          ref={sectionRefs[i]}
-          className="h-screen flex items-center justify-center text-4xl font-bold bg-slate-100 border-b"
-        >
-          {section.toUpperCase()}
-        </div>
-      ))}
+      {/* Hidden observer divs */}
+      <div className="hidden">
+        {sectionRefs.map(([ref], i) => (
+          <div key={sections[i].id} ref={ref} />
+        ))}
+      </div>
     </>
   );
 };
