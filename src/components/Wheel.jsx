@@ -163,7 +163,6 @@ export default function Wheel() {
         alt="Navigation Wheel"
         className="w-full h-full object-contain pointer-events-auto"
       />
-      <MusicToggleButton />
     </motion.div>
   );
 }
