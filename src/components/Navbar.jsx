@@ -7,11 +7,11 @@ export default function Navbar() {
       <motion.nav
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 5, ease: "easeOut" }}
-        className="w-full fixed top-0 left-0 flex items-center justify-between px-4 md:px-8 py-3 z-30 bg-transparent"
+        transition={{ delay: 1.2, duration: 1.2, ease: "easeOut" }}
+        className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-10 py-3 flex items-center justify-between bg-transparent"
       >
-        {/* Your name on the left */}
-        <div className="text-white text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
+        {/* Name on the left */}
+        <div className="text-white text-base sm:text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
           <em>Sudarshan Hingalje</em>
         </div>
 
@@ -23,7 +23,7 @@ export default function Navbar() {
           <img
             src={bgImage}
             alt="Logo"
-            className="h-50 md:h-20  w-full object-contain cursor-pointer"
+            className="h-10 sm:h-12 md:h-16 w-auto object-contain cursor-pointer"
           />
         </button>
       </motion.nav>
