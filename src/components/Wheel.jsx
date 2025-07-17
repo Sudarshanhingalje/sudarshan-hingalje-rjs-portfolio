@@ -4,7 +4,7 @@ import clickSoundFile from "../assets/click.mp3";
 import wheelImg from "../assets/wheel.png"; // Make sure the image has clear markings
 
 const sections = [
-  "home",
+  "header",
   "about",
   "skills",
   "projects",
