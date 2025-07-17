@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
   useScrollAnimation();
+  const resumeUrl = getResumeLink();
 
   const [showNavbar, setShowNavbar] = useState(true);
 
