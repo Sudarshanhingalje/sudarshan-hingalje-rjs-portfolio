@@ -6,7 +6,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center py-16"
+      className="min-h-screen  text-white flex flex-col items-center justify-center py-16"
     >
       <h2 className="text-4xl font-bold mb-10">Skills</h2>
       <motion.div
