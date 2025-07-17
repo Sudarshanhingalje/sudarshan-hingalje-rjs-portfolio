@@ -156,14 +156,12 @@ export default function Wheel() {
       onPointerDown={handlePointerDown}
       onClick={handleClick}
     >
-      {/* 🔺 Indicator */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full z-20 shadow" />
 
-      {/* ⭕ Wheel Image */}
       <img
         src={wheelImg}
         alt="Navigation Wheel"
-        className="w-full h-screen object-contain pointer-events-auto "
+        className="w-full h-full object-contain pointer-events-auto "
       />
     </motion.div>
   );
