@@ -32,7 +32,7 @@ export default function MusicToggleButton() {
           absolute z-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
           w-12 h-12 rounded-full
           flex items-center justify-center
-          bg-gradient-to-br from-purple-500 to-pink-500
+          bg-gradient-to-br from-yellow-500 to-red-500
           text-white text-2xl shadow-lg
           transition-all duration-300
           hover:scale-110 hover:rotate-6 hover:shadow-xl
