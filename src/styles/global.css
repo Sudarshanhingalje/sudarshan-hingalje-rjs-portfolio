@@ -1,6 +1,6 @@
 html,
 body {
-  scroll-behavior: auto !important; /* disables native smooth */
+  scroll-behavior: auto; /* disables native smooth */
   overflow: auto;
   height: auto;
 }
