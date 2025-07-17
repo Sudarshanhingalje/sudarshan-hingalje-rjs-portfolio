@@ -5,7 +5,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="bg-gray-900 text-white px-6 py-12 md:grid md:grid-cols-2 gap-10"
+      className=" text-white px-6 py-12 md:grid md:grid-cols-2 gap-10"
     >
       {/* Left Section */}
       <motion.div

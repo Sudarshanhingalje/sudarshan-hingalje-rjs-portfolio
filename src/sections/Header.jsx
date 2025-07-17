@@ -26,7 +26,7 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="transition-all duration-500 ease-in-out relative h-screen w-full  bg-white text-white overflow-hidden"
+      className="transition-all duration-500 ease-in-out relative h-screen w-full  text-white overflow-hidden"
     >
       {showNavbar && <Navbar />}
       <motion.h1
