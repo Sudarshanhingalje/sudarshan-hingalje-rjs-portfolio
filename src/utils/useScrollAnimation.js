@@ -9,7 +9,7 @@ export default function useScrollAnimation() {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
     // ✅ Header hide on scroll down
-     useEffect(() => {
+
     gsap.to("#header", {
       y: -100,
       opacity: 0,
@@ -21,8 +21,6 @@ export default function useScrollAnimation() {
         scrub: true,
       },
     });
-  }, []);
-}
 
     // ✅ Pin About Section with parallax
     gsap.to("#about .about-avatar", {
