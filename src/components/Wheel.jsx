@@ -1,8 +1,8 @@
 import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { clickSoundFile } from "../assets/click.mp3";
 import wheelImg from "../assets/wheel-fixed.svg";
 import MusicToggleButton from "./MusicToggleButton";
-import { clickSoundFile } from "/public/click.mp3";
 
 const sections = [
   "header",
