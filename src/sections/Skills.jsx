@@ -33,11 +33,10 @@ const Skills = () => {
                   className="bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow-md hover:shadow-xl transition-all flex flex-col items-center"
                 >
                   <img
-                    src={`/assets/skill/${skill.name
-                      .toLowerCase()
-                      .replace(/\s/g, "")}.svg`}
+                    src={skill.icon}
                     alt={skill.name}
                     className="w-12 h-12 mb-3 object-contain"
+                    loading="lazy"
                   />
                   <span className="text-sm text-center text-gray-200">
                     {skill.name}
