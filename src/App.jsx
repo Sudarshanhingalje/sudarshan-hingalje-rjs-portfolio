@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
 import Wheel from "./components/Wheel";
-import About from "./sections/About";
-import Contact from "./sections/Contact";
-import Experience from "./sections/Experience";
-import Footer from "./sections/Footer";
-import Header from "./sections/Header";
-import Personal from "./sections/Personal";
-import Projects from "./sections/Projects";
-import Skills from "./sections/Skills";
 import SplashCursor from "./ui/CustomCursor";
-import TechParallax from "./ui/TechParallax";
 import SmoothScroll from "./utils/SmoothScroll";
 import useScrollAnimation from "./utils/useScrollAnimation";
+
+const About = lazy(() => import("./sections/About"));
+const Contact = lazy(() => import("./sections/Contact"));
+const Footer = lazy(() => import("./sections/Footer"));
+const Header = lazy(() => import("./sections/Header"));
+const Personal = lazy(() => import("./sections/Personal"));
+const Skills = lazy(() => import("./sections/Skills"));
+const Projects = lazy(() => import("./sections/Projects"));
+const Experience = lazy(() => import("./sections/Experience"));
+const TechParallax = lazy(() => import("./ui/TechParallax"));
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -30,6 +31,7 @@ function App() {
         <SmoothScroll>
           <SplashCursor />
           <Wheel />
+
           <div
             className={
               loading
@@ -37,15 +39,17 @@ function App() {
                 : "blur-0 transition-all duration-500"
             }
           >
-            <Header />
-            <About />
-            <TechParallax />
-            <Skills />
-            <Projects />
-            <Experience />
-            <Personal />
-            <Contact />
-            <Footer />
+            <Suspense fallback={<Loader />}>
+              <Header />
+              <About />
+              <TechParallax />
+              <Skills />
+              <Projects />
+              <Experience />
+              <Personal />
+              <Contact />
+              <Footer />
+            </Suspense>
           </div>
 
           {loading && (

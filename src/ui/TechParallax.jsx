@@ -1,4 +1,4 @@
-// components/TechParallax.jsx
+// Font Awesome
 import {
   FaCode,
   FaCss3Alt,
@@ -9,7 +9,10 @@ import {
   FaJs,
   FaReact,
 } from "react-icons/fa";
+
+// Simple Icons
 import { SiJira, SiNextdotjs, SiPostman } from "react-icons/si";
+
 import ParallaxText from "../ui/ParallaxText";
 
 export default function TechParallax() {

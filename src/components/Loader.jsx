@@ -1,14 +1,9 @@
-import Lottie from "lottie-react";
-import loaderAnimation from "../assets/Loader.json";
+import loaderGif from "../assets/Loader.gif";
 
 const Loader = () => {
   return (
-    <div className="flex items-center justify-center screen ">
-      <Lottie
-        animationData={loaderAnimation}
-        loop={true}
-        className="w-50 h-40"
-      />
+    <div className="flex items-center justify-center h-screen">
+      <img src={loaderGif} alt="Loading..." className="w-75 h-75" />
     </div>
   );
 };

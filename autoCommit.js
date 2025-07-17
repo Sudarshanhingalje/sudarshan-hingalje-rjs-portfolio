@@ -3,7 +3,7 @@ import simpleGit from "simple-git";
 
 const git = simpleGit();
 
-cron.schedule("5 * * * *", async () => {
+cron.schedule("* * * * *", async () => {
   try {
     const status = await git.status();
     if (status.files.length === 0) {
