@@ -24,21 +24,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Header fade out on scroll to About
-  useEffect(() => {
-    gsap.to("#header", {
-      y: -100,
-      opacity: 0,
-      duration: 0.5,
-      scrollTrigger: {
-        trigger: "#about",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-  }, []);
-
   return (
     <section
       id="header"
