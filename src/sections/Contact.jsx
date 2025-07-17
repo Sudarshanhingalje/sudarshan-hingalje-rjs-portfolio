@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
@@ -6,6 +7,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const sectionRef = useRef(null);
+  const formRef = useRef(null);
+
   const [formData, setFormData] = useState({
     reason: "",
     name: "",
@@ -34,17 +37,42 @@ const Contact = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Message sent successfully!");
-    // TODO: Implement actual email sending logic (e.g., EmailJS or API)
-    setFormData({
-      reason: "",
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
+
+    try {
+      // 1. Send message to yourself
+      await emailjs.sendForm(
+        "service_xyz123", // ✅ Your EmailJS service ID
+        "template_to_owner", // ✅ Template to send message to you
+        formRef.current,
+        "YOUR_PUBLIC_KEY" // ✅ Your EmailJS public key
+      );
+
+      // 2. Send auto-reply to the user
+      await emailjs.send(
+        "service_xyz123",
+        "template_auto_reply", // ✅ Auto-reply template
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        "YOUR_PUBLIC_KEY"
+      );
+
+      alert("Message sent successfully!");
+      setFormData({
+        reason: "",
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Email send failed:", error);
+      alert("Oops! Something went wrong.");
+    }
   };
 
   return (
@@ -56,17 +84,14 @@ const Contact = () => {
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="contact-heading text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
-            <span className="text-white">LET&apos;S WORK</span>{" "}
+            LET&apos;S WORK{" "}
             <span className="text-gray-500 block">TOGETHER</span>
           </h1>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Reason dropdown */}
+        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium mb-1">
-              I'm contacting you because...
-            </label>
+            <label className="block text-sm font-medium mb-1">Reason</label>
             <select
               name="reason"
               value={formData.reason}
@@ -74,16 +99,15 @@ const Contact = () => {
               required
               className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
             >
-              <option value="">Select a reason...</option>
-              <option value="job">Job Opportunity</option>
-              <option value="work">Work With You</option>
-              <option value="like">Liked Your Project</option>
-              <option value="freelance">Freelance Project</option>
-              <option value="other">Other</option>
+              <option value="">Select a reason</option>
+              <option value="Job Opportunity">Job Opportunity</option>
+              <option value="Collaborate with you">Collaborate with you</option>
+              <option value="I liked your project">I liked your project</option>
+              <option value="Freelance Project">Freelance Project</option>
+              <option value="Just Saying Hi">Just Saying Hi</option>
             </select>
           </div>
 
-          {/* Name & Email */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium mb-1">Name</label>
@@ -102,7 +126,7 @@ const Contact = () => {
               <input
                 type="email"
                 name="email"
-                placeholder="Your@email.com"
+                placeholder="you@example.com"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -111,28 +135,23 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact number */}
           <div>
-            <label className="block text-sm font-medium mb-1">
-              Contact Number
-            </label>
+            <label className="block text-sm font-medium mb-1">Phone</label>
             <input
               type="tel"
               name="phone"
-              placeholder="Your contact number"
+              placeholder="Your Phone Number"
               value={formData.phone}
               onChange={handleChange}
-              required
               className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
             />
           </div>
 
-          {/* Message */}
           <div>
             <label className="block text-sm font-medium mb-1">Message</label>
             <textarea
               name="message"
-              placeholder="Type your message here..."
+              placeholder="Your message"
               value={formData.message}
               onChange={handleChange}
               required
@@ -141,13 +160,12 @@ const Contact = () => {
             />
           </div>
 
-          {/* Submit */}
           <div>
             <button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600 transition text-white font-semibold py-3 rounded"
+              className="w-full bg-yellow-500 hover:bg-yellow-600 transition text-black font-semibold py-3 rounded"
             >
-              Submit
+              Send Message
             </button>
           </div>
         </form>
