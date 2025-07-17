@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import devImage from "../assets/own.svg";
+import devImage from "../assets/own.png";
 
 const About = () => {
   return (
