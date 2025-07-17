@@ -1,8 +1,7 @@
-import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import wheelImg from "../assets/wheel.png";
 
-// Match IDs to your existing section components
+// Sections should match the section IDs in your HTML
 const sections = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
@@ -13,36 +12,32 @@ const sections = [
 ];
 
 const Wheel = () => {
+  const wheelRef = useRef(null);
   const [angle, setAngle] = useState(0);
 
-  const sectionEls = useRef([]);
-
   useEffect(() => {
-    sectionEls.current = sections.map(({ id }) => document.getElementById(id));
+    const elements = sections.map(({ id }) => document.getElementById(id));
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = sections.findIndex((s) => s.id === entry.target.id);
-            setAngle(index * (360 / sections.length));
+            const newAngle = index * (360 / sections.length);
+            setAngle(newAngle);
+
+            // Apply CSS transform manually
+            if (wheelRef.current) {
+              wheelRef.current.style.transform = `translateY(-50%) rotate(${newAngle}deg)`;
+            }
           }
         });
       },
-      {
-        threshold: 0.5,
-      }
+      { threshold: 0.5 }
     );
 
-    sectionEls.current.forEach((el) => {
-      if (el) observer.observe(el);
-    });
-
-    return () => {
-      sectionEls.current.forEach((el) => {
-        if (el) observer.unobserve(el);
-      });
-    };
+    elements.forEach((el) => el && observer.observe(el));
+    return () => elements.forEach((el) => el && observer.unobserve(el));
   }, []);
 
   const scrollTo = (id) => {
@@ -51,11 +46,13 @@ const Wheel = () => {
   };
 
   return (
-    <motion.div
-      className="fixed top-1/2 right-6 -translate-y-1/2 z-50 w-24 h-24 md:w-32 md:h-32"
-      animate={{ rotate: angle }}
-      transition={{ type: "spring", stiffness: 70 }}
-      style={{ originX: 0.5, originY: 0.5 }}
+    <div
+      ref={wheelRef}
+      className="fixed top-1/2 right-6 z-50 w-24 h-24 md:w-32 md:h-32 transition-transform duration-700 ease-out"
+      style={{
+        transform: "translateY(-50%) rotate(0deg)",
+        transformOrigin: "50% 50%",
+      }}
     >
       <img
         src={wheelImg}
@@ -78,7 +75,7 @@ const Wheel = () => {
           />
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
