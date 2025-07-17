@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { FcMusic } from "react-icons/fc";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
 import useScrollAnimation from "../utils/useScrollAnimation";
