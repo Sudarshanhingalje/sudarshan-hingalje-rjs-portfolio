@@ -11,7 +11,7 @@ const Skills = () => {
         Tech Stack
       </h2>
 
-      <div className="flex flex-wrap gap-12 max-w-5xl mx-auto">
+      <div className="grid gap-12 max-w-6xl mx-auto">
         {skillsLerned.map((category) => (
           <div key={category.category}>
             <h3 className="text-2xl font-semibold text-left mb-6">
