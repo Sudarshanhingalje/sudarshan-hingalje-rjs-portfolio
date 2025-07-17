@@ -45,7 +45,7 @@ export default function Header() {
         transition={{ delay: 6, duration: 6 }}
         className="absolute top-[28%] left-4 md:left-10 flex flex-col items-start space-y-6 sm:space-y-8"
       >
-        <p className="text-4xl sm:text-6xl md:text-7xl lg:text-[8vw] xl:text-[9vw] font-cinzel leading-tight text-[#d5cdc4]">
+        <p className="text-2xl sm:text-6xl md:text-7xl lg:text-[8vw] xl:text-[9vw] font-cinzel leading-tight text-[#d5cdc4]">
           Full Stack <br />
           <span className="text-5xl sm:text-7xl md:text-[9vw] font-bold">
             Developer
