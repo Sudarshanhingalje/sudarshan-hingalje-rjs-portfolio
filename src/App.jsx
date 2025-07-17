@@ -27,7 +27,7 @@ function App() {
 
   return (
     <Main>
-      <div className="relative bg-gray-100 dark:bg-gray-900">
+      <div className="relative min-h-screen bg-[#f7f5f0] bg-[url('/noise.png')] bg-repeat text-[#1c1c1c]">
         <SmoothScroll>
           <SplashCursor />
           <Wheel />
