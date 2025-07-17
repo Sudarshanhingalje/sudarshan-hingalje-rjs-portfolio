@@ -11,6 +11,7 @@ const sections = [
   "experience",
   "personal",
   "contact",
+  "footer",
 ];
 
 export default function Wheel() {
