@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { skillsLerned } from "../data/skills/SkillsLerned";
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40 },
   visible: (i = 1) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.07,
+      delay: i * 0.08,
       duration: 0.6,
       ease: "easeOut",
     },
@@ -18,12 +18,13 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="min-h-screen text-white font-montserrat py-16 px-4 flex flex-col items-center"
+      className="min-h-screen text-white font-montserrat pt-8 pb-16 px-4 flex flex-col items-center"
     >
       {/* Section Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6 }}
         className="text-4xl sm:text-5xl font-bold mb-12 text-center text-[#ffc857]"
       >
@@ -38,6 +39,7 @@ const Skills = () => {
             <motion.h3
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5 }}
               className="text-2xl font-semibold mb-6 text-gray-300"
             >
@@ -49,7 +51,7 @@ const Skills = () => {
               className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-5 justify-center"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.3 }}
             >
               {group.items.map((skill, i) => (
                 <motion.div
