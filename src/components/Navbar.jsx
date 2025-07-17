@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import bgImage from "../assets/brand2.svg";
-import MusicToggleButton from "./MusicToggleButton";
 
 export default function Navbar() {
   return (
@@ -15,7 +14,7 @@ export default function Navbar() {
         <div className="text-white text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
           <em>Sudarshan Hingalje</em>
         </div>
-        {<MusicToggleButton />}
+
         {/* Logo on the right */}
         <button
           onClick={() => window.location.reload()}

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
+import MusicToggleButton from "./components/MusicToggleButton";
 import Wheel from "./components/Wheel";
 import SplashCursor from "./ui/CustomCursor";
 import ErrorBoundary from "./utils/ErrorBoundary";
@@ -30,7 +31,7 @@ function App() {
     <Main>
       <div className="relative min-h-screen bg-[#121212] bg-[url('./assets/noise.png')] bg-repeat text-[#1c1c1c]">
         <ErrorBoundary>
-          {" "}
+          <MusicToggleButton />
           <SmoothScroll>
             <SplashCursor />
             <Wheel />
