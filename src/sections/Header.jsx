@@ -1,8 +1,13 @@
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
+import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
 import useScrollAnimation from "../utils/useScrollAnimation";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
   useScrollAnimation();
@@ -17,6 +22,21 @@ export default function Header() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Header fade out on scroll to About
+  useEffect(() => {
+    gsap.to("#header", {
+      y: -100,
+      opacity: 0,
+      duration: 0.5,
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
   }, []);
 
   return (
@@ -37,7 +57,7 @@ export default function Header() {
         Sudarshan <br /> Hingalje
       </motion.h1>
 
-      {/* Developer Title + CTA */}
+      {/* Title + CTA + Download CV */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
@@ -51,12 +71,23 @@ export default function Header() {
           </span>
         </p>
 
-        <a
-          href="#about"
-          className="bg-[#ffc857] hover:bg-[#ffb347] text-black font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
-        >
-          Contact Me
-        </a>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#about"
+            className="bg-[#ffc857] hover:bg-[#ffb347] text-black font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
+          >
+            Contact Me
+          </a>
+
+          <a
+            href="/Sudarshan_Hingalje_CV.pdf" // Make sure to place the CV in /public folder
+            download
+            className="flex items-center gap-2 bg-white hover:bg-gray-200 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
+          >
+            <FaDownload />
+            Download CV
+          </a>
+        </div>
       </motion.div>
 
       {/* Avatar Image */}
