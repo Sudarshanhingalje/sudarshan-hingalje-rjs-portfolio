@@ -27,3 +27,11 @@ body,
   background-position: 0 0;
   animation: moveGrid 30s linear infinite;
 }
+@keyframes moveGrid {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 40px 40px, 40px 40px;
+  }
+}
