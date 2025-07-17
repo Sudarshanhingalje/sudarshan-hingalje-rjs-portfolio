@@ -1,7 +1,7 @@
 import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clickSoundFile from "../assets/click.mp3";
-import wheelImg from "../assets/wheel.png"; // Ensure markings are clear
+import { wheelImg } from "../assets/wheel.png";
 
 const sections = [
   "header",
