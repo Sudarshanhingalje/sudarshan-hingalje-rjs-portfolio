@@ -7,9 +7,10 @@ gsap.registerPlugin(ScrollTrigger);
 const Contact = () => {
   const sectionRef = useRef(null);
   const [formData, setFormData] = useState({
+    reason: "",
     name: "",
     email: "",
-    budget: "",
+    phone: "",
     message: "",
   });
 
@@ -36,14 +37,21 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Message sent successfully!");
-    setFormData({ name: "", email: "", budget: "", message: "" });
+    // TODO: Implement actual email sending logic (e.g., EmailJS or API)
+    setFormData({
+      reason: "",
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
   };
 
   return (
     <section
       id="contact"
       ref={sectionRef}
-      className="py-20 px-4 sm:px-6 lg:px-8  text-white"
+      className="py-20 px-4 sm:px-6 lg:px-8 text-white"
     >
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
@@ -53,8 +61,29 @@ const Contact = () => {
           </h1>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Reason dropdown */}
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              I'm contacting you because...
+            </label>
+            <select
+              name="reason"
+              value={formData.reason}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
+            >
+              <option value="">Select a reason...</option>
+              <option value="job">Job Opportunity</option>
+              <option value="work">Work With You</option>
+              <option value="like">Liked Your Project</option>
+              <option value="freelance">Freelance Project</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          {/* Name & Email */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium mb-1">Name</label>
@@ -82,27 +111,28 @@ const Contact = () => {
             </div>
           </div>
 
+          {/* Contact number */}
           <div>
-            <label className="block text-sm font-medium mb-1">Budget</label>
-            <select
-              name="budget"
-              value={formData.budget}
+            <label className="block text-sm font-medium mb-1">
+              Contact Number
+            </label>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Your contact number"
+              value={formData.phone}
               onChange={handleChange}
               required
               className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
-            >
-              <option value="">Select...</option>
-              <option value="5000-10000">₹5,000 - ₹10,000</option>
-              <option value="10000-25000">₹10,000 - ₹25,000</option>
-              <option value="25000+">₹25,000+</option>
-            </select>
+            />
           </div>
 
+          {/* Message */}
           <div>
             <label className="block text-sm font-medium mb-1">Message</label>
             <textarea
               name="message"
-              placeholder="Message"
+              placeholder="Type your message here..."
               value={formData.message}
               onChange={handleChange}
               required
@@ -111,6 +141,7 @@ const Contact = () => {
             />
           </div>
 
+          {/* Submit */}
           <div>
             <button
               type="submit"
