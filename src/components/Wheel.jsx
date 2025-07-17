@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import wheelImg from "/assets/Steering_wheel_ship_1.png"; // adjust path as needed
+import wheelImg from "/assets/wheel.png"; // adjust path as needed
 
 const ScrollWheel = () => {
   const wheelRef = useRef(null);
