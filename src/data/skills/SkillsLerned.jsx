@@ -16,7 +16,6 @@ import {
   SiCplusplus,
   SiExpress,
   SiFramer,
-  SiGooglecloud,
   SiGsap,
   SiMongodb,
   SiMongoose,
@@ -70,11 +69,10 @@ export const skillsLerned = [
   {
     category: "Tools & Cloud",
     items: [
-      { name: "AWS", icon: <FaAws /> }, // ✅ Valid AWS icon
+      { name: "AWS", icon: <FaAws /> },
       { name: "Docker", icon: <FaDocker /> },
       { name: "Git", icon: <FaGitAlt /> },
       { name: "GitHub", icon: <FaGithub /> },
-      { name: "Google Cloud", icon: <SiGooglecloud /> },
     ],
   },
 ];
