@@ -20,6 +20,8 @@ export default function useScrollAnimation() {
         scrub: true,
       },
     });
+  }, []);
+}
 
     // ✅ Pin About Section with parallax
     gsap.to("#about .about-avatar", {

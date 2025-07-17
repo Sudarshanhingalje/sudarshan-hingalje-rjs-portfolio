@@ -27,7 +27,7 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative h-screen w-full overflow-hidden bg-[#0f0e0e] text-white transition-all duration-500 ease-in-out"
+      className="relative h-screen w-full bg-[#0f0e0e] text-white overflow-hidden"
     >
       {/* Navbar */}
       {showNavbar && <Navbar />}
@@ -37,37 +37,38 @@ export default function Header() {
         initial={{ opacity: 0, y: -80 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
         transition={{ duration: 8, ease: "easeInOut" }}
-        className="absolute top-8 left-4 md:left-10 text-4xl sm:text-5xl md:text-6xl font-cinzel tracking-tight text-[#d5cdc4]"
+        className="absolute top-6 left-4 md:left-10 text-3xl sm:text-4xl md:text-5xl font-cinzel tracking-tight text-[#d5cdc4]"
       >
         Sudarshan <br /> Hingalje
       </motion.h1>
 
-      {/* Title + CTA + Download CV */}
+      {/* Main Content */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 6.2, duration: 1.8, ease: "easeOut" }}
-        className="absolute top-[32%] left-4 md:left-10 flex flex-col items-start space-y-6 sm:space-y-8"
+        className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8"
       >
-        <p className="text-2xl sm:text-5xl md:text-6xl lg:text-[7vw] xl:text-[8vw] font-cinzel leading-tight text-[#e7e1da]">
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#e7e1da]">
           Full Stack <br />
-          <span className="text-[#ffc857] text-4xl sm:text-6xl md:text-[8vw] font-extrabold">
+          <span className="text-[#ffc857] text-4xl sm:text-5xl md:text-[7vw] font-extrabold">
             Developer
           </span>
         </p>
 
+        {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
           <a
             href="#about"
-            className="bg-[#ffc857] hover:bg-[#ffb347] text-black font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
+            className="bg-[#ffc857] hover:bg-[#ffb347] text-black font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-lg sm:text-xl transition duration-300 shadow-md text-center"
           >
             Contact Me
           </a>
 
           <a
-            href="/Sudarshan_Hingalje_CV.pdf" // Make sure to place the CV in /public folder
+            href="/Sudarshan_Hingalje_CV.pdf"
             download
-            className="flex items-center gap-2 bg-white hover:bg-gray-200 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
+            className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
           >
             <FaDownload />
             Download CV
@@ -75,7 +76,7 @@ export default function Header() {
         </div>
       </motion.div>
 
-      {/* Avatar Image */}
+      {/* Avatar */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
