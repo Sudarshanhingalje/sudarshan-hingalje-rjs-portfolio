@@ -1,6 +1,6 @@
-// components/Wheel.jsx
 import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
+import clickSoundFile from "../assets/click.mp3"; // Optional click sound
 import wheelImg from "../assets/wheel.png";
 
 const sections = [
@@ -19,6 +19,13 @@ export default function Wheel() {
   const centerRef = useRef(null);
   const isDragging = useRef(false);
   const lastAngle = useRef(null);
+  const lastTime = useRef(null);
+  const velocity = useRef(0);
+
+  const playClick = () => {
+    const audio = new Audio(clickSoundFile);
+    audio.play().catch(() => {});
+  };
 
   // 🔄 Scroll-based wheel rotation
   useEffect(() => {
@@ -36,7 +43,7 @@ export default function Wheel() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, rotation]);
 
-  // 🌀 Manual mouse wheel rotation
+  // 🌀 Mouse wheel on hover → rotate + scroll
   const handleManualWheel = useCallback(
     (e) => {
       e.preventDefault();
@@ -73,12 +80,15 @@ export default function Wheel() {
       stiffness: 70,
       damping: 12,
     });
+
+    playClick();
   };
 
-  // ✋ Pointer drag to rotate freely
+  // 👆 Drag to rotate
   const handlePointerDown = (e) => {
     isDragging.current = true;
     lastAngle.current = getAngle(e);
+    lastTime.current = Date.now();
     window.addEventListener("pointermove", handlePointerMove);
     window.addEventListener("pointerup", handlePointerUp);
   };
@@ -86,16 +96,40 @@ export default function Wheel() {
   const handlePointerMove = (e) => {
     if (!isDragging.current) return;
     const angle = getAngle(e);
+    const now = Date.now();
+
     if (lastAngle.current !== null) {
       const diff = angle - lastAngle.current;
+      const timeDiff = now - lastTime.current;
+      velocity.current = diff / timeDiff; // angle/ms
+
       rotation.set(rotation.get() + diff);
     }
+
     lastAngle.current = angle;
+    lastTime.current = now;
   };
 
   const handlePointerUp = () => {
     isDragging.current = false;
     lastAngle.current = null;
+    lastTime.current = null;
+
+    // ➕ Inertia effect
+    const inertiaAngle = velocity.current * 1500; // scale speed
+    const finalAngle = rotation.get() + inertiaAngle;
+
+    // 🎯 Snap to nearest 60°
+    const snapped = Math.round(finalAngle / 60) * 60;
+
+    animate(rotation, snapped, {
+      type: "spring",
+      stiffness: 80,
+      damping: 18,
+    });
+
+    playClick();
+
     window.removeEventListener("pointermove", handlePointerMove);
     window.removeEventListener("pointerup", handlePointerUp);
   };
