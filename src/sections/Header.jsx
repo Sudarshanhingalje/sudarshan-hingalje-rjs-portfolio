@@ -28,7 +28,7 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative h-screen w-full text-white overflow-hidden bg-gradient-to-br from-[#ffffff]/40 via-[#ff1b1b87]/30 to-[#ffffff]/20"
+      className="relative h-screen w-full text-white overflow-hidden bg-gradient-to-b from-[#1f1c2c] via-[#928dab] to-[#ffffff]"
     >
       {/* Grid Background */}
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
