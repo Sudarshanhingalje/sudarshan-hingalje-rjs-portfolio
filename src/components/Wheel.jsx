@@ -2,7 +2,7 @@ import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clickSoundFile from "../assets/click.mp3";
 import wheelImg from "../assets/wheel-fixed.svg";
-import MusicToggleButton from "./MusicToggleButton"; // adjust path if needed
+import MusicToggleButton from "./MusicToggleButton";
 
 const sections = [
   "header",
@@ -163,7 +163,7 @@ export default function Wheel() {
         alt="Navigation Wheel"
         className="w-full h-full object-contain pointer-events-auto"
       />
-      <MusicToggleButton /> {/* 🎵 Button appears centered on wheel */}
+      <MusicToggleButton />
     </motion.div>
   );
 }
