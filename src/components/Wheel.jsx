@@ -1,82 +1,71 @@
+// components/Wheel.jsx
+import { animate, motion, useMotionValue } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import wheelImg from "../assets/wheel.png";
 
-// Sections should match the section IDs in your HTML
-const sections = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "personal", label: "Personal" },
-  { id: "contact", label: "Contact" },
-];
+const sections = ["home", "about", "skills", "projects", "contact"];
 
-const Wheel = () => {
+export default function Wheel() {
   const wheelRef = useRef(null);
-  const [angle, setAngle] = useState(0);
+  const rotation = useMotionValue(0);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
+  // 🔄 Rotate wheel based on scroll
   useEffect(() => {
-    const elements = sections.map(({ id }) => document.getElementById(id));
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      const diff = currentY - lastScrollY;
+      setLastScrollY(currentY);
+      animate(rotation, rotation.get() + diff * 0.3, {
+        type: "spring",
+        stiffness: 50,
+      });
+    };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = sections.findIndex((s) => s.id === entry.target.id);
-            const newAngle = index * (360 / sections.length);
-            setAngle(newAngle);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
-            // Apply CSS transform manually
-            if (wheelRef.current) {
-              wheelRef.current.style.transform = `translateY(-50%) rotate(${newAngle}deg)`;
-            }
-          }
-        });
-      },
-      { threshold: 0.5 }
+  // 🌀 Scroll page when wheel is rotated manually
+  const handleWheelRotate = (_, info) => {
+    const delta = info.delta.x || info.delta.y;
+    const direction = delta > 0 ? 1 : -1;
+
+    const currentSectionIndex = sections.findIndex((id) => {
+      const el = document.getElementById(id);
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top <= window.innerHeight / 2 &&
+        rect.bottom >= window.innerHeight / 2
+      );
+    });
+
+    const nextIndex = Math.min(
+      sections.length - 1,
+      Math.max(0, currentSectionIndex + direction)
     );
+    const nextSection = document.getElementById(sections[nextIndex]);
 
-    elements.forEach((el) => el && observer.observe(el));
-    return () => elements.forEach((el) => el && observer.unobserve(el));
-  }, []);
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
 
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth" });
+    animate(rotation, rotation.get() + direction * 60, {
+      type: "spring",
+      stiffness: 60,
+    });
   };
 
   return (
-    <div
+    <motion.div
+      className="fixed bottom-10 right-10 z-50 w-32 h-32 rounded-full bg-gradient-to-tr from-gray-800 to-gray-900 flex items-center justify-center shadow-lg cursor-grab active:cursor-grabbing"
       ref={wheelRef}
-      className="fixed top-1/2 right-6 z-50 w-24 h-24 md:w-32 md:h-32 transition-transform duration-700 ease-out"
-      style={{
-        transform: "translateY(-50%) rotate(0deg)",
-        transformOrigin: "50% 50%",
-      }}
+      drag
+      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+      onDragEnd={handleWheelRotate}
+      style={{ rotate: rotation }}
     >
-      <img
-        src={wheelImg}
-        alt="Navigation Wheel"
-        className="w-full h-full select-none pointer-events-none"
-      />
-      <div className="absolute inset-0 flex flex-wrap items-center justify-center">
-        {sections.map((s, i) => (
-          <button
-            key={s.id}
-            onClick={() => scrollTo(s.id)}
-            className="absolute w-1/2 h-1/2 bg-transparent"
-            style={{
-              transform: `rotate(${
-                i * (360 / sections.length)
-              }deg) translateY(-50%)`,
-              transformOrigin: "50% 100%",
-            }}
-            aria-label={`Go to ${s.label}`}
-          />
-        ))}
-      </div>
-    </div>
+      <div className="text-white font-bold text-xl">🌀</div>
+    </motion.div>
   );
-};
-
-export default Wheel;
+}
