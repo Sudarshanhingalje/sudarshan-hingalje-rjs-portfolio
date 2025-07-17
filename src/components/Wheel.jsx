@@ -1,9 +1,8 @@
 import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clickSoundFile from "../assets/click.mp3";
-import wheelImg from "../assets/wheel.png"; // ✅ Must have visible markings
+import wheelImg from "../assets/wheel.png"; // Make sure the image has clear markings
 
-// 📌 Section IDs must match your page structure
 const sections = [
   "header",
   "about",
@@ -23,53 +22,66 @@ export default function Wheel() {
   const lastAngle = useRef(null);
   const lastTime = useRef(null);
   const velocity = useRef(0);
-  const currentIndex = useRef(0);
-
-  const anglePerSection = 360 / sections.length;
 
   const playClick = () => {
     const audio = new Audio(clickSoundFile);
     audio.play().catch(() => {});
   };
 
-  // 🔁 Scroll-based rotation (snap to section)
+  // 🔁 Scroll-based rotation
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
       const diff = currentY - lastScrollY;
       setLastScrollY(currentY);
-
-      const direction = diff > 0 ? 1 : -1;
-      rotateToSection(currentIndex.current + direction);
+      animate(rotation, rotation.get() + diff * 0.3, {
+        type: "spring",
+        stiffness: 60,
+        damping: 14,
+      });
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, rotation]);
 
   // 🌀 Mouse wheel hover over the wheel
-  const handleManualWheel = useCallback((e) => {
-    e.preventDefault();
-    const delta = e.deltaY || e.deltaX;
-    const direction = delta > 0 ? 1 : -1;
-    rotateToSection(currentIndex.current + direction);
-  }, []);
+  const handleManualWheel = useCallback(
+    (e) => {
+      e.preventDefault();
+      const delta = e.deltaY || e.deltaX;
+      const direction = delta > 0 ? 1 : -1;
+      rotateAndScroll(direction);
+    },
+    [rotation]
+  );
 
-  // 🔁 Scroll + rotate to section
-  const rotateToSection = (newIndex) => {
-    newIndex = Math.max(0, Math.min(sections.length - 1, newIndex));
-    currentIndex.current = newIndex;
-
-    const angle = newIndex * anglePerSection;
-
-    animate(rotation, angle, {
-      type: "spring",
-      stiffness: 80,
-      damping: 18,
+  // 🧭 Helper: rotate wheel + scroll sections
+  const rotateAndScroll = (direction) => {
+    const currentSectionIndex = sections.findIndex((id) => {
+      const el = document.getElementById(id);
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top <= window.innerHeight / 2 &&
+        rect.bottom >= window.innerHeight / 2
+      );
     });
 
-    const target = document.getElementById(sections[newIndex]);
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+    const nextIndex = Math.min(
+      sections.length - 1,
+      Math.max(0, currentSectionIndex + direction)
+    );
+    const nextSection = document.getElementById(sections[nextIndex]);
+
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+
+    animate(rotation, rotation.get() + direction * 60, {
+      type: "spring",
+      stiffness: 70,
+      damping: 12,
+    });
 
     playClick();
   };
@@ -92,6 +104,7 @@ export default function Wheel() {
       const diff = angle - lastAngle.current;
       const timeDiff = now - lastTime.current;
       velocity.current = diff / timeDiff;
+
       rotation.set(rotation.get() + diff);
     }
 
@@ -106,22 +119,13 @@ export default function Wheel() {
 
     const inertiaAngle = velocity.current * 1500;
     const finalAngle = rotation.get() + inertiaAngle;
-    const snapped = Math.round(finalAngle / anglePerSection) * anglePerSection;
-
-    const snappedIndex = Math.round(snapped / anglePerSection);
-    currentIndex.current = Math.max(
-      0,
-      Math.min(sections.length - 1, snappedIndex)
-    );
+    const snapped = Math.round(finalAngle / 60) * 60;
 
     animate(rotation, snapped, {
       type: "spring",
       stiffness: 80,
       damping: 18,
     });
-
-    const target = document.getElementById(sections[currentIndex.current]);
-    if (target) target.scrollIntoView({ behavior: "smooth" });
 
     playClick();
 
@@ -138,13 +142,17 @@ export default function Wheel() {
     return (Math.atan2(dy, dx) * 180) / Math.PI;
   };
 
-  // 🖱️ CLICK to rotate (left/right half)
+  // 🖱️ CLICK-BASED ROTATION
   const handleClick = (e) => {
     const rect = centerRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const isRightHalf = clickX > rect.width / 2;
-    const direction = isRightHalf ? 1 : -1;
-    rotateToSection(currentIndex.current + direction);
+
+    if (isRightHalf) {
+      rotateAndScroll(1); // Clockwise
+    } else {
+      rotateAndScroll(-1); // Counterclockwise
+    }
   };
 
   return (
@@ -159,7 +167,7 @@ export default function Wheel() {
       {/* 🔺 Rotation indicator */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full z-20 shadow" />
 
-      {/* 🖼️ Wheel image (must show rotation marks!) */}
+      {/* 🖼️ Wheel image (must have visible spokes/marks!) */}
       <img
         src={wheelImg}
         alt="Navigation Wheel"
