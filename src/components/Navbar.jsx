@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import bgImage from "../assets/brand.svg";
+import MusicToggleButton from "./MusicToggleButton";
 
 export default function Navbar() {
   return (
@@ -12,7 +13,7 @@ export default function Navbar() {
       >
         {/* Name on the left */}
         <div className="text-white text-base sm:text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
-          <em>fbdvbvbfbgfngfngfnfgn</em>
+          <em>{<MusicToggleButton />}</em>
         </div>
 
         {/* Logo on the right */}
