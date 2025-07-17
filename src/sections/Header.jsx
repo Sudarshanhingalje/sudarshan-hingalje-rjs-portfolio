@@ -35,6 +35,8 @@ export default function Header() {
         transition={{ duration: 8, ease: "easeInOut" }}
         className="absolute top-8 left-4 md:left-10 text-4xl sm:text-5xl md:text-6xl font-cinzel tracking-tight text-[#d5cdc4]"
       >
+        {" "}
+        <FcMusic />
         Sudarshan <br /> Hingalje
       </motion.h1>
 
@@ -67,7 +69,6 @@ export default function Header() {
         transition={{ delay: 7.5, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
       >
-        <FcMusic />
         <img
           src={avatar}
           alt="Avatar"
