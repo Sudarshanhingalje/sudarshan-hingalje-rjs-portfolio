@@ -30,12 +30,10 @@ export default function Header() {
       id="header"
       className="relative h-screen w-full text-white overflow-hidden bg-[#fffffff4]"
     >
-      {/* Grid Background */}
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
 
       {showNavbar && <Navbar />}
 
-      {/* Name Animation */}
       <motion.h1
         initial={{ opacity: 0, y: -80 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
@@ -45,7 +43,6 @@ export default function Header() {
         Sudarshan <br /> Hingalje
       </motion.h1>
 
-      {/* Main Content */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
@@ -59,7 +56,6 @@ export default function Header() {
           </span>
         </p>
 
-        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
           <a
             href="#about"
@@ -79,7 +75,6 @@ export default function Header() {
         </div>
       </motion.div>
 
-      {/* Avatar */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
