@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import wheelImg from "/assets/wheel.png"; // adjust path as needed
+import wheelImg from "../assets/wheel.png"; // adjust path as needed
 
-const ScrollWheel = () => {
+const Wheel = () => {
   const wheelRef = useRef(null);
   const rotation = useRef(0);
 
@@ -31,4 +31,4 @@ const ScrollWheel = () => {
   );
 };
 
-export default ScrollWheel;
+export default Wheel;
