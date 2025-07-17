@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"; // ✅ Add this import
+import { motion } from "framer-motion"; // Required for animated blobs
 import { lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
@@ -30,51 +30,53 @@ function App() {
   return (
     <Main>
       <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white overflow-hidden">
-        {/* ✅ Animated Floating Background Blobs */}
+        {/* 🔵 Animated Background Blobs */}
         <motion.div
-          className="absolute top-[-15%] left-[-10%] w-[350px] h-[350px] bg-pink-500 rounded-full opacity-30 blur-3xl z-0"
+          className="absolute top-[-15%] left-[-10%] w-[350px] h-[350px] bg-purple-500 rounded-full opacity-30 blur-3xl z-0"
           animate={{ x: [0, 100, 0], y: [0, 100, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-[-15%] right-[-10%] w-[300px] h-[300px] bg-blue-500 rounded-full opacity-25 blur-3xl z-0"
+          className="absolute bottom-[-15%] right-[-10%] w-[300px] h-[300px] bg-pink-500 rounded-full opacity-25 blur-3xl z-0"
           animate={{ x: [0, -100, 0], y: [0, -100, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
 
-        {/* ✅ Main UI Content */}
-        <ErrorBoundary>
-          <SmoothScroll>
-            <SplashCursor />
-            <Wheel />
+        {/* 🧊 Glass UI Wrapper */}
+        <div className="relative z-10 p-4 md:p-8 backdrop-blur-md bg-white/5 rounded-2xl shadow-xl min-h-screen">
+          <ErrorBoundary>
+            <SmoothScroll>
+              <SplashCursor />
+              <Wheel />
 
-            <div
-              className={
-                loading
-                  ? "blur-sm brightness-50 pointer-events-none"
-                  : "blur-0 transition-all duration-500"
-              }
-            >
-              <Suspense fallback={<Loader />}>
-                <Header />
-                <About />
-                <TechParallax />
-                <Skills />
-                <Projects />
-                <Experience />
-                <Personal />
-                <Contact />
-                <Footer />
-              </Suspense>
-            </div>
-
-            {loading && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
-                <Loader />
+              <div
+                className={
+                  loading
+                    ? "blur-sm brightness-50 pointer-events-none"
+                    : "blur-0 transition-all duration-500"
+                }
+              >
+                <Suspense fallback={<Loader />}>
+                  <Header />
+                  <About />
+                  <TechParallax />
+                  <Skills />
+                  <Projects />
+                  <Experience />
+                  <Personal />
+                  <Contact />
+                  <Footer />
+                </Suspense>
               </div>
-            )}
-          </SmoothScroll>
-        </ErrorBoundary>
+
+              {loading && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
+                  <Loader />
+                </div>
+              )}
+            </SmoothScroll>
+          </ErrorBoundary>
+        </div>
       </div>
     </Main>
   );
