@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
 import Wheel from "./components/Wheel";
@@ -6,9 +6,6 @@ import SplashCursor from "./ui/CustomCursor";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 import useScrollAnimation from "./utils/useScrollAnimation";
-
-// ✅ Music
-import suzume from "./assets/suzume.mp3";
 
 const About = lazy(() => import("./sections/About"));
 const Contact = lazy(() => import("./sections/Contact"));
@@ -22,33 +19,12 @@ const TechParallax = lazy(() => import("./ui/TechParallax"));
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const audioRef = useRef(null);
-
   useScrollAnimation();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
-
-  // Play music on mount
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.6;
-      audioRef.current.play().catch(() => {});
-    }
-  }, []);
-
-  const toggleMusic = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play().catch(() => {});
-    }
-    setIsPlaying(!isPlaying);
-  };
 
   return (
     <Main>
@@ -57,10 +33,6 @@ function App() {
           <SmoothScroll>
             <SplashCursor />
             <Wheel />
-
-            {/* ✅ Hidden audio tag */}
-            <audio ref={audioRef} src={suzume} loop preload="auto" />
-
             <div
               className={
                 loading
@@ -69,8 +41,7 @@ function App() {
               }
             >
               <Suspense fallback={<Loader />}>
-                {/* ✅ Pass props to Header */}
-                <Header isMusicPlaying={isPlaying} toggleMusic={toggleMusic} />
+                <Header />
                 <About />
                 <TechParallax />
                 <Skills />
