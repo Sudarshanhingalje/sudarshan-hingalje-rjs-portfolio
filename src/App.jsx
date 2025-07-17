@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
+import Wheel from "./components/Wheel";
 import About from "./sections/About";
 import Contact from "./sections/Contact";
 import Experience from "./sections/Experience";
@@ -36,6 +37,8 @@ function App() {
                 : "blur-0 transition-all duration-500"
             }
           >
+            <Wheel />
+
             <Header />
             <About />
             <TechParallax />
