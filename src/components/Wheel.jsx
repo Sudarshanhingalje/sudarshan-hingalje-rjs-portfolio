@@ -35,7 +35,7 @@ const WheelScrollAnimation = () => {
     <div className="relative w-full h-screen flex items-center justify-center bg-black">
       {/* Wheel image */}
       <img
-        src="/assets/wheel.png" // replace with your path
+        src="/assets/Wheel.png" // replace with your path
         alt="Wheel"
         className="absolute w-[300px] h-[300px] object-contain"
       />
