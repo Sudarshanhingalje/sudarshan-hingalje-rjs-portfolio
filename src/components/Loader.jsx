@@ -1,9 +1,14 @@
-import loaderGif from "../assets/Loader.gif";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Loader = () => {
   return (
     <div className="flex items-center justify-center h-screen">
-      <img src={loaderGif} alt="Loading..." className="w-75 h-75" />
+      <DotLottieReact
+        src="/path/to/loader.lottie"
+        autoplay
+        loop
+        style={{ width: 150, height: 150 }}
+      />
     </div>
   );
 };
