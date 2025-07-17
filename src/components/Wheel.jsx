@@ -5,7 +5,7 @@ const ScrollWheel = () => {
   const rotate = useTransform(scrollY, [0, 1000], [0, 360]);
 
   return (
-    <div className="flex items-center justify-center min-h-[200vh] bg-black">
+    <div className="flex items-end  min-h-[200vh] bg-black">
       <motion.img
         src={wheelImg}
         alt="Steering Wheel"
