@@ -79,7 +79,7 @@ const Skills = () => {
                   className="bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow flex flex-col items-center justify-center text-center hover:shadow-lg transition-all"
                 >
                   <img
-                    src={`/assets/skill/${skill.name}.svg`}
+                    src={skill.image}
                     alt={skill.name}
                     className="w-10 h-10 mb-2 object-contain"
                     loading="lazy"
