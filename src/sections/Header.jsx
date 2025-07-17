@@ -35,9 +35,9 @@ export default function Header() {
         transition={{ duration: 8, ease: "easeInOut" }}
         className="absolute top-8 left-4 md:left-10 text-4xl sm:text-5xl md:text-6xl font-cinzel tracking-tight text-[#d5cdc4]"
       >
-        {" "}
-        <FcMusic />
         Sudarshan <br /> Hingalje
+        <br />
+        <FcMusic />
       </motion.h1>
 
       {/* Developer Title + CTA */}
