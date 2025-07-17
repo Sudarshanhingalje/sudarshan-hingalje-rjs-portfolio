@@ -1,4 +1,3 @@
-// data/skills/SkillsLerned.js
 import {
   FaCss3Alt,
   FaDocker,
