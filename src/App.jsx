@@ -3,7 +3,7 @@ import Loader from "./components/Loader";
 import Main from "./components/Main";
 import Wheel from "./components/Wheel";
 import SplashCursor from "./ui/CustomCursor";
-import ErrorBoundary from "./utils/ErrorBoundary";
+import { ErrorBoundary } from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 import useScrollAnimation from "./utils/useScrollAnimation";
 
