@@ -28,7 +28,7 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative h-screen w-full text-white overflow-hidden bg-[#7e53f5]"
+      className="relative h-screen w-full text-white overflow-hidden bg-[#21285a75]"
     >
       {/* Grid Background */}
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
