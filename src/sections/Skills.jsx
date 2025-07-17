@@ -6,7 +6,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="min-h-screen text-white font-montserrat py-16 px-6 flex flex-col items-center bg-[#0f0e0e]"
+      className="min-h-screen text-white font-montserrat py-16 px-6 flex flex-col items-center "
     >
       <h2 className="text-4xl font-bold mb-12 text-center text-[#ffc857]">
         Tech Stack
