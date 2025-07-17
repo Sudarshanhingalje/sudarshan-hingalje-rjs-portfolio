@@ -24,10 +24,7 @@ export default function Header() {
   }, []);
 
   return (
-    <section
-      id="header"
-      className="transition-all duration-500 ease-in-out relative h-screen w-full  bg-stone-950 text-white overflow-hidden"
-    >
+    <section className="transition-all duration-500 ease-in-out relative h-screen w-full  bg-stone-950 text-white overflow-hidden">
       {showNavbar && <Navbar />}
       <motion.h1
         initial={{ opacity: 0, y: -100 }}

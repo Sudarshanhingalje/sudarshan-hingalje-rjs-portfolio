@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
-import wheelImg from "../assets/wheel.png";
+import wheelImg from "./assets/wheel.png";
 
 const sections = [
   { id: "about", label: "About" },
