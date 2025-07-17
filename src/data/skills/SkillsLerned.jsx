@@ -3,13 +3,13 @@ export const skillsLerned = [
     category: "Frontend",
     items: [
       { name: "HTML", image: "html.svg" },
+      { name: "CSS", image: "css.svg" },
       { name: "JavaScript", image: "javascript.svg" },
       { name: "React.js", image: "reactjs.svg" },
       { name: "Redux", image: "redux.svg" },
       { name: "Tailwind", image: "tailwind.svg" },
       { name: "Next.js", image: "nextjs.svg" },
       { name: "Vite", image: "vitejs.svg" },
-      { name: "Netlify", image: "netlify.svg" },
     ],
   },
   {
@@ -17,8 +17,10 @@ export const skillsLerned = [
     items: [
       { name: "Java", image: "java.svg" },
       { name: "NextAuth", image: "nextauth.svg" },
+      { name: "Node.js", image: "nodejs.svg" },
       { name: "Postman", image: "postman.svg" },
       { name: "NPM", image: "npm.svg" },
+      { name: "Express.js", image: "expressjs.svg" },
     ],
   },
   {
@@ -26,6 +28,7 @@ export const skillsLerned = [
     items: [
       { name: "MongoDB", image: "mongodb.svg" },
       { name: "MySQL", image: "mysql.svg" },
+      { name: "Supabase", image: "supabase.svg" },
     ],
   },
   {
@@ -36,6 +39,7 @@ export const skillsLerned = [
       { name: "Vercel", image: "vercel.svg" },
       { name: "VS Code", image: "vscode.svg" },
       { name: "React Query", image: "reactquery.svg" },
+      { name: "Netlify", image: "netlify.svg" },
     ],
   },
 ];
