@@ -9,7 +9,6 @@ const Skills = () => {
   useEffect(() => {
     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-    // ✅ Stagger skill cards using timeline
     const skillTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#skills",
@@ -24,11 +23,6 @@ const Skills = () => {
       duration: 0.6,
       stagger: 0.15,
       ease: "back.out(1.7)",
-    });
-
-    // Optional refresh
-    window.addEventListener("load", () => {
-      ScrollTrigger.refresh();
     });
   }, []);
 
@@ -56,7 +50,7 @@ const Skills = () => {
               {group.items.map((skill, i) => (
                 <div
                   key={i}
-                  className="skill-card bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow flex flex-col items-center justify-center text-center hover:shadow-lg transition-all"
+                  className="skill-card bg-white/5 backdrop-blur-md border border-white/10 p-4 rounded-xl shadow flex flex-col items-center justify-center text-center hover:scale-105 hover:shadow-lg transition-all"
                 >
                   <img
                     src={skill.image}
