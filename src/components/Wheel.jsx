@@ -163,7 +163,7 @@ export default function Wheel() {
       <img
         src={wheelImg}
         alt="Navigation Wheel"
-        className="w-full h-full object-contain pointer-events-auto hover:animate-spin"
+        className="w-full h-screen object-contain pointer-events-auto "
       />
     </motion.div>
   );
