@@ -44,7 +44,7 @@ const Contact = () => {
       // 1. Send message to yourself
       await emailjs.sendForm(
         "service_ec6uvv4", // ✅ Your EmailJS service ID
-        "template_to_owner", // ✅ Template to send message to you
+        "template_ifxi8iv", // ✅ Template to send message to you
         formRef.current,
         "YOUR_PUBLIC_KEY" // ✅ Your EmailJS public key
       );
