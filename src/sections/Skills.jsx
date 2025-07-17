@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { skillsLerned } from "../data/skills/SkillsLerned";
+import { skillsLerned } from "../data/skills/skillsLerned";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -64,7 +64,7 @@ const Skills = () => {
 
             {/* Grid */}
             <motion.div
-              className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-5 justify-center"
+              className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-8 2xl:grid-cols-10 gap-5 justify-center"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
