@@ -158,12 +158,12 @@ export default function Wheel() {
       onClick={handleClick}
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full z-20 shadow" />
-
       <img
         src={wheelImg}
         alt="Navigation Wheel"
-        className="w-full h-full object-contain pointer-events-auto "
+        className="w-full h-full object-contain pointer-events-auto"
       />
+      <MusicToggleButton /> {/* 🎵 Button appears centered on wheel */}
     </motion.div>
   );
 }
