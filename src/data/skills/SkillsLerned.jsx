@@ -1,4 +1,5 @@
 import {
+  FaAws,
   FaCss3Alt,
   FaDocker,
   FaGitAlt,
@@ -10,7 +11,6 @@ import {
 } from "react-icons/fa";
 
 import {
-  SiAmazonaws,
   SiBootstrap,
   SiC,
   SiCplusplus,
@@ -70,7 +70,7 @@ export const skillsLerned = [
   {
     category: "Tools & Cloud",
     items: [
-      { name: "AWS", icon: <SiAmazonaws /> },
+      { name: "AWS", icon: <FaAws /> }, // ✅ Valid AWS icon
       { name: "Docker", icon: <FaDocker /> },
       { name: "Git", icon: <FaGitAlt /> },
       { name: "GitHub", icon: <FaGithub /> },
