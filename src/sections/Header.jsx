@@ -42,21 +42,6 @@ export default function Header() {
       >
         Sudarshan <br /> Hingalje
       </motion.h1>
-      <div className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden bg-[#0a0a23]">
-        {/* Grid Overlay */}
-        <div className="absolute inset-0 bg-grid-pattern z-0" />
-
-        {/* Hero Content */}
-        <div className="z-10 text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold">
-            Hey, I'm{" "}
-            <span className="bg-gradient-to-r from-pink-500 to-purple-500 text-transparent bg-clip-text">
-              Daniel Steele
-            </span>
-          </h1>
-          <p className="text-xl mt-4">Front End Developer</p>
-        </div>
-      </div>
 
       {/* Main Content */}
       <motion.div
