@@ -37,7 +37,7 @@ export default function Wheel() {
       setLastScrollY(currentY);
       animate(rotation, rotation.get() + diff * 0.3, {
         type: "spring",
-        stiffness: 60,
+        stiffness: 80,
         damping: 14,
       });
     };
