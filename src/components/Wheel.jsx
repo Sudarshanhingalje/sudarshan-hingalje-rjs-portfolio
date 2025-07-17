@@ -1,6 +1,6 @@
 import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
-import clickSoundFile from "../assets/click.mp3";
+import clickSoundFile from "../assets/click2.mp3";
 import wheelImg from "../assets/wheel.png"; // Ensure markings are clear
 
 const sections = [
