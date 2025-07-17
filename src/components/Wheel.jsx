@@ -1,7 +1,7 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import wheelImg from "./assets/wheel.png";
+import wheelImg from "../assets/wheel.png";
 
 // Define sections (must match your real IDs)
 const sections = [
