@@ -3,10 +3,7 @@ import bgImage from "../assets/brand2.svg";
 
 const Footer = () => {
   return (
-    <footer
-      id="footer"
-      className="flex flex-col items-center pb-10 bg-[#0b0b0b] text-[#b0b2c3]"
-    >
+    <footer id="footer" className="flex flex-col items-center pb-10 ">
       <p className="text-xs text-gray-400 py-4"> Made with ❤️React Js+vite</p>
       Sudarshan Hingalje © 2025
       <div className="my-4">
