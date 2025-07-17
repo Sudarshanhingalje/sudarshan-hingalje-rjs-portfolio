@@ -29,7 +29,6 @@ export default function Header() {
       id="header"
       className="relative h-screen w-full bg-[#0f0e0e] text-white overflow-hidden"
     >
-      {/* Navbar */}
       {showNavbar && <Navbar />}
 
       {/* Name Animation */}
