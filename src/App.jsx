@@ -8,7 +8,6 @@ import SplashCursor from "./ui/CustomCursor";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 import useScrollAnimation from "./utils/useScrollAnimation";
-import AvatarSpeaker from "./components/AvatarSpeaker";
 
 const About = lazy(() => import("./sections/About"));
 const Contact = lazy(() => import("./sections/Contact"));
@@ -50,7 +49,7 @@ function App() {
             >
               <Suspense fallback={<Loader />}>
                 <Header />
-                <AvatarSpeaker />
+
                 <About />
 
                 <TechParallax />
