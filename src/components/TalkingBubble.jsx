@@ -14,7 +14,21 @@ export default function TalkingBubble({ message }) {
 
     return () => clearInterval(interval);
   }, [message]);
+  const speak = () => {
+    const synth = window.speechSynthesis;
+    const utter = new SpeechSynthesisUtterance(prompt);
 
+    const voices = synth.getVoices();
+    const preferredVoice = voices.find(
+      (v) => v.name.includes("Google") || v.lang === "en-US"
+    );
+    if (preferredVoice) utter.voice = preferredVoice;
+
+    utter.rate = 1;
+    utter.pitch = 1;
+    synth.cancel(); // Cancel ongoing speech
+    synth.speak(utter);
+  };
   return (
     <div className="relative z-50 max-w-[250px] sm:max-w-[300px] bg-white text-black px-4 py-3 rounded-xl shadow-xl text-left">
       <p className="text-sm sm:text-base font-medium leading-snug whitespace-pre-line">
