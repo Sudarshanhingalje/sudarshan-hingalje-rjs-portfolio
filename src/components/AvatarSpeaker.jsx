@@ -1,50 +1,26 @@
 import { useEffect, useRef, useState } from "react";
+import TalkingBubble from "./TalkingBubble";
 
-// Your speech message
-const speechText = "Hello, I am Sudarshan Hingalje. Welcome to my portfolio.";
+const speechText = `👋 Hi! My name is Sudarshan Hingalje.
+I'm a Full Stack Developer.
+Spin the Sudarshan chakra to know more about my journey!`;
 
 const AvatarSpeaker = () => {
   const avatarRef = useRef(null);
-  const [hasSpoken, setHasSpoken] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
-  const synthRef = useRef(window.speechSynthesis);
-  const utteranceRef = useRef(null);
-
-  // Function to speak
-  const speakOnce = () => {
-    if (!hasSpoken && synthRef.current && !synthRef.current.speaking) {
-      utteranceRef.current = new SpeechSynthesisUtterance(speechText);
-      utteranceRef.current.lang = "en-US";
-      utteranceRef.current.rate = 1;
-      synthRef.current.speak(utteranceRef.current);
-      setShowBubble(true);
-
-      // Hide bubble after 5 seconds
-      setTimeout(() => setShowBubble(false), 7000);
-
-      setHasSpoken(true);
-    }
-  };
-
-  // Stop speech
-  const stopSpeaking = () => {
-    if (synthRef.current && synthRef.current.speaking) {
-      synthRef.current.cancel();
-      setShowBubble(false);
-    }
-  };
+  const [bubbleTriggered, setBubbleTriggered] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio === 1) {
-          speakOnce();
-        } else {
-          stopSpeaking();
+        if (entry.isIntersecting && !bubbleTriggered) {
+          setShowBubble(true);
+          setBubbleTriggered(true);
+          setTimeout(() => setShowBubble(false), 9000); // hide after 9s
         }
       },
       {
-        threshold: 1, // Fully visible
+        threshold: 1.0,
       }
     );
 
@@ -52,18 +28,12 @@ const AvatarSpeaker = () => {
 
     return () => {
       if (avatarRef.current) observer.unobserve(avatarRef.current);
-      stopSpeaking();
     };
-  }, []);
+  }, [bubbleTriggered]);
 
   return (
-    <div ref={avatarRef} className="relative w-fit h-fit">
-      {/* Message bubble */}
-      {showBubble && (
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black text-sm px-4 py-2 rounded-full shadow-lg">
-          {speechText}
-        </div>
-      )}
+    <div ref={avatarRef} className="relative w-fit h-fit mx-auto">
+      {showBubble && <TalkingBubble message={speechText} />}
     </div>
   );
 };
