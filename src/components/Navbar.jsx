@@ -13,7 +13,7 @@ export default function Navbar() {
           <img
             src={bgImage}
             alt="Logo"
-            className="h-10 sm:h-12 md:h-16 w-auto object-contain cursor-pointer"
+            className="h-10 sm:h-12 md:h-16 w-auto object-contain cursor-pointer z-50 md:z-0 md:ml-4 md:mr-4 "
           />
         </button>
       </motion.nav>
