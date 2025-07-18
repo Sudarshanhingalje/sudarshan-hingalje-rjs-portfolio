@@ -1,15 +1,11 @@
 import { motion } from "framer-motion";
 import bgImage from "../assets/brand.svg";
-import MusicToggleButton from "./MusicToggleButton";
 
 export default function Navbar() {
   return (
     <div>
       <motion.nav className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-10 py-3 flex  justify-between bg-transparent">
-        {<MusicToggleButton />}
-        <div className="text-white text-base sm:text-lg md:text-xl font-bold tracking-wide font-cinzel underline">
-          <em>{<MusicToggleButton />}</em>
-        </div>
+        <div className="text-white text-base sm:text-lg md:text-xl font-bold tracking-wide font-cinzel underline"></div>
 
         {/* Logo on the right */}
         <button

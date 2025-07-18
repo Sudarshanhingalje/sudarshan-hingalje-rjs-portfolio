@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 import Main from "./components/Main";
+import MusicToggleButton from "./components/MusicToggleButton";
 import Wheel from "./components/Wheel";
 import SplashCursor from "./ui/CustomCursor";
 import ErrorBoundary from "./utils/ErrorBoundary";
