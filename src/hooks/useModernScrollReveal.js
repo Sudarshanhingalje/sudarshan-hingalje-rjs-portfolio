@@ -7,7 +7,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-function useModernScrollReveal() {
+export default function useModernScrollReveal() {
   useEffect(() => {
     ScrollTrigger.getAll().forEach((t) => t.kill());
 
@@ -132,5 +132,3 @@ function useModernScrollReveal() {
     window.addEventListener("load", () => ScrollTrigger.refresh());
   }, []);
 }
-
-export default useModernScrollReveal;
