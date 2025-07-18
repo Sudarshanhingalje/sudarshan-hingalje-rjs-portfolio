@@ -84,12 +84,12 @@ export default function Header() {
         transition={{ delay: 7.5, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
       >
+        <TalkingAvatar />
         <img
           src={avatar}
           alt="Avatar"
           className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
         />
-        <TalkingAvatar />
       </motion.div>
     </section>
   );
