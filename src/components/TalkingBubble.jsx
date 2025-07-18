@@ -51,7 +51,6 @@ export default function TalkingBubble({ message }) {
         {displayedText}
       </p>
 
-      {/* Triangle pointer */}
       <div className="absolute bottom-2 left-[-14px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[14px] border-r-[#1e1e2f]" />
     </div>
   );
