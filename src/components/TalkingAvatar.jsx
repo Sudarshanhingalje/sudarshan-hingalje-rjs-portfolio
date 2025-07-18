@@ -3,8 +3,8 @@ import avatarImg from "../assets/yoga.svg";
 import "../styles/index.css";
 
 const messages = [
-  "Welcome! my name is sudarshan .",
-  "i am a full stack developer.",
+  "  Welcome! my name is sudarshan .",
+  " i am a full stack developer.",
   "if you Need any help? I'm right here!",
   "to know more about me, spine the wheel.",
 ];
@@ -28,7 +28,7 @@ const TalkingAvatar = () => {
       } else {
         clearInterval(typingInterval.current);
       }
-    }, 30); // Typing speed
+    }, 100); // Typing speed
   };
 
   // 🔊 Speak and type new message
