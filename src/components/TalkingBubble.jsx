@@ -1,8 +1,8 @@
-// src/components/TalkingBubble.jsx
 import { useEffect, useState } from "react";
 
-export default function TalkingBubble({ message }) {
+export default function TalkingBubble({ message, onFinish }) {
   const [displayedText, setDisplayedText] = useState("");
+
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
@@ -11,13 +11,14 @@ export default function TalkingBubble({ message }) {
         i++;
       } else {
         clearInterval(interval);
+        onFinish?.();
       }
-    }, 50); // 50ms per letter
+    }, 50);
     return () => clearInterval(interval);
   }, [message]);
 
   return (
-    <div className="absolute bottom-[100px] left-1/2 transform -translate-x-1/2 z-10 max-w-[300px] sm:max-w-[400px] bg-white text-black px-4 py-3 rounded-xl shadow-xl text-center relative">
+    <div className="absolute bottom-[100px] left-1/2 transform -translate-x-1/2 z-10 max-w-[300px] sm:max-w-[400px] bg-white text-black px-4 py-3 rounded-xl shadow-xl text-center relative animate-fade-in">
       <p className="text-base sm:text-lg font-medium leading-snug">
         {displayedText}
       </p>
