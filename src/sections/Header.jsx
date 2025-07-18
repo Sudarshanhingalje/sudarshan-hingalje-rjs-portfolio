@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
-import TalkingAvatar from "../components/TalkingAvatar";
+import AvatarSpeaker from "../components/TalkingAvatar";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
@@ -84,7 +84,7 @@ export default function Header() {
         transition={{ delay: 7.5, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
       >
-        <TalkingAvatar />
+        <AvatarSpeaker />
         <img
           src={avatar}
           alt="Avatar"
