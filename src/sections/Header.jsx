@@ -29,7 +29,7 @@ export default function Header() {
   useScrollAnimation();
   const resumeUrl = getResumeLink();
   const [showNavbar, setShowNavbar] = useState(true);
-  const [showBubble, setShowBubble] = useState(false); // ✅ bubble control
+  const [showBubble, setShowBubble] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +44,7 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative h-screen w-full text-white overflow-hidden bg-[#fffffff4]"
+      className="relative h-screen w-full text-white overflow-hidden bg-[#070707f4]"
     >
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
 
