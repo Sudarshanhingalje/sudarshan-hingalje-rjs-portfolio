@@ -40,7 +40,9 @@ export default function TalkingBubble({ message }) {
   return (
     <div
       ref={containerRef}
-      className="relative z-50 bg-[#1e1e2f] text-green-300 font-mono px-4 py-3 rounded-xl shadow-lg w-[90%] sm:w-[80%] md:w-[300px] lg:w-[340px] xl:w-[380px] transition-all duration-300 ease-in-out border border-green-500"
+      className="relative z-50 bg-[#1e1e2f] text-green-300 font-mono px-4 py-3 rounded-xl shadow-lg border border-green-500
+        w-full max-w-[95%] sm:max-w-[90%] md:max-w-[300px] lg:max-w-[340px] xl:max-w-[380px]
+        transition-all duration-300 ease-in-out"
       style={{
         overflowWrap: "break-word",
         wordBreak: "break-word",
