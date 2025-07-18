@@ -3,8 +3,8 @@ import avatarImg from "../assets/yoga.svg";
 import "../styles/index.css";
 
 const messages = [
-  "Welcome! I am  sudashan hingalje.",
-  "Ask me anything about the site.",
+  "Welcome! I am sudarshan .",
+  "i am a full stack developer.",
   "Need help? I'm right here!",
 ];
 
@@ -27,7 +27,7 @@ const TalkingAvatar = () => {
       } else {
         clearInterval(typingInterval.current);
       }
-    }, 50); // Typing speed
+    }, 30); // Typing speed
   };
 
   // 🔊 Speak and type new message
@@ -48,7 +48,7 @@ const TalkingAvatar = () => {
     speakMessage(text);
 
     const next = (messageIndex + 1) % messages.length;
-    const timeout = setTimeout(() => setMessageIndex(next), 8000); // Next message after 8s
+    const timeout = setTimeout(() => setMessageIndex(next), 3000); // Next message after 8s
 
     return () => {
       clearTimeout(timeout);
