@@ -7,7 +7,6 @@ import Wheel from "./components/Wheel";
 import SplashCursor from "./ui/CustomCursor";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
-import useScrollAnimation from "./utils/useScrollAnimation";
 
 const About = lazy(() => import("./sections/About"));
 const Contact = lazy(() => import("./sections/Contact"));
@@ -21,7 +20,6 @@ const TechParallax = lazy(() => import("./ui/TechParallax"));
 
 function App() {
   const [loading, setLoading] = useState(true);
-  useScrollAnimation();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3000);
