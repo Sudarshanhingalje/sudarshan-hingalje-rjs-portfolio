@@ -1,3 +1,4 @@
+// src/utils/useScrollAnimation.js
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
@@ -6,127 +7,130 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function useScrollAnimation() {
   useEffect(() => {
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    const ctx = gsap.context(() => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 
-    // ✅ Header hide on scroll down
-
-    gsap.to("#header", {
-      y: -100,
-      opacity: 0,
-      duration: 0.5,
-      scrollTrigger: {
-        trigger: "#about",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-
-    // ✅ Pin About Section with parallax
-    gsap.to("#about .about-avatar", {
-      yPercent: -20,
-      scrollTrigger: {
-        trigger: "#skills",
-        start: "top 80%",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-
-    // ✅ Stagger skill cards using timeline
-    const skillTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#skills",
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    skillTimeline.from(".skill-card", {
-      opacity: 0,
-      y: 30,
-      duration: 0.6,
-      stagger: 0.15,
-      ease: "back.out(1.7)",
-    });
-
-    // ✅ Wipe animation between sections
-    const sections = document.querySelectorAll(".section");
-
-    sections.forEach((section, i) => {
-      gsap.from(section, {
+      // 🔽 Header hide on scroll
+      gsap.to("#header", {
+        y: -80,
         opacity: 0,
-        y: 100,
-        duration: 1,
+        duration: 0.5,
         scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
+          trigger: "#about",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // 👤 Parallax About Avatar
+      gsap.to("#about .about-avatar", {
+        yPercent: -30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // 💡 Animate skill cards
+      gsap.from(".skill-card", {
+        opacity: 0,
+        y: 40,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: "#skills",
+          start: "top 80%",
           toggleActions: "play none none reverse",
         },
       });
-    });
 
-    // ✅ Project zoom-in effect
-    gsap.from("#projects .project-card", {
-      scale: 0.8,
-      opacity: 0,
-      stagger: 0.2,
-      duration: 1,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#projects",
-        start: "top 80%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    // ✅ Experience timeline slide in
-    gsap.utils.toArray(".timeline-item").forEach((el, i) => {
-      gsap.from(el, {
-        x: i % 2 === 0 ? -100 : 100,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 90%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
-
-    // ✅ Contact form bounce
-    gsap.from("#contact .contact-form", {
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      ease: "bounce.out",
-      scrollTrigger: {
-        trigger: "#contact",
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    // ✅ Section background fade transitions
-    gsap.utils.toArray(".section").forEach((section, i) => {
-      gsap.fromTo(
-        section,
-        { backgroundColor: "transparent" },
-        {
-          backgroundColor: "#0f0f0f",
+      // ✨ Fade up each section
+      gsap.utils.toArray(".section").forEach((section) => {
+        gsap.from(section, {
+          opacity: 0,
+          y: 60,
+          duration: 1,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: section,
-            start: "top center",
-            end: "bottom center",
-            scrub: true,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
           },
-        }
-      );
+        });
+      });
+
+      // 🔍 Project cards zoom-in
+      gsap.from("#projects .project-card", {
+        scale: 0.9,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#projects",
+          start: "top 80%",
+        },
+      });
+
+      // 📜 Timeline slide-in
+      gsap.utils.toArray(".timeline-item").forEach((item, i) => {
+        gsap.from(item, {
+          x: i % 2 === 0 ? -120 : 120,
+          opacity: 0,
+          duration: 1,
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 90%",
+          },
+        });
+      });
+
+      // 📮 Contact form bounce
+      gsap.from("#contact .contact-form", {
+        y: 80,
+        opacity: 0,
+        duration: 1.2,
+        ease: "bounce.out",
+        scrollTrigger: {
+          trigger: "#contact",
+          start: "top 85%",
+        },
+      });
+
+      // 🎨 Background fade per section
+      gsap.utils.toArray(".section").forEach((section) => {
+        gsap.fromTo(
+          section,
+          { backgroundColor: "transparent" },
+          {
+            backgroundColor: "#0f0f0f",
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top center",
+              end: "bottom center",
+              scrub: true,
+            },
+          }
+        );
+      });
     });
 
-    // Optional: Refresh ScrollTrigger on image load
-    window.addEventListener("load", () => {
+    const handleImageLoad = () => {
       ScrollTrigger.refresh();
-    });
+    };
+
+    window.addEventListener("load", handleImageLoad);
+
+    return () => {
+      ctx.revert(); // ✅ Clean GSAP context
+      window.removeEventListener("load", handleImageLoad);
+    };
   }, []);
 }
