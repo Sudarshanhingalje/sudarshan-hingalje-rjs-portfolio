@@ -5,7 +5,7 @@ import "../styles/index.css";
 const messages = [
   "  Welcome! my name is sudarshan .",
   " i am a full stack developer.",
-  "if you Need any help? I'm right here!",
+  " if you Need any help? I'm right here!",
   "to know more about me, spine the wheel.",
 ];
 
@@ -64,7 +64,7 @@ const TalkingAvatar = () => {
         <img
           src={avatarImg}
           alt="avatar"
-          className={`w-32 h-32 object-cover rounded-full transition-all duration-300 ${
+          className={`w-50 h-50 object-cover rounded-full transition-all duration-300 ${
             isSpeaking ? "scale-105 shadow-lg" : ""
           }`}
         />
