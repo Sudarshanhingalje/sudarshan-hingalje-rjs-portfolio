@@ -4,7 +4,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
-import avatar from "../assets/yoga.svg";
+import Avatar from "../components/Avatar";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
@@ -124,11 +124,12 @@ export default function Header() {
             window.speechSynthesis.cancel();
           }}
         >
-          <Avatar isSpeaking={isSpeaking} />
+          <Avatar
+            isSpeaking={isSpeaking}
+            className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
+          />
 
           {showBubble && (
-className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
-
             <div className="absolute -top-16 left-full ml-4">
               <TalkingBubble message={speechText} />
             </div>
