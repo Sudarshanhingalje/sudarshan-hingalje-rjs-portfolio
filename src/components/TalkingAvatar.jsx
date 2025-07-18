@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import avatarImg from "../assets/yoga.svg"; // 🧑 Replace with your avatar image
-import "../styles/index.css"; // For Tailwind + custom animation
+import avatarImg from "../assets/avatar.png"; // 🧑 Replace with your avatar image
+import "../index.css"; // For Tailwind + custom animation
 
 const TalkingAvatar = ({ text, isSpeaking }) => {
   const [displayText, setDisplayText] = useState("");
