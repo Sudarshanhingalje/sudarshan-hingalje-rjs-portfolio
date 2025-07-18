@@ -43,8 +43,12 @@ function App() {
               }
             >
               <Suspense fallback={<Loader />}>
-                <Header />
-                <About />
+ <div className="App">
+      <header id="header">
+         <Header />
+        <AvatarSpeaker />
+      </header>
+       <About />
                 <TechParallax />
                 <Skills />
                 <Projects />
@@ -53,6 +57,9 @@ function App() {
                 <Contact />
                 <Footer />
               </Suspense>
+
+
+
             </div>
 
             {loading && (
