@@ -1,12 +1,12 @@
+// TalkingAvatar.jsx
 import { useEffect, useRef, useState } from "react";
-import avatarImg from "../assets/yoga.svg";
 import "../styles/index.css";
 
 const messages = [
-  "  Welcome! my name is sudarshan .",
-  " i am a full stack developer.",
-  " if you Need any help? I'm right here!",
-  "to know more about me, spine the wheel.",
+  "Welcome! My name is Sudarshan.",
+  "I am a full stack developer.",
+  "If you need any help, I'm right here!",
+  "To know more about me, spin the wheel.",
 ];
 
 const TalkingAvatar = () => {
@@ -15,11 +15,10 @@ const TalkingAvatar = () => {
   const [messageIndex, setMessageIndex] = useState(0);
   const typingInterval = useRef(null);
 
-  // ✨ Typing effect
+  // Typing effect
   const typeMessage = (fullText) => {
     let index = 0;
     setCurrentMessage("");
-
     clearInterval(typingInterval.current);
     typingInterval.current = setInterval(() => {
       if (index < fullText.length) {
@@ -28,28 +27,30 @@ const TalkingAvatar = () => {
       } else {
         clearInterval(typingInterval.current);
       }
-    }, 100); // Typing speed
+    }, 50);
   };
 
-  // 🔊 Speak and type new message
+  // Speak message
   const speakMessage = (text) => {
     if ("speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(text);
       setIsSpeaking(true);
       utterance.onend = () => setIsSpeaking(false);
-      window.speechSynthesis.cancel(); // stop previous
+      window.speechSynthesis.cancel();
       window.speechSynthesis.speak(utterance);
     }
   };
 
-  // 🧠 Trigger message and speech every time index changes
+  // Change message every 5s
   useEffect(() => {
     const text = messages[messageIndex];
     typeMessage(text);
     speakMessage(text);
 
-    const next = (messageIndex + 1) % messages.length;
-    const timeout = setTimeout(() => setMessageIndex(next), 3000); // Next message after 8s
+    const timeout = setTimeout(() => {
+      const next = (messageIndex + 1) % messages.length;
+      setMessageIndex(next);
+    }, 6000);
 
     return () => {
       clearTimeout(timeout);
@@ -59,20 +60,9 @@ const TalkingAvatar = () => {
   }, [messageIndex]);
 
   return (
-    <div className="relative flex flex-col items-center mt-10">
-      <div className="relative">
-        <img
-          src={avatarImg}
-          alt="avatar"
-          className={`w-32 h-32 object-cover s ${
-            isSpeaking ? "scale-105 " : ""
-          }`}
-        />
-        {currentMessage && (
-          <div className="absolute -top-6 -left-10 w-60 p-2 px-4 bg-white text-black text-sm rounded-xl shadow-xl border border-gray-300 animate-fadeIn">
-            {currentMessage}
-          </div>
-        )}
+    <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-72 z-20">
+      <div className="bg-white text-black text-sm px-4 py-2 rounded-xl shadow-lg border border-gray-300 animate-fadeIn">
+        {currentMessage}
       </div>
     </div>
   );

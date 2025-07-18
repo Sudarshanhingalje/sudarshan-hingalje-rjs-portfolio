@@ -1,3 +1,4 @@
+// Header.jsx
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -5,6 +6,7 @@ import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
+import TalkingAvatar from "../components/TalkingAvatar";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
@@ -75,6 +77,7 @@ export default function Header() {
         </div>
       </motion.div>
 
+      {/* 🔹 Avatar and TalkingBubble over it */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -86,6 +89,8 @@ export default function Header() {
           alt="Avatar"
           className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
         />
+        {/* ⬇️ Talking Bubble on top of the avatar */}
+        <TalkingAvatar />
       </motion.div>
     </section>
   );
