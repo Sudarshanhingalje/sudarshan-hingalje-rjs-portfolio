@@ -3,9 +3,10 @@ import avatarImg from "../assets/yoga.svg";
 import "../styles/index.css";
 
 const messages = [
-  "Welcome! I am sudarshan .",
+  "Welcome! my name is sudarshan .",
   "i am a full stack developer.",
-  "Need help? I'm right here!",
+  "if you Need any help? I'm right here!",
+  "to know more about me, spine the wheel.",
 ];
 
 const TalkingAvatar = () => {
