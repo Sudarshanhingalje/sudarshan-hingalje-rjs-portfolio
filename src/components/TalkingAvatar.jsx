@@ -59,7 +59,7 @@ const TalkingAvatar = () => {
   }, [messageIndex]);
 
   return (
-    <div className="relative flex flex-col items-center ">
+    <div className="relative flex flex-col items-center mt-10">
       <div className="relative">
         <img
           src={avatarImg}
