@@ -31,7 +31,7 @@ function App() {
   return (
     <Main>
       <Toaster position="top-right" reverseOrder={false} />
-      <div className="fixed top-4 right-4  ml-auto mr-4 z-50">
+      <div className="fixed top-4 right-4 mt-4 ml-auto mr-4 z-50">
         <MusicToggleButton />
       </div>
       <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white">
