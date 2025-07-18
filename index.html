@@ -5,26 +5,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow" />
-    <meta
-      name="keywords"
-      content="Sudarshan Hingalje, Full Stack Web Developer, MERN Stack Developer, ReactJS Developer, Java Developer, JavaScript Developer Portfolio, Frontend Developer, Backend Developer, Tailwind CSS, Portfolio Site"
-    />
+    <meta name="author" content="Sudarshan Hingalje" />
     <meta
       name="description"
       content="I'm Sudarshan Hingalje, a Full Stack Developer specializing in ReactJS, Java, and modern web technologies. Explore my portfolio, projects, and skills here."
     />
-
-    <meta
-      name="description"
-      content="Sudarshan Hingalje's Portfolio - Full Stack Web Developer specialized in React.js, Java, and modern web technologies."
-    />
     <meta
       name="keywords"
-      content="Sudarshan Hingalje, Web Developer, React, Portfolio, Full Stack, JavaScript, HTML, CSS, Tailwind"
+      content="Sudarshan Hingalje, Full Stack Web Developer, MERN Stack Developer, ReactJS Developer, Java Developer, Portfolio, Tailwind CSS"
     />
-    <meta name="author" content="Sudarshan Hingalje" />
 
-    <!-- Open Graph (OG) for social sharing -->
+    <!-- Open Graph Meta -->
     <meta property="og:title" content="Sudarshan Hingalje Portfolio" />
     <meta
       property="og:description"
@@ -40,7 +31,7 @@
       content="https://sudarshanhingalje-portfolio.netlify.app/og-image.png"
     />
 
-    <!-- Twitter Card -->
+    <!-- Twitter Meta -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Sudarshan Hingalje Portfolio" />
     <meta
@@ -52,13 +43,18 @@
       content="https://sudarshanhingalje-portfolio.netlify.app/og-image.png"
     />
 
+    <!-- Canonical -->
+    <link
+      rel="canonical"
+      href="https://sudarshanhingalje-portfolio.netlify.app/"
+    />
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap"
       rel="stylesheet"
@@ -71,10 +67,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@600&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="canonical"
-      href="https://sudarshanhingalje-portfolio.netlify.app/"
-    />
+
+    <!-- Preload Assets -->
     <link
       rel="preload"
       as="image"
@@ -83,12 +77,10 @@
     />
     <link rel="preload" href="/assets/hero.webp" as="image" />
 
+    <!-- Title -->
     <title>Sudarshan Hingalje | Portfolio</title>
-  </head>
 
-  <body class="bg-black text-white">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -110,8 +102,21 @@
         "sameAs": [
           "https://github.com/Sudarshanhingalje",
           "https://www.linkedin.com/in/sudarshan-hingalje-b07993158/"
-        ]
+        ],
+        "seeks": {
+          "@type": "JobPosting",
+          "title": "Full Stack Developer",
+          "employmentType": "FULL_TIME",
+          "industry": "Information Technology",
+          "jobLocationType": "TELECOMMUTE",
+          "description": "Looking for full-time opportunities in full stack web development. Skilled in ReactJS, Java, Spring Boot, and REST APIs."
+        }
       }
     </script>
+  </head>
+
+  <body class="bg-black text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
