@@ -1,6 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { FaArrowRight } from "react-icons/fa";
 import avatarImg from "../assets/yoga.svg";
 
 const Avatar = () => {
@@ -57,21 +55,6 @@ const Avatar = () => {
           <strong>Spin the Chakra to explore my journey!</strong>
         </div>
       )}
-
-      {/* 🔁 Arrow pointing to Chakra (shows for 1s) */}
-      <AnimatePresence>
-        {showArrow && (
-          <motion.div
-            initial={{ opacity: 0, x: 0 }}
-            animate={{ opacity: 1, x: 10 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="absolute left-36 top-8 text-yellow-400 text-xl"
-          >
-            <FaArrowRight />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
