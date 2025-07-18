@@ -45,6 +45,7 @@ function App() {
               }
             >
               <Suspense fallback={<Loader />}>
+                {<MusicToggleButton />}
                 <Header />
                 <About />
                 <TechParallax />
