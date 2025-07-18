@@ -64,7 +64,7 @@ const TalkingAvatar = () => {
         <img
           src={avatarImg}
           alt="avatar"
-          className={`w-50 h-50 object-cover rounded-full transition-all duration-300 ${
+          className={`w-32 h-32   transition-all duration-300 ${
             isSpeaking ? "scale-105 shadow-lg" : ""
           }`}
         />
