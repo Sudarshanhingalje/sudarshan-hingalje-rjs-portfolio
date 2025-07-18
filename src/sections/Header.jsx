@@ -1,3 +1,4 @@
+// Header.jsx
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -9,6 +10,7 @@ import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
+useModernScrollReveal();
 gsap.registerPlugin(ScrollTrigger);
 
 const speechText = `Hi, I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
@@ -18,7 +20,7 @@ export default function Header() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
   const [robotVoice, setRobotVoice] = useState(null);
-  useModernScrollReveal();
+
   // Load robot voice once
   useEffect(() => {
     const loadVoices = () => {
@@ -138,4 +140,3 @@ export default function Header() {
     </section>
   );
 }
-i;
