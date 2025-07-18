@@ -71,6 +71,37 @@ export default function useModernScrollReveal() {
       });
     });
 
+    // ✅ Experience timeline animation
+    gsap.utils.toArray("#experience .timeline-item").forEach((item, i) => {
+      gsap.from(item, {
+        x: i % 2 === 0 ? -100 : 100,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
+    // ✅ Personal goals stagger in
+    gsap.utils.toArray("#personal .goal-card").forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 40,
+        duration: 0.6,
+        delay: i * 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
     // Refresh ScrollTrigger after page load
     window.addEventListener("load", () => ScrollTrigger.refresh());
   }, []);
