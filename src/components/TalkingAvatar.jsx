@@ -1,21 +1,42 @@
-import { motion } from "framer-motion";
-import avatar from "../assets/yoga.svg";
+import { useEffect, useState } from "react";
+import avatarImg from "../assets/avatar.png"; // 🧑 Replace with your avatar image
+import "../index.css"; // For Tailwind + custom animation
 
-export default function TalkingAvatar({ isSpeaking }) {
-  const bounce = isSpeaking ? "animate-bounce" : "";
+const TalkingAvatar = ({ text, isSpeaking }) => {
+  const [displayText, setDisplayText] = useState("");
+
+  useEffect(() => {
+    if (!isSpeaking) return;
+    setDisplayText("");
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayText((prev) => prev + text[i]);
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, 50);
+    return () => clearInterval(interval);
+  }, [text, isSpeaking]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 7.5, duration: 1.2 }}
-      className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 ${bounce}`}
-    >
+    <div className="relative flex flex-col items-center mt-10">
+      {/* Avatar */}
       <img
-        src={avatar}
-        alt="Avatar"
-        className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
+        src={avatarImg}
+        alt="avatar"
+        className={`w-32 h-32 object-cover rounded-full transition-transform duration-300 ${
+          isSpeaking ? "animate-talk scale-105" : "animate-bounce"
+        }`}
       />
-    </motion.div>
+
+      {/* Speech Bubble */}
+      {isSpeaking && (
+        <div className="absolute top-[-60px] w-64 bg-white text-black p-3 rounded-xl border shadow-md animate-fade-in">
+          <div className="speech-arrow" />
+          <p className="text-sm font-mono leading-snug">{displayText}</p>
+        </div>
+      )}
+    </div>
   );
-}
+};
+
+export default TalkingAvatar;
