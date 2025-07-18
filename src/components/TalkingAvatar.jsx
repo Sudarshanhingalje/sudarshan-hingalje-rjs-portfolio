@@ -1,80 +1,76 @@
 import { useEffect, useRef, useState } from "react";
 
+// Your speech message
+const speechText = "Hello, I am Sudarshan Hingalje. Welcome to my portfolio.";
+
 const AvatarSpeaker = () => {
   const avatarRef = useRef(null);
   const [hasSpoken, setHasSpoken] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
   const synthRef = useRef(window.speechSynthesis);
   const utteranceRef = useRef(null);
 
-  useEffect(() => {
-    const checkIfAvatarVisible = () => {
-      if (!avatarRef.current) return false;
-      const rect = avatarRef.current.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <=
-          (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <=
-          (window.innerWidth || document.documentElement.clientWidth)
-      );
-    };
+  // Function to speak
+  const speakOnce = () => {
+    if (!hasSpoken && synthRef.current && !synthRef.current.speaking) {
+      utteranceRef.current = new SpeechSynthesisUtterance(speechText);
+      utteranceRef.current.lang = "en-US";
+      utteranceRef.current.rate = 1;
+      synthRef.current.speak(utteranceRef.current);
+      setShowBubble(true);
 
-    const speakOnce = () => {
-      if (hasSpoken || !checkIfAvatarVisible()) return;
+      // Hide bubble after 5 seconds
+      setTimeout(() => setShowBubble(false), 5000);
 
-      const utterance = new SpeechSynthesisUtterance(
-        "Hi there! Welcome to my portfolio. Let's explore together."
-      );
-      utterance.lang = "en-US";
-      utterance.rate = 1;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      synthRef.current.speak(utterance);
-
-      utteranceRef.current = utterance;
       setHasSpoken(true);
+    }
+  };
 
-      document.getElementById("speech-bubble").style.opacity = 1;
-    };
+  // Stop speech
+  const stopSpeaking = () => {
+    if (synthRef.current && synthRef.current.speaking) {
+      synthRef.current.cancel();
+      setShowBubble(false);
+    }
+  };
 
-    const stopOnScroll = () => {
-      if (synthRef.current.speaking) {
-        synthRef.current.cancel();
-        document.getElementById("speech-bubble").style.opacity = 0;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio === 1) {
+          speakOnce();
+        } else {
+          stopSpeaking();
+        }
+      },
+      {
+        threshold: 1, // Fully visible
       }
-    };
+    );
 
-    const onLoad = () => {
-      setTimeout(() => {
-        speakOnce();
-      }, 800); // Delay for header and avatar to be fully loaded
-    };
-
-    window.addEventListener("load", onLoad);
-    window.addEventListener("scroll", stopOnScroll);
+    if (avatarRef.current) observer.observe(avatarRef.current);
 
     return () => {
-      window.removeEventListener("load", onLoad);
-      window.removeEventListener("scroll", stopOnScroll);
+      if (avatarRef.current) observer.unobserve(avatarRef.current);
+      stopSpeaking();
     };
-  }, [hasSpoken]);
+  }, []);
 
   return (
-    <div className="relative flex flex-col items-center mt-10">
-      <div ref={avatarRef} className="avatar">
-        <img
-          src="/assets/avatar.png"
-          alt="Avatar"
-          className="w-32 h-32 rounded-full"
-        />
-        <div
-          id="speech-bubble"
-          className="absolute top-0 left-full ml-4 p-3 text-sm text-black bg-white rounded-lg shadow transition-opacity duration-300 opacity-0"
-        >
-          👋 Hi there! Welcome to my portfolio.
+    <div ref={avatarRef} className="relative w-fit h-fit">
+      {/* Your avatar */}
+      <img
+        src="/assets/avatar.png"
+        alt="Avatar"
+        className="w-32 h-32 rounded-full"
+      />
+
+      {/* Message bubble */}
+      {showBubble && (
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black text-sm px-4 py-2 rounded-full shadow-lg">
+          {speechText}
         </div>
-      </div>
+      )}
     </div>
   );
 };
