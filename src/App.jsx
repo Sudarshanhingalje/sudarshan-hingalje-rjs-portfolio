@@ -20,13 +20,6 @@ const TechParallax = lazy(() => import("./ui/TechParallax"));
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-
-  const handleSpeak = () => {
-    setIsSpeaking(true);
-    setTimeout(() => setIsSpeaking(false), 4000); // Stop after 4s
-  };
-
   useScrollAnimation();
 
   useEffect(() => {
@@ -51,18 +44,6 @@ function App() {
             >
               <Suspense fallback={<Loader />}>
                 <Header />
-                <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center">
-                  <TalkingAvatar
-                    text="Hello there! I’m your smart assistant speaking to you!"
-                    isSpeaking={isSpeaking}
-                  />
-                  <button
-                    onClick={handleSpeak}
-                    className="mt-10 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white transition"
-                  >
-                    Talk
-                  </button>
-                </div>
                 <About />
                 <TechParallax />
                 <Skills />
