@@ -68,7 +68,7 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative h-screen w-full text-white overflow-hidden bg-[#fffffff4]"
+      className="relative h-screen w-full font-cinzel text-white overflow-hidden bg-[#fffffff4]"
     >
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
 
