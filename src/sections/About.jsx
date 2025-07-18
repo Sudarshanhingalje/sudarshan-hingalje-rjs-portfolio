@@ -61,12 +61,12 @@ const About = () => {
 
       {/* Right Image Section */}
       <motion.div
-        className="about-avatar relative flex items-center justify-center md:justify-end"
+        className=" relative flex items-center justify-center md:justify-end"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+        <div className="about-avatar relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
           <img
             src={devImage}
             alt="Developer Sudarshan Hingalje"
