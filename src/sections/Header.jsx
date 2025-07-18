@@ -12,8 +12,8 @@ import useScrollAnimation from "../utils/useScrollAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const speechText = `Hi! I’m Sudarshan Hingalje, a Full Stack Developer. 
-Spin the Sudarshan Chakra to explore my journey through coding, learning, and life`;
+const speechText = `Hi I’m Sudarshan , a Full Stack Developer. 
+Spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
 const speakText = () => {
   const synth = window.speechSynthesis;
