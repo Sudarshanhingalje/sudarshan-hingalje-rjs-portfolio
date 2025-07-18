@@ -76,7 +76,7 @@ export default function Header() {
           </a>
         </div>
       </motion.div>
-
+      <AvatarSpeaker />
       {/* 🔹 Avatar and TalkingBubble over it */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -84,7 +84,6 @@ export default function Header() {
         transition={{ delay: 7.5, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
       >
-        <AvatarSpeaker />
         <img
           src={avatar}
           alt="Avatar"
