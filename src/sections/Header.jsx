@@ -94,7 +94,7 @@ Spin the Sudarshan chakra to know more about my journey!`;
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 7.5, duration: 1.2, ease: "easeOut" }}
+        transition={{ delay: 2, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
       >
         <div
