@@ -14,22 +14,46 @@ gsap.registerPlugin(ScrollTrigger);
 
 const speechText = `Hi, I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
-const speakText = () => {
-  const synth = window.speechSynthesis;
-  if (!synth.speaking) {
-    const utterance = new SpeechSynthesisUtterance(speechText);
-    utterance.rate = 1;
-    utterance.pitch = 1;
-    utterance.lang = "en-US";
-    synth.speak(utterance);
-  }
-};
-
 export default function Header() {
   useScrollAnimation();
   const resumeUrl = getResumeLink();
   const [showNavbar, setShowNavbar] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
+  const [robotVoice, setRobotVoice] = useState(null);
+
+  // Load robot voice once
+  useEffect(() => {
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      const selected =
+        voices.find((v) => v.name.includes("Microsoft David")) ||
+        voices.find((v) => v.name.includes("Google UK English Male")) ||
+        voices.find((v) => v.lang === "en-US");
+
+      setRobotVoice(selected || null);
+    };
+
+    if (window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+    } else {
+      loadVoices();
+    }
+
+    return () =>
+      window.speechSynthesis.removeEventListener("voiceschanged", loadVoices);
+  }, []);
+
+  const speakText = () => {
+    const synth = window.speechSynthesis;
+    if (!synth.speaking) {
+      const utterance = new SpeechSynthesisUtterance(speechText);
+      if (robotVoice) utterance.voice = robotVoice;
+      utterance.rate = 0.95;
+      utterance.pitch = 0.8;
+      synth.cancel();
+      synth.speak(utterance);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
