@@ -78,6 +78,7 @@ export default function Header() {
       </motion.div>
 
       {/* 🔹 Avatar and TalkingBubble over it */}
+      {/* 🔹 Avatar and TalkingBubble over it */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -89,7 +90,6 @@ export default function Header() {
           alt="Avatar"
           className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
         />
-        {/* ⬇️ Talking Bubble on top of the avatar */}
         <TalkingAvatar />
       </motion.div>
     </section>
