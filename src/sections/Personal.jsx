@@ -1,4 +1,5 @@
 import { FaBullseye, FaChartLine, FaRocket } from "react-icons/fa";
+import { useModernScrollReveal } from "../hooks/useModernScrollReveal";
 
 const goals = [
   {
@@ -22,6 +23,7 @@ const goals = [
 ];
 
 export default function Personal() {
+  useModernScrollReveal();
   return (
     <section id="personal" className="py-20 px-6 sm:px-12 lg:px-20 text-white">
       <div className="max-w-7xl mx-auto text-center">

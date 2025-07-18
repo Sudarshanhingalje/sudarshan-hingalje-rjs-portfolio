@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { experiences } from "../data/experienceTaken/ExperiencesTaken";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const Experience = () => {
+  useModernScrollReveal();
   return (
     <section id="experience" className="py-20  text-white">
       <div className="max-w-5xl mx-auto px-4">
