@@ -12,7 +12,7 @@ import useScrollAnimation from "../utils/useScrollAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const speechText = `Hello, I’m Sudarshan ,my codeWord -paradox, a Full Stack Developer. 
+const speechText = `Hello,my name is Sudarshan ,my codeWord is paradox, a Full Stack Developer,Lets 
 Spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
 const speakText = () => {
