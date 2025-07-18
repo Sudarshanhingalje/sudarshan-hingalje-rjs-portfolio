@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
+import TalkingBubble from "../components/TalkingBubble"; // ✅ import
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
@@ -15,6 +16,7 @@ export default function Header() {
   useScrollAnimation();
   const resumeUrl = getResumeLink();
   const [showNavbar, setShowNavbar] = useState(true);
+  const [showBubble, setShowBubble] = useState(false); // ✅ bubble control
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +27,10 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const speechText = `👋 Hi! My name is Sudarshan Hingalje.
+I'm a Full Stack Developer.
+Spin the Sudarshan chakra to know more about my journey!`;
 
   return (
     <section
@@ -69,18 +75,29 @@ export default function Header() {
         </div>
       </motion.div>
 
-      {/* 🔹 Avatar and TalkingBubble over it */}
+      {/* ✅ Avatar with hover-to-speak logic */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 7.5, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
       >
-        <img
-          src={avatar}
-          alt="Avatar"
-          className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
-        />
+        <div
+          className="relative w-fit h-fit"
+          onMouseEnter={() => setShowBubble(true)}
+          onMouseLeave={() => setShowBubble(false)}
+        >
+          <img
+            src={avatar}
+            alt="Avatar"
+            className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
+          />
+          {showBubble && (
+            <div className="absolute -top-16 left-full ml-4">
+              <TalkingBubble message={speechText} />
+            </div>
+          )}
+        </div>
       </motion.div>
     </section>
   );

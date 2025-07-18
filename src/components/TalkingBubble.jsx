@@ -20,7 +20,7 @@ export default function TalkingBubble({ message }) {
       <p className="text-sm sm:text-base font-medium leading-snug whitespace-pre-line">
         {displayedText}
       </p>
-      {/* Speech triangle */}
+      {/* Triangle */}
       <div className="absolute bottom-2 left-[-14px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[14px] border-r-white" />
     </div>
   );
