@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { projectsDone } from "../data/projects/ProjectDone";
-import useScrollAnimation from "../utils/useScrollAnimation";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const Projects = () => {
-  useScrollAnimation();
+  useModernScrollReveal();
   return (
     <section id="projects" className="py-20 text-white">
       <div className=" project-card max-w-6xl mx-auto px-4">

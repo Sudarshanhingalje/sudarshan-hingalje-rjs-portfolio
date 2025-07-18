@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { skillsLerned } from "../data/skills/SkillsLerned";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState(
     skillsLerned[0].category
   );
-
+  useModernScrollReveal();
   return (
     <section
       id="skills"
