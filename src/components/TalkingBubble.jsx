@@ -45,21 +45,19 @@ export default function TalkingBubble({ message }) {
   return (
     <div
       ref={containerRef}
-      className="relative z-50 max-w-[90vw] sm:max-w-sm md:max-w-md lg:max-w-lg bg-[#fefefe] text-black px-4 py-3 rounded-xl shadow-xl transition-all duration-300 ease-in-out border border-gray-300"
+      className="relative z-50 bg-white text-black px-4 py-3 rounded-xl shadow-xl text-left w-[220px] sm:w-[260px] transition-all duration-300 ease-in-out"
       style={{
         overflowWrap: "break-word",
         wordBreak: "break-word",
-        minHeight: "60px",
-        fontFamily: "'Fira Code', 'Courier New', monospace",
-        fontSize: "0.95rem",
-        lineHeight: "1.5",
-        whiteSpace: "pre-wrap",
+        minHeight: "50px",
       }}
     >
-      <p className="whitespace-pre-wrap break-words">{displayedText}</p>
+      <p className="text-sm sm:text-base font-medium leading-snug break-words">
+        {displayedText}
+      </p>
 
       {/* Triangle pointer */}
-      <div className="absolute bottom-2 left-[-14px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[14px] border-r-[#fefefe]" />
+      <div className="absolute bottom-2 left-[-14px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[14px] border-r-white" />
     </div>
   );
 }
