@@ -59,13 +59,6 @@ export default function Header() {
 
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href="#about"
-            className="bg-[#ffc857] hover:bg-[#ffb347] text-black font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-lg sm:text-xl transition duration-300 shadow-md text-center"
-          >
-            Contact Me
-          </a>
-
-          <a
             href={resumeUrl}
             download
             className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
