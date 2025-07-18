@@ -29,48 +29,50 @@ function App() {
   }, []);
 
   return (
-    <Main className="dark">
-      <Toaster position="top-right" reverseOrder={false} />
-      <div className="fixed top-4 right-4 mt-4 ml-auto mr-4 z-50">
-        <MusicToggleButton />
-      </div>
-      <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white">
-        <ErrorBoundary>
-          <SmoothScroll>
-            <SplashCursor />
+    <div className="dark">
+      <Main>
+        <Toaster position="top-right" reverseOrder={false} />
+        <div className="fixed top-4 right-4 mt-4 ml-auto mr-4 z-50">
+          <MusicToggleButton />
+        </div>
+        <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white">
+          <ErrorBoundary>
+            <SmoothScroll>
+              <SplashCursor />
 
-            <Wheel />
-            <div
-              className={
-                loading
-                  ? "blur-sm brightness-50 pointer-events-none"
-                  : "blur-0 transition-all duration-500"
-              }
-            >
-              <Suspense fallback={<Loader />}>
-                <Header />
+              <Wheel />
+              <div
+                className={
+                  loading
+                    ? "blur-sm brightness-50 pointer-events-none"
+                    : "blur-0 transition-all duration-500"
+                }
+              >
+                <Suspense fallback={<Loader />}>
+                  <Header />
 
-                <About />
+                  <About />
 
-                <TechParallax />
-                <Skills />
-                <Projects />
-                <Experience />
-                <Personal />
-                <Contact />
-                <Footer />
-              </Suspense>
-            </div>
-
-            {loading && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
-                <Loader />
+                  <TechParallax />
+                  <Skills />
+                  <Projects />
+                  <Experience />
+                  <Personal />
+                  <Contact />
+                  <Footer />
+                </Suspense>
               </div>
-            )}
-          </SmoothScroll>
-        </ErrorBoundary>
-      </div>
-    </Main>
+
+              {loading && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
+                  <Loader />
+                </div>
+              )}
+            </SmoothScroll>
+          </ErrorBoundary>
+        </div>
+      </Main>
+    </div>
   );
 }
 
