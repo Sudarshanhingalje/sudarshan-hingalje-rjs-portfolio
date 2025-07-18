@@ -1,9 +1,8 @@
-// ✅ Updated TalkingAvatar.jsx
 import { useEffect, useRef, useState } from "react";
 import "../styles/index.css";
 
 const message =
-  "Hello! I'm Sudarshan Hingalje, a Full Stack Developer. what can I do for you?";
+  "Hello! I'm Sudarshan Hingalje, a Full Stack Developer. What can I do for you?";
 
 const TalkingAvatar = () => {
   const [displayedText, setDisplayedText] = useState("");
@@ -12,7 +11,6 @@ const TalkingAvatar = () => {
   const avatarRef = useRef(null);
   const synthRef = useRef(window.speechSynthesis);
 
-  // Typing Effect
   useEffect(() => {
     let observer;
     let typingInterval;
@@ -22,6 +20,7 @@ const TalkingAvatar = () => {
       if (hasSpoken.current || synthRef.current.speaking) return;
 
       hasSpoken.current = true;
+
       utterance = new SpeechSynthesisUtterance(message);
       utterance.lang = "en-US";
       utterance.rate = 1;
@@ -46,36 +45,51 @@ const TalkingAvatar = () => {
       synthRef.current.speak(utterance);
     };
 
+    // 👁️ Trigger when avatar enters viewport
     observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           handleSpeak();
         }
       },
-      { threshold: 0.6 }
+      { threshold: 0.8 }
     );
 
     if (avatarRef.current) {
       observer.observe(avatarRef.current);
     }
 
-    const stopSpeaking = () => {
-      if (synthRef.current.speaking) synthRef.current.cancel();
-      setIsSpeaking(false);
-      hasSpoken.current = true;
+    // 🛑 Stop voice + prevent repeat when user scrolls down
+    const stopIfScrolledAway = () => {
+      const header = document.getElementById("header");
+      const headerBottom = header?.getBoundingClientRect()?.bottom || 0;
+
+      if (headerBottom <= 0 && synthRef.current.speaking) {
+        synthRef.current.cancel();
+        setIsSpeaking(false);
+        hasSpoken.current = true;
+      }
     };
 
-    window.addEventListener("scroll", stopSpeaking);
+    window.addEventListener("scroll", stopIfScrolledAway);
 
     return () => {
       observer?.disconnect();
-      window.removeEventListener("scroll", stopSpeaking);
-      if (synthRef.current.speaking) synthRef.current.cancel();
+      window.removeEventListener("scroll", stopIfScrolledAway);
+      synthRef.current.cancel();
+      clearInterval(typingInterval);
     };
   }, []);
 
   return (
     <div className="relative flex flex-col items-center mt-4" ref={avatarRef}>
+      <img
+        src="/avatar.svg" // or your correct path
+        alt="avatar"
+        className={`w-32 h-32 object-cover rounded-full transition-transform duration-300 ${
+          isSpeaking ? "animate-talk scale-105" : ""
+        }`}
+      />
       {isSpeaking && (
         <div className="mt-2 px-4 py-2 rounded-lg bg-white text-black shadow-md max-w-xs text-center text-sm">
           {displayedText}
