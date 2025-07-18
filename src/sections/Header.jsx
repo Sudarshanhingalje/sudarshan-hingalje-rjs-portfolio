@@ -43,9 +43,8 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const speechText = ` Hi, My name is Sudarshan Hingalje.
-I'm a Full Stack Developer.
-Spin the Sudarshan chakra to know more about my journey!`;
+  const speechText = ` Hi there I’m Sudarshan , a Full Stack Developer.
+Spin the Sudarshan Chakra to explore my journey in tech, education, and beyond`;
 
   return (
     <section
