@@ -78,7 +78,6 @@ export default function Header() {
       </motion.div>
 
       {/* 🔹 Avatar and TalkingBubble over it */}
-      {/* 🔹 Avatar and TalkingBubble over it */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
