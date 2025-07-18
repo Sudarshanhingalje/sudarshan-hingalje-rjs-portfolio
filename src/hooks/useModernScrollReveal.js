@@ -102,6 +102,32 @@ export default function useModernScrollReveal() {
       });
     });
 
+    // ✅ Contact section form animation
+    gsap.from("#contact .contact-form", {
+      y: 60,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#contact",
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    // ✅ Footer fade-in
+    gsap.from("#footer", {
+      y: 50,
+      opacity: 0,
+      duration: 0.6,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: "#footer",
+        start: "top bottom",
+        toggleActions: "play none none reverse",
+      },
+    });
+
     // Refresh ScrollTrigger after page load
     window.addEventListener("load", () => ScrollTrigger.refresh());
   }, []);

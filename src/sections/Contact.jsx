@@ -80,7 +80,7 @@ const Contact = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-20 px-4 sm:px-6 lg:px-8 text-white"
+      className=" py-20 px-4 sm:px-6 lg:px-8 text-white"
     >
       <div className=" max-w-3xl mx-auto">
         <div className="text-center mb-12">
@@ -90,7 +90,11 @@ const Contact = () => {
           </h1>
         </div>
 
-        <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className="contact-form space-y-6"
+        >
           <div>
             <label className="block text-sm font-medium mb-1">Reason</label>
             <select
