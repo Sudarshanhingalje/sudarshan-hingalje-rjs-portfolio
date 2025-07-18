@@ -3,7 +3,7 @@ import avatarImg from "../assets/yoga.svg";
 import "../styles/index.css";
 
 const messages = [
-  "Welcome! I am your talking avatar.",
+  "Welcome! I am  sudashan hingalje.",
   "Ask me anything about the site.",
   "Need help? I'm right here!",
 ];
