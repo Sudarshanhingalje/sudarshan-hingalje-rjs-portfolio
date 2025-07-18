@@ -1,103 +1,82 @@
 import { useEffect, useRef, useState } from "react";
-import "../styles/index.css";
 
-const message =
-  "Hello! I'm Sudarshan Hingalje, a Full Stack Developer. What can I do for you?";
-
-const TalkingAvatar = () => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const hasSpoken = useRef(false);
+const AvatarSpeaker = () => {
   const avatarRef = useRef(null);
+  const [hasSpoken, setHasSpoken] = useState(false);
   const synthRef = useRef(window.speechSynthesis);
+  const utteranceRef = useRef(null);
 
   useEffect(() => {
-    let observer;
-    let typingInterval;
-    let utterance;
-
-    const handleSpeak = () => {
-      if (hasSpoken.current || synthRef.current.speaking) return;
-
-      hasSpoken.current = true;
-
-      utterance = new SpeechSynthesisUtterance(message);
-      utterance.lang = "en-US";
-      utterance.rate = 1;
-
-      utterance.onstart = () => {
-        setIsSpeaking(true);
-        let index = 0;
-        setDisplayedText("");
-        typingInterval = setInterval(() => {
-          setDisplayedText((prev) => prev + message[index]);
-          index++;
-          if (index >= message.length) clearInterval(typingInterval);
-        }, 50);
-      };
-
-      utterance.onend = () => {
-        setIsSpeaking(false);
-        clearInterval(typingInterval);
-      };
-
-      synthRef.current.cancel();
-      synthRef.current.speak(utterance);
+    const checkIfAvatarVisible = () => {
+      if (!avatarRef.current) return false;
+      const rect = avatarRef.current.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+      );
     };
 
-    // 👁️ Trigger when avatar enters viewport
-    observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          handleSpeak();
-        }
-      },
-      { threshold: 0.8 }
-    );
+    const speakOnce = () => {
+      if (hasSpoken || !checkIfAvatarVisible()) return;
 
-    if (avatarRef.current) {
-      observer.observe(avatarRef.current);
-    }
+      const utterance = new SpeechSynthesisUtterance(
+        "Hi there! Welcome to my portfolio. Let's explore together."
+      );
+      utterance.lang = "en-US";
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      synthRef.current.speak(utterance);
 
-    // 🛑 Stop voice + prevent repeat when user scrolls down
-    const stopIfScrolledAway = () => {
-      const header = document.getElementById("header");
-      const headerBottom = header?.getBoundingClientRect()?.bottom || 0;
+      utteranceRef.current = utterance;
+      setHasSpoken(true);
 
-      if (headerBottom <= 0 && synthRef.current.speaking) {
+      document.getElementById("speech-bubble").style.opacity = 1;
+    };
+
+    const stopOnScroll = () => {
+      if (synthRef.current.speaking) {
         synthRef.current.cancel();
-        setIsSpeaking(false);
-        hasSpoken.current = true;
+        document.getElementById("speech-bubble").style.opacity = 0;
       }
     };
 
-    window.addEventListener("scroll", stopIfScrolledAway);
+    const onLoad = () => {
+      setTimeout(() => {
+        speakOnce();
+      }, 800); // Delay for header and avatar to be fully loaded
+    };
+
+    window.addEventListener("load", onLoad);
+    window.addEventListener("scroll", stopOnScroll);
 
     return () => {
-      observer?.disconnect();
-      window.removeEventListener("scroll", stopIfScrolledAway);
-      synthRef.current.cancel();
-      clearInterval(typingInterval);
+      window.removeEventListener("load", onLoad);
+      window.removeEventListener("scroll", stopOnScroll);
     };
-  }, []);
+  }, [hasSpoken]);
 
   return (
-    <div className="relative flex flex-col items-center mt-4" ref={avatarRef}>
-      <img
-        src="/avatar.svg" // or your correct path
-        alt="avatar"
-        className={`w-32 h-32 object-cover rounded-full transition-transform duration-300 ${
-          isSpeaking ? "animate-talk scale-105" : ""
-        }`}
-      />
-      {isSpeaking && (
-        <div className="mt-2 px-4 py-2 rounded-lg bg-white text-black shadow-md max-w-xs text-center text-sm">
-          {displayedText}
-          <span className="blinking-cursor">|</span>
+    <div className="relative flex flex-col items-center mt-10">
+      <div ref={avatarRef} className="avatar">
+        <img
+          src="/assets/avatar.png"
+          alt="Avatar"
+          className="w-32 h-32 rounded-full"
+        />
+        <div
+          id="speech-bubble"
+          className="absolute top-0 left-full ml-4 p-3 text-sm text-black bg-white rounded-lg shadow transition-opacity duration-300 opacity-0"
+        >
+          👋 Hi there! Welcome to my portfolio.
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
-export default TalkingAvatar;
+export default AvatarSpeaker;
