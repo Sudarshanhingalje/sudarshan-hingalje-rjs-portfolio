@@ -18,7 +18,7 @@ export default function Avatar() {
           stroke="#000"
           strokeWidth="5"
           fill="none"
-          className="animate-mouth"
+          className="mouth"
         />
       </svg>
     </div>

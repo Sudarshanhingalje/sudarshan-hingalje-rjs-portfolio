@@ -11,3 +11,9 @@
 .animate-mouth {
   animation: mouthMove 1s infinite ease-in-out;
 }
+.mouth {
+  transition: all 0.3s ease-in-out;
+}
+svg:hover .mouth {
+  animation: mouthMove 1s infinite;
+}
