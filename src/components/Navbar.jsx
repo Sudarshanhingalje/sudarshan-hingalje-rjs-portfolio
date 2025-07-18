@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import bgImage from "../assets/brand.svg";
+import MusicToggleButton from "./MusicToggleButton";
 
 export default function Navbar() {
   return (
