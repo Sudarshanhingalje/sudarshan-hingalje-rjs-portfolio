@@ -5,6 +5,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg";
+import Avatar from "../components/Avatar";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
@@ -91,6 +92,7 @@ export default function Header() {
         transition={{ delay: 2, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
       >
+        <Avatar />
         <div
           className="relative w-fit h-fit"
           onMouseEnter={() => {

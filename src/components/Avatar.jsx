@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
-import avatarImg from "../assets/avatar.svg";
+import avatarImg from "../assets/yoga.svg";
 
 const Avatar = () => {
   const [showBubble, setShowBubble] = useState(false);
