@@ -16,6 +16,7 @@ export default {
           700: "#3a3a3a",
         },
       },
+      darkMode: "class",
     },
   },
   plugins: [],
