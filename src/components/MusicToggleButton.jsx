@@ -29,18 +29,23 @@ export default function MusicToggleButton() {
       <button
         onClick={toggleMusic}
         className={`
-          absolute z-30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+          fixed z-50 right-6
           w-12 h-12 rounded-full
           flex items-center justify-center
-          bg-gradient-to-br from-yellow-500 to-red-500
-          text-white text-2xl shadow-lg
           transition-all duration-300
-          hover:scale-110 hover:rotate-6 hover:shadow-xl
-          active:scale-95
+          border dark:border-neutral-700 border-neutral-300
+          bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md
+          text-neutral-900 dark:text-neutral-100
+          shadow-md hover:shadow-lg
+          hover:scale-110 active:scale-95
         `}
         title={isPlaying ? "Pause Music" : "Play Music"}
       >
-        {isPlaying ? <HiMiniMusicalNote /> : <FcMusic />}
+        {isPlaying ? (
+          <HiMiniMusicalNote className="text-xl" />
+        ) : (
+          <FcMusic className="text-xl" />
+        )}
       </button>
     </>
   );
