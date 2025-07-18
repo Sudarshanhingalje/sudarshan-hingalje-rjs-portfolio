@@ -2,7 +2,6 @@ import { animate, motion, useMotionValue } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import clickSoundFile from "../assets/click.mp3";
 import wheelImg from "../assets/wheel-fixed.svg";
-import MusicToggleButton from "./MusicToggleButton";
 
 const sections = [
   "header",
@@ -30,7 +29,6 @@ export default function Wheel() {
     audio.play().catch(() => {});
   };
 
-  // 🔁 Scroll rotation (non-click)
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -46,7 +44,6 @@ export default function Wheel() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY, rotation]);
 
-  // 🌀 Mouse wheel on hover
   const handleManualWheel = useCallback(
     (e) => {
       e.preventDefault();
@@ -57,7 +54,6 @@ export default function Wheel() {
     [rotation]
   );
 
-  // 🔄 Rotate + scroll to section
   const rotateAndScroll = (direction) => {
     const currentSectionIndex = sections.findIndex((id) => {
       const el = document.getElementById(id);
@@ -140,7 +136,6 @@ export default function Wheel() {
     return (Math.atan2(dy, dx) * 180) / Math.PI;
   };
 
-  // 🖱️ Left/Right click to rotate
   const handleClick = (e) => {
     const rect = centerRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;

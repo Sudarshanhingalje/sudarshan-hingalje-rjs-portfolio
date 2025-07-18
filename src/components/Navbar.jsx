@@ -5,7 +5,6 @@ export default function Navbar() {
   return (
     <div>
       <motion.nav className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-10 py-3 flex  justify-between bg-transparent">
-        {/* Logo on the right */}
         <button
           onClick={() => window.location.reload()}
           className="focus:outline-none"
