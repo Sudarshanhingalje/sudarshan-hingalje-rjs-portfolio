@@ -1,3 +1,24 @@
+import { lazy, Suspense, useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import Loader from "./components/Loader";
+import Main from "./components/Main";
+import MusicToggleButton from "./components/MusicToggleButton";
+import Wheel from "./components/Wheel";
+import SplashCursor from "./ui/CustomCursor";
+import ErrorBoundary from "./utils/ErrorBoundary";
+import SmoothScroll from "./utils/SmoothScroll";
+import useScrollAnimation from "./utils/useScrollAnimation";
+
+const About = lazy(() => import("./sections/About"));
+const Contact = lazy(() => import("./sections/Contact"));
+const Footer = lazy(() => import("./sections/Footer"));
+const Header = lazy(() => import("./sections/Header"));
+const Personal = lazy(() => import("./sections/Personal"));
+const Skills = lazy(() => import("./sections/Skills"));
+const Projects = lazy(() => import("./sections/Projects"));
+const Experience = lazy(() => import("./sections/Experience"));
+const TechParallax = lazy(() => import("./ui/TechParallax"));
+
 function App() {
   const [loading, setLoading] = useState(true);
   useScrollAnimation();
