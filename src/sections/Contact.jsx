@@ -17,6 +17,7 @@ const Contact = () => {
     phone: "",
     message: "",
   });
+  useModernScrollReveal();
 
   useEffect(() => {
     gsap.fromTo(
