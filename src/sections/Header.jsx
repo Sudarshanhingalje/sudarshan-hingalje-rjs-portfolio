@@ -4,7 +4,6 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
-import Avatar from "../components/Avatar";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
