@@ -6,7 +6,7 @@ const Experience = () => {
   useModernScrollReveal();
   return (
     <section id="experience" className="py-20  text-white">
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="timeline-item max-w-5xl mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
