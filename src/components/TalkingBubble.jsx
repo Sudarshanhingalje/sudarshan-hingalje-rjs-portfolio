@@ -38,25 +38,20 @@ export default function TalkingBubble({ message }) {
   }, [message]);
 
   return (
-    <div className="flex justify-start px-4 sm:px-6 lg:px-8">
-      <div
-        ref={containerRef}
-        className="relative z-50 bg-[#1e1e2f] text-green-300 font-mono px-4 py-3 rounded-xl shadow-lg border border-green-500 
-                   w-full max-w-[95%] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[520px]
-                   transition-all duration-300 ease-in-out"
-        style={{
-          overflowWrap: "break-word",
-          wordBreak: "break-word",
-          minHeight: "60px",
-        }}
-      >
-        <p className="text-sm sm:text-base font-medium leading-snug whitespace-pre-wrap">
-          {displayedText}
-        </p>
+    <div
+      ref={containerRef}
+      className="relative z-50 bg-[#1e1e2f] text-green-300 font-mono px-4 py-3 rounded-xl shadow-lg w-[90%] sm:w-[80%] md:w-[300px] lg:w-[340px] xl:w-[380px] transition-all duration-300 ease-in-out border border-green-500"
+      style={{
+        overflowWrap: "break-word",
+        wordBreak: "break-word",
+        minHeight: "60px",
+      }}
+    >
+      <p className="text-sm sm:text-base font-medium leading-snug whitespace-pre-wrap">
+        {displayedText}
+      </p>
 
-        {/* Terminal Pointer Arrow */}
-        <div className="absolute bottom-2 left-[-14px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[14px] border-r-[#1e1e2f]" />
-      </div>
+      <div className="absolute bottom-2 left-[-14px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[14px] border-r-[#1e1e2f]" />
     </div>
   );
 }
