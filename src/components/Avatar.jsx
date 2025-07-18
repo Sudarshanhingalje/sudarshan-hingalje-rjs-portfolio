@@ -1,50 +1,53 @@
-// src/components/Avatar.jsx
-import { useEffect, useRef, useState } from "react";
-import avatarImg from "../assets/yoga.svg";
-
-const promptText = `👋 Hi! My name is Sudarshan Hingalje.
-I'm a Full Stack Developer.
-Spin the Sudarshan chakra to know more about my journey!`;
+import { useEffect, useState } from "react";
+import avatarImg from "../assets/avatar.svg";
 
 const Avatar = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const hasSpoken = useRef(false);
+  const [showBubble, setShowBubble] = useState(false);
+
+  const prompt =
+    "Hi! I’m Sudarshan Hingalje, a Full Stack Developer. Spin the Sudarshan Chakra to explore my journey through coding, learning, and life!";
+
+  const speak = () => {
+    const synth = window.speechSynthesis;
+    const utter = new SpeechSynthesisUtterance(prompt);
+
+    // Optional: pick a better voice
+    const voices = synth.getVoices();
+    const preferredVoice = voices.find(
+      (v) => v.name.includes("Google") || v.lang === "en-US"
+    );
+    if (preferredVoice) utter.voice = preferredVoice;
+
+    utter.rate = 1;
+    utter.pitch = 1;
+    synth.cancel(); // stop previous
+    synth.speak(utter);
+  };
 
   useEffect(() => {
-    if (isHovered && !hasSpoken.current) {
-      const synth = window.speechSynthesis;
-      const utterance = new SpeechSynthesisUtterance(promptText);
-      synth.speak(utterance);
-      hasSpoken.current = true;
-
-      utterance.onend = () => {
-        hasSpoken.current = false; // Allow speaking again next hover
-      };
-    }
-  }, [isHovered]);
+    if (showBubble) speak();
+  }, [showBubble]);
 
   return (
     <div
-      className="relative flex flex-col items-center cursor-pointer transition-transform hover:scale-105"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative w-fit group"
+      onMouseEnter={() => setShowBubble(true)}
+      onMouseLeave={() => setShowBubble(false)}
     >
       <img
         src={avatarImg}
         alt="Sudarshan Avatar"
-        className="w-40 h-40 rounded-full z-10 border-4 border-white shadow-xl"
+        className="w-32 h-32 hover:animate-spin transition-transform duration-500"
       />
-
-      {/* Bubble */}
-      <div
-        className={`absolute z-20 -top-10 left-[105%] min-w-[250px] bg-white text-black p-4 rounded-xl shadow-lg transition-opacity duration-300 ${
-          isHovered ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <p className="text-sm leading-snug whitespace-pre-line">{promptText}</p>
-        {/* Triangle */}
-        <div className="absolute -left-2 top-5 w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-r-[10px] border-r-white" />
-      </div>
+      {/* Bubble on top right */}
+      {showBubble && (
+        <div className="absolute -top-12 left-32 bg-white text-black px-4 py-2 rounded-lg shadow-lg text-sm w-64">
+          <div className="absolute -left-3 top-3 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-white"></div>
+          👋 Hi! I’m Sudarshan Hingalje, a Full Stack Developer.
+          <br />
+          <strong>Spin the Chakra to explore my journey!</strong>
+        </div>
+      )}
     </div>
   );
 };
