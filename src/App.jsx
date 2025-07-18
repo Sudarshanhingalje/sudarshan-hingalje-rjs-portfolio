@@ -52,8 +52,7 @@ function App() {
                 <div className="App">
                   <header id="header">
                     <Header />
-                    {!loading && <AvatarSpeaker />}{" "}
-                    {/* ✅ Show only after load */}
+                    {!loading && <AvatarSpeaker />}
                   </header>
 
                   <About />
