@@ -12,6 +12,21 @@ import useScrollAnimation from "../utils/useScrollAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const speechText = `👋 Hi! My name is Sudarshan Hingalje.
+I'm a Full Stack Developer.
+Spin the Sudarshan chakra to know more about my journey!`;
+
+const speakText = () => {
+  const synth = window.speechSynthesis;
+  if (!synth.speaking) {
+    const utterance = new SpeechSynthesisUtterance(speechText);
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    utterance.lang = "en-US";
+    synth.speak(utterance);
+  }
+};
+
 export default function Header() {
   useScrollAnimation();
   const resumeUrl = getResumeLink();
