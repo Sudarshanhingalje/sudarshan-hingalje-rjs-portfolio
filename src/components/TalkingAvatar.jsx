@@ -2,7 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import "../styles/index.css";
 
-const message = "Hello! I'm Sudarshan Hingalje, a Full Stack Developer.";
+const message =
+  "Hello! I'm Sudarshan Hingalje, a Full Stack Developer. what can I do for you?";
 
 const TalkingAvatar = () => {
   const [displayedText, setDisplayedText] = useState("");
