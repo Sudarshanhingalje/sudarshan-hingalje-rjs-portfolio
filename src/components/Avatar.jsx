@@ -5,7 +5,7 @@ const Avatar = () => {
   const [showBubble, setShowBubble] = useState(false);
 
   const prompt =
-    "Hi! I’m Sudarshan, a Full Stack Developer. Spin the Sudarshan Chakra to explore my journey through coding, learning, and life!";
+    "Hello, I’m Sudarshan, a Full Stack Developer. Spin the Sudarshan Chakra to explore my journey through coding, learning, and life!";
 
   const speak = () => {
     const synth = window.speechSynthesis;
