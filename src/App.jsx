@@ -20,7 +20,7 @@ const Experience = lazy(() => import("./sections/Experience"));
 const TechParallax = lazy(() => import("./ui/TechParallax"));
 
 // 🗣 Avatar Speaker component
-import AvatarSpeaker from "./components/AvatarSpeaker";
+import AvatarSpeaker from "./components/TalkingAvatar";
 
 function App() {
   const [loading, setLoading] = useState(true);
