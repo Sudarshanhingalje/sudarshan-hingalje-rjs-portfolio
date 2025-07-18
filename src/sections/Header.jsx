@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { FaDownload } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import TalkingAvatar from "../components/TalkingAvatar";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
-import { FaDownload } from "react-icons/fa";
 
 export default function Header() {
   const resumeUrl = getResumeLink();
@@ -27,9 +27,11 @@ export default function Header() {
     utterance.rate = 1;
     utterance.pitch = 1;
     utterance.volume = 1;
-    synth.cancel(); // Stop any previous
+
+    synth.cancel(); // Stop previous speech
     synth.speak(utterance);
     setIsSpeaking(true);
+
     utterance.onend = () => setIsSpeaking(false);
   }, []);
 
@@ -52,15 +54,15 @@ export default function Header() {
 
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href=\"#about\"
-            className=\"bg-[#ffc857] text-black px-6 py-3 rounded-full text-lg shadow-md\"
+            href="#about"
+            className="bg-[#ffc857] text-black px-6 py-3 rounded-full text-lg shadow-md"
           >
             Contact Me
           </a>
           <a
             href={resumeUrl}
             download
-            className=\"bg-white text-black px-6 py-3 rounded-full flex items-center gap-2 shadow-md\"
+            className="bg-white text-black px-6 py-3 rounded-full flex items-center gap-2 shadow-md"
           >
             <FaDownload />
             Download CV
