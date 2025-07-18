@@ -59,13 +59,13 @@ const TalkingAvatar = () => {
   }, [messageIndex]);
 
   return (
-    <div className="relative flex flex-col items-center mt-10">
+    <div className="relative flex flex-col items-center ">
       <div className="relative">
         <img
           src={avatarImg}
           alt="avatar"
-          className={`w-32 h-32   transition-all duration-300 ${
-            isSpeaking ? "scale-105 shadow-lg" : ""
+          className={`w-32 h-32 object-cover s ${
+            isSpeaking ? "scale-105 " : ""
           }`}
         />
         {currentMessage && (
