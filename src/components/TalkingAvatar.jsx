@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import avatar from "../assets/yoga.svg";
 
 export default function TalkingAvatar({ isSpeaking }) {
