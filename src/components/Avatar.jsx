@@ -1,26 +1,30 @@
-import "./Avatar.css"; // for CSS animation
-
-export default function Avatar() {
+const Avatar = ({ isSpeaking, className }) => {
   return (
-    <div className="relative w-[220px] h-auto">
-      <svg
-        viewBox="0 0 200 200"
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full"
-      >
-        {/* Example avatar */}
-        <circle cx="100" cy="100" r="80" fill="#f3f3f3" />
-        <circle cx="70" cy="85" r="10" fill="#333" /> {/* Left eye */}
-        <circle cx="130" cy="85" r="10" fill="#333" /> {/* Right eye */}
-        <path
-          id="mouth"
-          d="M70 130 Q100 150 130 130"
-          stroke="#000"
-          strokeWidth="5"
-          fill="none"
-          className="mouth"
-        />
-      </svg>
-    </div>
+    <svg
+      className={className}
+      viewBox="0 0 200 200"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Face */}
+      <circle cx="100" cy="100" r="80" fill="#fcd5ce" />
+
+      {/* Eyes */}
+      <circle cx="70" cy="80" r="10" fill="#000" />
+      <circle cx="130" cy="80" r="10" fill="#000" />
+
+      {/* Mouth */}
+      <ellipse
+        cx="100"
+        cy="130"
+        rx="20"
+        ry={isSpeaking ? "12" : "5"}
+        fill="#000"
+        style={{
+          transition: "all 0.3s ease-in-out",
+        }}
+      />
+    </svg>
   );
-}
+};
+
+export default Avatar;
