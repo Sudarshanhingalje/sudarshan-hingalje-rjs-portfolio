@@ -1,5 +1,5 @@
 import { FaBullseye, FaChartLine, FaRocket } from "react-icons/fa";
-import { useModernScrollReveal } from "../hooks/useModernScrollReveal";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const goals = [
   {
