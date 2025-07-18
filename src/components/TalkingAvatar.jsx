@@ -1,68 +1,67 @@
-// TalkingAvatar.jsx
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import avatarImg from "../assets/yoga.svg";
 import "../styles/index.css";
 
 const messages = [
-  "Welcome! My name is Sudarshan.",
-  "I am a full stack developer.",
-  "If you need any help, I'm right here!",
-  "To know more about me, spin the wheel.",
+  "Hello! I'm your assistant.",
+  "I can help you with anything.",
+  "Just ask and I’ll be here.",
+  "Keep going! You're doing great.",
 ];
 
 const TalkingAvatar = () => {
-  const [currentMessage, setCurrentMessage] = useState("");
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [messageIndex, setMessageIndex] = useState(0);
-  const typingInterval = useRef(null);
 
-  // Typing effect
-  const typeMessage = (fullText) => {
-    let index = 0;
-    setCurrentMessage("");
-    clearInterval(typingInterval.current);
-    typingInterval.current = setInterval(() => {
-      if (index < fullText.length) {
-        setCurrentMessage((prev) => prev + fullText.charAt(index));
-        index++;
-      } else {
-        clearInterval(typingInterval.current);
-      }
-    }, 50);
-  };
-
-  // Speak message
-  const speakMessage = (text) => {
-    if ("speechSynthesis" in window) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(utterance);
-    }
-  };
-
-  // Change message every 5s
+  // Typing Effect
   useEffect(() => {
-    const text = messages[messageIndex];
-    typeMessage(text);
-    speakMessage(text);
+    const message = messages[currentMessageIndex];
+    let charIndex = 0;
+    setDisplayedText("");
+    const typeInterval = setInterval(() => {
+      setDisplayedText((prev) => prev + message[charIndex]);
+      charIndex++;
+      if (charIndex >= message.length) {
+        clearInterval(typeInterval);
+      }
+    }, 60);
 
-    const timeout = setTimeout(() => {
-      const next = (messageIndex + 1) % messages.length;
-      setMessageIndex(next);
-    }, 6000);
+    return () => clearInterval(typeInterval);
+  }, [currentMessageIndex]);
 
-    return () => {
-      clearTimeout(timeout);
-      clearInterval(typingInterval.current);
-      window.speechSynthesis.cancel();
+  // SpeechSynthesis + Avatar Talk
+  useEffect(() => {
+    const utterance = new SpeechSynthesisUtterance(
+      messages[currentMessageIndex]
+    );
+    utterance.lang = "en-US";
+    utterance.rate = 1;
+
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setTimeout(() => {
+        setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
+      }, 1000); // 1s pause between messages
     };
-  }, [messageIndex]);
+
+    speechSynthesis.cancel(); // Clear previous speech
+    speechSynthesis.speak(utterance);
+  }, [currentMessageIndex]);
 
   return (
-    <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-72 z-20">
-      <div className="bg-white text-black text-sm px-4 py-2 rounded-xl shadow-lg border border-gray-300 animate-fadeIn">
-        {currentMessage}
+    <div className="relative flex flex-col items-center mt-10">
+      <img
+        src={avatarImg}
+        alt="avatar"
+        className={`w-32 h-32 object-cover rounded-full transition-transform duration-300 ${
+          isSpeaking ? "animate-talk scale-105" : ""
+        }`}
+      />
+      <div className="mt-4 px-4 py-2 rounded-lg bg-white text-black shadow-md max-w-xs text-center text-sm">
+        {displayedText}
+        <span className="blinking-cursor">|</span>
       </div>
     </div>
   );
