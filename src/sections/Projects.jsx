@@ -6,7 +6,7 @@ const Projects = () => {
   useScrollAnimation();
   return (
     <section id="projects" className="py-20 text-white">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className=" project-card max-w-6xl mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -16,7 +16,7 @@ const Projects = () => {
           My Projects
         </motion.h2>
 
-        <div className="project-card grid grid-cols-1 md:grid-cols-2 gap-10 bg">
+        <div className=" grid grid-cols-1 md:grid-cols-2 gap-10 bg">
           {projectsDone.map((project, index) => (
             <motion.div
               key={index}
