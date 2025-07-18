@@ -101,11 +101,11 @@ Spin the Sudarshan chakra to know more about my journey!`;
           className="relative w-fit h-fit"
           onMouseEnter={() => {
             setShowBubble(true);
-            speakText(); // 🔊 trigger voice
+            speakText();
           }}
           onMouseLeave={() => {
             setShowBubble(false);
-            window.speechSynthesis.cancel(); // 🛑 stop if user leaves early
+            window.speechSynthesis.cancel();
           }}
         >
           <img
