@@ -3,9 +3,8 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
+import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
-import TalkingAvatar from "../components/TalkingAvatar";
-import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
@@ -15,45 +14,16 @@ export default function Header() {
   useScrollAnimation();
   const resumeUrl = getResumeLink();
   const [showNavbar, setShowNavbar] = useState(true);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
-
-  const messages = [
-    "👋 Hi, I'm Sudarshan! I'm a full stack developer.",
-    "I build modern web apps with React, Node, and more.",
-    "Scroll down to explore my work and skills.",
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
       const headerHeight = window.innerHeight;
       setShowNavbar(window.scrollY <= headerHeight - 100);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    if (currentMessageIndex >= messages.length) return;
-
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(
-      messages[currentMessageIndex]
-    );
-    utterance.lang = "en-US";
-    utterance.rate = 1;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-
-    setIsSpeaking(true);
-    synth.cancel(); // Stop any previous speech
-    synth.speak(utterance);
-
-    utterance.onend = () => {
-      setIsSpeaking(false);
-      setTimeout(() => setCurrentMessageIndex((prev) => prev + 1), 2000);
-    };
-  }, [currentMessageIndex]);
 
   return (
     <section
@@ -61,6 +31,7 @@ export default function Header() {
       className="relative h-screen w-full text-white overflow-hidden bg-[#fffffff4]"
     >
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
+
       {showNavbar && <Navbar />}
 
       <motion.h1
@@ -104,15 +75,17 @@ export default function Header() {
         </div>
       </motion.div>
 
-      {isSpeaking && <TalkingBubble message={messages[currentMessageIndex]} />}
-
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 7.5, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
       >
-        <TalkingAvatar isSpeaking={isSpeaking} />
+        <img
+          src={avatar}
+          alt="Avatar"
+          className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
+        />
       </motion.div>
     </section>
   );
