@@ -10,6 +10,7 @@ import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
+useModernScrollReveal();
 gsap.registerPlugin(ScrollTrigger);
 
 const speechText = `Hi, I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
@@ -19,7 +20,7 @@ export default function Header() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
   const [robotVoice, setRobotVoice] = useState(null);
-  useModernScrollReveal();
+
   // Load robot voice once
   useEffect(() => {
     const loadVoices = () => {
@@ -124,7 +125,11 @@ export default function Header() {
             window.speechSynthesis.cancel();
           }}
         >
-          <img src={avatar} alt="Avatar" />
+          <img
+            src={avatar}
+            alt="Avatar"
+            className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
+          />
           {showBubble && (
             <div className="absolute -top-16 left-full ml-4">
               <TalkingBubble message={speechText} />
