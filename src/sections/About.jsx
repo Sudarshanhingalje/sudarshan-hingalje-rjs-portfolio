@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import devImage from "../assets/own.webp";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const About = () => {
   // ✅ Call custom scroll animation logic
