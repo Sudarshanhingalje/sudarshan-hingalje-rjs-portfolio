@@ -58,16 +58,9 @@ const AvatarSpeaker = () => {
 
   return (
     <div ref={avatarRef} className="relative w-fit h-fit">
-      {/* Your avatar */}
-      <img
-        src="/assets/avatar.png"
-        alt="Avatar"
-        className="w-32 h-32 rounded-full"
-      />
-
       {/* Message bubble */}
       {showBubble && (
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black text-sm px-4 py-2 rounded-full shadow-lg">
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white text-black text-sm px-4 py-2 shadow-lg">
           {speechText}
         </div>
       )}
