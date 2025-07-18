@@ -1,88 +1,96 @@
-import { useEffect, useRef, useState } from "react";
-import { FaRobot } from "react-icons/fa";
-import avatarImg from "../assets/yoga.svg"; // replace with your avatar path
+// Header.jsx
+import { motion } from "framer-motion";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useEffect, useState } from "react";
+import { FaDownload } from "react-icons/fa";
+import avatar from "../assets/yoga.svg";
+import Navbar from "../components/Navbar";
+import TalkingAvatar from "../components/TalkingAvatar";
+import { getResumeLink } from "../data/Resume/getResumeLink";
+import useScrollAnimation from "../utils/useScrollAnimation";
 
-const message =
-  "Hi, I am Ava! Your personal assistant. Welcome to my portfolio.";
+gsap.registerPlugin(ScrollTrigger);
 
-const Header = () => {
-  const [showBubble, setShowBubble] = useState(false);
-  const avatarRef = useRef(null);
-  const hasSpokenRef = useRef(false);
-  const speechInstanceRef = useRef(null);
+export default function Header() {
+  useScrollAnimation();
+  const resumeUrl = getResumeLink();
+  const [showNavbar, setShowNavbar] = useState(true);
 
-  // 📌 Function to check if avatar is fully in view
-  const isAvatarVisible = () => {
-    if (!avatarRef.current) return false;
-    const rect = avatarRef.current.getBoundingClientRect();
-    return rect.top >= 0 && rect.bottom <= window.innerHeight;
-  };
-
-  // 📌 Function to trigger speech and bubble
-  const speakMessage = () => {
-    if (hasSpokenRef.current || !isAvatarVisible()) return;
-
-    const utterance = new SpeechSynthesisUtterance(message);
-    speechSynthesis.cancel(); // clear any pending speech
-    speechSynthesis.speak(utterance);
-    speechInstanceRef.current = utterance;
-    setShowBubble(true);
-    hasSpokenRef.current = true;
-
-    utterance.onend = () => {
-      setShowBubble(false);
-    };
-  };
-
-  // 📌 On load, delay and check for avatar visibility
   useEffect(() => {
-    const checkAndSpeak = () => {
-      if (isAvatarVisible()) {
-        speakMessage();
-      }
-    };
-
     const handleScroll = () => {
-      // If scrolled away, stop the speech
-      if (!isAvatarVisible()) {
-        speechSynthesis.cancel();
-        setShowBubble(false);
-      }
+      const headerHeight = window.innerHeight;
+      setShowNavbar(window.scrollY <= headerHeight - 100);
     };
-
-    // Slight delay to ensure DOM and avatar are loaded
-    const delay = setTimeout(checkAndSpeak, 1000);
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      clearTimeout(delay);
-      window.removeEventListener("scroll", handleScroll);
-      speechSynthesis.cancel();
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header
+    <section
       id="header"
-      className="flex items-center justify-center h-screen bg-[#0d0d0d] relative overflow-hidden"
+      className="relative h-screen w-full text-white overflow-hidden bg-[#fffffff4]"
     >
-      <div className="relative" ref={avatarRef}>
-        <img
-          src={avatarImg}
-          alt="Avatar"
-          className="w-40 h-40 rounded-full border-4 border-white shadow-xl"
-        />
-        {showBubble && (
-          <div className="absolute top-0 left-44 bg-white text-black text-sm px-4 py-2 rounded-xl shadow-md animate-pulse z-10 max-w-xs">
-            <p className="flex items-center gap-2">
-              <FaRobot className="text-blue-500" /> {message}
-            </p>
-          </div>
-        )}
-      </div>
-    </header>
-  );
-};
+      <div className="absolute inset-0 z-0 bg-grid-pattern" />
 
-export default Header;
+      {showNavbar && <Navbar />}
+
+      <motion.h1
+        initial={{ opacity: 0, y: -80 }}
+        animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
+        transition={{ duration: 8, ease: "easeInOut" }}
+        className="absolute top-6 left-4 md:left-10 text-3xl sm:text-4xl md:text-5xl font-cinzel tracking-tight text-[#d5cdc4] z-10"
+      >
+        Sudarshan <br /> Hingalje
+      </motion.h1>
+
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 6.2, duration: 1.8, ease: "easeOut" }}
+        className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8 z-10"
+      >
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#a994fb]">
+          Full Stack <br />
+          <span className="text-[#ffc857] text-4xl sm:text-5xl md:text-[7vw] font-extrabold">
+            Developer
+          </span>
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#about"
+            className="bg-[#ffc857] hover:bg-[#ffb347] text-black font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-lg sm:text-xl transition duration-300 shadow-md text-center"
+          >
+            Contact Me
+          </a>
+
+          <a
+            href={resumeUrl}
+            download
+            className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
+          >
+            <FaDownload />
+            Download CV
+          </a>
+        </div>
+      </motion.div>
+
+      {/* 🔹 Avatar and TalkingBubble over it */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 7.5, duration: 1.2, ease: "easeOut" }}
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
+      >
+        <TalkingAvatar />
+        <img
+          src={avatar}
+          alt="Avatar"
+          className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
+        />
+      </motion.div>
+    </section>
+  );
+}
