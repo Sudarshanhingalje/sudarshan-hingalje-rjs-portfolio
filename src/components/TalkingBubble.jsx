@@ -36,7 +36,7 @@ export default function TalkingBubble({ message }) {
     };
 
     // Wait briefly so getVoices is loaded
-    const speechTimeout = setTimeout(() => speak(), 300);
+    const speechTimeout = setTimeout(() => speak(), 500);
 
     return () => {
       clearInterval(interval);
