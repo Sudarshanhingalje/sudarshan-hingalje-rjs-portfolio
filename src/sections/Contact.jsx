@@ -47,16 +47,15 @@ const Contact = () => {
     try {
       // 1. Send message to yourself
       await emailjs.sendForm(
-        "service_ec6uvv4", // ✅ Your EmailJS service ID
-        "template_ifxi8iv", // ✅ Template to send message to you
+        "service_ec6uvv4",
+        "template_ifxi8iv",
         formRef.current,
-        "2J7MxQtB47nOOr14W" // ✅ Your EmailJS public key
+        "2J7MxQtB47nOOr14W"
       );
 
-      // 2. Send auto-reply to the user
       await emailjs.send(
         "service_ec6uvv4",
-        "template_q4leu5r", // ✅ Auto-reply template
+        "template_q4leu5r",
         {
           name: formData.name,
           email: formData.email,
