@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
-import AvatarSpeaker from "../components/TalkingAvatar";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
@@ -76,7 +75,7 @@ export default function Header() {
           </a>
         </div>
       </motion.div>
-      <AvatarSpeaker />
+
       {/* 🔹 Avatar and TalkingBubble over it */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
