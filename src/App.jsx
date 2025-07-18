@@ -8,7 +8,6 @@ import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 import useScrollAnimation from "./utils/useScrollAnimation";
 
-// Lazy-loaded sections
 const About = lazy(() => import("./sections/About"));
 const Contact = lazy(() => import("./sections/Contact"));
 const Footer = lazy(() => import("./sections/Footer"));
@@ -19,15 +18,12 @@ const Projects = lazy(() => import("./sections/Projects"));
 const Experience = lazy(() => import("./sections/Experience"));
 const TechParallax = lazy(() => import("./ui/TechParallax"));
 
-// 🗣 Avatar Speaker component
-import AvatarSpeaker from "./components/TalkingAvatar";
-
 function App() {
   const [loading, setLoading] = useState(true);
   useScrollAnimation();
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000); // splash screen delay
+    const timer = setTimeout(() => setLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -39,8 +35,6 @@ function App() {
           <SmoothScroll>
             <SplashCursor />
             <Wheel />
-
-            {/* 🔄 Main site content */}
             <div
               className={
                 loading
@@ -49,24 +43,18 @@ function App() {
               }
             >
               <Suspense fallback={<Loader />}>
-                <div className="App">
-                  <header id="header">
-                    <Header /> <AvatarSpeaker />
-                  </header>
-
-                  <About />
-                  <TechParallax />
-                  <Skills />
-                  <Projects />
-                  <Experience />
-                  <Personal />
-                  <Contact />
-                  <Footer />
-                </div>
+                <Header />
+                <About />
+                <TechParallax />
+                <Skills />
+                <Projects />
+                <Experience />
+                <Personal />
+                <Contact />
+                <Footer />
               </Suspense>
             </div>
 
-            {/* ⏳ Splash Loader */}
             {loading && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
                 <Loader />
