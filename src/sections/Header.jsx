@@ -9,13 +9,13 @@ import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useScrollAnimation from "../utils/useScrollAnimation";
+import useModernScrollReveal from "../utils/useModernScrollReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const speechText = `Hi, I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
 export default function Header() {
-  useScrollAnimation();
   const resumeUrl = getResumeLink();
   const [showNavbar, setShowNavbar] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
