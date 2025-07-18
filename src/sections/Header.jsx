@@ -68,7 +68,7 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="bg-grid-pattern relative h-screen w-full font-cinzel text-white  bg-[#261a4c]"
+      className="bg-grid-pattern relative h-screen w-full font-cinzel text-white  bg-[#4b2ea5]"
     >
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
 
