@@ -99,8 +99,14 @@ Spin the Sudarshan chakra to know more about my journey!`;
       >
         <div
           className="relative w-fit h-fit"
-          onMouseEnter={() => setShowBubble(true)}
-          onMouseLeave={() => setShowBubble(false)}
+          onMouseEnter={() => {
+            setShowBubble(true);
+            speakText(); // 🔊 trigger voice
+          }}
+          onMouseLeave={() => {
+            setShowBubble(false);
+            window.speechSynthesis.cancel(); // 🛑 stop if user leaves early
+          }}
         >
           <img
             src={avatar}
