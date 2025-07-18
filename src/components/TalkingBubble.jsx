@@ -3,25 +3,17 @@ import { useEffect, useState } from "react";
 
 export default function TalkingBubble({ message }) {
   const [displayedText, setDisplayedText] = useState("");
-
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
-      setDisplayedText(message.slice(0, i));
-      i++;
-      if (i > message.length) clearInterval(interval);
-    }, 50);
-
-    const utterance = new SpeechSynthesisUtterance(message);
-    utterance.lang = "en-US";
-    utterance.rate = 1;
-    speechSynthesis.cancel();
-    speechSynthesis.speak(utterance);
-
-    return () => {
-      clearInterval(interval);
-      speechSynthesis.cancel();
-    };
+      if (i < message.length) {
+        setDisplayedText((prev) => prev + message[i]);
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 50); // 50ms per letter
+    return () => clearInterval(interval);
   }, [message]);
 
   return (
