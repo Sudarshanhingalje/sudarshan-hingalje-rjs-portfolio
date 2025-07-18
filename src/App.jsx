@@ -35,7 +35,7 @@ function App() {
         <ErrorBoundary>
           <SmoothScroll>
             <SplashCursor />
-            {<MusicToggleButton />}
+
             <Wheel />
             <div
               className={
