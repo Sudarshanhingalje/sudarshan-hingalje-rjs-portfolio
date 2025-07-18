@@ -1,57 +1,81 @@
-import { useEffect, useState } from "react";
+// ✅ Updated TalkingAvatar.jsx
+import { useEffect, useRef, useState } from "react";
 import avatarImg from "../assets/yoga.svg";
 import "../styles/index.css";
 
-const messages = [
-  "Hello! I'm your assistant.",
-  "I can help you with anything.",
-  "Just ask and I’ll be here.",
-  "Keep going! You're doing great.",
-];
+const message = "Hello! I'm Sudarshan Hingalje, a Full Stack Developer.";
 
 const TalkingAvatar = () => {
-  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const hasSpoken = useRef(false);
+  const avatarRef = useRef(null);
+  const synthRef = useRef(window.speechSynthesis);
 
   // Typing Effect
   useEffect(() => {
-    const message = messages[currentMessageIndex];
-    let charIndex = 0;
-    setDisplayedText("");
-    const typeInterval = setInterval(() => {
-      setDisplayedText((prev) => prev + message[charIndex]);
-      charIndex++;
-      if (charIndex >= message.length) {
-        clearInterval(typeInterval);
-      }
-    }, 60);
+    let observer;
+    let typingInterval;
+    let utterance;
 
-    return () => clearInterval(typeInterval);
-  }, [currentMessageIndex]);
+    const handleSpeak = () => {
+      if (hasSpoken.current || synthRef.current.speaking) return;
 
-  // SpeechSynthesis + Avatar Talk
-  useEffect(() => {
-    const utterance = new SpeechSynthesisUtterance(
-      messages[currentMessageIndex]
-    );
-    utterance.lang = "en-US";
-    utterance.rate = 1;
+      hasSpoken.current = true;
+      utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = "en-US";
+      utterance.rate = 1;
 
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => {
-      setIsSpeaking(false);
-      setTimeout(() => {
-        setCurrentMessageIndex((prev) => (prev + 1) % messages.length);
-      }, 1000); // 1s pause between messages
+      utterance.onstart = () => {
+        setIsSpeaking(true);
+        let index = 0;
+        setDisplayedText("");
+        typingInterval = setInterval(() => {
+          setDisplayedText((prev) => prev + message[index]);
+          index++;
+          if (index >= message.length) clearInterval(typingInterval);
+        }, 50);
+      };
+
+      utterance.onend = () => {
+        setIsSpeaking(false);
+        clearInterval(typingInterval);
+      };
+
+      synthRef.current.cancel();
+      synthRef.current.speak(utterance);
     };
 
-    speechSynthesis.cancel(); // Clear previous speech
-    speechSynthesis.speak(utterance);
-  }, [currentMessageIndex]);
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          handleSpeak();
+        }
+      },
+      { threshold: 0.6 }
+    );
+
+    if (avatarRef.current) {
+      observer.observe(avatarRef.current);
+    }
+
+    const stopSpeaking = () => {
+      if (synthRef.current.speaking) synthRef.current.cancel();
+      setIsSpeaking(false);
+      hasSpoken.current = true;
+    };
+
+    window.addEventListener("scroll", stopSpeaking);
+
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("scroll", stopSpeaking);
+      if (synthRef.current.speaking) synthRef.current.cancel();
+    };
+  }, []);
 
   return (
-    <div className="relative flex flex-col items-center mt-10">
+    <div className="relative flex flex-col items-center mt-4" ref={avatarRef}>
       <img
         src={avatarImg}
         alt="avatar"
@@ -59,10 +83,12 @@ const TalkingAvatar = () => {
           isSpeaking ? "animate-talk scale-105" : ""
         }`}
       />
-      <div className="mt-4 px-4 py-2 rounded-lg bg-white text-black shadow-md max-w-xs text-center text-sm">
-        {displayedText}
-        <span className="blinking-cursor">|</span>
-      </div>
+      {isSpeaking && (
+        <div className="mt-2 px-4 py-2 rounded-lg bg-white text-black shadow-md max-w-xs text-center text-sm">
+          {displayedText}
+          <span className="blinking-cursor">|</span>
+        </div>
+      )}
     </div>
   );
 };
