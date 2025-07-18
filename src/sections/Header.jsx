@@ -87,7 +87,7 @@ export default function Header() {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 10, ease: "easeOut" }}
+        transition={{ delay: 2, duration: 1.2, ease: "easeOut" }}
         className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10"
       >
         <div
