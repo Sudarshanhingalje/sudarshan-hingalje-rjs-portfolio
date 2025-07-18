@@ -1,6 +1,5 @@
 // ✅ Updated TalkingAvatar.jsx
 import { useEffect, useRef, useState } from "react";
-import avatarImg from "../assets/yoga.svg";
 import "../styles/index.css";
 
 const message = "Hello! I'm Sudarshan Hingalje, a Full Stack Developer.";
@@ -76,13 +75,6 @@ const TalkingAvatar = () => {
 
   return (
     <div className="relative flex flex-col items-center mt-4" ref={avatarRef}>
-      <img
-        src={avatarImg}
-        alt="avatar"
-        className={`w-32 h-32 object-cover rounded-full transition-transform duration-300 ${
-          isSpeaking ? "animate-talk scale-105" : ""
-        }`}
-      />
       {isSpeaking && (
         <div className="mt-2 px-4 py-2 rounded-lg bg-white text-black shadow-md max-w-xs text-center text-sm">
           {displayedText}
