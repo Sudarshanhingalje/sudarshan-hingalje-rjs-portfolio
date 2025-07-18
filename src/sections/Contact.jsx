@@ -4,6 +4,8 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
