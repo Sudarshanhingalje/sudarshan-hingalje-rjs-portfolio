@@ -8,9 +8,9 @@ import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
-import useScrollAnimation from "../utils/useScrollAnimation";
-import useModernScrollReveal from "../utils/useModernScrollReveal";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
+useModernScrollReveal();
 gsap.registerPlugin(ScrollTrigger);
 
 const speechText = `Hi, I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
