@@ -12,8 +12,7 @@ import useScrollAnimation from "../utils/useScrollAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const speechText = `Hello,my name is Sudarshan ,my codeWord is paradox, a Full Stack Developer,Lets 
-Spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
+const speechText = `Hi, I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
 const speakText = () => {
   const synth = window.speechSynthesis;
