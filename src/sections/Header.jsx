@@ -84,12 +84,11 @@ export default function Header() {
         </div>
       </motion.div>
 
-      {/* ✅ Avatar with hover-to-speak logic */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 1.2, ease: "easeOut" }}
-        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"
+        transition={{ delay: 2, duration: 3, ease: "easeOut" }}
+        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10"
       >
         <div
           className="relative w-fit h-fit"
