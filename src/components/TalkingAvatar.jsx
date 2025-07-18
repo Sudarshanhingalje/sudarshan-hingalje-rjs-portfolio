@@ -20,7 +20,7 @@ const AvatarSpeaker = () => {
       setShowBubble(true);
 
       // Hide bubble after 5 seconds
-      setTimeout(() => setShowBubble(false), 5000);
+      setTimeout(() => setShowBubble(false), 7000);
 
       setHasSpoken(true);
     }
