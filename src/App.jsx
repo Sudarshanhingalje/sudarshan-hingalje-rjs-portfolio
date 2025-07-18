@@ -51,8 +51,7 @@ function App() {
               <Suspense fallback={<Loader />}>
                 <div className="App">
                   <header id="header">
-                    <Header />
-                    {!loading && <AvatarSpeaker />}
+                    <Header /> <AvatarSpeaker />
                   </header>
 
                   <About />
