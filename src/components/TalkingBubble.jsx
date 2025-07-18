@@ -10,7 +10,7 @@ export default function TalkingBubble({ message }) {
       setDisplayedText((prev) => prev + message[i]);
       i++;
       if (i >= message.length) clearInterval(interval);
-    }, 40); // typing speed
+    }, 100); // typing speed
 
     return () => clearInterval(interval);
   }, [message]);
