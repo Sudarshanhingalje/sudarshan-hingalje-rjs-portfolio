@@ -1,62 +1,26 @@
-// import { useEffect, useState } from "react";
-// import avatarImg from "../assets/yoga.svg";
+import "./Avatar.css"; // for CSS animation
 
-// const Avatar = () => {
-//   const [showBubble, setShowBubble] = useState(false);
-//   const [showArrow, setShowArrow] = useState(false);
-
-//   const prompt =
-//     "Hello, I’m Sudarshan. A Full Stack Developer. Spin the Sudarshan Chakra to explore my journey through coding, learning, and life!";
-
-//   const speak = () => {
-//     const synth = window.speechSynthesis;
-//     const utter = new SpeechSynthesisUtterance(prompt);
-
-//     const voices = synth.getVoices();
-//     const preferredVoice = voices.find(
-//       (v) => v.name.includes("Google") || v.lang === "en-US"
-//     );
-//     if (preferredVoice) utter.voice = preferredVoice;
-
-//     utter.rate = 1;
-//     utter.pitch = 1;
-//     synth.cancel(); // Cancel ongoing speech
-//     synth.speak(utter);
-//   };
-
-//   // Speak + show arrow on hover
-//   useEffect(() => {
-//     if (showBubble) {
-//       speak();
-//       setShowArrow(true);
-//       const timeout = setTimeout(() => setShowArrow(false), 1000); // hide arrow after 1s
-//       return () => clearTimeout(timeout);
-//     }
-//   }, [showBubble]);
-
-//   return (
-//     <div
-//       className="relative w-fit group"
-//       onMouseEnter={() => setShowBubble(true)}
-//       onMouseLeave={() => setShowBubble(false)}
-//     >
-//       <img
-//         src={avatarImg}
-//         alt="Sudarshan Avatar"
-//         className="w-32 h-32 hover:animate-spin transition-transform duration-500"
-//       />
-
-//       {/* 💬 Bubble */}
-//       {showBubble && (
-//         <div className="absolute -top-12 left-32 bg-white text-black px-4 py-2 rounded-lg shadow-lg text-sm w-64 z-10">
-//           <div className="absolute -left-3 top-3 w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-white"></div>
-//           👋 Hi! I’m Sudarshan Hingalje, a Full Stack Developer.
-//           <br />
-//           <strong>Spin the Chakra to explore my journey!</strong>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Avatar;
+export default function Avatar() {
+  return (
+    <div className="relative w-[220px] h-auto">
+      <svg
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-full"
+      >
+        {/* Example avatar */}
+        <circle cx="100" cy="100" r="80" fill="#f3f3f3" />
+        <circle cx="70" cy="85" r="10" fill="#333" /> {/* Left eye */}
+        <circle cx="130" cy="85" r="10" fill="#333" /> {/* Right eye */}
+        <path
+          id="mouth"
+          d="M70 130 Q100 150 130 130"
+          stroke="#000"
+          strokeWidth="5"
+          fill="none"
+          className="animate-mouth"
+        />
+      </svg>
+    </div>
+  );
+}

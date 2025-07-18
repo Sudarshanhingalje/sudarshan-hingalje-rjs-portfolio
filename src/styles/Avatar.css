@@ -1,0 +1,13 @@
+@keyframes mouthMove {
+  0%,
+  100% {
+    d: path("M70 130 Q100 150 130 130"); /* normal */
+  }
+  50% {
+    d: path("M70 130 Q100 160 130 130"); /* open more */
+  }
+}
+
+.animate-mouth {
+  animation: mouthMove 1s infinite ease-in-out;
+}
