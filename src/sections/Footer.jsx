@@ -1,3 +1,4 @@
+// src/sections/Footer.jsx
 import { FaEnvelope, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import bgImage from "../assets/brand2.svg";
 
