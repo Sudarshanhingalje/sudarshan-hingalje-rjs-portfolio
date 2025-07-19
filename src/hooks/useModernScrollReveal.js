@@ -130,5 +130,6 @@ export default function useModernScrollReveal() {
 
     // Refresh ScrollTrigger after page load
     window.addEventListener("load", () => ScrollTrigger.refresh());
+    ScrollTrigger.refresh(true);
   }, []);
 }
