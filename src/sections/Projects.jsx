@@ -4,9 +4,10 @@ import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const Projects = () => {
   useModernScrollReveal();
+
   return (
-    <section id="projects" className="py-20 text-white">
-      <div className="project-card max-w-6xl mx-auto px-4">
+    <section id="projects" className="py-20 text-white border border-red-500">
+      <div className="max-w-6xl mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -16,7 +17,7 @@ const Projects = () => {
           My Projects
         </motion.h2>
 
-        <div className=" grid grid-cols-1 md:grid-cols-2 gap-10 bg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {projectsDone.map((project, index) => (
             <motion.div
               key={index}
