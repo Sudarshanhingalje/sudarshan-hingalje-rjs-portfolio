@@ -131,7 +131,7 @@ const JelloText = () => {
         ref={txtRef}
         className="text-[15vw] font-[600] tracking-[-1vw] leading-[0.6] text-white select-none shadow-jello"
       >
-        {"Jello".split("").map((char, i) => (
+        {"sudarshan hingalje PORTFOLIO".split("").map((char, i) => (
           <span
             key={i}
             className="inline-block cursor-pointer pt-[1.08vw]"
