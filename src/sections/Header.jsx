@@ -111,7 +111,7 @@ export default function Header() {
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 6.2, duration: 1.8, ease: "easeOut" }}
+        transition={{ delay: 1, duration: 1.8, ease: "easeOut" }}
         className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8 z-10"
       >
         <p
