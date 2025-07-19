@@ -18,7 +18,6 @@ export default function SmoothScroll({ children }) {
 
     return () => {
       lenis.destroy(); // clean up on unmount
-      lenis.on("scroll", ScrollTrigger.update);
     };
   }, []);
 
