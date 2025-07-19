@@ -1,6 +1,6 @@
 // src/sections/Personal.jsx
 import { motion } from "framer-motion";
-import { goals } from "../data/goals";
+import { goals } from "../data/goals/Goals";
 import useScrollAnimation from "../utils/useScrollAnimation";
 
 const Personal = () => {
