@@ -2,8 +2,6 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
-gsap.defaults({ ease: "none" });
-
 // Register plugin once
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
