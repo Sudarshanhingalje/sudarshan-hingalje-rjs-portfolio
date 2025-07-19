@@ -1,59 +1,42 @@
-// src/sections/Projects.jsx
 import { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
-
-// Dummy data (replace with your actual project list)
-const projects = [
-  {
-    title: "The Wild Oasis",
-    img: "/project/wild.png",
-    description:
-      "A full-stack hotel management app with customer-facing site using Next.js, Supabase, Framer Motion, Three.js.",
-    techImages: ["nextjs.svg", "tailwind.svg", "postgresql.svg"],
-    link: "https://wild-oasis.vercel.app",
-    github: "https://github.com/sudarshanhingalje/the-wild-oasis",
-  },
-  {
-    title: "Scrap Savvy",
-    img: "/project/scrap.png",
-    description:
-      "A waste management web app built with MERN stack that helps manage scrap pickups and delivery.",
-    techImages: ["react.svg", "nodejs.svg", "mongodb.svg"],
-    link: "https://scrap-savvy.vercel.app",
-    github: "https://github.com/sudarshanhingalje/scrap-savvy",
-  },
-  {
-    title: "Online Vegetable Store",
-    img: "/project/vege.png",
-    description:
-      "An e-commerce platform for fresh vegetables built using React, Express, and MongoDB with user authentication.",
-    techImages: ["react.svg", "express.svg", "mongodb.svg"],
-    link: "https://vegetable-store.vercel.app",
-    github: "https://github.com/sudarshanhingalje/vegetable-store",
-  },
-];
+import { projectsDone } from "../data/projects/ProjectDone";
 
 const Projects = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [active, setActive] = useState(null);
 
-  const handleClick = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
-  };
+  const activeProject = active !== null ? projectsDone[active] : null;
 
   return (
-    <section id="projects" className="p-4 sm:p-8 bg-gray-50">
-      <h2 className="text-2xl font-bold mb-6 text-center">My Projects</h2>
+    <section
+      id="projects"
+      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center"
+      style={{
+        backgroundImage: activeProject ? `url(${activeProject.img})` : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        transition: "background 0.5s ease-in-out",
+      }}
+    >
+      <div className="relative z-10 w-full max-w-7xl px-4 py-10  bg-opacity-70 rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold text-white text-center mb-8 uppercase">
+          Projects
+        </h2>
 
-      <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-        {projects.map((project, idx) => (
-          <ProjectCard
-            key={idx}
-            project={project}
-            isActive={idx === activeIndex}
-            onClick={() => handleClick(idx)}
-          />
-        ))}
+        <ul className="flex overflow-x-auto space-x-4 pb-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+          {projectsDone.map((project, i) => (
+            <ProjectCard
+              key={i}
+              project={project}
+              isActive={active === i}
+              onClick={() => setActive(active === i ? null : i)}
+            />
+          ))}
+        </ul>
       </div>
+
+      <div className="absolute inset-0 bg-black opacity-30"></div>
     </section>
   );
 };
