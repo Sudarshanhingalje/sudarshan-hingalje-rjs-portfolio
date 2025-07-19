@@ -4,17 +4,32 @@ import { Draggable } from "gsap/Draggable";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
 import { useEffect, useRef } from "react";
 
-gsap.registerPlugin(Draggable, InertiaPlugin);
+// Register GSAP plugins safely for browser
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Draggable, InertiaPlugin);
+}
 
 const CustomCursor = () => {
   const targetRef = useRef(null);
   const followerRefs = useRef([]);
 
   useEffect(() => {
-    // Init follower animation logic
-    function follower(target, duration) {
-      let xTo = gsap.quickTo(target, "x", { duration, ease: "back" }),
-        yTo = gsap.quickTo(target, "y", { duration, ease: "back" });
+    // Hide default cursor
+    document.body.style.cursor = "none";
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.cursor = "auto";
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!targetRef.current || followerRefs.current.some((el) => !el)) return;
+
+    // Function to create smooth follower movement
+    function createFollowerMotion(target, duration) {
+      const xTo = gsap.quickTo(target, "x", { duration, ease: "back.out" });
+      const yTo = gsap.quickTo(target, "y", { duration, ease: "back.out" });
       return (x, y) => {
         xTo(x);
         yTo(y);
@@ -24,49 +39,45 @@ const CustomCursor = () => {
     const followers = followerRefs.current
       .slice()
       .reverse()
-      .map((el, i) => follower(el, 0.25 + i * 0.1));
+      .map((el, i) => createFollowerMotion(el, 0.25 + i * 0.1));
 
-    // Create draggable cursor
-    Draggable.create(targetRef.current, {
+    // Draggable main cursor
+    const draggable = Draggable.create(targetRef.current, {
       bounds: window,
       inertia: true,
       onDrag: updateFollowers,
       onThrowUpdate: updateFollowers,
-    });
+    })[0];
 
     function updateFollowers() {
       const { x, y } = targetRef.current._gsap;
       followers.forEach((f) => f(x, y));
     }
 
-    // Hide default cursor
-    document.body.style.cursor = "none";
     return () => {
-      document.body.style.cursor = "auto";
+      draggable?.kill();
     };
   }, []);
 
   return (
     <>
       {/* Follower dots */}
-      <div
-        ref={(el) => (followerRefs.current[2] = el)}
-        className="fixed top-0 left-0 w-5 h-5 rounded-full bg-gradient-to-tr from-pink-300 to-purple-300 pointer-events-none z-[9998]"
-      ></div>
-      <div
-        ref={(el) => (followerRefs.current[1] = el)}
-        className="fixed top-0 left-0 w-4 h-4 rounded-full bg-gradient-to-tr from-pink-400 to-purple-400 pointer-events-none z-[9998]"
-      ></div>
-      <div
-        ref={(el) => (followerRefs.current[0] = el)}
-        className="fixed top-0 left-0 w-3 h-3 rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 pointer-events-none z-[9998]"
-      ></div>
+      {[5, 4, 3].map((size, index) => (
+        <div
+          key={index}
+          ref={(el) => (followerRefs.current[index] = el)}
+          className={`fixed top-0 left-0 w-${size} h-${size} rounded-full pointer-events-none z-[9998]`}
+          style={{
+            background: `linear-gradient(to top right, rgb(240, 113, 181), rgb(139, 92, 246))`,
+          }}
+        />
+      ))}
 
-      {/* Main draggable cursor */}
+      {/* Draggable target cursor */}
       <div
         ref={targetRef}
         id="target"
-        className="fixed top-0 left-0 w-8 h-8 rounded-full bg-gradient-to-tr from-pink-600 to-purple-600 mix-blend-difference shadow-xl z-[9999] pointer-events-none flex items-center justify-center text-white text-xs font-bold select-none"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full bg-gradient-to-tr from-pink-600 to-purple-600 mix-blend-difference shadow-xl z-[9999] pointer-events-none flex items-center justify-center text-white text-[10px] font-bold select-none"
       >
         DRAG
       </div>
