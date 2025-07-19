@@ -4,7 +4,7 @@ import bgImage from "../assets/brand2.svg";
 
 const Footer = () => {
   return (
-    <section id="footer">
+    <section>
       <footer className="flex flex-col items-center pb-10 text-white ">
         <p className="text-xs text-gray-400 py-4">
           {" "}
