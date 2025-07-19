@@ -2,12 +2,19 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
+const EXPANDED_HEIGHT = "h-[520px]";
+const COLLAPSED_HEIGHT = "h-[240px]";
+const IMAGE_EXPANDED = "h-[220px]";
+const IMAGE_COLLAPSED = "h-full";
+const INFO_EXPANDED_HEIGHT = "h-[300px]";
+const INFO_COLLAPSED_HEIGHT = "h-24";
+
 const ProjectCard = ({ project, isActive, onClick }) => {
   const contentRef = useRef(null);
 
   useEffect(() => {
     if (isActive && contentRef.current) {
-      contentRef.current.scrollTop = 0; // scroll to top when opening
+      contentRef.current.scrollTop = 0; // Scroll to top on expand
     }
   }, [isActive]);
 
@@ -16,25 +23,26 @@ const ProjectCard = ({ project, isActive, onClick }) => {
       onClick={onClick}
       layout
       transition={{ layout: { duration: 0.4, type: "spring" } }}
-      className={`relative w-full bg-white rounded-xl overflow-hidden shadow-xl cursor-pointer
-        ${
-          isActive ? "md:h-[480px] h-[500px]" : "md:h-[250px] h-[240px]"
-        } transition-all duration-500`}
+      className={`relative w-full rounded-xl overflow-hidden shadow-xl cursor-pointer bg-white
+        ${isActive ? EXPANDED_HEIGHT : COLLAPSED_HEIGHT}
+        transition-all duration-500 ease-in-out`}
     >
-      {/* Image */}
+      {/* Project Image */}
       <motion.img
         layout
         src={project.img}
         alt={project.title}
-        className={`absolute top-0 w-full object-cover transition-all duration-500
-          ${isActive ? "h-[200px]" : "h-full"}`}
+        className={`absolute top-0 w-full object-cover z-0 transition-all duration-500
+          ${isActive ? IMAGE_EXPANDED : IMAGE_COLLAPSED}`}
       />
 
-      {/* Content */}
+      {/* Info Section */}
       <motion.div
         layout
-        className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4
-          ${isActive ? "h-[280px]" : "h-24"} overflow-hidden`}
+        className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4 z-10
+          ${
+            isActive ? INFO_EXPANDED_HEIGHT : INFO_COLLAPSED_HEIGHT
+          } overflow-hidden`}
       >
         <h1 className="uppercase text-sm font-bold leading-tight truncate">
           {project.title}
@@ -44,15 +52,15 @@ const ProjectCard = ({ project, isActive, onClick }) => {
           {isActive ? (
             <motion.div
               key="expanded"
-              className="mt-2 overflow-y-auto max-h-[220px] pr-1"
-              ref={contentRef}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              className="mt-2"
+              ref={contentRef}
             >
               <p className="text-sm mt-2">{project.description}</p>
 
-              {/* Tech Stack Icons */}
+              {/* Tech Icons */}
               {project.techImages && (
                 <div className="flex flex-wrap gap-2 mt-3">
                   {project.techImages.map((icon, idx) => (
