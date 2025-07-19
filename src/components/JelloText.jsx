@@ -129,7 +129,7 @@ const JelloText = () => {
     <div className="w-full h-screen flex items-center justify-center bg-pink-300 font-jello overflow-hidden">
       <h1
         ref={txtRef}
-        className="text-[15vw] font-[600] tracking-[-1vw] leading-[0.6] text-white select-none shadow-jello"
+        className="text-[5vw] font-[200] tracking-[-1vw] leading-[0.6] text-white select-none shadow-jello"
       >
         {"sudarshan hingalje PORTFOLIO".split("").map((char, i) => (
           <span
