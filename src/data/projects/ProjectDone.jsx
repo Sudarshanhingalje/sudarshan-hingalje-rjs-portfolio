@@ -50,7 +50,7 @@ export const projectsDone = [
     title: "ScrapSavvy - Waste Management System",
     description:
       "A collaborative scrap collection platform. Users can schedule pickups, vendors manage listings. Built using Firebase for backend.",
-    img: "src/assets/project/scrapsavvy.png",
+    img: "/project/scrapsavvy.png",
     tech: ["HTML", "CSS", "JavaScript", "Firebase"],
     techImages: ["html.svg", "css.svg", "javascript.svg", "firebase.svg"],
     link: "https://the-wild-oasis-website-cabins.vercel.app/",
