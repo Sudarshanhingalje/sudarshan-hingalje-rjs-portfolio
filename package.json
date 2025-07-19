@@ -25,7 +25,8 @@
     "react-intersection-observer": "^9.16.0",
     "react-parallax-tilt": "^1.7.300",
     "react-router-dom": "^7.6.3",
-    "simple-git": "^3.28.0"
+    "simple-git": "^3.28.0",
+    "split-type": "^0.3.4"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.3",
