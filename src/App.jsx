@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import Loader from "./components/Loader";
+import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
 import Wheel from "./components/Wheel";
@@ -46,7 +46,7 @@ function App() {
                     : "blur-0 transition-all duration-500"
                 }
               >
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={<JelloText />}>
                   <Header />
 
                   <About />
@@ -63,7 +63,7 @@ function App() {
 
               {loading && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
-                  <Loader />
+                  <JelloText />
                 </div>
               )}
             </SmoothScroll>
