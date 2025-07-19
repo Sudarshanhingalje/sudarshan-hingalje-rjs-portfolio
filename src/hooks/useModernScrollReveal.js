@@ -2,7 +2,6 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
-// Register plugin once
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
@@ -24,7 +23,7 @@ export default function useModernScrollReveal() {
       },
     });
 
-    // ✅ About avatar parallax effect
+    // ✅ About avatar parallax
     gsap.to("#about .about-avatar", {
       yPercent: -20,
       scrollTrigger: {
@@ -35,7 +34,7 @@ export default function useModernScrollReveal() {
       },
     });
 
-    // ✅ Skills reveal animation
+    // ✅ Skills animation
     gsap.utils.toArray(".skill-card").forEach((el, i) => {
       gsap.fromTo(
         el,
@@ -55,7 +54,7 @@ export default function useModernScrollReveal() {
       );
     });
 
-    // ✅ Projects zoom-in animation
+    // ✅ Projects animation
     gsap.utils.toArray("#projects .project-card").forEach((card, i) => {
       gsap.from(card, {
         scale: 0.8,
@@ -71,7 +70,7 @@ export default function useModernScrollReveal() {
       });
     });
 
-    // ✅ Experience timeline animation
+    // ✅ Experience animation
     gsap.utils.toArray("#experience .timeline-item").forEach((item, i) => {
       gsap.from(item, {
         x: i % 2 === 0 ? -100 : 100,
@@ -86,8 +85,8 @@ export default function useModernScrollReveal() {
       });
     });
 
-    // ✅ Personal goals stagger in
-    gsap.utils.toArray("#personal ").forEach((card, i) => {
+    // ✅ Personal goals animation (fixed!)
+    gsap.utils.toArray("#personal .goal-card").forEach((card, i) => {
       gsap.from(card, {
         opacity: 0,
         y: 40,
@@ -101,18 +100,8 @@ export default function useModernScrollReveal() {
         },
       });
     });
-    gsap.from(".goal-card", {
-      scrollTrigger: {
-        trigger: "#personal",
-        start: "top 80%",
-      },
-      y: 60,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2,
-      ease: "power3.out",
-    });
-    // ✅ Contact section form animation
+
+    // ✅ Contact form animation
     gsap.from("#contact .contact-form", {
       y: 60,
       opacity: 0,
@@ -138,7 +127,7 @@ export default function useModernScrollReveal() {
       },
     });
 
-    // Refresh ScrollTrigger after page load
+    // ✅ Refresh triggers
     window.addEventListener("load", () => ScrollTrigger.refresh());
     ScrollTrigger.refresh(true);
   }, []);
