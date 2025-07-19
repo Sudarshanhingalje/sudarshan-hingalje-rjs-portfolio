@@ -8,6 +8,12 @@ body,
   height: 100%;
 }
 
+@layer utilities {
+  .font-krona {
+    font-family: "Krona One", sans-serif;
+  }
+}
+
 @keyframes talk {
   0%,
   100% {
