@@ -1,4 +1,4 @@
-import project1 from "../assets/project1.png"; // your images
+import project1 from "../assets/brand.svg"; // your images
 import ProjectCard from "../components/ProjectCard";
 
 const Projects = () => {
