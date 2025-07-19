@@ -7,6 +7,7 @@ import SplitType from "split-type";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
 import { getResumeLink } from "../data/Resume/getResumeLink";
+import useScrollAnimation from "../utils/useScrollAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +15,7 @@ const Header = () => {
   const [resumeLink, setResumeLink] = useState(null);
   const textRef = useRef(null);
 
-  // your custom hook
+  useScrollAnimation(); // your custom hook
 
   useEffect(() => {
     const fetchResume = async () => {
