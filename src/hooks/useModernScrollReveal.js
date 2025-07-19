@@ -10,7 +10,7 @@ export default function useModernScrollReveal() {
   useEffect(() => {
     ScrollTrigger.getAll().forEach((t) => t.kill());
 
-    // ✅ Header hides on scroll
+    // Header hides on scroll
     gsap.to("#header", {
       y: -100,
       opacity: 0,
@@ -23,7 +23,7 @@ export default function useModernScrollReveal() {
       },
     });
 
-    // ✅ About avatar parallax
+    // About avatar parallax
     gsap.to("#about .about-avatar", {
       yPercent: -20,
       scrollTrigger: {
@@ -34,7 +34,7 @@ export default function useModernScrollReveal() {
       },
     });
 
-    // ✅ Skills animation
+    // Skills animation
     gsap.utils.toArray(".skill-card").forEach((el, i) => {
       gsap.fromTo(
         el,
@@ -54,7 +54,7 @@ export default function useModernScrollReveal() {
       );
     });
 
-    // ✅ Projects animation
+    // Projects animation
     gsap.utils.toArray("#projects .project-card").forEach((card, i) => {
       gsap.from(card, {
         scale: 0.8,
@@ -70,7 +70,7 @@ export default function useModernScrollReveal() {
       });
     });
 
-    // ✅ Experience animation
+    // Experience animation
     gsap.utils.toArray("#experience .timeline-item").forEach((item, i) => {
       gsap.from(item, {
         x: i % 2 === 0 ? -100 : 100,
@@ -85,7 +85,7 @@ export default function useModernScrollReveal() {
       });
     });
 
-    // ✅ Personal goals animation (fixed!)
+    // Personal goals animation
     gsap.utils.toArray("#personal .goal-card").forEach((card, i) => {
       gsap.from(card, {
         opacity: 0,
@@ -101,7 +101,7 @@ export default function useModernScrollReveal() {
       });
     });
 
-    // ✅ Contact form animation
+    // Contact form animation
     gsap.from("#contact .contact-form", {
       y: 60,
       opacity: 0,
@@ -114,21 +114,23 @@ export default function useModernScrollReveal() {
       },
     });
 
-    // ✅ Footer fade-in
-    gsap.from("#footer", {
-      y: 50,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#footer",
-        start: "top bottom",
-        toggleActions: "play none none reverse",
-      },
+    // Footer animation – wait until after layout
+    requestAnimationFrame(() => {
+      gsap.from("#footer", {
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#footer",
+          start: "top bottom",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      ScrollTrigger.refresh(); // force all trigger points to re-calculate
     });
 
-    // ✅ Refresh triggers
     window.addEventListener("load", () => ScrollTrigger.refresh());
-    ScrollTrigger.refresh(true);
   }, []);
 }
