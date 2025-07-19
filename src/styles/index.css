@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .font-krona {
-    font-family: "Krona One", sans-serif;
-  }
+html,
+body,
+#root {
+  height: 100%;
 }
 
 @keyframes talk {
