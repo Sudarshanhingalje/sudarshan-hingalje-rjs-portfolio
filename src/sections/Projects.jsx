@@ -19,7 +19,7 @@ const Projects = () => {
         transition: "background 0.5s ease-in-out",
       }}
     >
-      <div className="relative z-10 w-full max-w-7xl px-4 py-10 bg-black bg-opacity-70 rounded-xl shadow-lg">
+      <div className="relative z-10 w-full max-w-7xl px-4 py-10  bg-opacity-70 rounded-xl shadow-lg">
         <h2 className="text-3xl font-bold text-white text-center mb-8 uppercase">
           Projects
         </h2>
