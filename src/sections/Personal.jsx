@@ -1,6 +1,6 @@
 // src/sections/Personal.jsx
 import { goals } from "../data/goals/Goals";
-
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 const Personal = () => {
   // Hook to trigger animations
   useModernScrollReveal();
