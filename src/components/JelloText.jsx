@@ -35,7 +35,7 @@ const JelloText = () => {
     setCharHeight(txtRef.current.offsetHeight);
 
     gsap.from(charRefs.current, {
-      y: -1 * (rect.y + rect.height + 1000),
+      y: -1 * (rect.y + rect.height + 500),
       fontWeight: weightTarget,
       fontStretch: stretchTarget,
       scaleY: 2,
@@ -103,7 +103,7 @@ const JelloText = () => {
         return Math.max(scale, 0.5);
       },
       ease: "power4",
-      duration: 0.6,
+      duration: 2,
     });
   };
 
