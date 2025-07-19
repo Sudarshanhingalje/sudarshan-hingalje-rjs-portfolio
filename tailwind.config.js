@@ -8,6 +8,8 @@ export default {
         poppins: ["Poppins", "sans-serif"],
         inter: ["Inter", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
+
+        jello: ["GT-Flexa", "sans-serif"],
       },
       colors: {
         neutral: {
