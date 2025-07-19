@@ -126,7 +126,7 @@ const JelloText = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-pink-300 font-jello overflow-hidden">
+    <div className="w-full h-screen flex items-center justify-center bg-blur font-jello overflow-hidden">
       <h1
         ref={txtRef}
         className="text-[5vw] font-[200] tracking-[-1vw] leading-[0.6] text-white select-none shadow-jello"
