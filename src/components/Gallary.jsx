@@ -1,10 +1,10 @@
 // src/components/Gallery.jsx
-import React, { useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import imagesLoaded from "imagesloaded";
+import { useEffect } from "react";
 
-import "./gallery.css";
+import "../styles/global.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
