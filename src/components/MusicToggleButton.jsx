@@ -1,25 +1,24 @@
 // src/components/MusicToggleButton.jsx
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { FcMusic } from "react-icons/fc";
 import { HiMiniMusicalNote } from "react-icons/hi2";
 
 export default function MusicToggleButton() {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false); // default is false (off)
   const audioRef = useRef(null);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) {
-      audio.volume = 0.6;
-      audio.play().catch((err) => {
-        console.warn("Autoplay blocked:", err);
-      });
-    }
-  }, []);
 
   const toggleMusic = () => {
     if (!audioRef.current) return;
-    isPlaying ? audioRef.current.pause() : audioRef.current.play();
+
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.volume = 0.6;
+      audioRef.current.play().catch((err) => {
+        console.warn("Play blocked:", err);
+      });
+    }
+
     setIsPlaying(!isPlaying);
   };
 
