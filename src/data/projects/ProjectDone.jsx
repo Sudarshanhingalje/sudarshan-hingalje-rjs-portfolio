@@ -16,7 +16,7 @@ export const projectsDone = [
     title: "Fast React Pizza",
     description:
       "Modern pizza ordering app built with React, Redux Toolkit and Tailwind CSS.",
-    img: "src/assets/project/pizzastore.png",
+    img: "src/assets/project/fastreactpizza.png",
   },
   {
     title: "ScrapSavvy Waste Platform",
