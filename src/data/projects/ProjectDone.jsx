@@ -3,7 +3,7 @@ export const projectsDone = [
     title: "The Wild Oasis (Cabin Booking App)",
     description:
       "A full-stack hotel booking platform with both admin and customer interfaces. Built using React, Supabase, styled-components, and React Query.",
-    img: "src/assets/project/thewildoasiswebsite.png",
+    img: "/project/thewildoasiswebsite.png",
     tech: [
       "React",
       "Supabase",
@@ -25,7 +25,7 @@ export const projectsDone = [
     title: "The Wild Oasis (Admin Dashboard)",
     description:
       "Admin panel for managing cabin bookings, users, and availability with charts and filters. Developed using React and Supabase.",
-    img: "src/assets/project/thewildoasis.png",
+    img: "/project/thewildoasis.png",
     tech: ["React", "Supabase", "React Query", "Styled-components"],
     techImages: [
       "reactjs.svg",
@@ -40,7 +40,7 @@ export const projectsDone = [
     title: "Fast React Pizza (Redux E-commerce)",
     description:
       "A modern pizza ordering app built with React and Redux Toolkit. Features real-time cart, checkout, and dynamic UI with Tailwind CSS.",
-    img: "src/assets/project/fastreactpizza.png",
+    img: "/project/fastreactpizza.png",
     tech: ["React", "Redux Toolkit", "Tailwind CSS"],
     techImages: ["reactjs.svg", "redux.svg", "tailwind.svg"],
     link: "https://redux-fast-react-pizza.netlify.app/",
@@ -60,7 +60,7 @@ export const projectsDone = [
     title: "Pizza Delivery Application",
     description:
       "A full-featured pizza ordering system with real-time cart updates, authentication, Razorpay payment integration, and MongoDB database. Includes REST API, Axios, Redux, and React Router. Watch demo: https://youtu.be/ynnvcnA_rqg?si=MsRwBd-RGUaKEeX0",
-    img: "src/assets/project/pizzastore.png",
+    img: "/project/pizzastore.png",
     tech: [
       "React",
       "Redux",
