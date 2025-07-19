@@ -1,4 +1,4 @@
-import { goals } from "../data/goals/Goals"; // ✅ lowercase file name
+import { goals } from "../data/goals/Goals";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 export default function Personal() {
