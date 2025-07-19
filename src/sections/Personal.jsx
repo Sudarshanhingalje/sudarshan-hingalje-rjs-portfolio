@@ -26,7 +26,7 @@ export default function Personal() {
   useModernScrollReveal();
   return (
     <section id="personal" className="py-20 px-6 sm:px-12 lg:px-20 text-white">
-      <div className="goal-card max-w-7xl mx-auto text-center">
+      <div className="max-w-7xl mx-auto text-center">
         <p className="mb-4 text-sm font-semibold text-cyan-400 border border-cyan-400 px-4 py-1 inline-block rounded-full">
           My Roadmap
         </p>
@@ -36,7 +36,7 @@ export default function Personal() {
           {goals.map((goal, index) => (
             <div
               key={index}
-              className="bg-[#121212] border border-gray-700 rounded-2xl p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="goal-card bg-[#121212] border border-gray-700 rounded-2xl p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <div className="mb-4">{goal.icon}</div>
               <h3 className="text-xl font-semibold mb-3">{goal.title}</h3>
