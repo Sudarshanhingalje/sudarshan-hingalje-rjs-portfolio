@@ -4,26 +4,25 @@ import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const Footer = () => {
   useModernScrollReveal();
+
   return (
-    <footer
-      id="footer"
-      className="flex flex-col items-center pb-10 text-white "
-    >
-      <p className="text-xs text-gray-400 py-4"> Made with ❤️React Js+vite</p>
+    <footer id="footer" className="flex flex-col items-center pb-10 text-white">
+      <p className="text-xs text-gray-400 py-4"> Made with ❤️ React Js+Vite</p>
       Sudarshan Hingalje © 2025
       <div className="my-4">
         <button
-          onClick={() => {
+          onClick={() =>
             window.scrollTo({
               top: 0,
-            });
-          }}
+              behavior: "smooth",
+            })
+          }
           className="focus:outline-none"
         >
           <img
             src={bgImage}
             alt="Logo"
-            className="h-20 md:h-20  w-full object-contain cursor-pointer"
+            className="h-20 md:h-20 w-full object-contain cursor-pointer"
           />
         </button>
       </div>
@@ -32,6 +31,7 @@ const Footer = () => {
           <a
             href="https://www.linkedin.com/in/sudarshanhingalje"
             target="_blank"
+            rel="noopener noreferrer"
             className="hover:text-white"
           >
             <FaLinkedin />
