@@ -1,32 +1,34 @@
-import { goals } from "../data/goals/Goals";
-import useModernScrollReveal from "../hooks/useModernScrollReveal";
+// src/sections/Personal.jsx
+import { motion } from "framer-motion";
+import { goals } from "../data/goals";
+import useScrollAnimation from "../utils/useScrollAnimation";
 
-export default function Personal() {
-  useModernScrollReveal();
+const Personal = () => {
+  useScrollAnimation(); // ✅ Apply scroll animations
 
   return (
-    <section id="personal" className="py-20 px-6 sm:px-12 lg:px-20 text-white">
-      <div className="max-w-7xl mx-auto text-center">
-        <p className="mb-4 text-sm font-semibold text-cyan-400 border border-cyan-400 px-4 py-1 inline-block rounded-full">
-          My Roadmap
-        </p>
-        <h2 className="text-4xl sm:text-5xl font-bold mb-12">Career Goals</h2>
-
-        <div className="grid md:grid-cols-3 gap-8">
+    <section id="personal" className="py-20 bg-gray-900 text-white">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-12">Personal Goals</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {goals.map((goal, index) => (
-            <div
+            <motion.div
               key={index}
-              className="goal-card bg-[#121212] border border-gray-700 rounded-2xl p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="goal-card p-6 rounded-2xl shadow-lg bg-gradient-to-br from-gray-800 to-gray-700 border border-teal-500"
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
             >
               <div className="mb-4">{goal.icon}</div>
-              <h3 className="text-xl font-semibold mb-3">{goal.title}</h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                {goal.description}
-              </p>
-            </div>
+              <h3 className="text-xl font-semibold mb-2">{goal.title}</h3>
+              <p className="text-gray-300">{goal.description}</p>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Personal;
