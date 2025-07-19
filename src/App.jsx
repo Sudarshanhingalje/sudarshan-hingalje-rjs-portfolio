@@ -27,7 +27,7 @@ function App() {
   }, []);
 
   return (
-    <div className="dark">
+    <div className="overflow-hidden">
       <Main>
         <Toaster position="top-right" reverseOrder={false} />
         <div className="fixed top-4 right-4 mt-4 ml-auto mr-4 z-50">
