@@ -1,4 +1,4 @@
-const goals = [
+export const goals = [
   {
     title: "Short-Term Goal",
     icon: <FaRocket size={24} className="text-teal-400" />,
@@ -18,5 +18,3 @@ const goals = [
       "To become a technical lead or solutions architect, guiding technical strategy, driving innovation in user experience, and making a significant impact on the products and teams I help create.",
   },
 ];
-
-export default goals;
