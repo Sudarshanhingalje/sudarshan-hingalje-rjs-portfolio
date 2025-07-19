@@ -1,6 +1,6 @@
 import Lenis from "@studio-freight/lenis";
 import { useEffect } from "react";
-import "./styles/SmoothScroll.css";
+import "/src/styles/ScrollSnapping.css";
 
 export default function SmoothScroll({ children }) {
   useEffect(() => {
