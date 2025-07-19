@@ -92,7 +92,11 @@ const Contact = () => {
           </h1>
         </div>
 
-        <form ref={formRef} onSubmit={handleSubmit} className=" space-y-6">
+        <form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          className=" space-y-6 confim-form"
+        >
           <div>
             <label className="block text-sm font-medium mb-1">Reason</label>
             <select
