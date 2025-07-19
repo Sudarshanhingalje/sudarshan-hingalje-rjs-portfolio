@@ -131,13 +131,15 @@ const JelloText = () => {
         ref={txtRef}
         className="text-[5vw] font-[200] tracking-[-1vw] leading-[0.6] text-white select-none shadow-jello"
       >
-        {"sudarshan hingalje PORTFOLIO".split("").map((char, i) => (
+        {"sudarshan  PORTFOLIO".split("").map((char, i) => (
           <span
             key={i}
-            className="inline-block cursor-pointer pt-[1.08vw]"
+            className={`inline-block cursor-pointer pt-[1.08vw] ${
+              char === " " ? "w-[1vw]" : ""
+            }`}
             onMouseDown={(e) => handleMouseDown(i, e)}
           >
-            {char}
+            {char === " " ? "\u00A0" : char}
           </span>
         ))}
       </h1>
