@@ -14,7 +14,7 @@ const ProjectCard = ({ project, isActive, onClick }) => {
 
   useEffect(() => {
     if (isActive && contentRef.current) {
-      contentRef.current.scrollTop = 0; // Scroll to top on expand
+      contentRef.current.scrollTop = 0;
     }
   }, [isActive]);
 
@@ -23,11 +23,11 @@ const ProjectCard = ({ project, isActive, onClick }) => {
       onClick={onClick}
       layout
       transition={{ layout: { duration: 0.4, type: "spring" } }}
-      className={`relative w-full rounded-xl overflow-hidden shadow-xl cursor-pointer bg-white
-        ${isActive ? EXPANDED_HEIGHT : COLLAPSED_HEIGHT}
-        transition-all duration-500 ease-in-out`}
+      className={`relative bg-white rounded-xl overflow-hidden shadow-xl cursor-pointer
+        transition-all duration-500 ease-in-out w-full
+        ${isActive ? EXPANDED_HEIGHT : COLLAPSED_HEIGHT}`}
     >
-      {/* Project Image */}
+      {/* Image */}
       <motion.img
         layout
         src={project.img}
@@ -36,7 +36,7 @@ const ProjectCard = ({ project, isActive, onClick }) => {
           ${isActive ? IMAGE_EXPANDED : IMAGE_COLLAPSED}`}
       />
 
-      {/* Info Section */}
+      {/* Info */}
       <motion.div
         layout
         className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4 z-10
@@ -60,7 +60,6 @@ const ProjectCard = ({ project, isActive, onClick }) => {
             >
               <p className="text-sm mt-2">{project.description}</p>
 
-              {/* Tech Icons */}
               {project.techImages && (
                 <div className="flex flex-wrap gap-2 mt-3">
                   {project.techImages.map((icon, idx) => (
@@ -75,7 +74,6 @@ const ProjectCard = ({ project, isActive, onClick }) => {
                 </div>
               )}
 
-              {/* Links */}
               <div className="mt-3 flex flex-wrap gap-4 text-xs">
                 {project.link && (
                   <a
