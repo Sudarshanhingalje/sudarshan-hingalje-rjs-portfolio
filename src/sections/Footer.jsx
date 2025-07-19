@@ -6,7 +6,10 @@ const Footer = () => {
   useModernScrollReveal();
 
   return (
-    <footer id="footer" className="flex flex-col items-center pb-10 text-white">
+    <footer
+      id="footer"
+      className="flex flex-col items-center pb-10 text-white bg-red-900"
+    >
       <p className="text-xs text-gray-400 py-4"> Made with ❤️ React Js+Vite</p>
       Sudarshan Hingalje © 2025
       <div className="my-4">
