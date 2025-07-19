@@ -115,29 +115,18 @@ export default function useModernScrollReveal() {
     });
 
     // Footer animation – wait until after layout
-    requestAnimationFrame(() => {
-      gsap.from("#footer", {
-        y: 50,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "#footer",
-          start: "top bottom",
-          toggleActions: "play none none reverse",
-        },
-      });
-      gsap.from("#footer", {
-        y: 50,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "#footer",
-          start: "top 95%", // ← updated for reliability
-          toggleActions: "play none none reverse",
-        },
-      });
+    // requestAnimationFrame(() => {
+    //   gsap.from("#footer", {
+    //     y: 50,
+    //     opacity: 0,
+    //     duration: 0.6,
+    //     ease: "power2.out",
+    //     scrollTrigger: {
+    //       trigger: "#footer",
+    //       start: "top 95%", // ← updated for reliability
+    //       toggleActions: "play none none reverse",
+    //     },
+    //   });
 
       ScrollTrigger.refresh(); // force all trigger points to re-calculate
     });
