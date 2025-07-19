@@ -4,8 +4,8 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg"; // Replace with your animated SVG
+import Navbar from "../components/Navbar";
 import { getResumeLink } from "../data/Resume/getResumeLink";
-import Navbar from "./components/Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
