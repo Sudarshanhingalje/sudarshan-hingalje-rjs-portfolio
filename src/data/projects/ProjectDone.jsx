@@ -4,7 +4,8 @@ export const projectsDone = [
     title: "The Wild Oasis (Cabin Booking App)",
     description:
       "A full‑stack hotel booking platform with both admin and customer interfaces. Built using React, Supabase, styled‑components, React Query.",
-    img: "src/assets/project/thewildoasiswebsite.png", // replace with your hosted image
+    img: "src/assets/project/thewildoasiswebsite.png", 
+    link:
   },
   {
     title: "The Wild Oasis (Admin Dashboard)",

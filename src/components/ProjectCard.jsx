@@ -26,7 +26,7 @@ const ProjectCard = ({ project, isActive, onClick }) => {
           <p className="mt-1 text-xs text-gray-300">{project.description}</p>
         ) : (
           {<p className="mt-4 text-sm">{project.description}</p>
-          <p>{project.link}</p>}
+          <p className="mt-1 text-xs text-gray-300">{project.link}</p>}
         )}
       </div>
     </li>
