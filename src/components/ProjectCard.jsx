@@ -14,7 +14,6 @@ const ProjectCard = ({ project, isActive, onClick }) => {
         className={`absolute bottom-0 w-full object-cover transition-all duration-500 ease-in-out
           ${isActive ? "h-1/2" : "h-full"}`}
       />
-
       <div
         className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white p-4 transition-all duration-500 ease-in-out ${
           isActive ? "pb-24" : "pb-4"
@@ -30,6 +29,22 @@ const ProjectCard = ({ project, isActive, onClick }) => {
           <>
             <p className="mt-4 text-sm">{project.description}</p>
 
+            {/* ✅ Tech stack icons */}
+            {project.techImages && (
+              <div className="flex flex-wrap gap-2 mt-3">
+                {project.techImages.map((icon, idx) => (
+                  <img
+                    key={idx}
+                    src={`/skill/${icon}`}
+                    alt={icon.replace(".svg", "")}
+                    className="w-5 h-5"
+                    title={icon.replace(".svg", "")}
+                  />
+                ))}
+              </div>
+            )}
+
+            {/* ✅ Project links */}
             <div className="mt-3 flex gap-4">
               {project.link && (
                 <a
