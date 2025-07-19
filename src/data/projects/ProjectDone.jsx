@@ -22,12 +22,12 @@ export const projectsDone = [
     title: "ScrapSavvy Waste Platform",
     description:
       "Collaborative scrap collection platform. Built with Firebase backend.",
-    img: "https://i.postimg.cc/50qxfnWx/h6.png",
+    img: "src/assets/project/scrapsavvy.png",
   },
   {
     title: "Pizza Delivery App",
     description:
       "Feature‑rich pizza ordering system with Razorpay payment, MongoDB, Axios, Redux.",
-    img: "https://i.postimg.cc/3J2ZYGdt/h3.png",
+    img: "src/assets/project/pizzastore.png",
   },
 ];
