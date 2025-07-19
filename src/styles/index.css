@@ -7,6 +7,9 @@ body,
 #root {
   height: 100%;
 }
+body {
+  cursor: none;
+}
 
 @keyframes talk {
   0%,
