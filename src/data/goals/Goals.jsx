@@ -1,3 +1,5 @@
+import { FaBullseye, FaChartLine, FaRocket } from "react-icons/fa";
+
 export const goals = [
   {
     title: "Short-Term Goal",
