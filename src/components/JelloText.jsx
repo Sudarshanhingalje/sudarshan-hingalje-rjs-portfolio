@@ -1,8 +1,8 @@
 // src/components/JelloText.jsx
+import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import SplitType from "split-type";
-import gsap from "gsap";
-import "../index.css";
+import "../styles/index.css";
 
 const JelloText = () => {
   const txtRef = useRef(null);

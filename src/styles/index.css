@@ -34,3 +34,21 @@ body {
     visibility: hidden;
   }
 }
+
+@font-face {
+  font-family: "GT-Flexa";
+  src: url("https://assets.codepen.io/61488/GT-Flexa-VF-Trial.woff2");
+  font-display: swap;
+  font-style: normal italic;
+  font-weight: 100 800;
+  font-stretch: 10% 200%;
+}
+
+.font-jello {
+  font-family: "GT-Flexa", sans-serif;
+}
+
+.shadow-jello {
+  text-shadow: 0 0.05em 0 #ffb0c0, 0 0.1em 0.1em rgba(70, 0, 35, 0.3),
+    0 0.4em 0.3em rgba(70, 0, 35, 0.1);
+}
