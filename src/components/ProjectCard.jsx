@@ -20,6 +20,16 @@ const ProjectCard = ({ project, isActive, onClick }) => {
       >
         <h1 className="uppercase text-sm font-bold leading-tight">
           {project.title}
+          {project.link && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs ml-2"
+            >
+              <i className="fas fa-external-link-alt"></i>
+            </a>
+          )}
         </h1>
         {!isActive ? (
           <p className="mt-1 text-xs text-gray-300">{project.description}</p>
