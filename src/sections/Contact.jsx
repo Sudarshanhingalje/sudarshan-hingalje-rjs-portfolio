@@ -177,9 +177,6 @@ const Contact = () => {
           </div>
         </form>
       </div>
-
-      {/* ✅ Render Footer component inline after contact form */}
-      <Footer />
     </section>
   );
 };

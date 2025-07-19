@@ -57,7 +57,7 @@ function App() {
                   <Experience />
                   <Personal />
                   <Contact />
-                  {/* <Footer /> */}
+                  <Footer />
                 </Suspense>
               </div>
 
