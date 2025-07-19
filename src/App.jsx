@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
+import Gallery from "./components/Gallary";
 import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
@@ -56,6 +57,7 @@ function App() {
                   <Projects />
                   <Experience />
                   <Personal />
+                  <Gallery />
                   <Contact />
                   <Footer />
                 </Suspense>
