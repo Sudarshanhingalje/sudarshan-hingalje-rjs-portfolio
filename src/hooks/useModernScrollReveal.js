@@ -101,12 +101,8 @@ export default function useModernScrollReveal() {
       });
     });
 
-    // Contact form animation
-    gsap.from("#contact .contact-form", {
-      y: 60,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out",
+    // 🔥 Unified Contact + Footer Animation
+    const contactFooterTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#contact",
         start: "top 85%",
@@ -114,22 +110,25 @@ export default function useModernScrollReveal() {
       },
     });
 
-    // Footer animation – wait until after layout
-    requestAnimationFrame(() => {
-      gsap.from("#footer", {
-        y: 50,
+    contactFooterTimeline
+      .from("#contact .contact-form", {
+        y: 60,
         opacity: 0,
-        duration: 0.6,
+        duration: 0.8,
         ease: "power2.out",
-        scrollTrigger: {
-          trigger: "#footer",
-          start: "top 95%", // ← updated for reliability
-          toggleActions: "play none none reverse",
+      })
+      .from(
+        "#footer",
+        {
+          y: 50,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.out",
         },
-      });
+        "-=0.3" // overlap slightly with contact form animation
+      );
 
-      ScrollTrigger.refresh(); // force all trigger points to re-calculate
-    });
+    ScrollTrigger.refresh();
 
     window.addEventListener("load", () => ScrollTrigger.refresh());
   }, []);
