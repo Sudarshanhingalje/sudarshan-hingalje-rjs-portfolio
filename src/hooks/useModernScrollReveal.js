@@ -87,7 +87,7 @@ export default function useModernScrollReveal() {
     });
 
     // ✅ Personal goals stagger in
-    gsap.utils.toArray("#personal .goal-card").forEach((card, i) => {
+    gsap.utils.toArray("#personal").forEach((card, i) => {
       gsap.from(card, {
         opacity: 0,
         y: 40,
@@ -101,6 +101,23 @@ export default function useModernScrollReveal() {
         },
       });
     });
+    gsap.utils.toArray(".goal-card").forEach((card) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
+    // ✅ Refresh after short delay to ensure DOM is ready
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 300);
 
     // ✅ Contact section form animation
     gsap.from("#contact .contact-form", {
