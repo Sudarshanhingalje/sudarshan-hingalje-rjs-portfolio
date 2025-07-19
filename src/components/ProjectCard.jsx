@@ -28,6 +28,7 @@ const ProjectCard = ({ project, isActive, onClick }) => {
         ) : (
           <>
             <p className="mt-4 text-sm">{project.description}</p>
+            {console.log(project.link)}
             <a
               href={project.link}
               target="_blank"
