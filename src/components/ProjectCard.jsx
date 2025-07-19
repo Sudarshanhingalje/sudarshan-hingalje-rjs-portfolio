@@ -1,35 +1,37 @@
 // src/components/ProjectCard.jsx
-
 const ProjectCard = ({ project, isActive, onClick }) => {
   return (
-    <li
+    <div
       onClick={onClick}
-      className={`relative flex-shrink-0 bg-white rounded-xl overflow-hidden transition-all duration-500 ease-in-out cursor-pointer
-        ${isActive ? "w-full h-[340px] m-0" : "w-[170px] h-[220px] mx-2"}
-        shadow-xl`}
+      className={`relative w-full bg-white rounded-xl overflow-hidden transition-all duration-500 ease-in-out cursor-pointer shadow-xl
+        ${isActive ? "h-[460px]" : "h-[240px]"}`}
     >
+      {/* Project Image */}
       <img
         src={project.img}
         alt={project.title}
-        className={`absolute bottom-0 w-full object-cover transition-all duration-500 ease-in-out
-          ${isActive ? "h-1/2" : "h-full"}`}
+        className={`absolute top-0 w-full object-cover transition-all duration-500 ease-in-out
+          ${isActive ? "h-[200px]" : "h-full"}`}
       />
+
+      {/* Project Info */}
       <div
-        className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white p-4 transition-all duration-500 ease-in-out ${
-          isActive ? "pb-24" : "pb-4"
-        }`}
+        className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4 transition-all duration-500 ease-in-out
+          ${isActive ? "h-[260px]" : "h-24"}`}
       >
-        <h1 className="uppercase text-sm font-bold leading-tight">
+        <h1 className="uppercase text-sm font-bold leading-tight truncate">
           {project.title}
         </h1>
 
         {!isActive ? (
-          <p className="mt-1 text-xs text-gray-300">{project.description}</p>
+          <p className="mt-1 text-xs text-gray-300 line-clamp-2">
+            {project.description}
+          </p>
         ) : (
           <>
             <p className="mt-4 text-sm">{project.description}</p>
 
-            {/* ✅ Tech stack icons */}
+            {/* Tech Stack */}
             {project.techImages && (
               <div className="flex flex-wrap gap-2 mt-3">
                 {project.techImages.map((icon, idx) => (
@@ -44,7 +46,7 @@ const ProjectCard = ({ project, isActive, onClick }) => {
               </div>
             )}
 
-            {/* ✅ Project links */}
+            {/* Links */}
             <div className="mt-3 flex gap-4">
               {project.link && (
                 <a
@@ -70,7 +72,7 @@ const ProjectCard = ({ project, isActive, onClick }) => {
           </>
         )}
       </div>
-    </li>
+    </div>
   );
 };
 
