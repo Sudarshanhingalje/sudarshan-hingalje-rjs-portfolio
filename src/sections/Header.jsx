@@ -12,7 +12,7 @@ import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const speechText = `Hi, I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
+const speechText = `Hello I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
 export default function Header() {
   useModernScrollReveal();
