@@ -1,4 +1,3 @@
-// src/sections/Projects.jsx
 import { useState } from "react";
 import ProjectCard from "../components/ProjectCard";
 import { projectsDone } from "../data/projects/ProjectDone";
@@ -6,36 +5,26 @@ import { projectsDone } from "../data/projects/ProjectDone";
 const Projects = () => {
   const [active, setActive] = useState(null);
 
+  const activeProject = active !== null ? projectsDone[active] : null;
+
   return (
-    <section className="flex justify-center items-center w-full h-screen bg-gray-900">
-      <main className="relative overflow-hidden overflow-y-scroll w-[400px] h-[800px] shadow-xl rounded-2xl bg-white">
-        {/* Layered Backgrounds */}
-        <div className="absolute inset-0 bg-cover bg-no-repeat bg-[url('https://i.postimg.cc/y8y4gWrP/bg1.jpg')] bg-fixed"></div>
-        <div className="absolute inset-0 bg-cover bg-no-repeat bg-[url('https://i.postimg.cc/rmzvPjyn/bg2.jpg')] bg-fixed opacity-70"></div>
-        <div className="absolute inset-0 bg-cover bg-no-repeat bg-[url('https://i.postimg.cc/SsTVwb1C/bg5.jpg')] bg-fixed opacity-40"></div>
+    <section
+      id="projects"
+      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center"
+      style={{
+        backgroundImage: activeProject ? `url(${activeProject.img})` : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        transition: "background 0.5s ease-in-out",
+      }}
+    >
+      <div className="relative z-10 w-full max-w-7xl px-4 py-10 bg-black bg-opacity-70 rounded-xl shadow-lg">
+        <h2 className="text-3xl font-bold text-white text-center mb-8 uppercase">
+          Projects
+        </h2>
 
-        {/* Header */}
-        <header className="relative z-10 flex justify-between items-center p-4 text-white">
-          <i className="fas fa-bars text-xl"></i>
-          <div className="font-krona text-2xl uppercase">urban</div>
-          <i className="fas fa-shopping-bag text-xl"></i>
-        </header>
-
-        {/* Hero Title */}
-        <aside className="relative z-10 p-6 pb-16 mt-8 text-right">
-          <p className="uppercase text-gray-200 text-sm">New SEASON – 020</p>
-          <hr className="my-2 border-gray-400" />
-          <h1 className="text-2xl font-krona text-white leading-tight">
-            our
-            <br />
-            Projects
-            <br />
-            Collection
-          </h1>
-        </aside>
-
-        {/* Project cards */}
-        <ul className="relative z-10 flex flex-wrap gap-4 p-4">
+        <ul className="flex overflow-x-auto space-x-4 pb-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
           {projectsDone.map((project, i) => (
             <ProjectCard
               key={i}
@@ -45,7 +34,9 @@ const Projects = () => {
             />
           ))}
         </ul>
-      </main>
+      </div>
+
+      <div className="absolute inset-0 bg-black opacity-30"></div>
     </section>
   );
 };
