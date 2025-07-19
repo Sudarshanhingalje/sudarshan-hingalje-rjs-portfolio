@@ -11,6 +11,13 @@ export default {
 
         jello: ["GT-Flexa", "sans-serif"],
       },
+      fontSize: {
+        "18vw": "18vw",
+      },
+      perspective: {
+        1000: "1000px",
+      },
+
       colors: {
         neutral: {
           900: "#1a1a1a",
@@ -18,6 +25,7 @@ export default {
           700: "#3a3a3a",
         },
       },
+
       darkMode: "class",
     },
   },

@@ -9,6 +9,7 @@ const About = () => {
   return (
     <section
       id="about"
+      data-speed="0.75"
       className="text-white px-6 py-16 md:py-20 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-12"
     >
       {/* Left Text Section */}
@@ -59,7 +60,6 @@ const About = () => {
         </p>
       </motion.div>
 
-      {/* Right Image Section */}
       <motion.div
         className=" relative flex items-center justify-center md:justify-end"
         initial={{ opacity: 0, x: 50 }}

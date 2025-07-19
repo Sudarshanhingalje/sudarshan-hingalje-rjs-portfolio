@@ -7,9 +7,6 @@ body,
 #root {
   height: 100%;
 }
-body {
-  cursor: none;
-}
 
 @keyframes talk {
   0%,
@@ -51,4 +48,28 @@ body {
 .shadow-jello {
   text-shadow: 0 0.05em 0 #ffb0c0, 0 0.1em 0.1em rgba(70, 0, 35, 0.3),
     0 0.4em 0.3em rgba(70, 0, 35, 0.1);
+}
+.shadow-jello {
+  text-shadow: 0 0.05em 0 #ffb0c0, 0 0.1em 0.1em rgba(70, 0, 35, 0.3),
+    0 0.4em 0.3em rgba(70, 0, 35, 0.1);
+}
+.image-text-hover {
+  transition: all 0.5s ease-in-out;
+}
+
+.image-text-hover:hover {
+  background-image: linear-gradient(to right, #e4e80d, #ff0000);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: rgb(34, 252, 0);
+  -webkit-text-fill-color: transparent;
+}
+.mask-fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
 }

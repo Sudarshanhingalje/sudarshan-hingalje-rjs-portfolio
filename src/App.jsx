@@ -3,8 +3,10 @@ import { Toaster } from "react-hot-toast";
 import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
+import StarsBackground from "./components/StarsBackground";
 import Wheel from "./components/Wheel";
 import CustomCursor from "./ui/CustomCursor";
+import FeaturedWork from "./ui/FeaturedWork";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 
@@ -16,7 +18,6 @@ const Personal = lazy(() => import("./sections/Personal"));
 const Skills = lazy(() => import("./sections/Skills"));
 const Projects = lazy(() => import("./sections/Projects"));
 const Experience = lazy(() => import("./sections/Experience"));
-const TechParallax = lazy(() => import("./ui/TechParallax"));
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -27,14 +28,15 @@ function App() {
   }, []);
 
   return (
-    <div className="dark">
+    <div>
       <Main>
         <Toaster position="top-right" reverseOrder={false} />
         <div className="fixed top-4 right-4 mt-4 ml-auto mr-4 z-50">
           <MusicToggleButton />
         </div>
-        <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white">
+        <div className="relative min-h-screen bg-black bg-opacity-80 bg-repeat text-white">
           <ErrorBoundary>
+            <StarsBackground />
             <SmoothScroll>
               <CustomCursor />
 
@@ -48,10 +50,8 @@ function App() {
               >
                 <Suspense fallback={<JelloText />}>
                   <Header />
-
                   <About />
-
-                  <TechParallax />
+                  <FeaturedWork />
                   <Skills />
                   <Projects />
                   <Experience />
