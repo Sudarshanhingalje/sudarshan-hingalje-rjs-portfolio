@@ -1,4 +1,3 @@
-// src/components/ProjectCard.jsx
 const ProjectCard = ({ project, isActive, onClick }) => {
   return (
     <div
@@ -6,7 +5,6 @@ const ProjectCard = ({ project, isActive, onClick }) => {
       className={`relative w-full bg-white rounded-xl overflow-hidden transition-all duration-500 ease-in-out cursor-pointer shadow-xl
         ${isActive ? "h-[460px]" : "h-[240px]"}`}
     >
-      {/* Project Image */}
       <img
         src={project.img}
         alt={project.title}
@@ -14,7 +12,6 @@ const ProjectCard = ({ project, isActive, onClick }) => {
           ${isActive ? "h-[200px]" : "h-full"}`}
       />
 
-      {/* Project Info */}
       <div
         className={`absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4 transition-all duration-500 ease-in-out
           ${isActive ? "h-[260px]" : "h-24"}`}
@@ -46,7 +43,6 @@ const ProjectCard = ({ project, isActive, onClick }) => {
               </div>
             )}
 
-            {/* Links */}
             <div className="mt-3 flex gap-4">
               {project.link && (
                 <a
