@@ -10,7 +10,7 @@ export const projectsDone = [
     title: "The Wild Oasis (Admin Dashboard)",
     description:
       "Admin panel for managing cabins, bookings, and users with interactive charts.",
-    img: "https://i.postimg.cc/7LKVjyfD/h2.png",
+    img: "src/assets/project/thewildoasis.png",
   },
   {
     title: "Fast React Pizza",
