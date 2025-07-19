@@ -12,7 +12,7 @@ import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const speechText = `Hello I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
+const speechText = `H I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
 export default function Header() {
   useModernScrollReveal();
@@ -65,31 +65,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    gsap.fromTo(
-      "#fullstack",
-      {
-        y: 100,
-        opacity: 0,
-        skewY: 10,
-        scale: 1.2,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        skewY: 0,
-        scale: 1,
-        duration: 1.6,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: "#fullstack",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  }, []);
-
   return (
     <section
       id="header"
@@ -111,13 +86,10 @@ export default function Header() {
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 5, ease: "easeOut" }}
+        transition={{ delay: 6.2, duration: 1.8, ease: "easeOut" }}
         className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8 z-10"
       >
-        <p
-          id="fullstack"
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#a994fb]"
-        >
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#a994fb]">
           Full Stack <br />
           <span className="text-[#ffc857] text-4xl sm:text-5xl md:text-[7vw] font-extrabold">
             Developer
