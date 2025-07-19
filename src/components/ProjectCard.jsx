@@ -1,5 +1,4 @@
 // src/components/ProjectCard.jsx
-import "twin.macro";
 
 const ProjectCard = ({ project, isActive, onClick }) => {
   return (
