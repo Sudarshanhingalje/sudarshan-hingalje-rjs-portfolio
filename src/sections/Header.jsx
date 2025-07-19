@@ -1,126 +1,142 @@
+// Header.jsx
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaDownload } from "react-icons/fa";
-import SplitType from "split-type";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
+import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
-import useScrollAnimation from "../utils/useScrollAnimation";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Header = () => {
-  const [resumeLink, setResumeLink] = useState(null);
-  const textRef = useRef(null);
+const speechText = `HELLO I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
-  useScrollAnimation(); // your custom hook
+export default function Header() {
+  useModernScrollReveal();
+  const resumeUrl = getResumeLink();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const [showBubble, setShowBubble] = useState(false);
+  const [robotVoice, setRobotVoice] = useState(null);
 
+  // Load robot voice once
   useEffect(() => {
-    const fetchResume = async () => {
-      const link = await getResumeLink();
-      setResumeLink(link);
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      const selected =
+        voices.find((v) => v.name.includes("Microsoft David")) ||
+        voices.find((v) => v.name.includes("Google UK English Male")) ||
+        voices.find((v) => v.lang === "en-US");
+
+      setRobotVoice(selected || null);
     };
 
-    fetchResume();
+    if (window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+    } else {
+      loadVoices();
+    }
+
+    return () =>
+      window.speechSynthesis.removeEventListener("voiceschanged", loadVoices);
   }, []);
 
+  const speakText = () => {
+    const synth = window.speechSynthesis;
+    if (!synth.speaking) {
+      const utterance = new SpeechSynthesisUtterance(speechText);
+      if (robotVoice) utterance.voice = robotVoice;
+      utterance.rate = 0.95;
+      utterance.pitch = 0.8;
+      synth.cancel();
+      synth.speak(utterance);
+    }
+  };
+
   useEffect(() => {
-    if (!textRef.current) return;
-
-    const split = new SplitType(textRef.current, { types: "chars" });
-
-    gsap.from(split.chars, {
-      scrollTrigger: {
-        trigger: textRef.current,
-        start: "top 80%",
-      },
-      y: 100,
-      opacity: 0,
-      stagger: 0.05,
-      duration: 1,
-      ease: "power4.out",
-    });
-
-    return () => {
-      split.revert(); // cleanup on unmount
+    const handleScroll = () => {
+      const headerHeight = window.innerHeight;
+      setShowNavbar(window.scrollY <= headerHeight - 100);
     };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <header
+    <section
       id="header"
-      className="h-screen w-full relative flex items-center justify-center px-4 md:px-8"
+      className="bg-grid-pattern relative h-screen w-full font-cinzel text-white overflow-hidden bg-sky-950"
     >
-      <Navbar />
-      <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between w-full gap-8">
-        {/* LEFT */}
-        <div className="flex flex-col items-start justify-center gap-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-4xl sm:text-5xl md:text-[7vw] font-extrabold leading-tight"
-          >
-            Full Stack{" "}
-            <span ref={textRef} className="text-[#ffc857] inline-block">
-              Developer
-            </span>
-          </motion.h1>
+      <div className="absolute inset-0 z-0 bg-grid-pattern" />
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-lg md:text-xl text-gray-400"
-          >
-            I build modern and performant web applications using JavaScript,
-            React.js, Node.js, and more.
-          </motion.p>
+      {showNavbar && <Navbar />}
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex gap-4"
+      <motion.h1
+        initial={{ opacity: 0, y: -80 }}
+        animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
+        transition={{ duration: 8, ease: "easeInOut" }}
+        className="absolute top-6 left-4 md:left-10 text-3xl sm:text-4xl md:text-5xl font-cinzel tracking-tight text-[#d5cdc4] z-10"
+      >
+        Sudarshan <br /> Hingalje
+      </motion.h1>
+
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 6.2, duration: 1.8, ease: "easeOut" }}
+        className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8 z-10"
+      >
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#a994fb]">
+          Full Stack <br />
+          <span className="text-[#ffc857] text-4xl sm:text-5xl md:text-[7vw] font-extrabold">
+            Developer
+          </span>
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+          <a
+            href={resumeUrl}
+            download
+            className="flex items-center justify-center gap-2 bg-white hover:bg-red-500 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
           >
-            <a
-              href="#contact"
-              className="bg-[#ffc857] text-black px-6 py-3 rounded-full font-semibold hover:bg-yellow-400 transition"
-            >
-              Hire Me
-            </a>
-            {resumeLink && (
-              <a
-                href={resumeLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 border border-[#ffc857] text-[#ffc857] px-6 py-3 rounded-full font-semibold hover:bg-[#ffc857] hover:text-black transition"
-              >
-                <FaDownload />
-                Resume
-              </a>
-            )}
-          </motion.div>
+            <FaDownload />
+            Download CV
+          </a>
         </div>
+      </motion.div>
 
-        {/* RIGHT */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          className="relative w-64 h-64 md:w-80 md:h-80"
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1.2, ease: "easeOut" }}
+        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10"
+      >
+        <div
+          className="relative w-fit h-fit"
+          onMouseEnter={() => {
+            setShowBubble(true);
+            speakText();
+          }}
+          onMouseLeave={() => {
+            setShowBubble(false);
+            window.speechSynthesis.cancel();
+          }}
         >
           <img
             src={avatar}
             alt="Avatar"
-            className="absolute inset-0 w-full h-full object-contain"
+            className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
           />
-        </motion.div>
-      </div>
-    </header>
+          {showBubble && (
+            <div className="absolute -top-16 left-full ml-4">
+              <TalkingBubble message={speechText} />
+            </div>
+          )}
+        </div>
+      </motion.div>
+    </section>
   );
-};
-
-export default Header;
+}
