@@ -1,12 +1,11 @@
 import Lenis from "@studio-freight/lenis";
 import { useEffect } from "react";
-import "/src/styles/ScrollSnapping.css";
 
 export default function SmoothScroll({ children }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => t * (2 - t),
+      duration: 1.2, // Smooth but responsive
+      easing: (t) => t * (2 - t), // Ease-out
       smooth: true,
     });
 
@@ -18,7 +17,7 @@ export default function SmoothScroll({ children }) {
     requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy();
+      lenis.destroy(); // clean up on unmount
     };
   }, []);
 
