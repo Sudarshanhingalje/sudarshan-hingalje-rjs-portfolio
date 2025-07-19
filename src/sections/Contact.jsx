@@ -9,6 +9,7 @@ import useModernScrollReveal from "../hooks/useModernScrollReveal";
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
+  useModernScrollReveal();
   const sectionRef = useRef(null);
   const formRef = useRef(null);
 
@@ -86,7 +87,7 @@ const Contact = () => {
     >
       <div className=" max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="contact-heading text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+          <h1 className=" text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
             LET&apos;S WORK{" "}
             <span className="text-gray-500 block">TOGETHER</span>
           </h1>

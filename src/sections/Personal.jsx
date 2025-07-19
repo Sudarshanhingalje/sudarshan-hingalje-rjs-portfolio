@@ -1,9 +1,10 @@
 // src/sections/Personal.jsx
 import { goals } from "../data/goals/Goals";
-import useModernScrollReveal from "../hooks/useModernScrollReveal";
+import useScrollAnimation from "../utils/useScrollAnimation";
+
 const Personal = () => {
-  // Hook to trigger animations
-  useModernScrollReveal();
+  useScrollAnimation(); // Hook to trigger animations
+
   return (
     <section id="personal" className="py-20 text-white bg-black">
       <div className="container mx-auto px-4">
