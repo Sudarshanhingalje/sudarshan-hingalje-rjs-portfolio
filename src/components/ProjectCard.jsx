@@ -31,6 +31,7 @@ const ProjectCard = ({ project, isActive, onClick }) => {
             <a
               href={project.link}
               target="_blank"
+              rel="noopener noreferrer"
               className="mt-2 inline-block text-xs text-blue-300 underline"
             >
               Live Demo
