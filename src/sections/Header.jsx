@@ -1,64 +1,30 @@
-// Header.jsx
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FaDownload } from "react-icons/fa";
-import avatar from "../assets/yoga.svg";
-import Navbar from "../components/Navbar";
-import TalkingBubble from "../components/TalkingBubble";
+import avatar from "../assets/yoga.svg"; // Replace with your animated SVG
 import { getResumeLink } from "../data/Resume/getResumeLink";
-import useModernScrollReveal from "../hooks/useModernScrollReveal";
+import Navbar from "./components/Navbar";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const speechText = `Hello I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
-
 export default function Header() {
-  useModernScrollReveal();
-  const resumeUrl = getResumeLink();
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [showBubble, setShowBubble] = useState(false);
-  const [robotVoice, setRobotVoice] = useState(null);
-
-  // Load robot voice once
   useEffect(() => {
-    const loadVoices = () => {
-      const voices = window.speechSynthesis.getVoices();
-      const selected =
-        voices.find((v) => v.name.includes("Microsoft David")) ||
-        voices.find((v) => v.name.includes("Google UK English Male")) ||
-        voices.find((v) => v.lang === "en-US");
+    // Header scroll hide/show
+    const header = document.getElementById("header");
+    let lastScrollY = window.scrollY;
 
-      setRobotVoice(selected || null);
-    };
-
-    if (window.speechSynthesis.getVoices().length === 0) {
-      window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
-    } else {
-      loadVoices();
-    }
-
-    return () =>
-      window.speechSynthesis.removeEventListener("voiceschanged", loadVoices);
-  }, []);
-
-  const speakText = () => {
-    const synth = window.speechSynthesis;
-    if (!synth.speaking) {
-      const utterance = new SpeechSynthesisUtterance(speechText);
-      if (robotVoice) utterance.voice = robotVoice;
-      utterance.rate = 0.95;
-      utterance.pitch = 0.8;
-      synth.cancel();
-      synth.speak(utterance);
-    }
-  };
-
-  useEffect(() => {
     const handleScroll = () => {
-      const headerHeight = window.innerHeight;
-      setShowNavbar(window.scrollY <= headerHeight - 100);
+      const currentScroll = window.scrollY;
+      if (currentScroll > lastScrollY && currentScroll > 80) {
+        header.style.transform = "translateY(-100%)";
+        header.style.opacity = "0";
+      } else {
+        header.style.transform = "translateY(0)";
+        header.style.opacity = "1";
+      }
+      lastScrollY = currentScroll;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -66,77 +32,53 @@ export default function Header() {
   }, []);
 
   return (
-    <section
+    <header
       id="header"
-      className="bg-grid-pattern relative h-screen w-full font-cinzel text-white overflow-hidden bg-sky-950"
+      className="fixed top-0 w-full z-40 bg-transparent backdrop-blur-lg border-b border-neutral-200 dark:border-neutral-800 transition-all duration-500"
     >
-      <div className="absolute inset-0 z-0 bg-grid-pattern" />
+      <Navbar />
 
-      {showNavbar && <Navbar />}
+      <section className="pt-24 min-h-screen w-full flex flex-col items-center justify-center gap-8 text-center px-4">
+        <motion.img
+          src={avatar}
+          alt="avatar"
+          className="w-40 md:w-56 object-contain about-avatar"
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        />
 
-      <motion.h1
-        initial={{ opacity: 0, y: -80 }}
-        animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
-        transition={{ duration: 8, ease: "easeInOut" }}
-        className="absolute top-6 left-4 md:left-10 text-3xl sm:text-4xl md:text-5xl font-cinzel tracking-tight text-[#d5cdc4] z-10"
-      >
-        Sudarshan <br /> Hingalje
-      </motion.h1>
-
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 6.2, duration: 1.8, ease: "easeOut" }}
-        className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8 z-10"
-      >
-        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#a994fb]">
-          Full Stack <br />
-          <span className="text-[#ffc857] text-4xl sm:text-5xl md:text-[7vw] font-extrabold">
-            Developer
-          </span>
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4">
-          <a
-            href={resumeUrl}
-            download
-            className="flex items-center justify-center gap-2 bg-white hover:bg-red-500 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
-          >
-            <FaDownload />
-            Download CV
-          </a>
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 1.2, ease: "easeOut" }}
-        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 z-10"
-      >
-        <div
-          className="relative w-fit h-fit"
-          onMouseEnter={() => {
-            setShowBubble(true);
-            speakText();
-          }}
-          onMouseLeave={() => {
-            setShowBubble(false);
-            window.speechSynthesis.cancel();
-          }}
+        <motion.h1
+          className="text-4xl md:text-6xl font-bold text-neutral-800 dark:text-white"
+          initial={{ y: -40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.2 }}
         >
-          <img
-            src={avatar}
-            alt="Avatar"
-            className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
-          />
-          {showBubble && (
-            <div className="absolute -top-16 left-full ml-4">
-              <TalkingBubble message={speechText} />
-            </div>
-          )}
-        </div>
-      </motion.div>
-    </section>
+          Hi, I'm Sudarshan Hingalje
+        </motion.h1>
+
+        <motion.p
+          className="max-w-2xl text-lg md:text-xl text-neutral-600 dark:text-neutral-300"
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1.4 }}
+        >
+          I’m a Full Stack Developer building modern web experiences using
+          React, Next.js, Spring Boot, and 3D/GSAP magic.
+        </motion.p>
+
+        <motion.a
+          href={getResumeLink()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 border border-neutral-400 dark:border-neutral-700 bg-white dark:bg-neutral-900 px-6 py-3 rounded-full text-sm font-semibold text-neutral-900 dark:text-white hover:scale-105 transition-all duration-300"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.6 }}
+        >
+          <FaDownload /> Download Resume
+        </motion.a>
+      </section>
+    </header>
   );
 }
