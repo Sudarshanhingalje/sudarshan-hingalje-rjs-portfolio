@@ -9,7 +9,7 @@ import useModernScrollReveal from "../hooks/useModernScrollReveal";
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
-  useModernScrollReveal(); // Only one call here now
+  useModernScrollReveal();
   const sectionRef = useRef(null);
   const formRef = useRef(null);
 
@@ -20,6 +20,7 @@ const Contact = () => {
     phone: "",
     message: "",
   });
+  useModernScrollReveal();
 
   useEffect(() => {
     gsap.fromTo(
@@ -45,6 +46,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
+      // 1. Send message to yourself
       await emailjs.sendForm(
         "service_ec6uvv4",
         "template_ifxi8iv",
@@ -79,24 +81,97 @@ const Contact = () => {
 
   return (
     <section
-      id="contact"
+      // id="contact"
       ref={sectionRef}
-      className="py-20 px-4 sm:px-6 lg:px-8 text-white"
+      className=" py-20 px-4 sm:px-6 lg:px-8 text-white"
     >
-      <div className="max-w-3xl mx-auto">
+      <div className=" max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="contact-heading text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
+          <h1 className=" text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight">
             LET&apos;S WORK{" "}
             <span className="text-gray-500 block">TOGETHER</span>
           </h1>
         </div>
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="contact-form space-y-6"
-        >
-          {/* FORM FIELDS (same as before) */}
+        <form ref={formRef} onSubmit={handleSubmit} className=" space-y-6">
+          <div>
+            <label className="block text-sm font-medium mb-1">Reason</label>
+            <select
+              name="reason"
+              value={formData.reason}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
+            >
+              <option value="">Select a reason</option>
+              <option value="Job Opportunity">Job Opportunity</option>
+              <option value="Collaborate with you">Collaborate with you</option>
+              <option value="I liked your project">I liked your project</option>
+              <option value="Freelance Project">Freelance Project</option>
+              <option value="Just Saying Hi">Just Saying Hi</option>
+            </select>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium mb-1">Name</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Your Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Message</label>
+            <textarea
+              name="message"
+              placeholder="Your message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              rows={5}
+              className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
+            />
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="w-full bg-yellow-500 hover:bg-yellow-600 transition text-black font-semibold py-3 rounded"
+            >
+              Send Message
+            </button>
+          </div>
         </form>
       </div>
     </section>
