@@ -1,12 +1,8 @@
 // src/components/ProjectCard.jsx
-import { motion } from "framer-motion";
 
 const ProjectCard = ({ project, isActive, onClick }) => {
   return (
-    <motion.li
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <li
       onClick={onClick}
       className={`relative flex-shrink-0 bg-white rounded-xl overflow-hidden transition-all duration-500 ease-in-out cursor-pointer
         ${isActive ? "w-full h-[340px] m-0" : "w-[170px] h-[220px] mx-2"}
@@ -74,7 +70,7 @@ const ProjectCard = ({ project, isActive, onClick }) => {
           </>
         )}
       </div>
-    </motion.li>
+    </li>
   );
 };
 
