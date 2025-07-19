@@ -6,7 +6,7 @@ const EXPANDED_HEIGHT = "h-[520px]";
 const COLLAPSED_HEIGHT = "h-[240px]";
 const IMAGE_EXPANDED = "h-[220px]";
 const IMAGE_COLLAPSED = "h-full";
-const INFO_EXPANDED_HEIGHT = "h-[300px]";
+const INFO_EXPANDED_HEIGHT = "h-[320px]";
 const INFO_COLLAPSED_HEIGHT = "h-24";
 
 const ProjectCard = ({ project, isActive, onClick }) => {
