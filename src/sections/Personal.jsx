@@ -32,11 +32,11 @@ export default function Personal() {
         </p>
         <h2 className="text-4xl sm:text-5xl font-bold mb-12">Career Goals</h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="goal-card grid md:grid-cols-3 gap-8">
           {goals.map((goal, index) => (
             <div
               key={index}
-              className="goal-card bg-[#121212] border border-gray-700 rounded-2xl p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="bg-[#121212] border border-gray-700 rounded-2xl p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300"
             >
               <div className="mb-4">{goal.icon}</div>
               <h3 className="text-xl font-semibold mb-3">{goal.title}</h3>
