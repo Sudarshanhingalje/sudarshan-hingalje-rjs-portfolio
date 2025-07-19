@@ -1,7 +1,9 @@
 import { FaEnvelope, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import bgImage from "../assets/brand2.svg";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const Footer = () => {
+  useModernScrollReveal();
   return (
     <section id="footer">
       <footer className="flex flex-col items-center pb-10 text-white ">
