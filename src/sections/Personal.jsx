@@ -26,13 +26,13 @@ export default function Personal() {
   useModernScrollReveal();
   return (
     <section id="personal" className="py-20 px-6 sm:px-12 lg:px-20 text-white">
-      <div className="max-w-7xl mx-auto text-center">
+      <div className=" max-w-7xl mx-auto text-center">
         <p className="mb-4 text-sm font-semibold text-cyan-400 border border-cyan-400 px-4 py-1 inline-block rounded-full">
           My Roadmap
         </p>
         <h2 className="text-4xl sm:text-5xl font-bold mb-12">Career Goals</h2>
 
-        <div className="goal-card grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {goals.map((goal, index) => (
             <div
               key={index}
