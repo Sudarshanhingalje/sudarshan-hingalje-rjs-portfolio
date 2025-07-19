@@ -21,7 +21,6 @@ const CustomCursor = () => {
       };
     }
 
-    // Get references in reverse order for trail
     const followers = followerRefs.current
       .slice()
       .reverse()
