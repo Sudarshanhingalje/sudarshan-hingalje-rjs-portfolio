@@ -1,6 +1,6 @@
 // src/sections/Projects.jsx
 import ProjectCard from "../components/ProjectCard";
-import { projectsDone } from "../data/projects"; // You need to create this
+import { projectsDone } from "../data/projects/ProjectDone"; // You need to create this
 
 const Projects = () => {
   return (
