@@ -131,13 +131,13 @@ const JelloText = () => {
         ref={txtRef}
         className="text-[5vw] font-[200] tracking-[-1vw] leading-[0.6] text-white select-none shadow-jello"
       >
-        {"sudarshan hingalje PORTFOLIO".split(" ").map((word, i) => (
+        {"sudarshan hingalje PORTFOLIO".split(" ").map((char, i) => (
           <span
             key={i}
-            className="inline-block cursor-pointer pt-[1.08vw] mr-[0.5vw]" // added margin-right for spacing
+            className="inline-block cursor-pointer pt-[1.08vw]"
             onMouseDown={(e) => handleMouseDown(i, e)}
           >
-            {word}
+            {char}
           </span>
         ))}
       </h1>
