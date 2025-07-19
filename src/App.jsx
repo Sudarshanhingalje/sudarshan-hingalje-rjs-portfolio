@@ -4,7 +4,7 @@ import Loader from "./components/Loader";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
 import Wheel from "./components/Wheel";
-import SplashCursor from "./ui/CustomCursor";
+import CustomCursor from "./ui/CustomCursor";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 
@@ -36,7 +36,7 @@ function App() {
         <div className="relative min-h-screen bg-[#161b2f] bg-[url('/stars.svg')] bg-repeat text-white">
           <ErrorBoundary>
             <SmoothScroll>
-              <SplashCursor />
+              <CustomCursor />
 
               <Wheel />
               <div
