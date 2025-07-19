@@ -1,14 +1,11 @@
 // src/components/JelloText.jsx
 import gsap from "gsap";
-import lottie from "lottie-web";
 import { useEffect, useRef, useState } from "react";
 import SplitType from "split-type";
-import animationData from "../assets/animation.json"; // your Lottie file
 import "../styles/index.css";
 
 const JelloText = () => {
   const txtRef = useRef(null);
-  const lottieRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedCharIndex, setSelectedCharIndex] = useState(0);
   const [charHeight, setCharHeight] = useState(0);
@@ -25,16 +22,6 @@ const JelloText = () => {
   const elasticDropOff = 0.8;
 
   useEffect(() => {
-    // Lottie animation
-    lottie.loadAnimation({
-      container: lottieRef.current,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      animationData,
-    });
-
-    // Split text
     const split = new SplitType(txtRef.current, {
       types: "chars",
       tagName: "span",
@@ -112,7 +99,8 @@ const JelloText = () => {
           1 -
           Math.abs(i - selectedCharIndex) /
             (charRefs.current.length * elasticDropOff);
-        return Math.max(1 + dispersion * dragYScale, 0.5);
+        const scale = 1 + dispersion * dragYScale;
+        return Math.max(scale, 0.5);
       },
       ease: "power4",
       duration: 2,
@@ -138,29 +126,23 @@ const JelloText = () => {
   };
 
   return (
-    <div className="w-full h-screen relative overflow-hidden font-jello">
-      {/* Lottie Background */}
-      <div ref={lottieRef} className="absolute inset-0 w-full h-full z-0"></div>
-
-      {/* Jello Text */}
-      <div className="relative z-10 w-full h-full flex items-center justify-center">
-        <h1
-          ref={txtRef}
-          className="text-[5vw] font-[200] tracking-[-1vw] leading-[0.6] text-white select-none shadow-jello"
-        >
-          {"sudarshan PORTFOLIO".split("").map((char, i) => (
-            <span
-              key={i}
-              className={`inline-block cursor-pointer pt-[1.08vw] ${
-                char === " " ? "w-[1vw]" : ""
-              }`}
-              onMouseDown={(e) => handleMouseDown(i, e)}
-            >
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </h1>
-      </div>
+    <div className="w-full h-screen flex items-center justify-center bg-blur font-jello overflow-hidden">
+      <h1
+        ref={txtRef}
+        className="text-[5vw] font-[200] tracking-[-1vw] leading-[0.6] text-white select-none shadow-jello"
+      >
+        {"sudarshan  PORTFOLIO".split("").map((char, i) => (
+          <span
+            key={i}
+            className={`inline-block cursor-pointer pt-[1.08vw] ${
+              char === " " ? "w-[1vw]" : ""
+            }`}
+            onMouseDown={(e) => handleMouseDown(i, e)}
+          >
+            {char === " " ? "\u00A0" : char}
+          </span>
+        ))}
+      </h1>
     </div>
   );
 };
