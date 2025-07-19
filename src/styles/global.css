@@ -1,9 +1,9 @@
-html,
+/* html,
 body {
   scroll-behavior: auto !important; /* disables native smooth */
 
   height: auto;
-}
+} */
 
 /* tailwind.css or global.css */
 .bg-grid-pattern {
