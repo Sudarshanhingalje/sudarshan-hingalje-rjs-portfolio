@@ -34,7 +34,7 @@ export default function FeaturedTechNames() {
     >
       <motion.div
         style={{ x: baseX }}
-        className="absolute flex gap-10 items-center text-[25vw] font-cinzel uppercase text-[#1f1f1f] whitespace-nowrap opacity-300"
+        className="absolute flex gap-10 items-center text-[25vw] font-cinzel uppercase text-[#1f1f1f] whitespace-nowrap opacity-90"
       >
         {[...Array(5)].map((_, i) => (
           <div key={i} className="flex gap-10">
