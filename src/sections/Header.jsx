@@ -127,9 +127,10 @@ export default function Header() {
           }}
         >
           <img
+            id="avatar-img"
             src={avatar}
             alt="Avatar"
-            className="w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
+            className="avatar-image w-[100px] sm:w-[140px] md:w-[180px] lg:w-[220px] xl:w-[260px] max-w-[80vw] h-auto object-contain"
           />
           {showBubble && (
             <div className="absolute -top-16 left-full ml-4">
