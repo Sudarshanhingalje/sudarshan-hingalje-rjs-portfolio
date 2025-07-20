@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import Gallery from "./components/Gallary";
+import GalleryMy from "./components/GalleryMy";
 import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
@@ -9,6 +9,7 @@ import Wheel from "./components/Wheel";
 import CustomCursor from "./ui/CustomCursor";
 import FeaturedWork from "./ui/FeaturedWork";
 import ErrorBoundary from "./utils/ErrorBoundary";
+import SmoothScroll from "./utils/SmoothScroll";
 
 const About = lazy(() => import("./sections/About"));
 const Contact = lazy(() => import("./sections/Contact"));
@@ -37,37 +38,37 @@ function App() {
         <div className="relative min-h-screen bg-black bg-opacity-80 bg-repeat text-white">
           <ErrorBoundary>
             <StarsBackground />
-            {/* <SmoothScroll> */}
-            <CustomCursor />
+            <SmoothScroll>
+              <CustomCursor />
 
-            <Wheel />
-            <div
-              className={
-                loading
-                  ? "blur-sm brightness-50 pointer-events-none"
-                  : "blur-0 transition-all duration-500"
-              }
-            >
-              <Suspense fallback={<JelloText />}>
-                <Header />
-                <About />
-                <FeaturedWork />
-                <Skills />
-                <Projects />
-                <Experience />
-                <Personal />
-                <Gallery />
-                <Contact />
-                <Footer />
-              </Suspense>
-            </div>
-
-            {loading && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
-                <JelloText />
+              <Wheel />
+              <div
+                className={
+                  loading
+                    ? "blur-sm brightness-50 pointer-events-none"
+                    : "blur-0 transition-all duration-500"
+                }
+              >
+                <Suspense fallback={<JelloText />}>
+                  <Header />
+                  <About />
+                  <FeaturedWork />
+                  <Skills />
+                  <Projects />
+                  <Experience />
+                  <Personal />
+                  <GalleryMy />
+                  <Contact />
+                  <Footer />
+                </Suspense>
               </div>
-            )}
-            {/* </SmoothScroll> */}
+
+              {loading && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
+                  <JelloText />
+                </div>
+              )}
+            </SmoothScroll>
           </ErrorBoundary>
         </div>
       </Main>
