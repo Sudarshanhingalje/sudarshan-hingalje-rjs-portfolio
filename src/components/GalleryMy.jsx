@@ -101,10 +101,10 @@ const GalleryMy = () => {
       />
 
       {/* First Infinite Image Row (left) */}
-      <GalleryRow direction={-1} speed={100} />
+      <GalleryRow direction={-1} speed={130} />
 
       {/* Second Infinite Image Row (right) */}
-      <GalleryRow direction={1} speed={80} />
+      <GalleryRow direction={1} speed={50} />
 
       <GalleryScroll
         direction={1}
