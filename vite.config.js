@@ -1,3 +1,4 @@
+// ✅ vite.config.js
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
@@ -6,12 +7,10 @@ export default defineConfig({
   plugins: [react(), visualizer()],
   resolve: {
     alias: {
-      // Use safer light version of lottie
       "lottie-web": "lottie-web/build/player/lottie_light.min.js",
     },
   },
   build: {
-    // You can keep tree shaking ON
     treeshake: true,
     rollupOptions: {
       output: {
