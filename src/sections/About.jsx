@@ -68,9 +68,10 @@ const About = () => {
       >
         <div className="about-avatar relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
           <img
+            id="about-img"
             src={devImage}
             alt="Developer Sudarshan Hingalje"
-            className="rounded-2xl w-full h-auto hover:scale-105 transition-transform duration-500 border-green-500 shadow-lg shadow-green-500/100"
+            className="avatar-image rounded-2xl w-full h-auto border-green-500 shadow-lg shadow-green-500/100"
           />
         </div>
       </motion.div>
