@@ -97,7 +97,7 @@ const GalleryMy = () => {
         text="My Certifications"
         height="40vh"
         fontSize="text-[6vw]"
-        speed={40}
+        speed={250}
       />
 
       {/* First Infinite Image Row (left) */}
@@ -111,7 +111,7 @@ const GalleryMy = () => {
         text="Achievements Gallery"
         height="40vh"
         fontSize="text-[6vw]"
-        speed={20}
+        speed={300}
       />
     </div>
   );
