@@ -111,7 +111,7 @@ const GalleryMy = () => {
         text="Achievements Gallery"
         height="40vh"
         fontSize="text-[6vw]"
-        speed={40}
+        speed={20}
       />
     </div>
   );
