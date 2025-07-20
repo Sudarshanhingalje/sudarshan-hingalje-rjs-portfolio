@@ -16,26 +16,36 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Basic Meta Tags -->
+    <!-- Google Analytics GA4 (separate tag) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-8T9S6CMZMG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-8T9S6CMZMG");
+    </script>
+
+    <!-- Meta tags (SEO + Social) -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Sudarshan Hingalje" />
     <meta
       name="description"
-      content="I'm Sudarshan Hingalje, a Full Stack Developer specializing in ReactJS, Java, and modern web technologies. Explore my portfolio, projects, and skills here."
+      content="I'm Sudarshan Hingalje, a Full Stack Developer..."
     />
     <meta
       name="keywords"
-      content="Sudarshan Hingalje, Full Stack Web Developer, MERN Stack Developer, ReactJS Developer, Java Developer, Portfolio, Tailwind CSS"
+      content="Sudarshan Hingalje, Full Stack Developer..."
     />
 
-    <!-- Open Graph Meta -->
     <meta property="og:title" content="Sudarshan Hingalje Portfolio" />
-    <meta
-      property="og:description"
-      content="Explore the portfolio of Sudarshan Hingalje – Full Stack Developer skilled in React, Java, and more."
-    />
+    <meta property="og:description" content="Explore the portfolio..." />
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -46,25 +56,18 @@
       content="https://sudarshanhingalje-portfolio.netlify.app/og-image.png"
     />
 
-    <!-- Twitter Meta -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Sudarshan Hingalje Portfolio" />
-    <meta
-      name="twitter:description"
-      content="Web Developer Portfolio - React, Java, and more."
-    />
+    <meta name="twitter:description" content="Web Developer Portfolio..." />
     <meta
       name="twitter:image"
       content="https://sudarshanhingalje-portfolio.netlify.app/og-image.png"
     />
 
-    <!-- Canonical -->
     <link
       rel="canonical"
       href="https://sudarshanhingalje-portfolio.netlify.app/"
     />
-
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Fonts -->
@@ -91,7 +94,6 @@
       rel="stylesheet"
     />
 
-    <!-- Title -->
     <title>Sudarshan Hingalje | Portfolio</title>
 
     <!-- JSON-LD Structured Data -->
@@ -107,7 +109,7 @@
           "@type": "CollegeOrUniversity",
           "name": "CDAC (Centre for Development of Advanced Computing)"
         },
-        "description": "Full Stack Developer skilled in ReactJS, Java, Spring Boot, and Tailwind CSS. Open to freelance and full-time opportunities.",
+        "description": "Full Stack Developer skilled in ReactJS, Java, Spring Boot, and Tailwind CSS...",
         "email": "mailto:sudarshanhingalje1@gmail.com",
         "address": {
           "@type": "PostalAddress",
@@ -123,24 +125,11 @@
           "employmentType": "FULL_TIME",
           "industry": "Information Technology",
           "jobLocationType": "TELECOMMUTE",
-          "description": "Looking for full-time opportunities in full stack web development. Skilled in ReactJS, Java, Spring Boot, and REST APIs."
+          "description": "Looking for full-time opportunities..."
         }
       }
     </script>
-    <!-- Google tag (gtag.js) for GA4 -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-8T9S6CMZMG"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-8T9S6CMZMG");
-    </script>
-    <script type="module" crossorigin src="/assets/index-BZEV-Ez6.js"></script>
+    <script type="module" crossorigin src="/assets/index-DcLoA5CB.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/react-CFCE4xZu.js">
     <link rel="modulepreload" crossorigin href="/assets/scheduler-DYLXRpC5.js">
     <link rel="modulepreload" crossorigin href="/assets/react-dom-CUeQ5oZw.js">
@@ -158,6 +147,7 @@
   </head>
 
   <body class="bg-black text-white">
+    <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-MTKDD7XB"
@@ -169,6 +159,8 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div id="root"></div>
+
+    <!-- Scripts -->
     <script src="https://assets.codepen.io/16327/Draggable3.min.js"></script>
     <script src="https://assets.codepen.io/16327/InertiaPlugin.min.js"></script>
   </body>
