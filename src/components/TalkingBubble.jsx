@@ -20,8 +20,7 @@ export default function TalkingBubble({ message }) {
       const voices = synth.getVoices();
       const robotVoice =
         voices.find((v) => v.name.includes("Microsoft David")) ||
-        voices.find((v) => v.name.includes("Google UK English Male")) ||
-        voices.find((v) => v.lang === "en-US");
+        voices.find((v) => v.name.includes("Google UK English Male"));
       if (robotVoice) utter.voice = robotVoice;
       utter.rate = 0.95;
       utter.pitch = 0.8;
