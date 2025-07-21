@@ -2,9 +2,9 @@
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import avatar from "../assets/yoga.svg";
+import DownloadButton from "../components/DownloadButton";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
@@ -96,18 +96,7 @@ export default function Header() {
             Developer
           </span>
         </p>
-        <motion.a
-          href={getResumeLink()}
-          download
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="group inline-flex items-center border border-white rounded-full px-6 py-3 text-white font-medium transition-all duration-300 hover:bg-white hover:text-black"
-        >
-          <Download className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:-rotate-45" />
-          Resume
-        </motion.a>
+        <DownloadButton>Resume</DownloadButton>
       </motion.div>
 
       <motion.div
