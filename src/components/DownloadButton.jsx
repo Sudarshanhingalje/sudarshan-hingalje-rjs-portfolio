@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef, useState } from "react";
 
 const DownloadButton = () => {
   const [downloading, setDownloading] = useState(false);
@@ -14,7 +14,6 @@ const DownloadButton = () => {
     setDownloading(true);
     setProgress(0);
 
-    // Simulate download progress
     intervalRef.current = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -24,17 +23,16 @@ const DownloadButton = () => {
             setProgress(0);
           }, 1000);
         }
-        return Math.min(prev + 10, 100);
+        return Math.min(prev + 5, 100);
       });
-    }, 150);
+    }, 100);
 
-    // Actual file download
     const link = document.createElement("a");
     link.href = resumeLink;
     link.setAttribute("download", "Sudarshan_Hingalje_Resume.pdf");
     document.body.appendChild(link);
     link.click();
-    link.parentNode.removeChild(link);
+    document.body.removeChild(link);
   };
 
   const progressAngle = (progress / 100) * 360;
@@ -42,24 +40,22 @@ const DownloadButton = () => {
   return (
     <button
       onClick={handleDownload}
-      className={`relative w-36 h-12 text-white font-medium transition-all duration-300 ease-in-out ${
-        downloading
-          ? "rounded-full w-12 h-12 p-0"
-          : "rounded-lg bg-blue-600 hover:bg-blue-700"
-      } flex items-center justify-center overflow-hidden`}
+      className={`relative transition-all duration-500 ease-in-out overflow-hidden text-white font-medium flex items-center justify-center ${
+        downloading ? "w-14 h-14 rounded-full" : "w-40 h-12 rounded-md px-4"
+      } bg-blue-600 hover:bg-blue-700`}
     >
-      {/* Download text (hide when downloading) */}
-      {!downloading && <span>Download CV</span>}
+      {/* Normal Text */}
+      {!downloading && <span className="z-10">Download CV</span>}
 
-      {/* Circular progress loader */}
+      {/* Circular progress + percentage */}
       {downloading && (
         <>
           <svg
-            className="absolute w-12 h-12 rotate-[-90deg]"
+            className="absolute w-14 h-14 rotate-[-90deg] z-0"
             viewBox="0 0 36 36"
           >
             <path
-              className="text-gray-300"
+              className="text-blue-500"
               stroke="currentColor"
               strokeWidth="4"
               fill="none"
@@ -74,7 +70,7 @@ const DownloadButton = () => {
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
           </svg>
-          <span className="text-xs font-semibold z-10">{progress}%</span>
+          <span className="text-sm font-semibold z-10">{progress}%</span>
         </>
       )}
     </button>
