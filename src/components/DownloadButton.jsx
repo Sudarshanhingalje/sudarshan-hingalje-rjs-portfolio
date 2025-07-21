@@ -22,7 +22,6 @@ export default function DownloadButton({
   const [completed, setCompleted] = useState(false);
   const intervalRef = useRef(null);
 
-  // Start actual file download immediately
   const triggerDownload = () => {
     const link = document.createElement("a");
     link.href = resumeUrl;
@@ -38,41 +37,39 @@ export default function DownloadButton({
     setDownloading(true);
     setProgress(0);
     setCompleted(false);
-
-    // Fire analytics hook
     onDownloadStart?.();
-
-    // Start the real download right away
     triggerDownload();
 
-    // Simulated progress (tapered finish if you like—simple linear here)
+    const progressSteps = [1, 25, 50, 75, 100];
+    let index = 0;
+
     intervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + 2; // adjust speed
-        if (next >= 100) {
+      setProgress(() => {
+        const next = progressSteps[index];
+        index++;
+
+        if (index >= progressSteps.length) {
           clearInterval(intervalRef.current);
           setCompleted(true);
 
-          // Confetti burst
           confetti({
             particleCount: 80,
             spread: 70,
             origin: { y: 0.6 },
           });
 
-          // Fire analytics hook
           onDownloadComplete?.();
 
-          // Reset after delay
           setTimeout(() => {
             setDownloading(false);
             setProgress(0);
             setCompleted(false);
           }, 1500);
         }
-        return Math.min(next, 100);
+
+        return next;
       });
-    }, 100);
+    }, 600);
   };
 
   const progressAngle = (progress / 100) * 360;
@@ -91,7 +88,6 @@ export default function DownloadButton({
         hover:scale-105 hover:shadow-xl text-white font-semibold
       `}
     >
-      {/* Static label (hidden during download) */}
       <span
         className={`transition-opacity duration-300 z-10 ${
           downloading ? "opacity-0" : "opacity-100"
@@ -100,18 +96,14 @@ export default function DownloadButton({
         Download CV
       </span>
 
-      {/* Circle Progress Layer */}
       {downloading && (
         <>
-          {/* Shine / glass overlay */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-white/5 animate-gloss pointer-events-none" />
 
-          {/* SVG ring */}
           <svg
             className="absolute w-full h-full rotate-[-90deg] pointer-events-none"
             viewBox="0 0 36 36"
           >
-            {/* Track */}
             <path
               className="text-white/20"
               stroke="currentColor"
@@ -119,7 +111,6 @@ export default function DownloadButton({
               fill="none"
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
-            {/* Progress */}
             <path
               className="text-green-400"
               stroke="currentColor"
@@ -131,7 +122,6 @@ export default function DownloadButton({
             />
           </svg>
 
-          {/* Centered % / Check — THIS FIXES YOUR “1 to 100 not in middle” ISSUE */}
           <span
             className="absolute inset-0 flex items-center justify-center z-10 text-white font-bold text-sm leading-none"
             aria-live="polite"
