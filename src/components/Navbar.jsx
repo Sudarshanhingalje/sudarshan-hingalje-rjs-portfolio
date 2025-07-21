@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import bgImage from "../assets/brand.svg";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   return (
@@ -16,6 +17,9 @@ export default function Navbar() {
           />
         </button>
       </motion.nav>
+      <div className="fixed top-4 right-20 z-50 flex items-center gap-4">
+        <ThemeToggle />
+      </div>
     </div>
   );
 }
