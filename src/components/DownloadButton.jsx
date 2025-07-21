@@ -78,11 +78,8 @@ export default function DownloadButton({
       className={`
         relative select-none overflow-hidden flex items-center justify-center
         transition-all duration-700 ease-in-out
-        ${
-          downloading
-            ? "w-20 h-20 rounded-full"
-            : "w-52 h-14 rounded-[30px] px-6"
-        }
+        ${downloading ? "w-20 h-20 rounded-full" : "w-48 h-14 rounded-2xl px-6"}
+
         backdrop-blur-md bg-white/10 dark:bg-white/5 border border-white/30
         shadow-[inset_2px_2px_5px_rgba(255,255,255,0.4),inset_-2px_-2px_6px_rgba(0,0,0,0.25)]
         hover:scale-[1.05] hover:shadow-xl text-white font-bold tracking-wide
