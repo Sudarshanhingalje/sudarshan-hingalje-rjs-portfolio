@@ -110,23 +110,12 @@ export default function useModernScrollReveal() {
       },
     });
 
-    contactFooterTimeline
-      .from("#contact .contact-form", {
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power2.out",
-      })
-      .from(
-        "#footer",
-        {
-          y: 50,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        "-=0.3" // overlap slightly with contact form animation
-      );
+    contactFooterTimeline.from("#contact .contact-form", {
+      y: 60,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    });
 
     ScrollTrigger.refresh();
 
