@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
