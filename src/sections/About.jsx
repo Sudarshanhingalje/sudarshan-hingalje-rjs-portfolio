@@ -10,7 +10,7 @@ const About = () => {
     <section
       id="about"
       data-speed="0.75"
-      className="text-white px-6 py-16 md:py-20 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-12"
+      className="bg-[#121212] text-white px-6 py-16 md:py-20 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-12"
     >
       {/* Left Text Section */}
       <motion.div
