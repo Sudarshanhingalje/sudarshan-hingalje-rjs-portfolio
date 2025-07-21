@@ -1,9 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
-// Hooks
-import useTheme from "./hooks/UseTheme"; // ✅ Import the custom hook useTheme";
-
 // Core Components
 import GalleryMy from "./components/GalleryMy";
 import JelloText from "./components/JelloText";
@@ -31,7 +28,6 @@ const Footer = lazy(() => import("./sections/Footer"));
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useTheme(); // ✅ Use the custom hook
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3000);
@@ -42,23 +38,13 @@ function App() {
     <Main>
       <Toaster position="top-right" reverseOrder={false} />
 
-      {/* Dark/Light Mode Toggle Button */}
-      <div className="fixed top-4 left-4 z-50">
+      {/* Top Right Corner: Dark Mode + Music */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-4">
         <ThemeToggle />
-        <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="bg-white text-black dark:bg-neutral-800 dark:text-white px-4 py-2 rounded-full shadow-md transition-all duration-300"
-        >
-          {isDarkMode ? "☀️ Light" : "🌙 Dark"}
-        </button>
-      </div>
-
-      {/* Music Toggle Button */}
-      <div className="fixed top-4 right-4 mt-4 ml-auto mr-4 z-50">
         <MusicToggleButton />
       </div>
 
-      {/* Page Content */}
+      {/* Main Page Content */}
       <div className="relative min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
         <ErrorBoundary>
           <StarsBackground />
