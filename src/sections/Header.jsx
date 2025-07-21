@@ -4,7 +4,9 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
 import avatar from "../assets/yoga.svg";
 import DownloadButton from "../components/DownloadButton";
+import GalaxyBackground from "../components/GalaxyBackground";
 import Navbar from "../components/Navbar";
+import StarsBackground from "../components/StarsBackground";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
@@ -66,10 +68,11 @@ export default function Header() {
     <section
       id="header"
       data-speed="1"
-      className="relative h-screen w-full font-cinzel overflow-hidden bg-sky-950 dark:bg-[#0e0e10] transition-colors duration-500"
+      className="relative h-screen w-full font-cinzel overflow-hidden transition-colors duration-500 bg-white text-black dark:bg-black dark:text-white"
     >
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
-
+      <GalaxyBackground />
+      <StarsBackground />
       {showNavbar && <Navbar />}
 
       <motion.h1
@@ -93,7 +96,7 @@ export default function Header() {
             Developer
           </span>
         </p>
-        <DownloadButton>Resume</DownloadButton>
+        <DownloadButton resumeUrl={resumeUrl} />
       </motion.div>
 
       <motion.div

@@ -6,12 +6,16 @@ import GalleryMy from "./components/GalleryMy";
 import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
+import Pro1 from "./components/Pro1";
+import Pro2 from "./components/Pro2";
+import Pro3 from "./components/Pro3";
 import StarsBackground from "./components/StarsBackground";
 import Wheel from "./components/Wheel";
 import CustomCursor from "./ui/CustomCursor";
 import FeaturedWork from "./ui/FeaturedWork";
 
 // Utilities
+import ScrollManager from "./hooks/ScrollManager";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 
@@ -49,28 +53,35 @@ function App() {
           <SmoothScroll>
             <CustomCursor />
             <Wheel />
-
-            <div
-              className={
-                loading
-                  ? "blur-sm brightness-50 pointer-events-none"
-                  : "blur-0 transition-all duration-500"
-              }
-            >
-              <Suspense fallback={<JelloText />}>
-                <Header />
-                <About />
-                <FeaturedWork />
-                <Skills />
-                <Projects />
-                <Experience />
-                <Personal />
-                <GalleryMy />
-                <Contact />
-                <Footer />
-              </Suspense>
-            </div>
-
+            <ScrollManager>
+              <StarsBackground />
+              <div
+                className={
+                  loading
+                    ? "blur-sm brightness-50 pointer-events-none"
+                    : "blur-0 transition-all duration-500"
+                }
+              >
+                <Suspense fallback={<JelloText />}>
+                  <Header />
+                  {/* <Pro1 />
+                  <Pro2 />
+                  <Pro3 /> */}
+                  <About />
+                  <FeaturedWork />
+                  <Skills />
+                  <Projects />
+                  <Experience />
+                  <Personal />
+                  <Pro1 />
+                  <Pro2 />
+                  <Pro3 />
+                  <GalleryMy />
+                  <Contact />
+                  <Footer />
+                </Suspense>
+              </div>
+            </ScrollManager>
             {loading && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
                 <JelloText />

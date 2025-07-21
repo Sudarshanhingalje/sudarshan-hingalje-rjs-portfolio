@@ -17,13 +17,95 @@
     background-position: 200% center;
   }
 }
+
 .animate-gloss {
   background-image: linear-gradient(
     120deg,
-    rgba(41, 232, 11, 0.995) 0%,
-    rgba(238, 14, 14, 0.35) 45%,
-    rgba(255, 255, 255, 0.05) 100%
+    rgba(0, 200, 255, 0.12) 0%,
+    rgba(0, 255, 200, 0.18) 45%,
+    rgba(255, 255, 255, 0.06) 100%
   );
   background-size: 200% auto;
   animation: gloss 3s linear infinite;
+}
+.starfield {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 9999px;
+  opacity: 0.8;
+  animation: starFall linear infinite;
+}
+.shooting-star {
+  position: absolute;
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(-45deg, white, transparent);
+  transform: rotate(-45deg);
+  opacity: 0.9;
+  animation: shootingStar 2s ease-in-out forwards;
+}
+
+@keyframes starFall {
+  from {
+    transform: translateY(-100vh);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+@keyframes shootingStar {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-150vw, 150vh);
+    opacity: 0;
+  }
+}
+
+@keyframes parallaxSlow {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+@keyframes parallaxFast {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50px);
+  }
+}
+.animate-parallaxSlow {
+  animation: parallaxSlow 60s linear infinite alternate;
+}
+.animate-parallaxFast {
+  animation: parallaxFast 40s linear infinite alternate;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }

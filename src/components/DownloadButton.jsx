@@ -1,11 +1,6 @@
-import confetti from "canvas-confetti";
 import { Check, CloudDownload } from "lucide-react";
 import { useRef, useState } from "react";
 
-/**
- * DownloadButton
- * Dribbble-style 3D download button with glassmorphism → morph-to-circle loader → confetti + tick → reset.
- */
 export default function DownloadButton({
   resumeUrl = "https://drive.google.com/uc?export=download&id=1paE8KgxZGv3nfP2YxYpSy1SJGL7cS86V",
   fileName = "Sudarshan_Hingalje_Resume.pdf",
@@ -47,12 +42,6 @@ export default function DownloadButton({
           clearInterval(intervalRef.current);
           setCompleted(true);
 
-          confetti({
-            particleCount: 80,
-            spread: 70,
-            origin: { y: 0.6 },
-          });
-
           onDownloadComplete?.();
 
           setTimeout(() => {
@@ -84,26 +73,31 @@ export default function DownloadButton({
             : "w-48 h-14 rounded-2xl px-6 gap-2"
         }
 
-        backdrop-blur-md bg-white/10 dark:bg-white/5 border border-white/30
+        backdrop-blur-md
+        bg-white/30 dark:bg-white/10
+        border border-white/20 dark:border-white/10
+        hover:shadow-[0_0_18px_rgba(0,255,255,0.3)]
         shadow-[inset_2px_2px_5px_rgba(255,255,255,0.4),inset_-2px_-2px_6px_rgba(0,0,0,0.25)]
-        hover:scale-[1.07] hover:shadow-2xl text-white font-bold tracking-wide
+        text-white font-semibold tracking-wide
       `}
     >
-      {/* Button Label */}
+      {/* Label */}
       <span
         className={`transition-opacity duration-300 z-10 text-sm flex items-center
           ${downloading ? "opacity-0" : "opacity-100"}`}
       >
-        <CloudDownload size={18} className="mr-1" />
+        <CloudDownload
+          size={26}
+          className="mr-1 text-cyan-500 dark:text-cyan-400"
+        />
         Download Resume
       </span>
 
-      {/* Loader State */}
+      {/* Loader */}
       {downloading && (
         <>
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/30 to-white/5 animate-gloss pointer-events-none" />
+          <div className="absolute inset-0 rounded-full animate-gloss pointer-events-none" />
 
-          {/* Circular Progress Ring */}
           <svg
             className="absolute w-full h-full rotate-[-90deg] pointer-events-none"
             viewBox="0 0 36 36"
@@ -116,7 +110,7 @@ export default function DownloadButton({
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
             <path
-              className="text-green-400"
+              className="text-green-500 dark:text-emerald-400"
               stroke="currentColor"
               strokeWidth="4"
               strokeDasharray={`${progressAngle}, 360`}
@@ -129,10 +123,12 @@ export default function DownloadButton({
             />
           </svg>
 
-          {/* Percentage or Checkmark */}
           <span className="absolute inset-0 flex items-center justify-center z-10 text-white font-bold text-sm">
             {completed ? (
-              <Check className="text-green-400 animate-bounce" size={22} />
+              <Check
+                className="text-green-500 dark:text-emerald-400 animate-bounce"
+                size={22}
+              />
             ) : (
               `${progress}%`
             )}

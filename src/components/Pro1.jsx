@@ -2,7 +2,7 @@ import { ExternalLink } from "lucide-react";
 
 const Projects = () => {
   return (
-    <div className="bg-pink-50 min-h-screen p-8 relative">
+    <div className=" min-h-screen p-8 relative">
       <div className="max-w-6xl mx-auto">
         {/* PROJECTS Title - Rotated */}
         <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
