@@ -1,4 +1,3 @@
-// Header.jsx
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -21,7 +20,6 @@ export default function Header() {
   const [showBubble, setShowBubble] = useState(false);
   const [robotVoice, setRobotVoice] = useState(null);
 
-  // Load robot voice once
   useEffect(() => {
     const loadVoices = () => {
       const voices = window.speechSynthesis.getVoices();
@@ -29,7 +27,6 @@ export default function Header() {
         voices.find((v) => v.name.includes("Microsoft David")) ||
         voices.find((v) => v.name.includes("Google UK English Male")) ||
         voices.find((v) => v.lang === "en-US");
-
       setRobotVoice(selected || null);
     };
 
@@ -69,7 +66,7 @@ export default function Header() {
     <section
       id="header"
       data-speed="1"
-      className="bg-grid-pattern relative h-screen w-full font-cinzel text-white overflow-hidden bg-sky-950"
+      className="relative h-screen w-full font-cinzel overflow-hidden bg-sky-950 dark:bg-[#0e0e10] transition-colors duration-500"
     >
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
 
@@ -79,7 +76,7 @@ export default function Header() {
         initial={{ opacity: 0, y: -80 }}
         animate={{ opacity: [0, 1, 1, 0], y: [-80, 0, 0, -80] }}
         transition={{ duration: 8, ease: "easeInOut" }}
-        className="absolute top-6 left-4 md:left-10 text-3xl sm:text-4xl md:text-5xl font-cinzel tracking-tight text-[#d5cdc4] z-10"
+        className="absolute top-6 left-4 md:left-10 text-3xl sm:text-4xl md:text-5xl font-cinzel tracking-tight text-neutral-800 dark:text-[#d5cdc4] z-10"
       >
         Sudarshan <br /> Hingalje
       </motion.h1>
@@ -90,9 +87,9 @@ export default function Header() {
         transition={{ delay: 6.2, duration: 1.8, ease: "easeOut" }}
         className="absolute top-[30%] left-4 right-4 md:left-10 md:right-auto flex flex-col items-start space-y-6 sm:space-y-8 z-10"
       >
-        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#a994fb]">
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-[6vw] xl:text-[7vw] font-cinzel leading-tight text-[#7b51f0] dark:text-[#a994fb]">
           Full Stack <br />
-          <span className="text-[#ffc857] text-4xl sm:text-5xl md:text-[7vw] font-extrabold">
+          <span className="text-[#ffc857] dark:text-[#fbd85d] text-4xl sm:text-5xl md:text-[7vw] font-extrabold">
             Developer
           </span>
         </p>
