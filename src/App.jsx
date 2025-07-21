@@ -7,7 +7,6 @@ import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
 import StarsBackground from "./components/StarsBackground";
-import ThemeToggle from "./components/ThemeToggle";
 import Wheel from "./components/Wheel";
 import CustomCursor from "./ui/CustomCursor";
 import FeaturedWork from "./ui/FeaturedWork";
@@ -40,7 +39,6 @@ function App() {
 
       {/* Top Right Corner: Dark Mode + Music */}
       <div className="fixed top-4 right-20 z-50 flex items-center gap-4">
-        <ThemeToggle />
         <MusicToggleButton />
       </div>
 
