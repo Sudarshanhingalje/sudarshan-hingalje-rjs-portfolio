@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
-import { FaDownload } from "react-icons/fa";
 import avatar from "../assets/yoga.svg";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
@@ -96,17 +95,16 @@ export default function Header() {
             Developer
           </span>
         </p>
-
-        <div className="flex flex-col sm:flex-row gap-4">
-          <a
-            href={getResumeLink}
-            download
-            className="flex items-center justify-center gap-2 bg-white hover:bg-red-500 text-black font-medium px-6 py-3 rounded-full text-lg sm:text-xl transition duration-300 shadow-md"
-          >
-            <FaDownload />
-            Download CV
-          </a>
-        </div>
+        <motion.a
+          href={getResumeLink()}
+          download
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="group inline-flex items-center gap-2 px-6 py-3 rounded-2xl border border-white text-white font-semibold transition-all duration-300 hover:bg-white hover:text-black"
+        >
+          <Download className="w-5 h-5 transition-transform duration-300 group-hover:-rotate-45" />
+          <span>Download Resume</span>
+        </motion.a>
       </motion.div>
 
       <motion.div
