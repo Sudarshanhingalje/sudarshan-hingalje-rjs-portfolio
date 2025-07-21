@@ -41,8 +41,8 @@ function App() {
       {/* Top Right Corner: Dark Mode + Music */}
       <div className="fixed top-4 right-4 z-50 flex items-center gap-4">
         <ThemeToggle />
-        <MusicToggleButton />
       </div>
+      <MusicToggleButton />
 
       {/* Main Page Content */}
       <div className="relative min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
