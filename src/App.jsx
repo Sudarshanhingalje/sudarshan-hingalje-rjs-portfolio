@@ -27,20 +27,49 @@ const Footer = lazy(() => import("./sections/Footer"));
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) return savedTheme === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isDarkMode) {
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDarkMode]);
+
   return (
     <Main>
       <Toaster position="top-right" reverseOrder={false} />
+
+      {/* Dark/Light Mode Toggle Button */}
+      <div className="fixed top-4 left-4 z-50">
+        <button
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          className="bg-white text-black dark:bg-neutral-800 dark:text-white px-4 py-2 rounded-full shadow-md transition-all duration-300"
+        >
+          {isDarkMode ? "☀️ Light" : "🌙 Dark"}
+        </button>
+      </div>
+
+      {/* Music Toggle Button */}
       <div className="fixed top-4 right-4 mt-4 ml-auto mr-4 z-50">
         <MusicToggleButton />
       </div>
 
-      <div className="relative min-h-screen bg-black bg-opacity-80 text-white">
+      {/* Page Content */}
+      <div className="relative min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
         <ErrorBoundary>
           <StarsBackground />
           <SmoothScroll>
