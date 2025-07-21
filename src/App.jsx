@@ -1,6 +1,8 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
+// Hooks
+
 // Core Components
 import GalleryMy from "./components/GalleryMy";
 import JelloText from "./components/JelloText";
@@ -27,27 +29,12 @@ const Footer = lazy(() => import("./sections/Footer"));
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) return savedTheme === "dark";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
+  const [isDarkMode, setIsDarkMode] = useTheme(); // ✅ Use the custom hook
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    const html = document.documentElement;
-    if (isDarkMode) {
-      html.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      html.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDarkMode]);
 
   return (
     <Main>
