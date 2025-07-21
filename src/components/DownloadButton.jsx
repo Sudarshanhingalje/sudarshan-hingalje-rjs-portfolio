@@ -1,4 +1,4 @@
-import { Check } from "lucide-react"; // ✅ Optional: or use inline SVG
+import { Check } from "lucide-react";
 import { useRef, useState } from "react";
 
 const DownloadButton = () => {
@@ -46,16 +46,19 @@ const DownloadButton = () => {
   return (
     <button
       onClick={handleDownload}
-      className={`relative flex items-center justify-center overflow-hidden text-white font-medium transition-all duration-500 ease-in-out
-        ${downloading ? "w-16 h-16 rounded-full" : "w-44 h-12 rounded-full"}
+      className={`relative flex items-center justify-center overflow-hidden font-semibold transition-all duration-500 ease-in-out transform active:scale-95
+        ${
+          downloading ? "w-16 h-16 rounded-full" : "w-44 h-14 rounded-full px-6"
+        }
         ${
           !downloading
-            ? "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
-            : "bg-blue-600"
+            ? "bg-gradient-to-b from-blue-500 to-blue-700 shadow-lg hover:brightness-110"
+            : "bg-gradient-to-b from-blue-500 to-blue-700"
         }
+        text-white select-none
       `}
     >
-      {/* Initial text */}
+      {/* Text */}
       <span
         className={`z-10 transition-opacity duration-300 ${
           downloading ? "opacity-0" : "opacity-100"
@@ -64,7 +67,7 @@ const DownloadButton = () => {
         Download CV
       </span>
 
-      {/* Loader or tick */}
+      {/* Circular loader */}
       {downloading && (
         <>
           <svg
@@ -73,15 +76,15 @@ const DownloadButton = () => {
           >
             {/* Background ring */}
             <path
-              className="text-white/30 dark:text-white/10"
+              className="text-white/30"
               stroke="currentColor"
               strokeWidth="4"
               fill="none"
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
-            {/* Green progress arc */}
+            {/* Green progress */}
             <path
-              className="text-green-500"
+              className="text-green-400"
               stroke="currentColor"
               strokeWidth="4"
               strokeDasharray={`${progressAngle}, 360`}
@@ -90,10 +93,10 @@ const DownloadButton = () => {
             />
           </svg>
 
-          {/* Show percent or check */}
-          <span className="z-10 text-sm font-bold transition-all duration-300">
+          {/* Text inside circle */}
+          <span className="z-10 text-sm font-bold">
             {completed ? (
-              <Check size={20} className="text-green-500 animate-bounce" />
+              <Check className="text-green-400 animate-bounce" size={20} />
             ) : (
               `${progress}%`
             )}
