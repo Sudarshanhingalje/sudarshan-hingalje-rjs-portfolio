@@ -40,37 +40,43 @@ const DownloadButton = () => {
   return (
     <button
       onClick={handleDownload}
-      className={`relative transition-all duration-500 ease-in-out overflow-hidden text-white font-medium flex items-center justify-center bg-blue-600 ${
-        downloading ? "w-14 h-14 rounded-full" : "w-40 h-12 rounded-full"
-      }`}
+      className={`relative flex items-center justify-center text-white font-medium overflow-hidden transition-all duration-500 ease-in-out
+        ${
+          downloading
+            ? "w-16 h-16 rounded-full"
+            : "w-44 h-12 rounded-full bg-blue-600 hover:bg-blue-700"
+        }
+      `}
     >
-      {/* Static Text (Fade out) */}
+      {/* Show text only when not downloading */}
       <span
-        className={`transition-opacity duration-300 ${
+        className={`z-10 transition-opacity duration-300 ${
           downloading ? "opacity-0" : "opacity-100"
-        } z-10`}
+        }`}
       >
         Download CV
       </span>
 
-      {/* Circular SVG Progress Loader */}
+      {/* Show progress circle when downloading */}
       {downloading && (
         <>
           <svg
-            className="absolute w-full h-full rotate-[-90deg] z-0"
+            className="absolute w-full h-full rotate-[-90deg]"
             viewBox="0 0 36 36"
           >
+            {/* Background ring */}
             <path
-              className="text-blue-500"
+              className="text-gray-300"
               stroke="currentColor"
-              strokeWidth="3"
+              strokeWidth="4"
               fill="none"
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
+            {/* Green progress arc */}
             <path
-              className="text-white"
+              className="text-green-400"
               stroke="currentColor"
-              strokeWidth="3"
+              strokeWidth="4"
               strokeDasharray={`${progressAngle}, 360`}
               fill="none"
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
@@ -84,4 +90,3 @@ const DownloadButton = () => {
 };
 
 export default DownloadButton;
-3;
