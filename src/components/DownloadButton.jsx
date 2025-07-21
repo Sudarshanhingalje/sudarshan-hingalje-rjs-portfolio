@@ -1,8 +1,10 @@
+import { Check } from "lucide-react"; // ✅ Optional: or use inline SVG
 import { useRef, useState } from "react";
 
 const DownloadButton = () => {
   const [downloading, setDownloading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [completed, setCompleted] = useState(false);
   const intervalRef = useRef(null);
 
   const resumeLink =
@@ -13,15 +15,19 @@ const DownloadButton = () => {
 
     setDownloading(true);
     setProgress(0);
+    setCompleted(false);
 
     intervalRef.current = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(intervalRef.current);
+          setCompleted(true);
+
           setTimeout(() => {
             setDownloading(false);
             setProgress(0);
-          }, 900); // delay before morph-back
+            setCompleted(false);
+          }, 1200);
         }
         return Math.min(prev + 5, 100);
       });
@@ -40,15 +46,16 @@ const DownloadButton = () => {
   return (
     <button
       onClick={handleDownload}
-      className={`relative flex items-center justify-center text-white font-medium overflow-hidden transition-all duration-500 ease-in-out
+      className={`relative flex items-center justify-center overflow-hidden text-white font-medium transition-all duration-500 ease-in-out
+        ${downloading ? "w-16 h-16 rounded-full" : "w-44 h-12 rounded-full"}
         ${
-          downloading
-            ? "w-16 h-16 rounded-full"
-            : "w-44 h-12 rounded-full bg-blue-600 hover:bg-blue-700"
+          !downloading
+            ? "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+            : "bg-blue-600"
         }
       `}
     >
-      {/* Static Text when not downloading */}
+      {/* Initial text */}
       <span
         className={`z-10 transition-opacity duration-300 ${
           downloading ? "opacity-0" : "opacity-100"
@@ -57,16 +64,16 @@ const DownloadButton = () => {
         Download CV
       </span>
 
-      {/* Downloading animation */}
+      {/* Loader or tick */}
       {downloading && (
         <>
           <svg
             className="absolute w-full h-full rotate-[-90deg]"
             viewBox="0 0 36 36"
           >
-            {/* Light gray ring */}
+            {/* Background ring */}
             <path
-              className="text-gray-300"
+              className="text-white/30 dark:text-white/10"
               stroke="currentColor"
               strokeWidth="4"
               fill="none"
@@ -82,7 +89,15 @@ const DownloadButton = () => {
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
           </svg>
-          <span className="text-sm font-bold z-10">{progress}%</span>
+
+          {/* Show percent or check */}
+          <span className="z-10 text-sm font-bold transition-all duration-300">
+            {completed ? (
+              <Check size={20} className="text-green-500 animate-bounce" />
+            ) : (
+              `${progress}%`
+            )}
+          </span>
         </>
       )}
     </button>
