@@ -39,7 +39,7 @@ function App() {
       <Toaster position="top-right" reverseOrder={false} />
 
       {/* Dark/Light Mode Toggle Button */}
-      <div className="fixed top-4 left-4 z-50">
+      <div className="fixed top-4 right-4 mt-4 ml-auto mr-4 z-50">
         <ThemeToggle />
       </div>
 
