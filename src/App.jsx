@@ -13,6 +13,7 @@ import StarsBackground from "./components/StarsBackground";
 import Wheel from "./components/Wheel";
 import CustomCursor from "./ui/CustomCursor";
 import FeaturedWork from "./ui/FeaturedWork";
+import ThemeToggle from "./components/ThemeToggle";
 
 // Utilities
 import ErrorBoundary from "./utils/ErrorBoundary";
@@ -43,6 +44,7 @@ function App() {
 
       {/* Dark/Light Mode Toggle Button */}
       <div className="fixed top-4 left-4 z-50">
+        <ThemeToggle />
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
           className="bg-white text-black dark:bg-neutral-800 dark:text-white px-4 py-2 rounded-full shadow-md transition-all duration-300"
