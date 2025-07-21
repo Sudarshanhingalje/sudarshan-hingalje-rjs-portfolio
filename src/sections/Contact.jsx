@@ -48,23 +48,24 @@ const Contact = () => {
     e.preventDefault();
     try {
       await emailjs.sendForm(
-        "service_ec6uvv4",
-        "template_ifxi8iv",
+        import.meta.env.VITE_EMAILJS_SERVICE,
+        import.meta.env.VITE_EMAILJS_TEMPLATE1,
         formRef.current,
-        "2J7MxQtB47nOOr14W"
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
+
       await emailjs.send(
-        "service_ec6uvv4",
-        "template_q4leu5r",
+        import.meta.env.VITE_EMAILJS_SERVICE,
+        import.meta.env.VITE_EMAILJS_TEMPLATE2,
         {
           name: formData.name,
           email: formData.email,
           message: formData.message,
         },
-        "2J7MxQtB47nOOr14W"
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
-      toast.success("Message sent successfully to sudarshan!");
+      toast.success("Message sent successfully to Sudarshan!");
       setFormData({
         reason: "",
         name: "",
