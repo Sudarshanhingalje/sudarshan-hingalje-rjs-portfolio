@@ -40,7 +40,7 @@ export default function DownloadButton({
     onDownloadStart?.();
     triggerDownload();
 
-    const progressSteps = [1, 25, 50, 75, 100];
+    const progressSteps = [1, 10, 20, +100];
     let index = 0;
 
     intervalRef.current = setInterval(() => {
