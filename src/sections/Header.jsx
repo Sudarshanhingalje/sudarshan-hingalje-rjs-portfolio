@@ -99,12 +99,14 @@ export default function Header() {
         <motion.a
           href={getResumeLink()}
           download
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="group inline-flex items-center gap-2 px-6 py-3 rounded-2xl border border-white text-white font-semibold transition-all duration-300 hover:bg-white hover:text-black"
+          className="group inline-flex items-center border border-white rounded-full px-6 py-3 text-white font-medium transition-all duration-300 hover:bg-white hover:text-black"
         >
-          <Download className="w-5 h-5 transition-transform duration-300 group-hover:-rotate-45" />
-          <span>Download Resume</span>
+          <Download className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:-rotate-45" />
+          Resume
         </motion.a>
       </motion.div>
 
