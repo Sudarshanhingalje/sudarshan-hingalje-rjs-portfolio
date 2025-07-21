@@ -16,6 +16,9 @@ export default {
       fontSize: {
         "18vw": "18vw",
       },
+      backdropBlur: {
+        xs: "2px",
+      },
       perspective: {
         1000: "1000px",
       },
