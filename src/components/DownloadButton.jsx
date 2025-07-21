@@ -1,5 +1,5 @@
 import confetti from "canvas-confetti";
-import { Check } from "lucide-react";
+import { Check, CloudDownload } from "lucide-react";
 import { useRef, useState } from "react";
 
 /**
@@ -77,19 +77,24 @@ export default function DownloadButton({
       title="Download Sudarshan Hingalje Resume"
       className={`
         relative select-none overflow-hidden flex items-center justify-center
-        transition-all duration-700 ease-in-out
-        ${downloading ? "w-14 h-14 rounded-full" : "w-48 h-14 rounded-2xl px-6"}
+        transition-all duration-700 ease-[cubic-bezier(0.86,0,0.07,1)]
+        ${
+          downloading
+            ? "w-14 h-14 rounded-full"
+            : "w-48 h-14 rounded-2xl px-6 gap-2"
+        }
 
         backdrop-blur-md bg-white/10 dark:bg-white/5 border border-white/30
         shadow-[inset_2px_2px_5px_rgba(255,255,255,0.4),inset_-2px_-2px_6px_rgba(0,0,0,0.25)]
-        hover:scale-[1.05] hover:shadow-xl text-white font-bold tracking-wide
+        hover:scale-[1.07] hover:shadow-2xl text-white font-bold tracking-wide
       `}
     >
       {/* Button Label */}
       <span
-        className={`transition-opacity duration-300 z-10 text-sm
+        className={`transition-opacity duration-300 z-10 text-sm flex items-center
           ${downloading ? "opacity-0" : "opacity-100"}`}
       >
+        <CloudDownload size={18} className="mr-1" />
         Download Resume
       </span>
 
@@ -116,7 +121,10 @@ export default function DownloadButton({
               strokeWidth="4"
               strokeDasharray={`${progressAngle}, 360`}
               fill="none"
-              style={{ transition: "stroke-dasharray 0.3s ease-out" }}
+              style={{
+                transition:
+                  "stroke-dasharray 0.5s cubic-bezier(0.77, 0, 0.175, 1)",
+              }}
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
           </svg>
