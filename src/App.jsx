@@ -1,16 +1,13 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
-// Hooks
-import useTheme from "./hooks/UseTheme"; // ✅ Import the custom hook useTheme";
-
 // Core Components
 import GalleryMy from "./components/GalleryMy";
 import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
 import StarsBackground from "./components/StarsBackground";
-import ThemeToggle from "./components/ThemeToggle";
+import ThemeToggle from "./components/ThemeToggle"; // ✅ Your custom styled toggle button
 import Wheel from "./components/Wheel";
 import CustomCursor from "./ui/CustomCursor";
 import FeaturedWork from "./ui/FeaturedWork";
@@ -31,7 +28,6 @@ const Footer = lazy(() => import("./sections/Footer"));
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useTheme(); // ✅ Use the custom hook
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3000);
@@ -45,12 +41,6 @@ function App() {
       {/* Dark/Light Mode Toggle Button */}
       <div className="fixed top-4 left-4 z-50">
         <ThemeToggle />
-        <button
-          onClick={() => setIsDarkMode(!isDarkMode)}
-          className="bg-white text-black dark:bg-neutral-800 dark:text-white px-4 py-2 rounded-full shadow-md transition-all duration-300"
-        >
-          {isDarkMode ? "☀️ Light" : "🌙 Dark"}
-        </button>
       </div>
 
       {/* Music Toggle Button */}
