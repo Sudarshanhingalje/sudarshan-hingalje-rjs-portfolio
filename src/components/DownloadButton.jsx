@@ -44,11 +44,10 @@ const DownloadButton = () => {
         ${
           downloading
             ? "w-16 h-16 rounded-full"
-            : "w-44 h-12 rounded-full bg-blue-600 hover:bg-blue-700"
+            : "w-44 h-12 rounded-full bg-blue-500 hover:bg-blue-600"
         }
       `}
     >
-      {/* Show text only when not downloading */}
       <span
         className={`z-10 transition-opacity duration-300 ${
           downloading ? "opacity-0" : "opacity-100"
@@ -57,24 +56,23 @@ const DownloadButton = () => {
         Download CV
       </span>
 
-      {/* Show progress circle when downloading */}
       {downloading && (
         <>
           <svg
             className="absolute w-full h-full rotate-[-90deg]"
             viewBox="0 0 36 36"
           >
-            {/* Background ring */}
+            {/* Light ring background */}
             <path
-              className="text-gray-300"
+              className="text-white"
               stroke="currentColor"
               strokeWidth="4"
               fill="none"
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
-            {/* Green progress arc */}
+            {/* Progress arc in same blue */}
             <path
-              className="text-green-400"
+              className="text-blue-500"
               stroke="currentColor"
               strokeWidth="4"
               strokeDasharray={`${progressAngle}, 360`}
