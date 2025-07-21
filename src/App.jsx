@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 // Hooks
+import useTheme from "./hooks/UseTheme"; // ✅ Import the custom hook useTheme";
 
 // Core Components
 import GalleryMy from "./components/GalleryMy";
