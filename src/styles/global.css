@@ -9,3 +9,23 @@
   background-size: 40px 40px;
   background-position: center;
 }
+/* Add to your globals.css or tailwind layer */
+@keyframes gloss {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-gloss {
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  background-size: 200% auto;
+  animation: gloss 3s linear infinite;
+}
