@@ -38,7 +38,7 @@ function App() {
       <Toaster position="top-right" reverseOrder={false} />
 
       {/* Top Right Corner: Dark Mode + Music */}
-      <div className="fixed top-4 right-20 z-50 ">
+      <div className="fixed top-3 right-20 z-50 ">
         <MusicToggleButton />
       </div>
 
