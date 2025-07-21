@@ -30,7 +30,7 @@ export default function FeaturedTechNames() {
   return (
     <section
       ref={ref}
-      className="relative h-[80vh] overflow-hidden flex items-center justify-center bg-black"
+      className="relative h-[80vh] overflow-hidden flex items-center justify-center "
     >
       <motion.div
         style={{ x: baseX }}
