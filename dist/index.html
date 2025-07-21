@@ -8,7 +8,7 @@
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
         var f = d.getElementsByTagName(s)[0],
           j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
+          dl = l !== "dataLayer" ? "&l=" + l : "";
         j.async = true;
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
@@ -16,36 +16,26 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google Analytics GA4 (separate tag) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-8T9S6CMZMG"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-8T9S6CMZMG");
-    </script>
-
-    <!-- Meta tags (SEO + Social) -->
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Sudarshan Hingalje" />
     <meta
       name="description"
-      content="I'm Sudarshan Hingalje, a Full Stack Developer..."
+      content="I'm Sudarshan Hingalje, a Full Stack Developer specializing in ReactJS, Java, and modern web technologies. Explore my portfolio, projects, and skills here."
     />
     <meta
       name="keywords"
-      content="Sudarshan Hingalje, Full Stack Developer..."
+      content="Sudarshan Hingalje, Full Stack Web Developer, MERN Stack Developer, ReactJS Developer, Java Developer, Portfolio, Tailwind CSS"
     />
 
+    <!-- Open Graph Meta -->
     <meta property="og:title" content="Sudarshan Hingalje Portfolio" />
-    <meta property="og:description" content="Explore the portfolio..." />
+    <meta
+      property="og:description"
+      content="Explore the portfolio of Sudarshan Hingalje – Full Stack Developer skilled in React, Java, and more."
+    />
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -56,18 +46,25 @@
       content="https://sudarshanhingalje-portfolio.netlify.app/og-image.png"
     />
 
+    <!-- Twitter Meta -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Sudarshan Hingalje Portfolio" />
-    <meta name="twitter:description" content="Web Developer Portfolio..." />
+    <meta
+      name="twitter:description"
+      content="Web Developer Portfolio - React, Java, and more."
+    />
     <meta
       name="twitter:image"
       content="https://sudarshanhingalje-portfolio.netlify.app/og-image.png"
     />
 
+    <!-- Canonical -->
     <link
       rel="canonical"
       href="https://sudarshanhingalje-portfolio.netlify.app/"
     />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Fonts -->
@@ -94,6 +91,7 @@
       rel="stylesheet"
     />
 
+    <!-- Title -->
     <title>Sudarshan Hingalje | Portfolio</title>
 
     <!-- JSON-LD Structured Data -->
@@ -109,7 +107,7 @@
           "@type": "CollegeOrUniversity",
           "name": "CDAC (Centre for Development of Advanced Computing)"
         },
-        "description": "Full Stack Developer skilled in ReactJS, Java, Spring Boot, and Tailwind CSS...",
+        "description": "Full Stack Developer skilled in ReactJS, Java, Spring Boot, and Tailwind CSS. Open to freelance and full-time opportunities.",
         "email": "mailto:sudarshanhingalje1@gmail.com",
         "address": {
           "@type": "PostalAddress",
@@ -125,7 +123,7 @@
           "employmentType": "FULL_TIME",
           "industry": "Information Technology",
           "jobLocationType": "TELECOMMUTE",
-          "description": "Looking for full-time opportunities..."
+          "description": "Looking for full-time opportunities in full stack web development. Skilled in ReactJS, Java, Spring Boot, and REST APIs."
         }
       }
     </script>
@@ -158,6 +156,7 @@
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
+    <!-- React Mount Point -->
     <div id="root"></div>
 
     <!-- Scripts -->
