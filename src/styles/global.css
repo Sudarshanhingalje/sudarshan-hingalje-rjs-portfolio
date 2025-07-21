@@ -2,7 +2,7 @@
 .bg-grid-pattern {
   background-image: linear-gradient(
       to right,
-      rgba(3, 0, 0, 0.05) 1px,
+      rgba(233, 10, 10, 0.05) 1px,
       transparent 1px
     ),
     linear-gradient(to bottom, rgba(7, 0, 0, 0.016) 1px, transparent 1px);
@@ -20,8 +20,8 @@
 .animate-gloss {
   background-image: linear-gradient(
     120deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.35) 45%,
+    rgba(41, 232, 11, 0.995) 0%,
+    rgba(238, 14, 14, 0.35) 45%,
     rgba(255, 255, 255, 0.05) 100%
   );
   background-size: 200% auto;
