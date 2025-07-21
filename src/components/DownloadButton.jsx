@@ -44,36 +44,40 @@ export default function DownloadButton({
 
     // Start the real download right away
     triggerDownload();
+const progressSteps = [1, 25, 50, 75, 100];
+let index = 0;
 
-    // Simulated progress (tapered finish if you like—simple linear here)
-    intervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + 2; // adjust speed
-        if (next >= 100) {
-          clearInterval(intervalRef.current);
-          setCompleted(true);
+intervalRef.current = setInterval(() => {
+  setProgress(() => {
+    const next = progressSteps[index];
+    index++;
 
-          // Confetti burst
-          confetti({
-            particleCount: 80,
-            spread: 70,
-            origin: { y: 0.6 },
-          });
+    if (index >= progressSteps.length) {
+      clearInterval(intervalRef.current);
+      setCompleted(true);
 
-          // Fire analytics hook
-          onDownloadComplete?.();
-
-          // Reset after delay
-          setTimeout(() => {
-            setDownloading(false);
-            setProgress(0);
-            setCompleted(false);
-          }, 1500);
-        }
-        return Math.min(next, 100);
+      // Confetti burst
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
       });
-    }, 100);
-  };
+
+      // Fire analytics hook
+      onDownloadComplete?.();
+
+      // Reset after delay
+      setTimeout(() => {
+        setDownloading(false);
+        setProgress(0);
+        setCompleted(false);
+      }, 1500);
+    }
+
+    return next;
+  });
+}, 600); // show each step every 600ms
+
 
   const progressAngle = (progress / 100) * 360;
 
