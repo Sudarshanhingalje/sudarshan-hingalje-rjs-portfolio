@@ -21,7 +21,7 @@ const DownloadButton = () => {
           setTimeout(() => {
             setDownloading(false);
             setProgress(0);
-          }, 800);
+          }, 900); // delay before morph-back
         }
         return Math.min(prev + 5, 100);
       });
@@ -44,10 +44,11 @@ const DownloadButton = () => {
         ${
           downloading
             ? "w-16 h-16 rounded-full"
-            : "w-44 h-12 rounded-full bg-blue-500 hover:bg-blue-600"
+            : "w-44 h-12 rounded-full bg-blue-600 hover:bg-blue-700"
         }
       `}
     >
+      {/* Static Text when not downloading */}
       <span
         className={`z-10 transition-opacity duration-300 ${
           downloading ? "opacity-0" : "opacity-100"
@@ -56,23 +57,24 @@ const DownloadButton = () => {
         Download CV
       </span>
 
+      {/* Downloading animation */}
       {downloading && (
         <>
           <svg
             className="absolute w-full h-full rotate-[-90deg]"
             viewBox="0 0 36 36"
           >
-            {/* Light ring background */}
+            {/* Light gray ring */}
             <path
-              className="text-white"
+              className="text-gray-300"
               stroke="currentColor"
               strokeWidth="4"
               fill="none"
               d="M18 2a16 16 0 1 1 0 32 16 16 0 1 1 0-32"
             />
-            {/* Progress arc in same blue */}
+            {/* Green progress arc */}
             <path
-              className="text-blue-500"
+              className="text-green-500"
               stroke="currentColor"
               strokeWidth="4"
               strokeDasharray={`${progressAngle}, 360`}
