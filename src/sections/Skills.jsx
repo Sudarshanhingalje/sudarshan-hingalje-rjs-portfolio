@@ -7,11 +7,12 @@ const Skills = () => {
   const [activeCategory, setActiveCategory] = useState(
     skillsLerned[0].category
   );
+  // bg-black bg-opacity-80
   useModernScrollReveal();
   return (
     <section
       id="skills"
-      className="min-h-screen bg-black bg-opacity-80 text-white py-20 px-4 md:px-8"
+      className="min-h-screen  text-white py-20 px-4 md:px-8"
     >
       <h2 className="text-4xl font-cinzel font-bold text-center text-yellow-300 mb-16">
         Tech Stack
