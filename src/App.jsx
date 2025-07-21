@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 // Hooks
-import useTheme from "./hooks/UseTheme"; // ✅ Import the custom hook useTheme";
 
 // Core Components
 import GalleryMy from "./components/GalleryMy";
@@ -31,7 +30,6 @@ const Footer = lazy(() => import("./sections/Footer"));
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useTheme(); // ✅ Use the custom hook
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3000);
