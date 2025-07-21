@@ -10,10 +10,10 @@ import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
 import StarsBackground from "./components/StarsBackground";
+import ThemeToggle from "./components/ThemeToggle";
 import Wheel from "./components/Wheel";
 import CustomCursor from "./ui/CustomCursor";
 import FeaturedWork from "./ui/FeaturedWork";
-import ThemeToggle from "./components/ThemeToggle";
 
 // Utilities
 import ErrorBoundary from "./utils/ErrorBoundary";
