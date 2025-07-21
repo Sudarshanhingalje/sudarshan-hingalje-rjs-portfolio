@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class", // <-- move this here!
   theme: {
     extend: {
       fontFamily: {
@@ -10,7 +11,6 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
         script: ['"Great Vibes"', "cursive"],
         elegant: ['"Playfair Display"', "serif"],
-
         jello: ["GT-Flexa", "sans-serif"],
       },
       fontSize: {
@@ -22,7 +22,6 @@ export default {
       perspective: {
         1000: "1000px",
       },
-
       colors: {
         neutral: {
           900: "#1a1a1a",
@@ -30,8 +29,6 @@ export default {
           700: "#3a3a3a",
         },
       },
-
-      darkMode: "class",
     },
   },
   plugins: [],
