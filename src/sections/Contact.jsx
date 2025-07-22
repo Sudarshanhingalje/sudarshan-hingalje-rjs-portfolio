@@ -1,13 +1,10 @@
 // src/sections/Contact.jsx
 import emailjs from "@emailjs/browser";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
-
-// ✅ Import Footer here
-import Footer from "./Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -96,15 +93,20 @@ const Contact = () => {
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className=" space-y-6 confim-form"
+          className="space-y-6 confim-form"
         >
+          {/* Reason */}
           <div>
-            <label className="block text-sm font-medium mb-1">Reason</label>
+            <label htmlFor="reason" className="block text-sm font-medium mb-1">
+              Reason
+            </label>
             <select
+              id="reason"
               name="reason"
               value={formData.reason}
               onChange={handleChange}
               required
+              autoComplete="reason"
               className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
             >
               <option value="">Select a reason</option>
@@ -116,58 +118,79 @@ const Contact = () => {
             </select>
           </div>
 
+          {/* Name + Email */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-1">Name</label>
+              <label htmlFor="name" className="block text-sm font-medium mb-1">
+                Name
+              </label>
               <input
-                type="text"
+                id="name"
                 name="name"
+                type="text"
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
                 required
+                autoComplete="name"
                 className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
               />
             </div>
+
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium mb-1">
+                Email
+              </label>
               <input
-                type="email"
+                id="email"
                 name="email"
+                type="email"
                 placeholder="you@example.com"
                 value={formData.email}
                 onChange={handleChange}
                 required
+                autoComplete="email"
                 className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
               />
             </div>
           </div>
 
+          {/* Phone */}
           <div>
-            <label className="block text-sm font-medium mb-1">Phone</label>
+            <label htmlFor="phone" className="block text-sm font-medium mb-1">
+              Phone
+            </label>
             <input
-              type="tel"
+              id="phone"
               name="phone"
+              type="tel"
               placeholder="Your Phone Number"
               value={formData.phone}
               onChange={handleChange}
+              autoComplete="tel"
               className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
             />
           </div>
 
+          {/* Message */}
           <div>
-            <label className="block text-sm font-medium mb-1">Message</label>
+            <label htmlFor="message" className="block text-sm font-medium mb-1">
+              Message
+            </label>
             <textarea
+              id="message"
               name="message"
               placeholder="Your message"
               value={formData.message}
               onChange={handleChange}
               required
+              autoComplete="off"
               rows={5}
               className="w-full px-4 py-3 rounded bg-neutral-900 border border-neutral-700 focus:outline-none"
             />
           </div>
 
+          {/* Submit */}
           <div>
             <button
               type="submit"

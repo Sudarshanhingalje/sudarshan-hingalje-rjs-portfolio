@@ -32,9 +32,9 @@ const GalleryScroll = ({
         ref={containerRef}
         className={`absolute flex gap-10 whitespace-nowrap text-white items-center font-semibold ${fontSize}`}
       >
-        {Array.from({ length: 2 }).flatMap(() =>
-          Array.from({ length: 50 }).map((_, i) => (
-            <span key={i} className="mx-5">
+        {Array.from({ length: 2 }).flatMap((_, outerIndex) =>
+          Array.from({ length: 50 }).map((_, innerIndex) => (
+            <span key={`scroll-${outerIndex}-${innerIndex}`} className="mx-5">
               {text}
             </span>
           ))
@@ -44,24 +44,20 @@ const GalleryScroll = ({
   );
 };
 
-// IMAGE SCROLLER - INFINITE LOOP
+// IMAGE SCROLLER
 const GalleryRow = ({ direction = 1, speed = 30 }) => {
   const x = useRef(0);
   const containerRef = useRef();
 
-  // Duplicate once for seamless loop
-  const images = [...certificateImages, ...certificateImages];
+  const images = [...certificateImages, ...certificateImages]; // duplicated for seamless loop
 
   useAnimationFrame((_, delta) => {
     if (!containerRef.current) return;
-
     x.current += (direction * speed * delta) / 1000;
     const totalWidth = containerRef.current.scrollWidth / 2;
-
     if (Math.abs(x.current) >= totalWidth) {
       x.current = 0;
     }
-
     containerRef.current.style.transform = `translateX(${x.current}px)`;
   });
 
@@ -71,9 +67,9 @@ const GalleryRow = ({ direction = 1, speed = 30 }) => {
         ref={containerRef}
         className="flex gap-6 w-fit px-10 transition-transform duration-75 ease-linear"
       >
-        {images.map((id, i) => (
+        {images.map((id, index) => (
           <li
-            key={`img-${i}`}
+            key={`img-${index}-${id}`}
             className="w-[clamp(200px,30vw,400px)] max-h-[300px] rounded-xl bg-white overflow-hidden shadow-lg"
           >
             <img
@@ -88,7 +84,7 @@ const GalleryRow = ({ direction = 1, speed = 30 }) => {
   );
 };
 
-// COMPOSED COMPONENT
+// FINAL COMPONENT
 const GalleryMy = () => {
   return (
     <div className="w-full m-0 p-0 leading-none font-cinzel">
@@ -99,13 +95,8 @@ const GalleryMy = () => {
         fontSize="text-[6vw]"
         speed={250}
       />
-
-      {/* First Infinite Image Row (left) */}
       <GalleryRow direction={-1} speed={130} />
-
-      {/* Second Infinite Image Row (right) */}
       <GalleryRow direction={1} speed={50} />
-
       <GalleryScroll
         direction={1}
         text="Achievements Gallery"

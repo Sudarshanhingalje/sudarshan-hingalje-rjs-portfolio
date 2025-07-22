@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useState } from "react";
 import avatar from "../assets/yoga.svg";
 import DownloadButton from "../components/DownloadButton";

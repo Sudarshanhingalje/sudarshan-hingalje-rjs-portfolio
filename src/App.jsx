@@ -6,15 +6,12 @@ import GalleryMy from "./components/GalleryMy";
 import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
-import Pro1 from "./components/Pro1";
-import Pro2 from "./components/Pro2";
-import Pro3 from "./components/Pro3";
-import StarsBackground from "./components/StarsBackground";
 import Wheel from "./components/Wheel";
 import CustomCursor from "./ui/CustomCursor";
 import FeaturedWork from "./ui/FeaturedWork";
 
 // Utilities
+import GalaxyBackground from "./components/GalaxyBackground";
 import ScrollManager from "./hooks/ScrollManager";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
@@ -41,20 +38,18 @@ function App() {
     <Main>
       <Toaster position="top-right" reverseOrder={false} />
 
-      {/* Top Right Corner: Dark Mode + Music */}
       <div className="fixed top-3 right-20 z-50 ">
         <MusicToggleButton />
       </div>
 
-      {/* Main Page Content */}
       <div className="relative min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
         <ErrorBoundary>
-          <StarsBackground />
           <SmoothScroll>
             <CustomCursor />
             <Wheel />
             <ScrollManager>
-              <StarsBackground />
+              <GalaxyBackground />
+
               <div
                 className={
                   loading
@@ -64,18 +59,14 @@ function App() {
               >
                 <Suspense fallback={<JelloText />}>
                   <Header />
-                  {/* <Pro1 />
-                  <Pro2 />
-                  <Pro3 /> */}
+
                   <About />
                   <FeaturedWork />
                   <Skills />
                   <Projects />
                   <Experience />
                   <Personal />
-                  <Pro1 />
-                  <Pro2 />
-                  <Pro3 />
+
                   <GalleryMy />
                   <Contact />
                   <Footer />
