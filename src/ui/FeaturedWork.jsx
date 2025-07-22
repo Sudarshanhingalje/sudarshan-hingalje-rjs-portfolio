@@ -17,7 +17,7 @@ export default function FeaturedTechNames() {
       const direction = currentScrollY > lastScrollY ? -1 : 1;
       lastScrollY = currentScrollY;
 
-      baseX.set(baseX.get() + direction * 2);
+      baseX.set(baseX.get() + direction * 5);
 
       animationFrameId = requestAnimationFrame(animate);
     };

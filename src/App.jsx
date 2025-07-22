@@ -1,18 +1,19 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
-// Core Components
-import GalleryMy from "./components/GalleryMy";
-import JelloText from "./components/JelloText";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
 import Wheel from "./components/Wheel";
-import CustomCursor from "./ui/CustomCursor";
 import FeaturedWork from "./ui/FeaturedWork";
 
 // Utilities
+import { Loader } from "lucide-react";
 import GalaxyBackground from "./components/GalaxyBackground";
+import GalleryMy from "./components/GalleryMy";
+import StarsBackground from "./components/StarsBackground";
 import ScrollManager from "./hooks/ScrollManager";
+import useTheme from "./hooks/useTheme";
+import VideoPopup from "./ui/VideoPopup";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 
@@ -28,6 +29,12 @@ const Footer = lazy(() => import("./sections/Footer"));
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isDarkMode] = useTheme();
+
+  useEffect(() => {
+    const html = document.documentElement;
+    html.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 3000);
@@ -38,17 +45,22 @@ function App() {
     <Main>
       <Toaster position="top-right" reverseOrder={false} />
 
-      <div className="fixed top-3 right-20 z-50 ">
+      <div className="fixed top-3 right-20 z-50">
         <MusicToggleButton />
       </div>
 
       <div className="relative min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
         <ErrorBoundary>
           <SmoothScroll>
-            <CustomCursor />
+            {/* <CustomCursor /> */}
             <Wheel />
             <ScrollManager>
-              <GalaxyBackground />
+              {isDarkMode && (
+                <>
+                  <GalaxyBackground />
+                  <StarsBackground />
+                </>
+              )}
 
               <div
                 className={
@@ -57,25 +69,26 @@ function App() {
                     : "blur-0 transition-all duration-500"
                 }
               >
-                <Suspense fallback={<JelloText />}>
+                <Suspense fallback={<Loader />}>
                   <Header />
-
+                  <VideoPopup />
                   <About />
                   <FeaturedWork />
                   <Skills />
                   <Projects />
                   <Experience />
                   <Personal />
-
                   <GalleryMy />
                   <Contact />
                   <Footer />
                 </Suspense>
               </div>
             </ScrollManager>
+
+            {/* Loader overlay */}
             {loading && (
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
-                <JelloText />
+                <Loader />
               </div>
             )}
           </SmoothScroll>

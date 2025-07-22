@@ -1,4 +1,3 @@
-// GalaxyBackground.jsx
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
@@ -7,20 +6,14 @@ export default function GalaxyBackground() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-
-    // Set up renderer
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    // Set up scene and camera
     const scene = new THREE.Scene();
     const camera = new THREE.Camera();
     camera.position.z = 1;
 
-    // Fullscreen plane
     const geometry = new THREE.PlaneGeometry(2, 2);
-
-    // Shader material
     const material = new THREE.ShaderMaterial({
       uniforms: {
         u_time: { value: 0 },
@@ -47,8 +40,6 @@ export default function GalaxyBackground() {
           vec2 pos = uv - 0.5;
           float dist = length(pos);
           float brightness = smoothstep(0.5, 0.0, dist);
-
-          // Twinkling stars
           float stars = step(0.995, random(floor(gl_FragCoord.xy * 0.5)));
           float twinkle = sin(u_time * 5.0 + dist * 50.0) * 0.5 + 0.5;
 
@@ -63,7 +54,6 @@ export default function GalaxyBackground() {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // Resize listener
     const onResize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       material.uniforms.u_resolution.value.set(
@@ -73,7 +63,6 @@ export default function GalaxyBackground() {
     };
     window.addEventListener("resize", onResize);
 
-    // Animation loop
     const start = Date.now();
     const animate = () => {
       material.uniforms.u_time.value = (Date.now() - start) * 0.001;
@@ -82,7 +71,6 @@ export default function GalaxyBackground() {
     };
     animate();
 
-    // Cleanup
     return () => {
       window.removeEventListener("resize", onResize);
       renderer.dispose();
@@ -90,6 +78,6 @@ export default function GalaxyBackground() {
   }, []);
 
   return (
-    <canvas ref={canvasRef} className="fixed inset-0 -z-20 dark:block hidden" />
+    <canvas ref={canvasRef} className="fixed inset-0 -z-20 w-full h-full" />
   );
 }

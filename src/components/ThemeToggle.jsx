@@ -1,5 +1,5 @@
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
-import useTheme from "../hooks/UseTheme";
+import useTheme from "../hooks/useTheme";
 
 const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useTheme();

@@ -29,6 +29,20 @@ export default {
           700: "#3a3a3a",
         },
       },
+      keyframes: {
+        twinkle: {
+          "0%, 100%": { opacity: "0.2" },
+          "50%": { opacity: "1" },
+        },
+        shooting: {
+          "0%": { transform: "translateX(0)", opacity: 1 },
+          "100%": { transform: "translateX(-100vw)", opacity: 0 },
+        },
+      },
+      animation: {
+        twinkle: "twinkle 20s ease-in-out infinite",
+        shooting: "shooting 2s linear forwards",
+      },
     },
   },
   plugins: [],

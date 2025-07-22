@@ -1,29 +1,46 @@
+import { useEffect, useState } from "react";
+import GoalCard from "../components/GoalCard";
+import SectionHeader from "../components/SectionHeader";
 import { goals } from "../data/goals/Goals";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 export default function Personal() {
+  const [activeGoal, setActiveGoal] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
   useModernScrollReveal();
 
-  return (
-    <section id="personal" className="py-20 px-6 sm:px-12 lg:px-20 text-white">
-      <div className="max-w-7xl mx-auto text-center">
-        <p className="mb-4 text-sm font-semibold text-cyan-400 border border-cyan-400 px-4 py-1 inline-block rounded-full">
-          My Roadmap
-        </p>
-        <h2 className="text-4xl sm:text-5xl font-bold mb-12">Career Goals</h2>
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 200);
+    return () => clearTimeout(timer);
+  }, []);
 
-        <div className="grid md:grid-cols-3 gap-8">
+  const handleGoalSelect = (index) => {
+    setActiveGoal(index);
+    setIsPaused(true);
+
+    setTimeout(() => setIsPaused(false), 10000);
+  };
+
+  return (
+    <section
+      id="personal"
+      className="py-20 px-6 sm:px-12 lg:px-20 text-white min-h-screen "
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div className="max-w-7xl mx-auto">
+        <SectionHeader isVisible={isVisible} />
+
+        <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {goals.map((goal, index) => (
-            <div
-              key={index}
-              className=" bg-[#121212] border border-gray-700 rounded-2xl p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300"
-            >
-              <div className="mb-4">{goal.icon}</div>
-              <h3 className="text-xl font-semibold mb-3">{goal.title}</h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                {goal.description}
-              </p>
-            </div>
+            <GoalCard
+              key={goal.id}
+              goal={goal}
+              index={index}
+              onClick={handleGoalSelect}
+            />
           ))}
         </div>
       </div>

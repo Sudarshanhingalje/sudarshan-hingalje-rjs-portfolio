@@ -10,6 +10,7 @@ import StarsBackground from "../components/StarsBackground";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
+import useTheme from "../hooks/useTheme";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +22,7 @@ export default function Header() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [showBubble, setShowBubble] = useState(false);
   const [robotVoice, setRobotVoice] = useState(null);
+  const [isDarkMode] = useTheme();
 
   useEffect(() => {
     const loadVoices = () => {
@@ -68,11 +70,17 @@ export default function Header() {
     <section
       id="header"
       data-speed="1"
-      className="relative h-screen w-full font-cinzel overflow-hidden transition-colors duration-500 bg-white text-black dark:bg-black dark:text-white"
+      className="relative h-screen w-full font-cinzel overflow-hidden transition-colors duration-500 bg-white-100 text-black dark:bg-black dark:text-white"
     >
+      {isDarkMode && (
+        <>
+          <GalaxyBackground />
+          <StarsBackground />
+        </>
+      )}
+
       <div className="absolute inset-0 z-0 bg-grid-pattern" />
-      <GalaxyBackground />
-      <StarsBackground />
+
       {showNavbar && <Navbar />}
 
       <motion.h1

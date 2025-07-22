@@ -7,6 +7,9 @@ body,
 #root {
   height: 100%;
 }
+html.dark {
+  background-color: black;
+}
 
 @keyframes talk {
   0%,
@@ -72,4 +75,23 @@ body,
     black 85%,
     transparent 100%
   );
+}
+
+.blinking-cursor {
+  animation: blink 1.05s step-end infinite;
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
 }
