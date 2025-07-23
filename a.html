@@ -1,0 +1,829 @@
+*Build a dashboard for a medical SaaS called MediLens AI. Top bar: OCR upload,
+quick language switch (EN/Hindi/Marathi), user menu. Left sidebar: Dashboard,
+Patients, Cases, Reports, AI Summary, Analytics, Settings. Main: stats cards
+(total patients, chronic tracking), table of patient records (with extracted
+summaries, SOAP notes, status tags, PDF actions). Right: collapsible drawer for
+selected patient with full AI summary, auto-notes, download/export options. Show
+buttons for PDF, followup, and language translation how it look can you genrate
+image of it * Edit I'll create a comprehensive medical SaaS dashboard for
+MediLens AI with all the features you specified. This will be a fully functional
+React component with modern design and interactive elements. MediLens AI
+Dashboard Interactive artifact i dont wNT FULL CODE I Wnt just wirelframe how it
+look' Edit I'll create a visual wireframe/mockup showing how the MediLens AI
+dashboard would look, rather than functional code. MediLens AI Dashboard
+Wireframe Interactive artifact ∙ Version 2 I've created a visual wireframe of
+the MediLens AI dashboard showing exactly how it would look with all the
+components you requested: Key Features Displayed: Top Bar: OCR upload button,
+language switcher (EN/Hindi/Marathi), notification bell, and user menu Left
+Sidebar: Navigation with Dashboard, Patients, Cases, Reports, AI Summary,
+Analytics, and Settings Main Area: Stats cards showing total patients, chronic
+tracking, appointments, and pending reports Patient records table with extracted
+summaries, SOAP notes, status tags, and action buttons (PDF, view, calendar)
+Right Drawer: Selected patient's full AI summary SOAP notes display
+Auto-generated notes Action buttons for PDF download, follow-up scheduling,
+language translation, export, and patient communication The design uses a modern
+medical color scheme with gradients and clean typography, making it look
+professional and suitable for healthcare professionals. The layout is responsive
+and shows how all the requested functionality would be organized in the
+interface. An error occurred while trying to run the generated artifact.
+Unexpected token (401:10) Can you fix this error in medilens-dashboard? Edit
+I'll fix the syntax error in the wireframe. The issue is likely with the
+JavaScript or HTML structure. MediLens AI Dashboard Interactive
+artifact ∙ Version 3 Let me fix the complete HTML structure to ensure there are
+no syntax errors: MediLens AI Dashboard Interactive artifact ∙ Version 4 Let me
+rewrite the artifact to ensure there are no syntax errors: MediLens AI Dashboard
+Wireframe Interactive artifact ∙ Version 5 I've fixed the syntax error by
+removing the problematic JavaScript onclick handler and cleaning up the HTML
+structure. The wireframe now displays properly and shows the complete MediLens
+AI dashboard layout with all the requested components: Top header with OCR
+upload, language switcher, and user menu Left sidebar with navigation items Main
+content area with stats cards and patient records table Right drawer with
+patient details, AI summary, SOAP notes, and action buttons The wireframe is now
+error-free and displays the visual representation of how your medical SaaS
+dashboard would look. just show me how it look landing page Edit I'll create a
+landing page wireframe for MediLens AI showing how the marketing/homepage would
+look. MediLens AI Landing Page Interactive artifact ∙ Version 6 I've created a
+comprehensive landing page wireframe for MediLens AI that shows: Key Sections:
+Header: Navigation with logo, menu items, and CTA buttons Hero Section:
+Eye-catching gradient background with main value proposition Features Grid: 6
+key features highlighting OCR, multilingual support, AI SOAP notes, analytics,
+security, and speed Stats Section: Key metrics showing credibility (50K+
+documents, 99.2% accuracy, etc.) Demo Section: Visual mockup of the dashboard
+with call-to-action Final CTA: Strong conversion section Footer: Complete site
+links and company information Design Features: Modern gradient backgrounds and
+animations Responsive grid layouts Hover effects and smooth transitions
+Medical-themed icons and colors Professional healthcare branding
+Mobile-responsive design The landing page effectively communicates the value
+proposition of AI-powered medical document processing with multilingual support,
+targeting healthcare providers who need to digitize handwritten prescriptions
+and medical records. like these is one landing how medilens ai look ChatGPT
+Image Jul 23 2025 07_35_21 PM.png -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediLens AI - Landing Page</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: #333;
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-menu li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.3s;
+      }
+
+      .nav-menu li a:hover {
+        opacity: 0.8;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.7rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: white;
+        color: #667eea;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 8rem 0 4rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        animation: float 20s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate(-20px, -20px) rotate(1deg);
+        }
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2.5rem;
+        opacity: 0.9;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-large {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 5rem 0;
+        background: #f8fafc;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .section-title h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #1f2937;
+      }
+
+      .section-title p {
+        font-size: 1.1rem;
+        color: #6b7280;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-top: 4px solid #667eea;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .feature-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        color: #1f2937;
+      }
+
+      .feature-card p {
+        color: #6b7280;
+        line-height: 1.6;
+      }
+
+      /* Stats Section */
+      .stats {
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        color: white;
+        padding: 4rem 0;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .stat-item h3 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #60a5fa;
+      }
+
+      .stat-item p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      /* Demo Section */
+      .demo {
+        padding: 5rem 0;
+        background: white;
+      }
+
+      .demo-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .demo-text h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        color: #1f2937;
+      }
+
+      .demo-text p {
+        font-size: 1.1rem;
+        color: #6b7280;
+        margin-bottom: 2rem;
+        line-height: 1.7;
+      }
+
+      .demo-mockup {
+        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        border: 2px solid #e5e7eb;
+      }
+
+      .mockup-screen {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .mockup-header {
+        background: #667eea;
+        color: white;
+        padding: 0.5rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .mockup-content {
+        background: #f8fafc;
+        height: 200px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        font-size: 1.1rem;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 4rem 0;
+        text-align: center;
+      }
+
+      .cta-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .cta-section p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      .footer {
+        background: #1f2937;
+        color: white;
+        padding: 3rem 0 1rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h3 {
+        margin-bottom: 1rem;
+        color: #60a5fa;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section ul li a {
+        color: #d1d5db;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-section ul li a:hover {
+        color: white;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #374151;
+        padding-top: 1rem;
+        text-align: center;
+        color: #9ca3af;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+
+        .demo-content {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-menu {
+          display: none;
+        }
+      }
+      #feature-list .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border-top: 6px solid;
+        color: #1f2937;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      #feature-list .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      #feature-list .feature-card h3 {
+        margin-bottom: 1.5rem;
+        font-size: 1.35rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav">
+        <div class="logo">🏥 MediLens AI</div>
+        <ul class="nav-menu">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="cta-buttons">
+          <a href="#login" class="btn btn-secondary">Login</a>
+          <a href="#signup" class="btn btn-primary">Get Started</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>AI-Powered Medical Documentation</h1>
+        <p>
+          Transform handwritten prescriptions and medical records into digital
+          insights with advanced OCR and multilingual AI analysis
+        </p>
+        <div class="hero-buttons">
+          <a href="#demo" class="btn btn-primary btn-large">Try Free Demo</a>
+          <a href="#features" class="btn btn-secondary btn-large">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Revolutionize Medical Practice</h2>
+          <p>
+            Advanced AI technology that understands medical handwriting,
+            processes multiple languages, and generates intelligent summaries
+            for better patient care
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <span class="feature-icon">📄</span>
+            <h3>Smart OCR Technology</h3>
+            <p>
+              Convert handwritten prescriptions and medical notes into digital
+              text with 99% accuracy using advanced machine learning
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon">🌐</span>
+            <h3>Multilingual Support</h3>
+            <p>
+              Process documents in English, Hindi, and Marathi with instant
+              translation and context-aware medical terminology
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon">🧠</span>
+            <h3>AI-Generated SOAP Notes</h3>
+            <p>
+              Automatically generate structured SOAP notes and medical summaries
+              from unstructured patient data
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon">📊</span>
+            <h3>Patient Analytics</h3>
+            <p>
+              Track patient progress, medication adherence, and treatment
+              outcomes with intelligent dashboards
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon">🔒</span>
+            <h3>HIPAA Compliant</h3>
+            <p>
+              Enterprise-grade security ensuring all patient data is encrypted
+              and compliant with healthcare regulations
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon">⚡</span>
+            <h3>Real-time Processing</h3>
+            <p>
+              Instant document processing and analysis, reducing administrative
+              time by up to 70%
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h3>50,000+</h3>
+            <p>Documents Processed</p>
+          </div>
+          <div class="stat-item">
+            <h3>99.2%</h3>
+            <p>OCR Accuracy</p>
+          </div>
+          <div class="stat-item">
+            <h3>500+</h3>
+            <p>Healthcare Providers</p>
+          </div>
+          <div class="stat-item">
+            <h3>70%</h3>
+            <p>Time Saved</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo" id="demo">
+      <div class="container">
+        <div class="demo-content">
+          <div class="demo-text">
+            <h2>See MediLens AI in Action</h2>
+            <p>
+              Upload handwritten prescriptions, lab reports, or medical notes
+              and watch as our AI instantly converts them into structured
+              digital records with intelligent analysis and multilingual
+              support.
+            </p>
+            <a href="#" class="btn btn-primary btn-large">Request Live Demo</a>
+          </div>
+          <div class="demo-mockup">
+            <div class="mockup-screen">
+              <div class="mockup-header">🏥 MediLens AI Dashboard</div>
+              <div class="mockup-content">
+                📱 Interactive Dashboard Preview<br />
+                🔄 Real-time OCR Processing<br />
+                📊 AI Analytics & Insights
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="features" id="feature-list" style="padding-bottom: 5rem">
+      <div class="container">
+        <div class="section-title">
+          <h2>Complete Feature List for MediLens AI</h2>
+          <p>
+            Explore our current capabilities and exciting upcoming features to
+            revolutionize medical practice.
+          </p>
+        </div>
+
+        <div
+          class="features-grid"
+          style="grid-template-columns: repeat(3, 1fr); gap: 2rem"
+        >
+          <!-- Current (MVP) Features -->
+          <div class="feature-card" style="border-top-color: #22c55e">
+            <h3>🟢 Current (MVP) Features</h3>
+            <ul style="list-style: none; padding-left: 0">
+              <li>
+                <strong>📸 OCR:</strong> Extract text from printed or
+                handwritten lab reports using Tesseract.js
+              </li>
+              <li>
+                <strong>🧠 AI Medical Summary:</strong> Generate diagnosis,
+                findings, and suggestions using GPT
+              </li>
+              <li>
+                <strong>🧾 Auto Case Notes (SOAP):</strong> Automatically draft
+                clinical notes: Subjective, Objective, Assessment, Plan
+              </li>
+              <li>
+                <strong>🌐 Multilingual Input:</strong> Support for Hindi,
+                Marathi, English text or speech
+              </li>
+              <li>
+                <strong>💾 Offline-Ready (PWA):</strong> Works without internet
+                using IndexedDB browser storage
+              </li>
+              <li>
+                <strong>📱 Mobile-first UI:</strong> Responsive React + Tailwind
+                interface for mobile devices
+              </li>
+              <li>
+                <strong>🔐 Doctor Login + Patient Record Storage:</strong>
+                Authentication and patient data stored securely
+              </li>
+              <li>
+                <strong>📂 React + Node.js Full Stack:</strong> Scalable,
+                real-world architecture
+              </li>
+            </ul>
+          </div>
+
+          <!-- Advanced Features -->
+          <div class="feature-card" style="border-top-color: #eab308">
+            <h3>🟡 Advanced Features</h3>
+            <ul style="list-style: none; padding-left: 0">
+              <li>
+                <strong>📈 Chronic Patient Tracking:</strong> Monitor vitals
+                like BP, sugar, thyroid over time
+              </li>
+              <li>
+                <strong>💊 Drug Recommendation:</strong> Suggest generic
+                medicines with dosage and cautions
+              </li>
+              <li>
+                <strong>🔁 Multi-AI Engine Compare:</strong> Compare GPT-4,
+                Claude, Gemini suggestions
+              </li>
+              <li>
+                <strong>🩻 Image Scan AI:</strong> Interpret X-ray and MRI images
+                with Hugging Face models
+              </li>
+              <li>
+                <strong>🔊 Voice Symptom Intake:</strong> Speak symptoms in
+                Marathi/Hindi and auto-generate notes
+              </li>
+              <li>
+                <strong>📩 Follow-up Alerts:</strong> Notify patients or doctors
+                by SMS/WhatsApp automatically
+              </li>
+              <li>
+                <strong>📤 PDF Case Export:</strong> Downloadable patient or
+                clinic reports in PDF format
+              </li>
+            </ul>
+          </div>
+
+          <!-- Future-Proof Features -->
+          <div class="feature-card" style="border-top-color: #3b82f6">
+            <h3>🔵 Future-Proof Features</h3>
+            <ul style="list-style: none; padding-left: 0">
+              <li>
+                <strong>🏥 Hospital Dashboard:</strong> Multi-doctor EMR-lite
+                dashboard with management tools
+              </li>
+              <li>
+                <strong>🤝 Integration with Labs/Pharmacies:</strong> Auto-fetch
+                lab results & pharmacy recommendations
+              </li>
+              <li>
+                <strong>📶 Offline-to-Online Sync:</strong> Seamless data sync
+                when connectivity is restored
+              </li>
+              <li>
+                <strong>🧬 Disease Trend AI:</strong> Alerts for rising disease
+                patterns like dengue or malaria
+              </li>
+              <li>
+                <strong>📲 Android App:</strong> Convert PWA into full Android
+                app via Trusted Web App (TWA)
+              </li>
+              <li>
+                <strong>🧑‍⚕️ Telehealth Integration:</strong> AI + video calls for
+                remote patient consultations
+              </li>
+              <li>
+                <strong>📊 Analytics for Doctors:</strong> Graphs, vitals
+                tracking, and consultation logs
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Transform Your Practice?</h2>
+        <p>
+          Join hundreds of healthcare providers using MediLens AI to streamline
+          documentation and improve patient care
+        </p>
+        <div class="hero-buttons">
+          <a href="#" class="btn btn-primary btn-large">Start Free Trial</a>
+          <a href="#" class="btn btn-secondary btn-large">Schedule Demo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>🏥 MediLens AI</h3>
+            <p>
+              Transforming healthcare documentation with AI-powered OCR and
+              multilingual support for better patient care.
+            </p>
+          </div>
+          <div class="footer-section">
+            <h3>Product</h3>
+            <ul>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">API Documentation</a></li>
+              <li><a href="#">Integrations</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Training</a></li>
+              <li><a href="#">System Status</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Security</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2025 MediLens AI. All rights reserved. | HIPAA Compliant
+            Healthcare Solutions
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+<!-- Smart, efficient model for everyday use Learn more
+
+Artifacts
+
+MediLens AI Dashboard
+Click to open component • 6 versions
+Content
+No content added yet
+Add images, PDFs, docs, spreadsheets, and more to summarize, analyze, and query content with Claude.
