@@ -10,7 +10,7 @@ import StarsBackground from "../components/StarsBackground";
 import TalkingBubble from "../components/TalkingBubble";
 import { getResumeLink } from "../data/Resume/getResumeLink";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
-import useTheme from "../hooks/useTheme";
+import useTheme from "../hooks/UseTheme";
 
 gsap.registerPlugin(ScrollTrigger);
 
