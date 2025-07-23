@@ -12,7 +12,7 @@ import GalaxyBackground from "./components/GalaxyBackground";
 import GalleryMy from "./components/GalleryMy";
 import StarsBackground from "./components/StarsBackground";
 import ScrollManager from "./hooks/ScrollManager";
-import useTheme from "./hooks/useTheme";
+import useTheme from "./hooks/UseTheme";
 import VideoPopup from "./ui/VideoPopup";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
