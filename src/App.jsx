@@ -36,9 +36,20 @@ function App() {
   }, [isDarkMode]);
 
   useEffect(() => {
-    const handleLoad = () => setLoading(false);
+    const timeout = setTimeout(() => {
+      setLoading(false); // Fallback in case "load" event doesn't fire (especially on mobile)
+    }, 4000);
+
+    const handleLoad = () => {
+      clearTimeout(timeout);
+      setLoading(false);
+    };
+
     window.addEventListener("load", handleLoad);
-    return () => window.removeEventListener("load", handleLoad);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener("load", handleLoad);
+    };
   }, []);
 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
@@ -46,6 +57,8 @@ function App() {
   return (
     <Main>
       <Toaster position="top-right" />
+
+      {/* Fixed UI Toggles */}
       <div className="fixed top-3 right-20 z-50">
         <MusicToggleButton />
         <div className="fixed top-4 right-20 z-50 flex items-center gap-4">
@@ -58,6 +71,7 @@ function App() {
           <SmoothScroll>
             <Wheel />
             <ScrollManager>
+              {/* Conditionally load animated galaxy backgrounds */}
               {isDarkMode && !loading && !isMobile && (
                 <Suspense fallback={<Loader />}>
                   <GalaxyBackground />
@@ -65,6 +79,7 @@ function App() {
                 </Suspense>
               )}
 
+              {/* Main App Content */}
               <div
                 className={
                   loading
@@ -75,12 +90,15 @@ function App() {
                 <Suspense fallback={<Loader />}>
                   <Header />
                 </Suspense>
+
                 {/* <VideoPopup /> */}
 
                 <Suspense fallback={<Loader />}>
                   <About />
                 </Suspense>
+
                 <FeaturedWork />
+
                 <Suspense fallback={<Loader />}>
                   <Skills />
                 </Suspense>
@@ -103,13 +121,14 @@ function App() {
                   <Footer />
                 </Suspense>
               </div>
-            </ScrollManager>
 
-            {loading && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-80">
-                <Loader />
-              </div>
-            )}
+              {/* Loading Overlay with fade-out animation */}
+              {loading && (
+                <div className="fixed inset-0 z-[999] flex items-center justify-center bg-gray-900 bg-opacity-90 animate-fadeOut">
+                  <Loader />
+                </div>
+              )}
+            </ScrollManager>
           </SmoothScroll>
         </ErrorBoundary>
       </div>
