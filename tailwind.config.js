@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  darkMode: "class", // <-- move this here!
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -12,6 +12,7 @@ export default {
         script: ['"Great Vibes"', "cursive"],
         elegant: ['"Playfair Display"', "serif"],
         jello: ["GT-Flexa", "sans-serif"],
+        sans: ["Inter", "sans-serif"],
       },
       fontSize: {
         "18vw": "18vw",
@@ -28,6 +29,8 @@ export default {
           800: "#2a2a2a",
           700: "#3a3a3a",
         },
+        "brand-dark": "#0b0c15",
+        "brand-light": "#f8f9fb",
       },
       keyframes: {
         twinkle: {
@@ -45,6 +48,7 @@ export default {
       },
     },
   },
+
   plugins: [],
   safelist: ["bg-grid-pattern"],
 };

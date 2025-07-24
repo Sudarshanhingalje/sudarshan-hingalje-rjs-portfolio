@@ -62,7 +62,6 @@ const ScrollManager = ({ children }) => {
     };
   }, []);
 
-  // Progressive scroll indicator
   const scrollProgress = useTransform(scrollY, [0, 4000], [0, 1]);
   const scaleX = useSpring(scrollProgress, {
     stiffness: 100,

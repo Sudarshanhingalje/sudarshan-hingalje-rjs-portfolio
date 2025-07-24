@@ -1,4 +1,9 @@
-/* tailwind.css or global.css */
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+.font-signature {
+  font-family: "Pacifico", cursive;
+}
+
 .bg-grid-pattern {
   background-image: linear-gradient(
       to right,

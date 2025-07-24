@@ -74,11 +74,12 @@ export default function DownloadButton({
         }
 
         backdrop-blur-md
-        bg-white/30 dark:bg-white/10
+          bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600
+        dark:from-cyan-500 dark:via-blue-500 dark:to-purple-500
         border border-white/20 dark:border-white/10
         hover:shadow-[0_0_18px_rgba(0,255,255,0.3)]
-        shadow-[inset_2px_2px_5px_rgba(255,255,255,0.4),inset_-2px_-2px_6px_rgba(0,0,0,0.25)]
-        text-white font-semibold tracking-wide
+        shadow-[inset_2px_2px_5px_rgba(255,255,255,0.4),inset_-2px_-2px_6px_rgba(8, 121, 123, 0.25)]
+        text-white font-semibold tracking-wide 
       `}
     >
       {/* Label */}
@@ -88,7 +89,7 @@ export default function DownloadButton({
       >
         <CloudDownload
           size={26}
-          className="mr-1 text-cyan-500 dark:text-cyan-400"
+          className="mr-1 text-cyan-500  dark:text-cyan-400"
         />
         Download Resume
       </span>
