@@ -11,7 +11,7 @@ import Wheel from "./components/Wheel";
 import ScrollManager from "./hooks/ScrollManager";
 import useTheme from "./hooks/UseTheme";
 import FeaturedWork from "./ui/FeaturedWork";
-import VideoPopup from "./ui/VideoPopup";
+// import VideoPopup from "./ui/VideoPopup";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 
@@ -75,7 +75,8 @@ function App() {
                 <Suspense fallback={<Loader />}>
                   <Header />
                 </Suspense>
-                <VideoPopup />
+                {/* <VideoPopup /> */}
+
                 <Suspense fallback={<Loader />}>
                   <About />
                 </Suspense>

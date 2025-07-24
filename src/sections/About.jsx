@@ -1,44 +1,44 @@
+import { MonitorPlay } from "lucide-react"; // Lucide icon
+import { useState } from "react";
 import devImage from "../assets/own.webp";
 import useModernScrollReveal from "../hooks/useModernScrollReveal";
+import IntroPopup from "../ui/IntroPopup";
 
 const About = () => {
+  const [popupOpen, setPopupOpen] = useState(false);
   useModernScrollReveal();
 
   return (
     <section
       id="about"
-      className="min-h-screen w-full flex items-center justify-center px-4 sm:px-6 lg:px-16 py-24 relative overflow-hidden 
-                 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 
-                 dark:from-[#0b0c15] dark:via-[#11121c] dark:to-[#181927]"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-16 py-24 overflow-hidden 
+      bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 
+      dark:from-[#0b0c15] dark:via-[#11121c] dark:to-[#181927]"
     >
-      {/* Watermark Title — Large screen: behind / Mobile: top centered */}
+      {/* ✅ Watermark Title: Responsive position */}
       <h2
         className="text-[64px] sm:text-[100px] lg:text-[160px] xl:text-[200px]
-                   font-black text-[#b4b4b466] dark:text-[#6d6d8540] pointer-events-none select-none
-                   absolute lg:top-1/3 lg:left-1/2 lg:-translate-x-1/3 lg:-translate-y-1/3 lg:z-0 
-                   block lg:block text-center w-full top-6 z-10 lg:w-auto"
+        font-black text-[#b4b4b466] dark:text-[#6d6d8540] pointer-events-none select-none
+        mb-8 lg:absolute lg:top-1/3 lg:left-1/2 lg:-translate-x-1/3 lg:-translate-y-1/3 lg:mb-0 z-0 w-full text-center"
       >
         ABOUT
       </h2>
 
-      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center z-20 mt-24 lg:mt-0">
-        {/* Image Side */}
+      <div className="max-w-7xl w-full flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12 items-center z-20 mt-12 lg:mt-0">
+        {/* Left: Image */}
         <div className="flex justify-center items-center lg:justify-end">
-          <div className="relative group w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-md">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-400 rounded-3xl blur-2xl opacity-30 group-hover:opacity-60 transition-all duration-700"></div>
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-purple-400 dark:from-cyan-300 dark:to-blue-300 rounded-3xl blur-xl opacity-40 group-hover:opacity-70 transition-all duration-500"></div>
-
-            <div className="relative">
-              <img
-                src={devImage}
-                alt="Sudarshan Hingalje - Full Stack Developer"
-                className="relative w-full h-auto shadow-2xl shadow-blue-500/20 dark:shadow-cyan-400/20 rounded-2xl"
-              />
-            </div>
+          <div className="relative group w-full max-w-md">
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-400 rounded-3xl blur-2xl opacity-30 group-hover:opacity-60 transition-all duration-700" />
+            <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 to-purple-400 dark:from-cyan-300 dark:to-blue-300 rounded-3xl blur-xl opacity-40 group-hover:opacity-70 transition-all duration-500" />
+            <img
+              src={devImage}
+              alt="Sudarshan Hingalje"
+              className="relative w-full h-auto shadow-2xl rounded-2xl"
+            />
           </div>
         </div>
 
-        {/* Text Side */}
+        {/* Right: Text */}
         <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
           <p className="text-slate-800 dark:text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 max-w-xl">
             I’m{" "}
@@ -74,6 +74,17 @@ const About = () => {
           </p>
         </div>
       </div>
+
+      {/* ✅ Lucide Icon Button */}
+      <button
+        onClick={() => setPopupOpen(true)}
+        className="absolute bottom-8 left-8 z-50 bg-white dark:bg-gray-800 p-3 rounded-full shadow-xl hover:scale-110 transition-transform"
+      >
+        <MonitorPlay className="w-6 h-6 text-pink-600 dark:text-pink-400" />
+      </button>
+
+      {/* ✅ Intro Video Popup */}
+      <IntroPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
     </section>
   );
 };
