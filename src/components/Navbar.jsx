@@ -4,7 +4,7 @@ import bgImage from "../assets/brand.svg";
 export default function Navbar() {
   return (
     <div>
-      <motion.nav className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-10 py-3 flex justify-between bg-transparent">
+      <motion.nav className="fixed top-0 left-0 w-full z-50 sm:px-6 md:px-10 ">
         <button
           onClick={() => window.location.reload()}
           className="focus:outline-none"
@@ -12,7 +12,7 @@ export default function Navbar() {
           <img
             src={bgImage}
             alt="Logo"
-            className="h-10 sm:h-12 md:h-16 w-auto object-contain cursor-pointer z-50"
+            className="h-20 sm:h-25 md:h-35 lg:h-30 w-auto object-contain cursor-pointer z-50"
           />
         </button>
       </motion.nav>

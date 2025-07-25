@@ -12,10 +12,8 @@ const About = () => {
     <section
       id="about"
       className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-16 py-24 overflow-hidden 
-      bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 
-      dark:from-[#0b0c15] dark:via-[#11121c] dark:to-[#181927]"
+      "
     >
-      {/* ✅ Watermark Title: Responsive position */}
       <h2
         className="text-[64px] sm:text-[100px] lg:text-[160px] xl:text-[200px]
         font-black text-[#b4b4b466] dark:text-[#6d6d8540] pointer-events-none select-none
@@ -75,7 +73,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* ✅ Lucide Icon Button */}
       <button
         onClick={() => setPopupOpen(true)}
         className="absolute bottom-8 left-8 z-50 bg-white dark:bg-gray-800 p-3 rounded-full shadow-xl hover:scale-110 transition-transform"
@@ -83,7 +80,6 @@ const About = () => {
         <MonitorPlay className="w-6 h-6 text-pink-600 dark:text-pink-400" />
       </button>
 
-      {/* ✅ Intro Video Popup */}
       <IntroPopup isOpen={popupOpen} onClose={() => setPopupOpen(false)} />
     </section>
   );

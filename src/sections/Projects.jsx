@@ -1,3 +1,4 @@
+// src/components/Projects.jsx
 import { motion } from "framer-motion";
 import { Github, LinkIcon } from "lucide-react";
 import { projectsDone } from "../data/projects/ProjectDone";
@@ -17,16 +18,21 @@ const fadeInUp = {
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-16 px-4 md:px-12 lg:px-20">
+    <section
+      id="projects"
+      className="py-16 px-4 md:px-8 lg:px-16 max-w-[1440px] mx-auto"
+    >
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold mb-2 text-foreground">Projects</h2>
-        <p className="text-muted-foreground max-w-xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
+          Projects
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
           Explore a collection of my featured full-stack and frontend projects
           showcasing my expertise across various technologies.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
         {projectsDone.map((project, index) => (
           <motion.div
             key={project.id}
@@ -37,13 +43,14 @@ const Projects = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
           >
-            <div className="relative w-full h-48 overflow-hidden">
+            {/* Project Video / Thumbnail */}
+            <div className="relative w-full aspect-[16/9] overflow-hidden">
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover"
                 poster={project.img}
               >
                 <source
@@ -53,11 +60,14 @@ const Projects = () => {
               </video>
             </div>
 
+            {/* Project Content */}
             <div className="p-4">
-              <h3 className="text-xl font-semibold mb-2">
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">
                 {project.shortTitle}
               </h3>
-              <p className="text-sm mb-3 opacity-90">{project.description}</p>
+              <p className="text-sm opacity-90 mb-3">{project.description}</p>
+
+              {/* Technologies */}
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.tech.map((tech, idx) => (
                   <span
@@ -68,23 +78,29 @@ const Projects = () => {
                   </span>
                 ))}
               </div>
+
+              {/* Links */}
               <div className="flex gap-4">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white/80"
-                >
-                  <LinkIcon size={18} />
-                </a>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white/80"
-                >
-                  <Github size={18} />
-                </a>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white/80"
+                  >
+                    <LinkIcon size={18} />
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white/80"
+                  >
+                    <Github size={18} />
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>

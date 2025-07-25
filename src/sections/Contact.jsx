@@ -80,9 +80,9 @@ const Contact = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-20 px-4 sm:px-6 lg:px-8 text-white"
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 text-black dark:text-white "
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="w-full max-w-3xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight contact-heading">
             LET&apos;S WORK{" "}

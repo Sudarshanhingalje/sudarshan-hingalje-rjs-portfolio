@@ -30,11 +30,11 @@ export default function FeaturedTechNames() {
   return (
     <section
       ref={ref}
-      className="relative h-[80vh] overflow-hidden flex items-center justify-center "
+      className="relative h-[25vh] overflow-hidden flex items-center justify-center "
     >
       <motion.div
         style={{ x: baseX }}
-        className="absolute flex gap-10 items-center text-[25vw] font-cinzel uppercase text-[#1f1f1f] whitespace-nowrap opacity-90"
+        className="absolute flex gap-10 items-center text-[15vw] font-cinzel uppercase text-[#1f1f1f] whitespace-nowrap opacity-90"
       >
         {[...Array(5)].map((_, i) => (
           <div key={i} className="flex gap-10">
@@ -51,7 +51,7 @@ export default function FeaturedTechNames() {
       </motion.div>
 
       <h2 className="z-10 text-white text-5xl md:text-6xl lg:text-7xl font-light text-center image-text-hover">
-        Featured Tech
+        Tech Stacks
       </h2>
     </section>
   );

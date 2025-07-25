@@ -3,36 +3,52 @@ import { useEffect, useRef, useState } from "react";
 export default function TalkingBubble({ message }) {
   const [displayedText, setDisplayedText] = useState("");
   const containerRef = useRef(null);
+  const synthRef = useRef(window.speechSynthesis);
 
   useEffect(() => {
-    setDisplayedText("");
     let i = 0;
+    setDisplayedText("");
 
-    const interval = setInterval(() => {
+    // Typing animation
+    const typingInterval = setInterval(() => {
       setDisplayedText((prev) => prev + message[i]);
       i++;
-      if (i >= message.length) clearInterval(interval);
-    }, 50);
+      if (i >= message.length) clearInterval(typingInterval);
+    }, 40);
 
+    // Speak
     const speak = () => {
-      const synth = window.speechSynthesis;
-      const utter = new SpeechSynthesisUtterance(message);
-      const voices = synth.getVoices();
+      const utterance = new SpeechSynthesisUtterance(message);
+      const voices = synthRef.current.getVoices();
       const robotVoice =
         voices.find((v) => v.name.includes("Microsoft David")) ||
+        voices.find((v) => v.name.includes("Google UK English Male")) ||
         voices.find((v) => v.lang === "en-US");
-      if (robotVoice) utter.voice = robotVoice;
-      utter.rate = 0.95;
-      utter.pitch = 0.8;
-      synth.cancel();
-      synth.speak(utter);
+      if (robotVoice) utterance.voice = robotVoice;
+      utterance.rate = 0.95;
+      utterance.pitch = 0.8;
+      synthRef.current.cancel(); // cancel any existing speech
+      synthRef.current.speak(utterance);
     };
 
-    const speechTimeout = setTimeout(() => speak(), 500);
+    // Load voices and speak
+    if (synthRef.current.getVoices().length === 0) {
+      const loadVoicesAndSpeak = () => {
+        speak();
+        synthRef.current.removeEventListener(
+          "voiceschanged",
+          loadVoicesAndSpeak
+        );
+      };
+      synthRef.current.addEventListener("voiceschanged", loadVoicesAndSpeak);
+    } else {
+      speak();
+    }
 
+    // Cleanup
     return () => {
-      clearInterval(interval);
-      clearTimeout(speechTimeout);
+      clearInterval(typingInterval);
+      synthRef.current.cancel();
     };
   }, [message]);
 

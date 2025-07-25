@@ -10,8 +10,7 @@ import Wheel from "./components/Wheel";
 
 import ScrollManager from "./hooks/ScrollManager";
 import useTheme from "./hooks/UseTheme";
-import FeaturedWork from "./ui/FeaturedWork";
-// import VideoPopup from "./ui/VideoPopup";
+import VideoPopup from "./ui/VideoPopup";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 
@@ -66,7 +65,12 @@ function App() {
         </div>
       </div>
 
-      <div className="relative min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
+      <div
+        className="relative min-h-screen 
+        bg-gradient-to-br from-slate-50 via-blue-200 to-indigo-200 text-slate-800
+        dark:bg-gradient-to-br dark:from-[#0b0c15] dark:via-[#11121c] dark:to-[#181927] dark:text-white 
+        transition-colors duration-300"
+      >
         <ErrorBoundary>
           <SmoothScroll>
             <Wheel />
@@ -79,7 +83,6 @@ function App() {
                 </Suspense>
               )}
 
-              {/* Main App Content */}
               <div
                 className={
                   loading
@@ -91,14 +94,11 @@ function App() {
                   <Header />
                 </Suspense>
 
-                {/* <VideoPopup /> */}
+                <VideoPopup />
 
                 <Suspense fallback={<Loader />}>
                   <About />
                 </Suspense>
-
-                <FeaturedWork />
-
                 <Suspense fallback={<Loader />}>
                   <Skills />
                 </Suspense>

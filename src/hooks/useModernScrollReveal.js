@@ -11,20 +11,20 @@ export default function useModernScrollReveal() {
     ScrollTrigger.getAll().forEach((t) => t.kill());
 
     // Header hides on scroll
-    gsap.to("#header", {
-      y: -100,
-      opacity: 0,
-      duration: 0.5,
-      scrollTrigger: {
-        trigger: "#about",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+    // gsap.to("#header", {
+    //   y: -100,
+    //   opacity: 0,
+    //   duration: 0.5,
+    //   scrollTrigger: {
+    //     trigger: "#about",
+    //     start: "top top",
+    //     end: "bottom top",
+    //     scrub: true,
+    //   },
+    // });
 
     // About avatar parallax
-    gsap.to("#about .about-avatar", {
+    gsap.to("#about ", {
       yPercent: -20,
       scrollTrigger: {
         trigger: "#skills",
@@ -35,7 +35,7 @@ export default function useModernScrollReveal() {
     });
 
     // Skills animation
-    gsap.utils.toArray(".skill-card").forEach((el, i) => {
+    gsap.utils.toArray("#skills .skill-card").forEach((el, i) => {
       gsap.fromTo(
         el,
         { opacity: 0, y: 30 },
@@ -102,20 +102,13 @@ export default function useModernScrollReveal() {
     });
 
     // 🔥 Unified Contact + Footer Animation
-    const contactFooterTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#contact",
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    contactFooterTimeline.from("#contact .contact-form", {
-      y: 60,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out",
-    });
+    // const contactFooterTimeline = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: "#contact",
+    //     start: "top 85%",
+    //     toggleActions: "play none none reverse",
+    //   },
+    // });
 
     ScrollTrigger.refresh();
 

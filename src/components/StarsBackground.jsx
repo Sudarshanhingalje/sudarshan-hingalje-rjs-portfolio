@@ -5,7 +5,7 @@ const StarsBackground = () => {
   const [stars, setStars] = useState([]);
 
   useEffect(() => {
-    const generatedStars = Array.from({ length: 1000 }).map(() => ({
+    const generatedStars = Array.from({ length: 500 }).map(() => ({
       id: crypto.randomUUID(),
       size:
         Math.random() < 0.1 ? Math.random() * 5 + 5 : Math.random() * 2 + 0.5,
