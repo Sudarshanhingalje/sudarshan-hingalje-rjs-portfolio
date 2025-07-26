@@ -34,104 +34,86 @@ function App() {
     document.documentElement.classList.toggle("dark", isDarkMode);
   }, [isDarkMode]);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false); // Fallback in case "load" event doesn't fire (especially on mobile)
-    }, 4000);
-
-    const handleLoad = () => {
-      clearTimeout(timeout);
-      setLoading(false);
-    };
-
-    window.addEventListener("load", handleLoad);
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener("load", handleLoad);
-    };
-  }, []);
-
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  // Handle loader completion
+  const handleLoaderComplete = () => {
+    window.scrollTo(0, 0);
+    setLoading(false);
+  };
 
   return (
     <Main>
       <Toaster position="top-right" />
 
-      {/* Fixed UI Toggles */}
-      <div className="fixed top-3 right-20 z-50">
-        <MusicToggleButton />
-        <div className="fixed top-4 right-20 z-50 flex items-center gap-4">
-          <ThemeToggle />
+      {loading ? (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-gray-900 bg-opacity-90">
+          <Loader onComplete={handleLoaderComplete} />
         </div>
-      </div>
+      ) : (
+        <>
+          {/* Fixed UI Toggles */}
+          <div className="fixed top-3 right-20 z-50">
+            <MusicToggleButton />
+            <div className="fixed top-4 right-20 z-50 flex items-center gap-4">
+              <ThemeToggle />
+            </div>
+          </div>
 
-      <div
-        className="relative min-h-screen 
-        bg-gradient-to-br from-slate-50 via-blue-200 to-indigo-200 text-slate-800
-        dark:bg-gradient-to-br dark:from-[#0b0c15] dark:via-[#11121c] dark:to-[#181927] dark:text-white 
-        transition-colors duration-300"
-      >
-        <ErrorBoundary>
-          <SmoothScroll>
-            <Wheel />
-            <ScrollManager>
-              {/* Conditionally load animated galaxy backgrounds */}
-              {isDarkMode && !loading && !isMobile && (
-                <Suspense fallback={<Loader />}>
-                  <GalaxyBackground />
-                  <StarsBackground />
-                </Suspense>
-              )}
+          <div
+            className="relative min-h-screen 
+            bg-gradient-to-br from-slate-50 via-blue-200 to-indigo-200 text-slate-800 
+            dark:bg-gradient-to-br dark:from-[#0b0c15] dark:via-[#11121c] dark:to-[#181927] dark:text-white 
+            transition-colors duration-300"
+          >
+            <ErrorBoundary>
+              <SmoothScroll>
+                <Wheel />
+                <ScrollManager>
+                  {/* Conditionally load animated galaxy backgrounds */}
+                  {isDarkMode && !isMobile && (
+                    <Suspense fallback={<div />}>
+                      <GalaxyBackground />
+                      <StarsBackground />
+                    </Suspense>
+                  )}
 
-              <div
-                className={
-                  loading
-                    ? "blur-sm brightness-50 pointer-events-none"
-                    : "blur-0 transition-all duration-500"
-                }
-              >
-                <Suspense fallback={<Loader />}>
-                  <Header />
-                </Suspense>
+                  <Suspense fallback={<div />}>
+                    <Header />
+                  </Suspense>
 
-                <VideoPopup />
+                  <VideoPopup />
 
-                <Suspense fallback={<Loader />}>
-                  <About />
-                </Suspense>
-                <Suspense fallback={<Loader />}>
-                  <Skills />
-                </Suspense>
-                <Suspense fallback={<Loader />}>
-                  <Projects />
-                </Suspense>
-                <Suspense fallback={<Loader />}>
-                  <Experience />
-                </Suspense>
-                <Suspense fallback={<Loader />}>
-                  <Personal />
-                </Suspense>
-                <Suspense fallback={<Loader />}>
-                  <GalleryMy />
-                </Suspense>
-                <Suspense fallback={<Loader />}>
-                  <Contact />
-                </Suspense>
-                <Suspense fallback={<Loader />}>
-                  <Footer />
-                </Suspense>
-              </div>
-
-              {/* Loading Overlay with fade-out animation */}
-              {loading && (
-                <div className="fixed inset-0 z-[999] flex items-center justify-center bg-gray-900 bg-opacity-90 animate-fadeOut">
-                  <Loader />
-                </div>
-              )}
-            </ScrollManager>
-          </SmoothScroll>
-        </ErrorBoundary>
-      </div>
+                  <Suspense fallback={<div />}>
+                    <About />
+                  </Suspense>
+                  <Suspense fallback={<div />}>
+                    <Skills />
+                  </Suspense>
+                  <Suspense fallback={<div />}>
+                    <Projects />
+                  </Suspense>
+                  <Suspense fallback={<div />}>
+                    <Experience />
+                  </Suspense>
+                  <Suspense fallback={<div />}>
+                    <Personal />
+                  </Suspense>
+                  <Suspense fallback={<div />}>
+                    <GalleryMy />
+                  </Suspense>
+                  <Suspense fallback={<div />}>
+                    <Contact />
+                  </Suspense>
+                  <Suspense fallback={<div />}>
+                    <Footer />
+                  </Suspense>
+                </ScrollManager>
+              </SmoothScroll>
+            </ErrorBoundary>
+          </div>
+        </>
+      )}
     </Main>
   );
 }

@@ -17,7 +17,7 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="h-screen overflow-hidden flex flex-col justify-center py-10 dark:text-white text-slate-800"
+      className="min-h-screen flex flex-col justify-center py-10 dark:text-white text-slate-800"
     >
       <div className="max-w-5xl mx-auto w-full px-4 h-full flex flex-col justify-center">
         <motion.div

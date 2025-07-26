@@ -4,10 +4,12 @@ import avatar from "../assets/yoga.svg";
 import DownloadButton from "../components/DownloadButton";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
+import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const speechText = `HELLO I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
 export default function Header() {
+  useModernScrollReveal();
   const [showBubble, setShowBubble] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -28,14 +30,11 @@ export default function Header() {
   return (
     <section
       id="header"
-      data-speed="1"
       className="relative bg-grid-pattern min-h-screen w-full overflow-hidden transition-colors duration-500 bg-gray-50 text-black"
     >
       <Navbar />
 
-      {/* Desktop/Tablet Layout */}
       <div className="hidden md:block">
-        {/* Left Content */}
         <div className="absolute inset-0 flex flex-col justify-center items-start pl-6 md:pl-12 lg:pl-16 xl:pl-24">
           <motion.div
             initial={{ opacity: 0, x: -100 }}
@@ -80,7 +79,6 @@ export default function Header() {
           </motion.div>
         </div>
 
-        {/* Right Side Content */}
         <div className="absolute right-6 md:right-12 lg:right-16 xl:right-24 top-1/2 transform -translate-y-1/2">
           <motion.div
             initial={{ opacity: 0, x: 100 }}
@@ -118,7 +116,6 @@ export default function Header() {
           </motion.div>
         </div>
 
-        {/* Avatar */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -152,7 +149,6 @@ export default function Header() {
         </motion.div>
       </div>
 
-      {/* Mobile Layout */}
       <div className="block md:hidden px-6 pt-24 text-center">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}

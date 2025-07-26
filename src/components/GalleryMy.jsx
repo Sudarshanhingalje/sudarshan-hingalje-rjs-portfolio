@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { certificateImages } from "../data/certificates/Certificates";
 
 // 🖼️ Seamless infinite scroll component with pause on hover
-const GalleryRow = ({ speed = 0.5 }) => {
+const GalleryRow = ({ speed = 0.2 }) => {
   const containerRef = useRef(null);
   const [paused, setPaused] = useState(false);
 
@@ -63,7 +63,7 @@ const GalleryScroll = ({
   text = "My Certifications",
   height = "40vh",
   fontSize = "text-[6vw]",
-  speed = 40,
+  speed = 100,
 }) => {
   const x = useRef(0);
   const containerRef = useRef();
@@ -113,15 +113,15 @@ const GalleryMy = () => {
         text="My Certifications"
         height="40vh"
         fontSize="text-[6vw]"
-        speed={250}
+        speed={100}
       />
       <GalleryRow speed={5} />
       <GalleryScroll
-        direction={1}
+        direction={-1}
         text="Achievements Gallery"
         height="40vh"
         fontSize="text-[6vw]"
-        speed={300}
+        speed={100}
       />
     </div>
   );

@@ -6,9 +6,9 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react(), visualizer()],
   resolve: {
-    alias: {
-      "lottie-web": "lottie-web/build/player/lottie_light.min.js",
-    },
+    // alias: {
+    //   "lottie-web": "lottie-web/build/player/lottie_light.min.js",
+    // },
   },
   build: {
     treeshake: true,

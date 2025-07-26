@@ -46,6 +46,9 @@ export default {
         twinkle: "twinkle 20s ease-in-out infinite",
         shooting: "shooting 2s linear forwards",
       },
+      animation: {
+        "pulse-slow": "pulse 6s ease-in-out infinite",
+      },
     },
   },
 

@@ -11,20 +11,20 @@ export default function useModernScrollReveal() {
     ScrollTrigger.getAll().forEach((t) => t.kill());
 
     // Header hides on scroll
-    // gsap.to("#header", {
-    //   y: -100,
-    //   opacity: 0,
-    //   duration: 0.5,
-    //   scrollTrigger: {
-    //     trigger: "#about",
-    //     start: "top top",
-    //     end: "bottom top",
-    //     scrub: true,
-    //   },
-    // });
+    gsap.to("#header", {
+      y: -100,
+      opacity: 0,
+      duration: 0.5,
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
 
     // About avatar parallax
-    gsap.to("#about ", {
+    gsap.to("#about", {
       yPercent: -20,
       scrollTrigger: {
         trigger: "#skills",

@@ -16,7 +16,7 @@ const SectionHeader = ({ isVisible }) => {
         Career Goals
       </h2>
 
-      <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+      <p className="text-xl  max-w-3xl mx-auto leading-relaxed text-black dark:text-yellow-100">
         A strategic journey from Full Stack Developer to Solution Architect,
         with clear milestones and measurable outcomes.
       </p>

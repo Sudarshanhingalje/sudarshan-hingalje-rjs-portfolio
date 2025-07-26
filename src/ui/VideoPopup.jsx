@@ -24,9 +24,15 @@ const VideoPopup = () => {
       setShowClose(true);
     }, 25000);
 
+    // Auto close after 50 seconds
+    const autoCloseTimer = setTimeout(() => {
+      setShowPopup(false);
+    }, 25000);
+
     return () => {
       clearTimeout(popupTimer);
       clearTimeout(closeTimer);
+      clearTimeout(autoCloseTimer);
     };
   }, []);
 
