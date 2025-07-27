@@ -1,4 +1,3 @@
-// Skills.jsx
 import { useEffect, useState } from "react";
 import techPlanets from "../data/techPlanets";
 import FeaturedWork from "../ui/FeaturedWork";
@@ -21,15 +20,38 @@ const Skills = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // 🌀 Inject orbit keyframes dynamically
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.type = "text/css";
+    const keyframes = techPlanets
+      .filter((p) => p.orbit && typeof p.orbit === "object")
+      .map(
+        (p) => `
+        @keyframes orbit-${p.id} {
+          from { transform: translate(-50%, -50%) rotate(0deg); }
+          to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+      `
+      )
+      .join("\n");
+    style.innerHTML = keyframes;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   const Planet = ({ planet }) => {
     const size = planet.size[screenSize];
     const orbit = planet.orbit?.[screenSize] || 0;
     const isCenter = orbit === 0;
+
     if (isCenter) {
       return (
         <div
-          id="skills"
-          className="absolute rounded-full shadow-xl ring-4 ring-orange-400/40 animate-pulse flex items-center justify-center sun-core"
+          className="absolute rounded-full shadow-xl ring-4 ring-orange-400/40 animate-pulse flex items-center justify-center sun-core z-20"
           style={{
             width: `${size}px`,
             height: `${size}px`,
@@ -38,11 +60,10 @@ const Skills = () => {
             top: "50%",
             transform: "translate(-50%, -50%)",
             boxShadow: `
-          0 0 40px ${planet.color},
-          0 0 60px ${planet.color}AA,
-          0 0 100px ${planet.color}66
-        `,
-            zIndex: 20,
+              0 0 40px ${planet.color},
+              0 0 60px ${planet.color}AA,
+              0 0 100px ${planet.color}66
+            `,
           }}
         >
           <img
@@ -50,18 +71,15 @@ const Skills = () => {
             alt={planet.name}
             className="w-2/3 h-2/3 object-contain"
           />
-
           <div
-            className="absolute rounded-full glow-ring"
+            className="absolute rounded-full glow-ring z-[-1]"
             style={{
               width: `${size * 3}px`,
               height: `${size * 3}px`,
               left: "50%",
               top: "50%",
               transform: "translate(-50%, -50%)",
-              borderRadius: "9999px",
               boxShadow: `0 0 80px 40px ${planet.color}33`,
-              zIndex: -1,
             }}
           />
         </div>
@@ -70,7 +88,6 @@ const Skills = () => {
 
     return (
       <div
-        id="skills"
         className="absolute"
         style={{
           width: `${orbit * 2}px`,
@@ -107,7 +124,7 @@ const Skills = () => {
 
   const OrbitRing = ({ radius, color = "#2d04fa8b" }) => (
     <div
-      className="absolute rounded-full border border-dashed border-white/20 "
+      className="absolute rounded-full border border-dashed border-white/20"
       style={{
         width: `${radius * 2}px`,
         height: `${radius * 2}px`,
@@ -138,7 +155,7 @@ const Skills = () => {
         }}
       >
         <div
-          className="absolute text-xs text-white bg-black bg-opacity-70 px-2 py-1 rounded"
+          className="absolute text-xs text-white bg-black/70 px-2 py-1 rounded"
           style={{
             top: `-30px`,
             left: "50%",
@@ -154,26 +171,18 @@ const Skills = () => {
   return (
     <div
       id="skills"
-      className="min-h-screen  flex flex-col items-center justify-center p-4"
+      className="min-h-screen flex flex-col items-center justify-center p-4"
     >
-      <style jsx>{`
-        ${techPlanets
-          .filter((p) => p.orbit && typeof p.orbit === "object")
-          .map(
-            (p) => `@keyframes orbit-${p.id} {
-              from { transform: translate(-50%, -50%) rotate(0deg); }
-              to { transform: translate(-50%, -50%) rotate(360deg); }
-            }`
-          )
-          .join("\n")}
-      `}</style>
-
       <h1 className="text-4xl font-bold text-white mb-2">
         My Tech Solar System
       </h1>
 
-      {<FeaturedWork />}
-      <div className="relative" style={{ width: "600px", height: "600px" }}>
+      <FeaturedWork />
+
+      <div
+        className="relative my-6"
+        style={{ width: "600px", height: "600px" }}
+      >
         {[80, 120, 160, 200, 240, 280].map((r) => (
           <OrbitRing key={r} radius={r} />
         ))}
@@ -189,7 +198,7 @@ const Skills = () => {
       <div className="mt-8 flex gap-4">
         <button
           onClick={() => setShowLabels(!showLabels)}
-          className={`px-4 py-2 rounded ${
+          className={`px-4 py-2 rounded transition ${
             showLabels ? "bg-blue-600" : "bg-gray-600"
           } text-white`}
         >

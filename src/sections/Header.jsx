@@ -5,15 +5,21 @@ import DownloadButton from "../components/DownloadButton";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
 // import useModernScrollReveal from "../hooks/useModernScrollReveal";
-import { useGSAPScrollTransition } from "../hooks/useGSAPScrollTransition";
 
 const speechText = `HELLO I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
+
+function speakText() {
+  window.speechSynthesis.cancel();
+  const utter = new window.SpeechSynthesisUtterance(speechText);
+  utter.rate = 1;
+  window.speechSynthesis.speak(utter);
+}
 
 export default function Header() {
   // useModernScrollReveal();
   const [showBubble, setShowBubble] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { headerAvatarRef } = useGSAPScrollTransition();
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -26,10 +32,11 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative bg-grid-pattern min-h-screen w-full overflow-hidden transition-colors duration-500 bg-gray-50 text-black"
+      className="relative bg-grid-pattern min-h-screen w-full overflow-x-hidden transition-colors duration-500 bg-gray-50 text-black"
     >
       <Navbar />
 
+      {/* Desktop */}
       <div className="hidden md:block">
         <div className="absolute inset-0 flex flex-col justify-center items-start pl-6 md:pl-12 lg:pl-16 xl:pl-24">
           <motion.div
@@ -131,9 +138,7 @@ export default function Header() {
           >
             <div className="relative mx-auto">
               <img
-                ref={headerAvatarRef}
                 src={avatar}
-                style={{ willChange: "transform, opacity" }}
                 alt="Avatar"
                 className="w-[220px] md:w-[280px] lg:w-[300px] xl:w-[360px] rounded-full object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
               />
@@ -147,12 +152,13 @@ export default function Header() {
         </motion.div>
       </div>
 
-      <div className="block md:hidden px-6 pt-24 text-center">
+      {/* Mobile */}
+      <div className="block md:hidden w-full max-w-screen-xl px-4 pt-24 text-center min-h-screen flex flex-col items-center justify-start">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl font-extrabold tracking-tight text-gray-800 mb-4"
+          className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-800 mb-2"
         >
           FULL STACK DEVELOPER
         </motion.h1>
@@ -161,17 +167,15 @@ export default function Header() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-xl font-medium text-gray-600"
+          className="text-lg sm:text-xl font-medium text-gray-600 mb-2"
         >
           Sudarshan Hingalje
         </motion.p>
 
         <motion.img
-          ref={headerAvatarRef}
           src={avatar}
-          style={{ willChange: "transform, opacity" }}
           alt="Sudarshan Avatar"
-          className="w-40 h-40 mt-6 mx-auto rounded-full grayscale hover:grayscale-0 transition-all duration-300"
+          className="w-32 h-32 sm:w-40 sm:h-40 mt-4 mx-auto rounded-full grayscale hover:grayscale-0 transition-all duration-300"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
@@ -188,7 +192,7 @@ export default function Header() {
           </div>
         )}
 
-        <div className="mt-6">
+        <div className="mt-6 w-full flex justify-center">
           <DownloadButton />
         </div>
       </div>

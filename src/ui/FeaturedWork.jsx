@@ -1,6 +1,17 @@
 const FeaturedWork = () => {
   // Frontend Technologies
-  const frontendTech = ["React", "HTML5", "CSS3", "JavaScript", "Next.js"];
+  const frontendTech = [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "React",
+    "Next.js",
+    "chartjs",
+    "Tailwind",
+    "Bootstrap",
+    "styled-components",
+    "Vite",
+  ];
 
   // Backend and Other Technologies
   const backendTech = [
@@ -27,7 +38,7 @@ const FeaturedWork = () => {
       </h2>
 
       {/* Frontend Technologies */}
-      <div className="relative w-full h-20 overflow-hidden mb-4">
+      <div className="relative w-full h-16 sm:h-20 md:h-24 overflow-hidden mb-4">
         {/* Animated dotted line */}
         <div className="absolute left-0 top-1/2 w-full h-px transform -translate-y-1/2 z-10">
           <div
@@ -36,7 +47,7 @@ const FeaturedWork = () => {
               backgroundImage:
                 "linear-gradient(90deg, black 50%, transparent 50%)",
               backgroundSize: "40px 1px",
-              animation: "slideRight 60s linear infinite",
+              animation: "slideRight 30s linear infinite",
             }}
           />
         </div>
@@ -51,7 +62,7 @@ const FeaturedWork = () => {
           {topSlides.map((tech, index) => (
             <div
               key={index}
-              className="flex-shrink-0 flex items-center justify-center px-12 h-full text-3xl font-normal relative"
+              className="flex-shrink-0 flex items-center justify-center px-6 sm:px-10 md:px-12 h-full text-lg sm:text-2xl md:text-3xl font-normal relative"
               style={{ minWidth: "auto" }}
             >
               {tech}
@@ -60,13 +71,14 @@ const FeaturedWork = () => {
         </div>
       </div>
 
-      <div className="relative w-full h-20 overflow-hidden">
-        <div className="absolute  left-0 top-1/2 w-full h-px transform -translate-y-1/2 z-10">
+      {/* Backend Technologies */}
+      <div className="relative w-full h-16 sm:h-20 md:h-24 overflow-hidden">
+        <div className="absolute left-0 top-1/2 w-full h-px transform -translate-y-1/2 z-10">
           <div
             className="w-[200%] h-px bg-repeat-x"
             style={{
               backgroundImage:
-                "linear-gradient(90deg, black 50%, transparent 50%) dark:linear-gradient(90deg, white 50%, transparent 50%)",
+                "linear-gradient(90deg, black 50%, transparent 50%)",
               backgroundSize: "40px 1px",
               animation: "slideLeft 60s linear infinite",
             }}
@@ -82,7 +94,7 @@ const FeaturedWork = () => {
           {bottomSlides.map((tech, index) => (
             <div
               key={index}
-              className="flex-shrink-0 flex items-center justify-center px-12 h-full text-3xl font-normal relative"
+              className="flex-shrink-0 flex items-center justify-center px-6 sm:px-10 md:px-12 h-full text-lg sm:text-2xl md:text-3xl font-normal relative"
               style={{ minWidth: "auto" }}
             >
               {tech}
@@ -90,26 +102,6 @@ const FeaturedWork = () => {
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes slideLeft {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-33.333%);
-          }
-        }
-
-        @keyframes slideRight {
-          0% {
-            transform: translateX(-33.333%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };

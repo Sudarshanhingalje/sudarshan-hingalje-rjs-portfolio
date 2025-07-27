@@ -4,6 +4,7 @@ import App from "./App";
 
 import "./styles/global.css";
 import "./styles/index.css";
+import "./styles/planet.css";
 import "./styles/stars.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

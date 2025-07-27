@@ -1,0 +1,7 @@
+.sun-core {
+  box-shadow: 0 0 40px #ff9800, 0 0 60px #ff9800aa, 0 0 100px #ff980066;
+}
+
+.glow-ring {
+  box-shadow: 0 0 80px 40px rgba(255, 152, 0, 0.2);
+}

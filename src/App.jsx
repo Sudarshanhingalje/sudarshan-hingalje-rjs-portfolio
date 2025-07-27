@@ -48,12 +48,9 @@ function App() {
         </div>
       ) : (
         <>
-          {/* Fixed UI Toggles */}
-          <div className="fixed top-3 right-20 z-50">
+          <div className="fixed top-3 right-3 md:top-4 md:right-20 z-50 flex flex-col md:flex-row items-center gap-3">
             <MusicToggleButton />
-            <div className="fixed top-4 right-20 z-50 flex items-center gap-4">
-              <ThemeToggle />
-            </div>
+            <ThemeToggle />
           </div>
 
           <div

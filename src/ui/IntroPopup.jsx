@@ -2,7 +2,7 @@ const IntroPopup = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-[50] flex items-center justify-center p-4">
+    <div className="absolute inset-0 bg-black/80 backdrop-blur z-[50] flex items-center justify-center p-4">
       <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 max-w-2xl w-full mx-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10" />
         <button

@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import GoalCard from "../components/GoalCard";
 import SectionHeader from "../components/SectionHeader";
 import { goals } from "../data/goals/Goals";
-import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 export default function Personal() {
   const [activeGoal, setActiveGoal] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-
-  useModernScrollReveal();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 200);
