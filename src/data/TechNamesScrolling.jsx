@@ -10,4 +10,8 @@ export const techNames = [
   "Postman",
   "Jira",
   "GitHub",
+  "spring",
+  "spring-boot",
+  "jenkien",
+  "aws",
 ];

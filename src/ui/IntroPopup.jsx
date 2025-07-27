@@ -1,126 +1,43 @@
-// IntroPopup.jsx
-import { useEffect, useRef, useState } from "react";
-import Draggable from "react-draggable";
-import { FaBackward, FaForward, FaPause, FaPlay } from "react-icons/fa";
-import { FiX } from "react-icons/fi";
-
 const IntroPopup = ({ isOpen, onClose }) => {
-  const [showClose, setShowClose] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const videoRef = useRef(null);
-
-  // Show close button after 5s
-  useEffect(() => {
-    if (isOpen) {
-      const timer = setTimeout(() => setShowClose(true), 5000);
-      return () => clearTimeout(timer);
-    } else {
-      setShowClose(false);
-      setIsPlaying(true); // reset when closed
-    }
-  }, [isOpen]);
-
-  // Auto-close when About section is not in view
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting && isOpen) {
-          onClose();
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    const aboutEl = document.querySelector("#about");
-    if (aboutEl) observer.observe(aboutEl);
-
-    return () => {
-      if (aboutEl) observer.unobserve(aboutEl);
-    };
-  }, [isOpen, onClose]);
-
-  const togglePlayPause = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      videoRef.current.play();
-      setIsPlaying(true);
-    } else {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
-  };
-
-  const skip = (seconds) => {
-    if (videoRef.current) {
-      videoRef.current.currentTime += seconds;
-    }
-  };
-
   if (!isOpen) return null;
 
   return (
-    <div className="absolute inset-0 z-[99] flex items-center justify-center bg-black/40 backdrop-blur-md">
-      <Draggable>
-        <div
-          className="relative w-[320px] sm:w-[480px] aspect-[3/4] bg-contain bg-no-repeat bg-center rounded-[30px] shadow-2xl"
-          style={{
-            backgroundImage: `url('/assets/ipad 1.png')`, // Or your custom image
-            backgroundSize: "100% 100%",
-            border: "8px solid #222",
-          }}
+    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-[50] flex items-center justify-center p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 max-w-2xl w-full mx-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-pink-500/10" />
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-xl font-bold z-10"
         >
-          {/* ❌ Close */}
-          {showClose && (
-            <button
-              onClick={onClose}
-              className="absolute top-2 right-2 z-50 p-1 rounded-full text-white bg-red-600 hover:bg-red-400"
-            >
-              <FiX size={18} />
-            </button>
-          )}
+          ×
+        </button>
 
-          {/* 📽️ Video inside tablet screen */}
-          <div className="absolute top-[9%] left-[6%] w-[88%] h-[82%] rounded-[20px] overflow-hidden bg-black">
+        <div className="relative z-10">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            My Journey in 60 Seconds 🎬
+          </h3>
+
+          <div className="aspect-video rounded-xl overflow-hidden bg-black mb-4 shadow-xl">
             <video
-              ref={videoRef}
               src="/assets/projectvideo.mp4"
-              className="w-full h-full object-cover"
+              controls
               autoPlay
               loop
               muted
               playsInline
-              controls={false}
+              className="w-full h-full object-cover"
             >
               Your browser does not support the video tag.
             </video>
           </div>
 
-          {/* 🎛️ Controls inside tablet */}
-          <div className="absolute bottom-[10%] left-[50%] -translate-x-1/2 z-50 flex gap-3 bg-white/80 dark:bg-black/60 backdrop-blur-md px-4 py-2 rounded-full">
-            <button
-              onClick={() => skip(-10)}
-              className="text-black dark:text-white hover:scale-110 transition"
-              title="Rewind 10s"
-            >
-              <FaBackward />
-            </button>
-            <button
-              onClick={togglePlayPause}
-              className="text-black dark:text-white hover:scale-110 transition"
-              title={isPlaying ? "Pause" : "Play"}
-            >
-              {isPlaying ? <FaPause /> : <FaPlay />}
-            </button>
-            <button
-              onClick={() => skip(10)}
-              className="text-black dark:text-white hover:scale-110 transition"
-              title="Forward 10s"
-            >
-              <FaForward />
-            </button>
-          </div>
+          <p className="text-gray-600 dark:text-gray-300 text-center">
+            Watch my story unfold — from mechanical engineering to full-stack
+            development, capturing moments through photography, and building
+            dreams through code.
+          </p>
         </div>
-      </Draggable>
+      </div>
     </div>
   );
 };

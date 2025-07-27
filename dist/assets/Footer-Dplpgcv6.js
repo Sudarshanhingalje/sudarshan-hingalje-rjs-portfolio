@@ -1,4 +1,4 @@
-import{j as e}from"./react-Cxtxkmud.js";import{m as r,n as t,o as a,p as s}from"./react-icons-5btsjKQQ.js";import"./clsx-BWEp7SwF.js";const n="/assets/brand2-DE2GPeYJ.svg",h=()=>e.jsxs("footer",{id:"footer",className:`flex flex-col items-center pb-10 \r
+import{j as e}from"./react-Cxtxkmud.js";import{i as r,j as t,k as a,l as s}from"./react-icons-Cza7odtR.js";import"./clsx-BWEp7SwF.js";const n="/assets/brand2-DE2GPeYJ.svg",h=()=>e.jsxs("footer",{id:"footer",className:`flex flex-col items-center pb-10 \r
       text-slate-800\r
       dark:bg-gradient-to-t dark:from-[#0b0c15] dark:text-white\r
       transition-colors duration-500`,children:[e.jsx("p",{className:"text-xs dark:text-gray-400 text-slate-500 py-4",children:"Made with ❤️ React Js+Vite"}),e.jsx("div",{className:"dark:text-white text-slate-800 font-medium",children:"Sudarshan Hingalje © 2025"}),e.jsx("div",{className:"my-4",children:e.jsx("button",{onClick:()=>window.scrollTo({top:0,behavior:"smooth"}),className:"focus:outline-none group",children:e.jsx("img",{src:n,alt:"Logo",className:`h-20 md:h-20 w-full object-contain cursor-pointer \r

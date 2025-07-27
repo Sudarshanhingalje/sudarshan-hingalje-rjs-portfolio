@@ -32,7 +32,7 @@ const Loader = ({ onComplete }) => {
         }
         return next;
       });
-    }, 700);
+    }, 500);
 
     return () => clearInterval(interval);
   }, [onComplete]);

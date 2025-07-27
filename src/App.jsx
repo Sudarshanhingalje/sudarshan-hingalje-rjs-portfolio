@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 
@@ -29,10 +29,6 @@ const StarsBackground = lazy(() => import("./components/StarsBackground"));
 function App() {
   const [loading, setLoading] = useState(true);
   const [isDarkMode] = useTheme();
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
@@ -70,7 +66,6 @@ function App() {
               <SmoothScroll>
                 <Wheel />
                 <ScrollManager>
-                  {/* Conditionally load animated galaxy backgrounds */}
                   {isDarkMode && !isMobile && (
                     <Suspense fallback={<div />}>
                       <GalaxyBackground />

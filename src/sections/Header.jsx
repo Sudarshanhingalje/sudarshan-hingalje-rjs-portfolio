@@ -4,15 +4,16 @@ import avatar from "../assets/yoga.svg";
 import DownloadButton from "../components/DownloadButton";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
-import useModernScrollReveal from "../hooks/useModernScrollReveal";
+// import useModernScrollReveal from "../hooks/useModernScrollReveal";
+import { useGSAPScrollTransition } from "../hooks/useGSAPScrollTransition";
 
 const speechText = `HELLO I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
 export default function Header() {
-  useModernScrollReveal();
+  // useModernScrollReveal();
   const [showBubble, setShowBubble] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
+  const { headerAvatarRef } = useGSAPScrollTransition();
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -21,11 +22,6 @@ export default function Header() {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  const speakText = () => {
-    const utterance = new SpeechSynthesisUtterance(speechText);
-    window.speechSynthesis.speak(utterance);
-  };
 
   return (
     <section
@@ -135,7 +131,9 @@ export default function Header() {
           >
             <div className="relative mx-auto">
               <img
+                ref={headerAvatarRef}
                 src={avatar}
+                style={{ willChange: "transform, opacity" }}
                 alt="Avatar"
                 className="w-[220px] md:w-[280px] lg:w-[300px] xl:w-[360px] rounded-full object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
               />
@@ -169,7 +167,9 @@ export default function Header() {
         </motion.p>
 
         <motion.img
+          ref={headerAvatarRef}
           src={avatar}
+          style={{ willChange: "transform, opacity" }}
           alt="Sudarshan Avatar"
           className="w-40 h-40 mt-6 mx-auto rounded-full grayscale hover:grayscale-0 transition-all duration-300"
           initial={{ opacity: 0, y: 30 }}

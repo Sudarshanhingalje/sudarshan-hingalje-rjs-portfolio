@@ -13,6 +13,7 @@ export default {
         elegant: ['"Playfair Display"', "serif"],
         jello: ["GT-Flexa", "sans-serif"],
         sans: ["Inter", "sans-serif"],
+        serif: ["Merriweather, serif"],
       },
       fontSize: {
         "18vw": "18vw",

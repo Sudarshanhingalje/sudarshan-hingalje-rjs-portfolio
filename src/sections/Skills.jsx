@@ -1,73 +1,202 @@
-// src/sections/Skills.jsx
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { skillsLerned } from "../data/skills/SkillsLerned";
-import useModernScrollReveal from "../hooks/useModernScrollReveal";
-import FeaturedTechNames from "../ui/FeaturedWork";
+// Skills.jsx
+import { useEffect, useState } from "react";
+import techPlanets from "../data/techPlanets";
+import FeaturedWork from "../ui/FeaturedWork";
+
+const getScreenSize = () => {
+  const width = window.innerWidth;
+  if (width < 640) return "mobile";
+  if (width < 1024) return "tablet";
+  return "desktop";
+};
 
 const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState(
-    skillsLerned[0].category
-  );
-  useModernScrollReveal();
+  const [paused, setPaused] = useState(false);
+  const [showLabels, setShowLabels] = useState(true);
+  const [screenSize, setScreenSize] = useState(getScreenSize());
 
-  return (
-    <section
-      id="skills"
-      className="h-screen grid grid-rows-[40vh_auto] dark:text-white text-black py-10 px-4 md:px-8 "
-    >
-      {/* Top Marquee Area */}
-      <div className="overflow-hidden">
-        <FeaturedTechNames />
-      </div>
+  useEffect(() => {
+    const handleResize = () => setScreenSize(getScreenSize());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-      {/* Tech Stack */}
-      <div className="overflow-auto pb-6">
-        <div className="skill-card max-w-7xl mx-auto flex flex-col md:flex-row gap-10">
-          {/* Categories */}
-          <div className="md:w-1/4 flex flex-col gap-6 text-yellow-200 text-xl font-semibold">
-            {skillsLerned.map((category) => (
-              <button
-                key={category.category}
-                onClick={() => setActiveCategory(category.category)}
-                className={`text-left transition-all duration-300 px-2 py-1 rounded-md ${
-                  activeCategory === category.category
-                    ? "bg-yellow-300 text-black font-bold scale-105"
-                    : "hover:bg-yellow-100/20"
-                }`}
-              >
-                {category.category}
-              </button>
-            ))}
-          </div>
+  const Planet = ({ planet }) => {
+    const size = planet.size[screenSize];
+    const orbit = planet.orbit?.[screenSize] || 0;
+    const isCenter = orbit === 0;
+    if (isCenter) {
+      return (
+        <div
+          id="skills"
+          className="absolute rounded-full shadow-xl ring-4 ring-orange-400/40 animate-pulse flex items-center justify-center sun-core"
+          style={{
+            width: `${size}px`,
+            height: `${size}px`,
+            backgroundColor: planet.color,
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            boxShadow: `
+          0 0 40px ${planet.color},
+          0 0 60px ${planet.color}AA,
+          0 0 100px ${planet.color}66
+        `,
+            zIndex: 20,
+          }}
+        >
+          <img
+            src={planet.image}
+            alt={planet.name}
+            className="w-2/3 h-2/3 object-contain"
+          />
 
-          {/* Skills */}
-          <div className="md:w-3/4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-            {skillsLerned
-              .find((cat) => cat.category === activeCategory)
-              ?.items.map((skill, idx) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.3, delay: idx * 0.1 }}
-                  whileHover={{ scale: 1.1 }}
-                  className="flex flex-col items-center justify-center text-center"
-                >
-                  <img
-                    src={`/skill/${skill.image}`}
-                    alt={skill.name}
-                    className="w-12 h-12 mb-2 object-contain"
-                    loading="lazy"
-                  />
-                  <p className="text-sm">{skill.name}</p>
-                </motion.div>
-              ))}
-          </div>
+          <div
+            className="absolute rounded-full glow-ring"
+            style={{
+              width: `${size * 3}px`,
+              height: `${size * 3}px`,
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              borderRadius: "9999px",
+              boxShadow: `0 0 80px 40px ${planet.color}33`,
+              zIndex: -1,
+            }}
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div
+        id="skills"
+        className="absolute"
+        style={{
+          width: `${orbit * 2}px`,
+          height: `${orbit * 2}px`,
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          animation: paused
+            ? "none"
+            : `orbit-${planet.id} ${planet.speed}s linear infinite`,
+        }}
+      >
+        <div
+          className="absolute rounded-full shadow-md"
+          style={{
+            width: `${size}px`,
+            height: `${size}px`,
+            backgroundColor: planet.color,
+            border: `2px solid ${planet.color}`,
+            top: 0,
+            left: "50%",
+            transform: `translate(-50%, -50%) rotate(${planet.offset}deg)`,
+          }}
+        >
+          <img
+            src={planet.image}
+            alt={planet.name}
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
-    </section>
+    );
+  };
+
+  const OrbitRing = ({ radius, color = "#2d04fa8b" }) => (
+    <div
+      className="absolute rounded-full border border-dashed border-white/20 "
+      style={{
+        width: `${radius * 2}px`,
+        height: `${radius * 2}px`,
+        borderColor: color,
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    />
+  );
+
+  const PlanetLabel = ({ planet }) => {
+    const orbit = planet.orbit?.[screenSize] || 0;
+    if (!showLabels || orbit === 0) return null;
+
+    return (
+      <div
+        className="absolute"
+        style={{
+          width: `${orbit * 2}px`,
+          height: `${orbit * 2}px`,
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          animation: paused
+            ? "none"
+            : `orbit-${planet.id} ${planet.speed}s linear infinite`,
+        }}
+      >
+        <div
+          className="absolute text-xs text-white bg-black bg-opacity-70 px-2 py-1 rounded"
+          style={{
+            top: `-30px`,
+            left: "50%",
+            transform: `translate(-50%, -50%) rotate(${planet.offset || 0}deg)`,
+          }}
+        >
+          {planet.name}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div
+      id="skills"
+      className="min-h-screen  flex flex-col items-center justify-center p-4"
+    >
+      <style jsx>{`
+        ${techPlanets
+          .filter((p) => p.orbit && typeof p.orbit === "object")
+          .map(
+            (p) => `@keyframes orbit-${p.id} {
+              from { transform: translate(-50%, -50%) rotate(0deg); }
+              to { transform: translate(-50%, -50%) rotate(360deg); }
+            }`
+          )
+          .join("\n")}
+      `}</style>
+
+      <h1 className="text-4xl font-bold text-white mb-2">
+        My Tech Solar System
+      </h1>
+
+      {<FeaturedWork />}
+      <div className="relative" style={{ width: "600px", height: "600px" }}>
+        {[80, 120, 160, 200, 240, 280].map((r) => (
+          <OrbitRing key={r} radius={r} />
+        ))}
+
+        {techPlanets.map((planet) => (
+          <div key={planet.id}>
+            <Planet planet={planet} />
+            <PlanetLabel planet={planet} />
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8 flex gap-4">
+        <button
+          onClick={() => setShowLabels(!showLabels)}
+          className={`px-4 py-2 rounded ${
+            showLabels ? "bg-blue-600" : "bg-gray-600"
+          } text-white`}
+        >
+          {showLabels ? "🏷️ Hide Labels" : "🏷️ Show Labels"}
+        </button>
+      </div>
+    </div>
   );
 };
 

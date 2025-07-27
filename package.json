@@ -34,6 +34,7 @@
     "react-router-dom": "^7.6.3",
     "simple-git": "^3.28.0",
     "split-type": "^0.3.4",
+    "swiper": "^11.2.10",
     "three": "^0.178.0"
   },
   "devDependencies": {
