@@ -52,12 +52,12 @@ const About = () => {
       </h2>
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-16 py-24">
-        <div className="max-w-7xl w-full">
+        <div className="max-w-7xl w-full ">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="flex justify-center lg:justify-end">
-              <div className="relative group">
-                <div className="relative w-80 h-80 sm:w-96 sm:h-96">
-                  <div className="w-full h-full overflow-hidden shadow-2xl">
+              <div className="relative group ">
+                <div className="relative w-80 h-80 sm:w-96 sm:h-96 ">
+                  <div className="w-full h-full overflow-hidden shadow-2xl ">
                     <div className="w-full h-full flex items-center justify-center">
                       <img src={myImage} alt="my image" />
                     </div>

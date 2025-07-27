@@ -10,13 +10,13 @@ const getScreenSize = () => {
 };
 
 const containerSizes = {
-  mobile: 320,
+  mobile: 280,
   tablet: 480,
   desktop: 600,
 };
 
 const orbitRadii = {
-  mobile: [40, 60, 80, 100, 120, 140],
+  mobile: [35, 55, 75, 95, 115, 135],
   tablet: [60, 90, 120, 150, 180, 210],
   desktop: [80, 120, 160, 200, 240, 280],
 };
@@ -32,7 +32,6 @@ const Skills = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 🌀 Inject orbit keyframes dynamically
   useEffect(() => {
     const style = document.createElement("style");
     style.type = "text/css";
@@ -43,6 +42,10 @@ const Skills = () => {
         @keyframes orbit-${p.id} {
           from { transform: translate(-50%, -50%) rotate(0deg); }
           to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        @keyframes counter-rotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
         }
       `
       )
@@ -167,42 +170,51 @@ const Skills = () => {
         }}
       >
         <div
-          className="absolute text-xs sm:text-sm text-white bg-black/70 px-2 py-1 rounded"
+          className="absolute"
           style={{
-            top: `-30px`,
+            top: 0,
             left: "50%",
-            transform: `translate(-50%, -50%) rotate(${planet.offset || 0}deg)`,
-            whiteSpace: "nowrap",
+            transform: "translateX(-50%)",
           }}
         >
-          {planet.name}
+          <div
+            className="text-xs text-white bg-black/70 px-2 py-1 rounded shadow-md"
+            style={{
+              animation: paused
+                ? "none"
+                : `counter-rotate ${planet.speed}s linear infinite`,
+              transformOrigin: "center",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {planet.name}
+          </div>
         </div>
       </div>
     );
   };
 
-  // Responsive container size and orbit radii
   const containerSize = containerSizes[screenSize];
   const radii = orbitRadii[screenSize];
 
   return (
     <div
       id="skills"
-      className="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4"
+      className="flex flex-col items-center justify-center px-4 py-8 sm:py-12"
     >
-      <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 text-center">
+      <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text mb-4 sm:mb-6 text-center tracking-tight hover:scale-105 transition-transform duration-300">
         My Tech Solar System
       </h1>
 
       <FeaturedWork />
 
       <div
-        className="relative my-6 mx-auto"
+        className="relative mx-auto my-4 sm:my-6"
         style={{
           width: `${containerSize}px`,
           height: `${containerSize}px`,
-          maxWidth: "100vw",
-          maxHeight: "80vw",
+          maxWidth: "90vw",
+          maxHeight: "90vw",
         }}
       >
         {radii.map((r) => (
@@ -217,14 +229,17 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="mt-8 flex gap-4 flex-wrap justify-center">
+      <div className="mt-4 sm:mt-6 flex gap-4 flex-wrap justify-center">
         <button
           onClick={() => setShowLabels(!showLabels)}
-          className={`px-4 py-2 rounded transition ${
-            showLabels ? "bg-blue-600" : "bg-gray-600"
-          } text-white`}
+          className={`flex items-center gap-2 px-4 py-2 rounded-full font-semibold shadow-lg transition-all duration-300 border-2 text-sm sm:text-base ${
+            showLabels
+              ? "bg-gradient-to-r from-blue-600 to-purple-600 border-blue-700 hover:from-blue-700 hover:to-purple-700"
+              : "bg-gradient-to-r from-gray-600 to-gray-800 border-gray-700 hover:from-gray-700 hover:to-gray-900"
+          } text-white hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400`}
         >
-          {showLabels ? "🏷️ Hide Labels" : "🏷️ Show Labels"}
+          <span className="text-sm sm:text-lg">{showLabels ? "🏷️" : "🚫"}</span>
+          <span>{showLabels ? "Hide Labels" : "Show Labels"}</span>
         </button>
       </div>
     </div>

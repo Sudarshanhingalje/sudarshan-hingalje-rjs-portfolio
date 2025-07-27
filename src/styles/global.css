@@ -140,13 +140,13 @@ html.lenis body {
 }
 
 /* Scrollbar Hide */
-* {
+/* * {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 *::-webkit-scrollbar {
   display: none;
-}
+} */
 
 body {
   overflow-x: hidden;

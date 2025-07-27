@@ -80,11 +80,11 @@ const Contact = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 text-black dark:text-white "
+      className="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 text-black dark:text-white"
     >
-      <div className="w-full max-w-3xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight contact-heading">
+      <div className="w-full max-w-3xl mx-auto">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight contact-heading">
             LET&apos;S WORK{" "}
             <span className="text-gray-500 block">TOGETHER</span>
           </h1>
@@ -93,7 +93,7 @@ const Contact = () => {
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="space-y-6 confim-form"
+          className="space-y-4 sm:space-y-6 confim-form"
         >
           {/* Reason */}
           <div>
@@ -119,7 +119,7 @@ const Contact = () => {
           </div>
 
           {/* Name + Email */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-1">
                 Name

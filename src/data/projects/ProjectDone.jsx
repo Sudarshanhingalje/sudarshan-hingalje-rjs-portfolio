@@ -1,13 +1,10 @@
-// src/data/projects/ProjectDone.js
-export const projectsDone = [
+export const projects = [
   {
     id: 1,
     title: "The Wild Oasis - Complete Hotel Management Suite",
     shortTitle: "Wild Oasis Hotel Suite",
     description:
       "A comprehensive full-stack hotel booking platform featuring both customer-facing website and admin dashboard. Includes real-time booking management, payment processing, user authentication, and advanced analytics dashboard.",
-    detailedDescription:
-      "Complete hotel management ecosystem designed for modern hospitality businesses. This full-stack application features a customer booking interface with real-time availability checking, secure payment processing, user role management, comprehensive booking analytics, and responsive design optimized for all devices. The admin dashboard provides powerful tools for managing reservations, customer data, and business insights.",
     img: "/project/thewildoasiswebsite.png",
     category: "Full-Stack Web Application",
     status: "Production Ready",
@@ -35,7 +32,6 @@ export const projectsDone = [
     ],
     link: "https://the-wild-oasis-website-cabins.vercel.app/",
     github: "https://github.com/Sudarshanhingalje/the-wild-oasis-website",
-    color: "from-emerald-600 via-teal-600 to-cyan-600",
   },
   {
     id: 2,
@@ -43,8 +39,6 @@ export const projectsDone = [
     shortTitle: "Fast Pizza E-commerce",
     description:
       "Modern pizza ordering application built with React and Redux Toolkit. Features dynamic cart management, real-time order tracking, GPS location integration, and seamless checkout experience.",
-    detailedDescription:
-      "High-performance pizza ordering system showcasing advanced state management with Redux Toolkit. The application includes GPS location integration for delivery, real-time cart updates, order priority system, dynamic pricing, and an optimized user experience with Tailwind CSS styling. Perfect demonstration of modern React patterns and state management.",
     img: "/project/fastreactpizza.png",
     category: "E-commerce Application",
     status: "Live & Optimized",
@@ -60,7 +54,6 @@ export const projectsDone = [
     techImages: ["reactjs.svg", "redux.svg", "tailwind.svg", "router.svg"],
     link: "https://redux-fast-react-pizza.netlify.app/",
     github: "https://github.com/Sudarshanhingalje/fast-react-pizza",
-    color: "from-orange-600 via-red-600 to-pink-600",
   },
   {
     id: 3,
@@ -68,8 +61,6 @@ export const projectsDone = [
     shortTitle: "ScrapSavvy Eco-Platform",
     description:
       "Innovative collaborative waste management platform connecting users with scrap vendors. Features intelligent pickup scheduling, vendor network management, and real-time tracking with Firebase backend integration.",
-    detailedDescription:
-      "Revolutionary waste management solution promoting environmental sustainability through technology. Users can easily schedule scrap pickups, vendors can efficiently manage their services, and the platform provides comprehensive analytics on waste collection patterns. Built with Firebase for real-time data synchronization and scalable cloud infrastructure.",
     img: "/project/scrapsavvy.png",
     category: "Environmental Technology",
     status: "Concept to Production",
@@ -87,7 +78,7 @@ export const projectsDone = [
       "JavaScript",
       "ReactJs",
       "MySQL",
-      "java",
+      "Java",
       "Spring-boot",
       "AWS-EC2",
     ],
@@ -100,7 +91,6 @@ export const projectsDone = [
     ],
     link: "https://the-wild-oasis-website-cabins.vercel.app/",
     github: "https://github.com/ScrapSavvym24/ScrapSavvy_M24",
-    color: "from-green-600 via-emerald-600 to-teal-600",
   },
   {
     id: 4,
@@ -108,8 +98,6 @@ export const projectsDone = [
     shortTitle: "Pizza Enterprise System",
     description:
       "Full-featured enterprise pizza delivery system with robust authentication, integrated Razorpay payment processing, MongoDB database, and comprehensive REST API architecture. Includes real-time order management and delivery tracking.",
-    detailedDescription:
-      "Enterprise-level pizza delivery application showcasing full-stack development expertise. Features secure user authentication, integrated payment processing via Razorpay, comprehensive order management system, robust REST API architecture, and real-time delivery tracking. Built with scalability and performance in mind using modern full-stack technologies and best practices.",
     img: "/project/pizzastore.png",
     category: "Full-Stack Commerce Platform",
     status: "Production Ready",
@@ -132,7 +120,6 @@ export const projectsDone = [
     ],
     link: "https://pizza-delivery-application-rose.vercel.app/",
     github: "https://github.com/Sudarshanhingalje/Pizza-Delivery-Application",
-    color: "from-purple-600 via-indigo-600 to-blue-600",
   },
   {
     id: 5,
@@ -140,8 +127,6 @@ export const projectsDone = [
     shortTitle: "Admin Dashboard Pro",
     description:
       "Sophisticated admin panel for comprehensive hotel management with interactive analytics, advanced user management, booking oversight, and real-time data visualization. Built for scalability and performance.",
-    detailedDescription:
-      "Professional administrative interface designed for hotel management professionals. Features advanced analytics with interactive charts, comprehensive user role management, detailed booking oversight, real-time performance monitoring, and intuitive data visualization tools. Built with React and Supabase for seamless real-time updates and optimal user experience.",
     img: "/project/thewildoasis.png",
     category: "Hotel Admin Dashboard",
     status: "Production Ready",
@@ -157,6 +142,5 @@ export const projectsDone = [
     techImages: ["reactjs.svg", "supabase.svg", "chartjs.svg", "tailwind.svg"],
     link: "https://hotelthe-wild-oasis.netlify.app/",
     github: "https://github.com/Sudarshanhingalje/the-wild-oasis",
-    color: "from-cyan-600 via-sky-600 to-indigo-600",
   },
 ];

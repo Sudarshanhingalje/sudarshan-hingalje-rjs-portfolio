@@ -2,12 +2,12 @@ import { lazy, Suspense, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 
-import GalleryMy from "./components/GalleryMy";
 import Main from "./components/Main";
 import MusicToggleButton from "./components/MusicToggleButton";
 import ThemeToggle from "./components/ThemeToggle";
 import Wheel from "./components/Wheel";
 
+import CertificateWall from "./components/CertificateWall";
 import ScrollManager from "./hooks/ScrollManager";
 import useTheme from "./hooks/UseTheme";
 import VideoPopup from "./ui/VideoPopup";
@@ -94,8 +94,9 @@ function App() {
                   <Suspense fallback={<div />}>
                     <Personal />
                   </Suspense>
+
                   <Suspense fallback={<div />}>
-                    <GalleryMy />
+                    <CertificateWall />
                   </Suspense>
                   <Suspense fallback={<div />}>
                     <Contact />
