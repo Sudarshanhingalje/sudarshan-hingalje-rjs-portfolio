@@ -4,7 +4,6 @@ import avatar from "../assets/yoga.svg";
 import DownloadButton from "../components/DownloadButton";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
-// import useModernScrollReveal from "../hooks/useModernScrollReveal";
 
 const speechText = `HELLO I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
 
@@ -16,7 +15,6 @@ function speakText() {
 }
 
 export default function Header() {
-  // useModernScrollReveal();
   const [showBubble, setShowBubble] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -32,12 +30,12 @@ export default function Header() {
   return (
     <section
       id="header"
-      className="relative bg-grid-pattern min-h-screen w-full overflow-x-hidden transition-colors duration-500 bg-gray-50 text-black"
+      className="relative bg-grid-pattern w-full overflow-x-hidden transition-colors duration-500 bg-gray-50 text-black"
     >
       <Navbar />
 
       {/* Desktop */}
-      <div className="hidden md:block">
+      <div className="hidden md:block min-h-screen">
         <div className="absolute inset-0 flex flex-col justify-center items-start pl-6 md:pl-12 lg:pl-16 xl:pl-24">
           <motion.div
             initial={{ opacity: 0, x: -100 }}
@@ -153,12 +151,12 @@ export default function Header() {
       </div>
 
       {/* Mobile */}
-      <div className="block md:hidden w-full max-w-screen-xl px-4 pt-24 text-center min-h-screen flex flex-col items-center justify-start">
+      <div className="block md:hidden w-full px-4 pt-16 text-center h-auto flex flex-col items-center justify-start space-y-4 pb-8">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-800 mb-2"
+          className="text-3xl sm:text-4xl font-extrabold tracking-tight text-gray-800"
         >
           FULL STACK DEVELOPER
         </motion.h1>
@@ -167,7 +165,7 @@ export default function Header() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-lg sm:text-xl font-medium text-gray-600 mb-2"
+          className="text-lg sm:text-xl font-medium text-gray-600"
         >
           Sudarshan Hingalje
         </motion.p>
@@ -175,7 +173,7 @@ export default function Header() {
         <motion.img
           src={avatar}
           alt="Sudarshan Avatar"
-          className="w-32 h-32 sm:w-40 sm:h-40 mt-4 mx-auto rounded-full grayscale hover:grayscale-0 transition-all duration-300"
+          className="w-32 h-32 sm:w-40 sm:h-40 rounded-full grayscale hover:grayscale-0 transition-all duration-300"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
@@ -187,12 +185,12 @@ export default function Header() {
         />
 
         {showBubble && (
-          <div className="mt-4 flex justify-center">
+          <div className="flex justify-center">
             <TalkingBubble message={speechText} />
           </div>
         )}
 
-        <div className="mt-6 w-full flex justify-center">
+        <div className="w-full flex justify-center">
           <DownloadButton />
         </div>
       </div>

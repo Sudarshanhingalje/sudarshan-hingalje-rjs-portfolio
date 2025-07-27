@@ -9,7 +9,7 @@ export default function SmoothScroll({ children }) {
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
-      smoothTouch: false,
+      smoothTouch: true, // Enable smooth scroll on mobile/touch devices
     });
 
     function raf(time) {
