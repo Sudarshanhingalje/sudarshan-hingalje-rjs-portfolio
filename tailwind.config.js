@@ -11,7 +11,6 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
         script: ['"Great Vibes"', "cursive"],
         elegant: ['"Playfair Display"', "serif"],
-        jello: ["GT-Flexa", "sans-serif"],
         sans: ["Inter", "sans-serif"],
         serif: ["Merriweather, serif"],
       },

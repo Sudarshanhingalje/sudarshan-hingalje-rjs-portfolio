@@ -10,6 +10,7 @@ const sections = [
   "projects",
   "experience",
   "personal",
+  "certificates",
   "contact",
   "footer",
 ];

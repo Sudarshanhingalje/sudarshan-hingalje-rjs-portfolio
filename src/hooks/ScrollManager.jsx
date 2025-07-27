@@ -86,21 +86,17 @@ const ScrollManager = ({ children }) => {
 
   return (
     <div ref={containerRef} className="relative">
-      {/* Enhanced Progress Bar Container */}
       <motion.div
         className="fixed left-4 top-[40%] -translate-y-1/2 w-1.5 h-[60vh] z-50 rounded-full"
         style={{ opacity: progressOpacity }}
       >
-        {/* Background track */}
         <div className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-full border border-white/20" />
 
-        {/* Main progress bar (your exact styling) */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 origin-top rounded-full"
           style={{ scaleY }}
         />
 
-        {/* Glow effect */}
         <motion.div
           className="absolute -inset-1 bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400 origin-top rounded-full blur-sm"
           style={{
@@ -111,9 +107,8 @@ const ScrollManager = ({ children }) => {
           transition={{ duration: 0.6, repeat: isScrolling ? Infinity : 0 }}
         />
 
-        {/* Progress indicator dot */}
         <motion.div
-          className="absolute w-3 h-3 bg-white rounded-full -right-0.5 shadow-lg border border-white/30"
+          className="absolute w-3 h-3  rounded-full -right-0.5  shadow-lg border border-white/30"
           style={{
             top: useTransform(
               scrollProgress,
@@ -137,9 +132,8 @@ const ScrollManager = ({ children }) => {
         />
       </motion.div>
 
-      {/* Scroll status indicator */}
       <motion.div
-        className="fixed top-8 left-4 text-white/70 text-xs font-mono tracking-wider"
+        className="fixed top-8 left-4 text-black/70 dark:text-white/70 text-xs font-mono tracking-wider"
         animate={{
           opacity: isScrolling ? 1 : 0,
           y: isScrolling ? 0 : -10,

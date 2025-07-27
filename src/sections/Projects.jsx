@@ -2,26 +2,26 @@ import { projects } from "../data/projects/ProjectDone";
 
 const Project = () => {
   return (
-    <div className="dark:text-white text-black px-4 sm:px-8 md:px-12 lg:px-16 py-6 sm:py-8 md:py-12">
+    <div
+      id="projects"
+      className="dark:text-white text-black px-4 sm:px-8 md:px-12 lg:px-16 py-6 sm:py-8 md:py-12"
+    >
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="mb-6 sm:mb-8 md:mb-12">
           <h2 className="text-xs sm:text-sm font-light tracking-[0.2em] text-gray-400 uppercase mb-4">
             PROJECT
           </h2>
         </div>
 
-        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {projects.map((project) => (
             <div key={project.id} className="group cursor-pointer">
-              <div className="relative overflow-hidden rounded-xl bg-blue-950 p-4 sm:p-6 aspect-[4/3] hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
-                {/* Project Image */}
-                <div className="relative h-full w-full overflow-hidden rounded-lg">
+              <div className="relative overflow-hidden rounded-xl bg-[#043d74] p-4 sm:p-6 aspect-[4/3] ">
+                <div className="relative h-full w-full overflow-hidden ">
                   <img
                     src={project.img}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover"
                   />
 
                   {/* Overlay */}

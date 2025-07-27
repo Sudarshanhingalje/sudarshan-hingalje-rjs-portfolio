@@ -178,7 +178,7 @@ const Skills = () => {
           }}
         >
           <div
-            className="text-xs text-white bg-black/70 px-2 py-1 rounded shadow-md"
+            className="text-xs dark:text-white text-black font-cinzel  px-2 py-1 rounded shadow-md"
             style={{
               animation: paused
                 ? "none"

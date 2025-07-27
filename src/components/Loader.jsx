@@ -9,7 +9,7 @@ const greetings = [
   "Bonjour",
   "Hola",
   "こんにちは",
-  "வணக்கம்",
+  "Hello",
 ];
 
 const Loader = ({ onComplete }) => {
@@ -27,12 +27,12 @@ const Loader = ({ onComplete }) => {
           setTimeout(() => {
             setShow(false);
             onComplete?.();
-          }, 800);
+          }, 700);
           return prev;
         }
         return next;
       });
-    }, 500);
+    }, 400);
 
     return () => clearInterval(interval);
   }, [onComplete]);
@@ -45,7 +45,6 @@ const Loader = ({ onComplete }) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.8 } }}
         >
-          {/* Glowing Chakra Spinner */}
           <motion.img
             src={chakraImg}
             alt="Chakra Loader"
@@ -54,10 +53,9 @@ const Loader = ({ onComplete }) => {
             transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
           />
 
-          {/* Neon Name */}
           <motion.h1
             key={index}
-            className="mt-8 text-3xl md:text-5xl font-bold tracking-widest text-center text-[#fffce1]"
+            className="mt-8 text-3xl md:text-5xl font-bold tracking-widest text-center text-[#f0e689]"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}

@@ -10,9 +10,9 @@ import Wheel from "./components/Wheel";
 import CertificateWall from "./components/CertificateWall";
 import ScrollManager from "./hooks/ScrollManager";
 import useTheme from "./hooks/UseTheme";
-import VideoPopup from "./ui/VideoPopup";
 import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
+import VideoPopup from "./videoads/VideoPopup";
 
 // Lazy Loaded Sections
 const Header = lazy(() => import("./sections/Header"));
@@ -94,7 +94,6 @@ function App() {
                   <Suspense fallback={<div />}>
                     <Personal />
                   </Suspense>
-
                   <Suspense fallback={<div />}>
                     <CertificateWall />
                   </Suspense>

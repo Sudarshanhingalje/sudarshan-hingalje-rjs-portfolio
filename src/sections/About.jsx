@@ -1,7 +1,7 @@
 import { Award, Code, MonitorPlay, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import myImage from "../assets/own.webp";
-import IntroPopup from "../ui/IntroPopup";
+import IntroPopup from "../videoads/IntroPopup";
 const About = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -41,7 +41,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-slate-50 via-white to-cyan-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+      className="relative min-h-screen w-full overflow-hidden "
     >
       <h2
         className={`absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[120px] sm:text-[160px] lg:text-[220px] xl:text-[280px] font-black text-gray-100/80 dark:text-gray-800/40 pointer-events-none select-none z-0 transition-all duration-1000 ${

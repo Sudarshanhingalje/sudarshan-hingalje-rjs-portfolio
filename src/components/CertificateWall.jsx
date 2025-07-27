@@ -58,7 +58,10 @@ const CertificateWall = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 font-sans">
+    <div
+      id="certificates"
+      className="flex flex-col items-center justify-center min-h-screen p-4 font-sans"
+    >
       <h1 className="text-4xl font-bold mb-8" style={{ color: "coral" }}>
         Digital Badges Wall
       </h1>
