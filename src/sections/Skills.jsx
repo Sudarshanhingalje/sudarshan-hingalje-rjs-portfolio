@@ -9,6 +9,18 @@ const getScreenSize = () => {
   return "desktop";
 };
 
+const containerSizes = {
+  mobile: 320,
+  tablet: 480,
+  desktop: 600,
+};
+
+const orbitRadii = {
+  mobile: [40, 60, 80, 100, 120, 140],
+  tablet: [60, 90, 120, 150, 180, 210],
+  desktop: [80, 120, 160, 200, 240, 280],
+};
+
 const Skills = () => {
   const [paused, setPaused] = useState(false);
   const [showLabels, setShowLabels] = useState(true);
@@ -155,11 +167,12 @@ const Skills = () => {
         }}
       >
         <div
-          className="absolute text-xs text-white bg-black/70 px-2 py-1 rounded"
+          className="absolute text-xs sm:text-sm text-white bg-black/70 px-2 py-1 rounded"
           style={{
             top: `-30px`,
             left: "50%",
             transform: `translate(-50%, -50%) rotate(${planet.offset || 0}deg)`,
+            whiteSpace: "nowrap",
           }}
         >
           {planet.name}
@@ -168,22 +181,31 @@ const Skills = () => {
     );
   };
 
+  // Responsive container size and orbit radii
+  const containerSize = containerSizes[screenSize];
+  const radii = orbitRadii[screenSize];
+
   return (
     <div
       id="skills"
-      className="min-h-screen flex flex-col items-center justify-center p-4"
+      className="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4"
     >
-      <h1 className="text-4xl font-bold text-white mb-2">
+      <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 text-center">
         My Tech Solar System
       </h1>
 
       <FeaturedWork />
 
       <div
-        className="relative my-6"
-        style={{ width: "600px", height: "600px" }}
+        className="relative my-6 mx-auto"
+        style={{
+          width: `${containerSize}px`,
+          height: `${containerSize}px`,
+          maxWidth: "100vw",
+          maxHeight: "80vw",
+        }}
       >
-        {[80, 120, 160, 200, 240, 280].map((r) => (
+        {radii.map((r) => (
           <OrbitRing key={r} radius={r} />
         ))}
 
@@ -195,7 +217,7 @@ const Skills = () => {
         ))}
       </div>
 
-      <div className="mt-8 flex gap-4">
+      <div className="mt-8 flex gap-4 flex-wrap justify-center">
         <button
           onClick={() => setShowLabels(!showLabels)}
           className={`px-4 py-2 rounded transition ${
