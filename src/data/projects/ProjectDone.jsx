@@ -89,8 +89,9 @@ export const projects = [
       "mysql.svg",
       "aws.svg",
     ],
-    link: "https://the-wild-oasis-website-cabins.vercel.app/",
-    github: "https://github.com/ScrapSavvym24/ScrapSavvy_M24",
+    link: "https://scrapsavvy.netlify.app/",
+    // github: "https://github.com/Sudarshanhingalje/ScrapSavvy-frontend",
+    github: "https://github.com/Sudarshanhingalje/ScrapSavvy-backend",
   },
   {
     id: 4,
