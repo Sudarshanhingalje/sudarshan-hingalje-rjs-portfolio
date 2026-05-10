@@ -1,31 +1,180 @@
+// src/sections/Header.jsx
+
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import avatar from "../assets/yoga.svg";
 import DownloadButton from "../components/DownloadButton";
 import Navbar from "../components/Navbar";
 import TalkingBubble from "../components/TalkingBubble";
 
-const speechText = `HELLO I'm Sudarshan. My codeword is Paradox. I'm a Full Stack Developer. Let's spin the Sudarshan Chakra to explore my journey through coding, learning, and life!`;
-
-function speakText() {
+function speakText(text) {
   window.speechSynthesis.cancel();
-  const utter = new window.SpeechSynthesisUtterance(speechText);
+  const utter = new window.SpeechSynthesisUtterance(text);
   utter.rate = 1;
   window.speechSynthesis.speak(utter);
 }
 
 export default function Header() {
   const [showBubble, setShowBubble] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [bubbleText, setBubbleText] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const avatarRef = useRef(null);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    function handleClickOutside(event) {
+      if (avatarRef.current && !avatarRef.current.contains(event.target)) {
+        setShowBubble(false);
+        setBubbleText("");
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const startListening = () => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Speech recognition not supported in this browser.");
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    console.log("🎤 Preparing mic...");
+
+    setBubbleText("Listening...");
+    setShowBubble(true);
+
+    // Delayed start: helps with "no-speech"
+    setTimeout(() => {
+      recognition.start();
+      console.log("🎤 Listening started...");
+
+      recognition.onstart = () => console.log("🔊 Speech recognition started");
+      recognition.onaudiostart = () =>
+        console.log("🎙️ Audio capturing started");
+      recognition.onspeechstart = () => console.log("🗣️ Speech detected");
+      recognition.onspeechend = () => console.log("📴 Speech ended");
+      recognition.onaudioend = () => console.log("🔇 Audio capturing ended");
+
+      recognition.onresult = async (event) => {
+        const transcript = event.results[0][0].transcript;
+        console.log("📝 Heard:", transcript);
+
+        setBubbleText("Thinking... 🤔");
+        speakText("Thinking...");
+
+        try {
+          console.log(
+            "🔄 Making request to:",
+            "http://localhost:5678/webhook/chat"
+          );
+          console.log("📤 Sending data:", { message: transcript });
+
+          const response = await fetch("http://localhost:5678/webhook/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: transcript }),
+          });
+
+          console.log("📥 Response status:", response.status);
+          console.log("📥 Response ok:", response.ok);
+
+          // Get the raw text first
+          const rawText = await response.text();
+          console.log("📄 Raw response text:", rawText);
+          console.log("📏 Raw response length:", rawText.length);
+
+          // Check if response is empty
+          if (!rawText || rawText.trim() === "") {
+            console.error("❌ Empty response received");
+            setBubbleText("Sorry, I received an empty response.");
+            speakText("Sorry, I received an empty response.");
+            return;
+          }
+
+          // Try to parse JSON
+          let data;
+          try {
+            data = JSON.parse(rawText);
+            console.log("✅ Parsed JSON:", data);
+          } catch (jsonError) {
+            console.error("❌ JSON parsing failed:", jsonError);
+            console.error("📄 Failed to parse:", rawText);
+            setBubbleText("Sorry, I received an invalid response format.");
+            speakText("Sorry, I received an invalid response format.");
+            return;
+          }
+
+          // Extract message
+          const message = data?.message || "No message found in response";
+          console.log("💬 Final message:", message);
+
+          setBubbleText(message);
+          speakText(message);
+        } catch (error) {
+          console.error("❌ Fetch Error:", error);
+          console.error("❌ Error details:", error.message);
+          setBubbleText("Sorry, I'm having trouble connecting.");
+          speakText("Sorry, I'm having trouble connecting.");
+        }
+      };
+
+      recognition.onerror = (event) => {
+        console.error("⚠️ Speech recognition error:", event.error);
+
+        if (event.error === "no-speech") {
+          setBubbleText("I couldn't hear you. Please try again.");
+          speakText("I couldn't hear you. Please try again.");
+        } else if (event.error === "not-allowed") {
+          setBubbleText("Microphone access was denied.");
+          speakText("Microphone access was denied.");
+        } else {
+          setBubbleText("Speech recognition error occurred.");
+          speakText("Speech recognition error occurred.");
+        }
+      };
+
+      recognition.onend = () => {
+        console.log("🛑 Recognition ended");
+      };
+    }, 500); // Delay of 500ms before starting recognition
+  };
+
+  const testConnection = async () => {
+    try {
+      console.log("🧪 Testing connection...");
+      const response = await fetch("http://localhost:5678/webhook/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: "Test connection from frontend" }),
+      });
+
+      console.log("🧪 Test response status:", response.status);
+      const rawText = await response.text();
+      console.log("🧪 Test raw response:", rawText);
+
+      if (rawText) {
+        const data = JSON.parse(rawText);
+        console.log("🧪 Test parsed data:", data);
+        alert("Connection works! Check console for details.");
+      } else {
+        alert("Connection returned empty response!");
+      }
+    } catch (error) {
+      console.error("🧪 Test connection failed:", error);
+      alert("Connection failed! Check console for details.");
+    }
+  };
 
   return (
     <section
@@ -34,8 +183,18 @@ export default function Header() {
     >
       <Navbar />
 
+      <div className="absolute top-4 right-4 z-50">
+        <button
+          onClick={testConnection}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
+        >
+          Test n8n Connection
+        </button>
+      </div>
+
       {/* Desktop */}
       <div className="hidden md:block min-h-screen">
+        {/* Left text content */}
         <div className="absolute inset-0 flex flex-col justify-center items-start pl-6 md:pl-12 lg:pl-16 xl:pl-24">
           <motion.div
             initial={{ opacity: 0, x: -100 }}
@@ -80,6 +239,7 @@ export default function Header() {
           </motion.div>
         </div>
 
+        {/* Right avatar */}
         <div className="absolute right-6 md:right-12 lg:right-16 xl:right-24 top-1/2 transform -translate-y-1/2">
           <motion.div
             initial={{ opacity: 0, x: 100 }}
@@ -117,6 +277,7 @@ export default function Header() {
           </motion.div>
         </div>
 
+        {/* Avatar speech */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -124,15 +285,9 @@ export default function Header() {
           className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10"
         >
           <div
+            ref={avatarRef}
             className="relative group cursor-pointer"
-            onMouseEnter={() => {
-              setShowBubble(true);
-              speakText();
-            }}
-            onMouseLeave={() => {
-              setShowBubble(false);
-              window.speechSynthesis.cancel();
-            }}
+            onClick={startListening}
           >
             <div className="relative mx-auto">
               <img
@@ -142,7 +297,7 @@ export default function Header() {
               />
               {showBubble && (
                 <div className="absolute -top-20 left-full ml-4">
-                  <TalkingBubble message={speechText} />
+                  <TalkingBubble message={bubbleText} />
                 </div>
               )}
             </div>
@@ -150,7 +305,7 @@ export default function Header() {
         </motion.div>
       </div>
 
-      {/* Mobile */}
+      {/* Mobile View */}
       <div className="block md:hidden w-full px-4 pt-16 text-center h-auto flex flex-col items-center justify-start space-y-4 pb-8">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
@@ -177,16 +332,13 @@ export default function Header() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          onClick={() => {
-            setShowBubble(!showBubble);
-            if (!showBubble) speakText();
-            else window.speechSynthesis.cancel();
-          }}
+          onClick={startListening}
+          ref={avatarRef}
         />
 
         {showBubble && (
           <div className="flex justify-center">
-            <TalkingBubble message={speechText} />
+            <TalkingBubble message={bubbleText} />
           </div>
         )}
 
