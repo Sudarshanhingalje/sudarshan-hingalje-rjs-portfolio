@@ -91,6 +91,7 @@ export const projects = [
     ],
     link: "https://scrapsavvy.netlify.app/",
     // github: "https://github.com/Sudarshanhingalje/ScrapSavvy-frontend",
+    //not public
     github: "https://github.com/Sudarshanhingalje/ScrapSavvy-backend",
   },
   {
