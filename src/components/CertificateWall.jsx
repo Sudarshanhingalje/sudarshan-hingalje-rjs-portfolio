@@ -1,59 +1,59 @@
 const CertificateWall = () => {
-  const dogData = [
+  const certificateData = [
     {
       id: 1,
       src: "certificates/1.png",
-      caption: "I'm so happy today!",
+      caption: "Full-Stack Web Development Certificate",
     },
     {
       id: 2,
       src: "certificates/2.png",
-      caption: "I see those nugs.",
+      caption: "ReactJS & Redux Toolkit Course",
     },
     {
       id: 3,
       src: "certificates/3.png",
-      caption: "I love you so much!",
+      caption: "Java & Centre for Development of Advanced Computing (CDAC) Graduate",
     },
     {
       id: 4,
       src: "certificates/4.png",
-      caption: "I'm the baby of the house!",
+      caption: "Spring Boot & RESTful APIs Development",
     },
     {
       id: 5,
       src: "certificates/5.png",
-      caption: "Are you gunna throw the ball?",
+      caption: "AWS EC2 & Cloud Hosting Services",
     },
     {
       id: 6,
       src: "certificates/6.png",
-      caption: "C'mon friend!",
+      caption: "SQL & Relational Databases (MySQL)",
     },
     {
       id: 7,
       src: "certificates/7.png",
-      caption: "A rose for mommy!",
+      caption: "Tailwind CSS & Modern UI Components",
     },
     {
       id: 8,
       src: "certificates/8.png",
-      caption: "You gunna finish that?",
+      caption: "Git & GitHub Team Collaboration",
     },
     {
       id: 9,
       src: "certificates/9.png",
-      caption: "We can't afford a cat!",
+      caption: "State Management with Redux Pro",
     },
     {
       id: 10,
       src: "certificates/10.png",
-      caption: "Dis my fren!",
+      caption: "Responsive Web Design & Mobile UX",
     },
     {
       id: 11,
       src: "certificates/11.png",
-      caption: "A rose for mommy!",
+      caption: "Single Page Application (SPA) Routing & Security",
     },
   ];
 
@@ -62,7 +62,7 @@ const CertificateWall = () => {
       id="certificates"
       className="flex flex-col items-center justify-center min-h-screen p-4 font-sans"
     >
-      <h1 className="text-4xl font-bold mb-8" style={{ color: "coral" }}>
+      <h1 className="text-4xl font-bold mb-8 animate-pulse" style={{ color: "coral" }}>
         Digital Badges Wall
       </h1>
 
@@ -71,36 +71,30 @@ const CertificateWall = () => {
           className="gap-6"
           style={{
             columns: "5 200px",
-            columnGap: "certificates/1.5rem",
+            columnGap: "1.5rem",
           }}
         >
-          {dogData.map((dog) => (
+          {certificateData.map((cert) => (
             <div
-              key={dog.id}
-              className="inline-block w-full mb-6 border-2 border-black pcertificates/1 rounded-lg transition-all duration-300 ease-in-out hover:border-orange-400 group"
+              key={cert.id}
+              className="inline-block w-full mb-6 border-2 border-black p-2 rounded-lg transition-all duration-300 ease-in-out hover:border-[coral] group"
               style={{
                 boxShadow: "5px 5px 5px rgba(0,0,0,0.5)",
                 breakInside: "avoid",
               }}
             >
               <img
-                src={dog.src}
-                alt={`Dog ${dog.id}`}
+                src={cert.src}
+                alt={`Certificate ${cert.id}`}
                 className="w-full rounded-lg transition-all duration-300 ease-in-out grayscale group-hover:grayscale-0"
               />
-              <p className="text-center italic mycertificates/1 mx-0 p-0 text-sm">
-                "{dog.caption}"
+              <p className="text-center italic mt-2 mx-0 p-0 text-sm">
+                "{cert.caption}"
               </p>
             </div>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        .group:hover {
-          border-color: coral;
-        }
-      `}</style>
     </div>
   );
 };

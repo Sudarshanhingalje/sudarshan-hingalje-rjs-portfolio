@@ -150,7 +150,7 @@ export default function Header() {
     }, 500); // Delay of 500ms before starting recognition
   };
 
-  const ytestConnection = async () => {
+  const testConnection = async () => {
     try {
       console.log("🧪 Testing connection...");
       const response = await fetch("http://localhost:5678/webhook/chat", {

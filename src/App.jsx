@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import Loader from "./components/Loader";
 
@@ -14,17 +14,17 @@ import ErrorBoundary from "./utils/ErrorBoundary";
 import SmoothScroll from "./utils/SmoothScroll";
 import VideoPopup from "./videoads/VideoPopup";
 
-// Lazy Loaded Sections
-const Header = lazy(() => import("./sections/Header"));
-const About = lazy(() => import("./sections/About"));
-const Skills = lazy(() => import("./sections/Skills"));
-const Projects = lazy(() => import("./sections/Projects"));
-const Experience = lazy(() => import("./sections/Experience"));
-const Personal = lazy(() => import("./sections/Personal"));
-const Contact = lazy(() => import("./sections/Contact"));
-const Footer = lazy(() => import("./sections/Footer"));
-const GalaxyBackground = lazy(() => import("./components/GalaxyBackground"));
-const StarsBackground = lazy(() => import("./components/StarsBackground"));
+// Statically Imported Sections for smooth rendering and reliable GSAP triggers
+import Header from "./sections/Header";
+import About from "./sections/About";
+import Skills from "./sections/Skills";
+import Projects from "./sections/Projects";
+import Experience from "./sections/Experience";
+import Personal from "./sections/Personal";
+import Contact from "./sections/Contact";
+import Footer from "./sections/Footer";
+import GalaxyBackground from "./components/GalaxyBackground";
+import StarsBackground from "./components/StarsBackground";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -67,42 +67,24 @@ function App() {
                 <Wheel />
                 <ScrollManager>
                   {isDarkMode && !isMobile && (
-                    <Suspense fallback={<div />}>
+                    <>
                       <GalaxyBackground />
                       <StarsBackground />
-                    </Suspense>
+                    </>
                   )}
 
-                  <Suspense fallback={<div />}>
-                    <Header />
-                  </Suspense>
+                  <Header />
 
                   <VideoPopup />
 
-                  <Suspense fallback={<div />}>
-                    <About />
-                  </Suspense>
-                  <Suspense fallback={<div />}>
-                    <Skills />
-                  </Suspense>
-                  <Suspense fallback={<div />}>
-                    <Projects />
-                  </Suspense>
-                  <Suspense fallback={<div />}>
-                    <Experience />
-                  </Suspense>
-                  <Suspense fallback={<div />}>
-                    <Personal />
-                  </Suspense>
-                  <Suspense fallback={<div />}>
-                    <CertificateWall />
-                  </Suspense>
-                  <Suspense fallback={<div />}>
-                    <Contact />
-                  </Suspense>
-                  <Suspense fallback={<div />}>
-                    <Footer />
-                  </Suspense>
+                  <About />
+                  <Skills />
+                  <Projects />
+                  <Experience />
+                  <Personal />
+                  <CertificateWall />
+                  <Contact />
+                  <Footer />
                 </ScrollManager>
               </SmoothScroll>
             </ErrorBoundary>

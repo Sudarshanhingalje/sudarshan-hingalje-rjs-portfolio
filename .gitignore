@@ -1,7 +1,18 @@
-.vercel
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
+# Dependencies
+node_modules/
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Production Build outputs
+dist/
+build/
+stats.html
+
+# Deployments / Hosting configurations
+.vercel/
+.netlify/
