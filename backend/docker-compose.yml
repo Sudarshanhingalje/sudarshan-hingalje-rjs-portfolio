@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+
+  # ─── MySQL 8 Database ──────────────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    container_name: portfolio-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root123}
+      MYSQL_DATABASE: ${DB_NAME:-portfolio}
+      MYSQL_USER: ${DB_USER:-portfolio_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-root123}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── Spring Boot 3.5 / Java 21 Backend ────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: portfolio-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-portfolio}
+      DB_USER: ${DB_USER:-portfolio_user}
+      DB_PASSWORD: ${DB_PASSWORD:-root123}
+      JWT_SECRET: ${JWT_SECRET:-change_this_to_a_very_long_secret_key_at_least_32_chars}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_RECEIVER: ${SMTP_RECEIVER:-sudarshanhigalje1@gmail.com}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:5173,http://localhost:3000}
+    ports:
+      - "8080:8080"
+
+# ─── Volumes ──────────────────────────────────────────────────────────────────
+volumes:
+  mysql_data:
+    driver: local
