@@ -76,7 +76,7 @@ export default function Header() {
         try {
           console.log(
             "🔄 Making request to:",
-            "http://localhost:5678/webhook/chat"
+            "http://localhost:5678/webhook/chat",
           );
           console.log("📤 Sending data:", { message: transcript });
 
@@ -150,7 +150,7 @@ export default function Header() {
     }, 500); // Delay of 500ms before starting recognition
   };
 
-  const testConnection = async () => {
+  const ytestConnection = async () => {
     try {
       console.log("🧪 Testing connection...");
       const response = await fetch("http://localhost:5678/webhook/chat", {
