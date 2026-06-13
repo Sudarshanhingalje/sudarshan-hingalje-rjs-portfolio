@@ -5,7 +5,7 @@ import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 export default function DownloadButton({
-  resumeUrl: propResumeUrl = "https://drive.google.com/uc?export=download&id=1paE8KgxZGv3nfP2YxYpSy1SJGL7cS86V",
+  resumeUrl: propResumeUrl = "https://raw.githubusercontent.com/Sudarshanhingalje/portfolio-assets/main/resumes/Sudarshan_Hingalje_Resume_3fff8ba8.pdf",
   fileName: propFileName = "Sudarshan_Hingalje_Resume.pdf",
   onDownloadStart,
   onDownloadComplete,
