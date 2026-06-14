@@ -154,7 +154,11 @@ public class GitHubStorageService {
         if (contentObj instanceof Map<?, ?> contentMap) {
             Object downloadUrl = contentMap.get("download_url");
             if (downloadUrl != null && !downloadUrl.toString().isBlank()) {
-                return downloadUrl.toString();
+                String url = downloadUrl.toString();
+                if (url.contains("?")) {
+                    url = url.substring(0, url.indexOf("?"));
+                }
+                return url;
             }
         }
         // Fallback: construct raw URL manually

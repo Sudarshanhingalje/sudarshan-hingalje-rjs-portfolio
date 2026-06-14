@@ -12,18 +12,22 @@ const Project = () => {
       try {
         const res = await axios.get(`${API_URL}/projects`);
         if (res.data?.success && Array.isArray(res.data.data)) {
-          const mapped = res.data.data.map(p => ({
-            id: p.id,
-            title: p.title,
-            shortTitle: p.title.split(" - ")[0] || p.title,
-            category: p.isFeatured ? "Featured Project" : "Web Application",
-            status: p.isFeatured ? "Live" : "Active",
-            img: p.imageUrl,
-            link: p.liveUrl,
-            github: p.githubUrl,
-            tech: p.techStack || [],
-            displayOrder: p.displayOrder || 0
-          })).sort((a, b) => a.displayOrder - b.displayOrder);
+          const mapped = res.data.data.map(p => {
+            const rawImg = p.imageUrl;
+            const cleanImg = rawImg && rawImg.includes("?") ? rawImg.split("?")[0] : rawImg;
+            return {
+              id: p.id,
+              title: p.title,
+              shortTitle: p.title.split(" - ")[0] || p.title,
+              category: p.isFeatured ? "Featured Project" : "Web Application",
+              status: p.isFeatured ? "Live" : "Active",
+              img: cleanImg,
+              link: p.liveUrl,
+              github: p.githubUrl,
+              tech: p.techStack || [],
+              displayOrder: p.displayOrder || 0
+            };
+          }).sort((a, b) => a.displayOrder - b.displayOrder);
           setProjectList(mapped);
         } else {
           setProjectList(fallbackProjects);

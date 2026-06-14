@@ -21,8 +21,10 @@ export default function DownloadButton({
       try {
         const res = await axios.get(`${API_URL}/resumes/active`);
         if (res.data?.success && res.data.data) {
+          const rawUrl = res.data.data.pdfUrl;
+          const cleanUrl = rawUrl && rawUrl.includes("?") ? rawUrl.split("?")[0] : rawUrl;
           setActiveResume({
-            url: res.data.data.pdfUrl,
+            url: cleanUrl,
             fileName: res.data.data.label || "Sudarshan_Hingalje_Resume.pdf"
           });
         }

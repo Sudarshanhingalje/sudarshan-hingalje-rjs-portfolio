@@ -16,7 +16,9 @@ const VideoPopup = () => {
       try {
         const res = await axios.get(`${API_URL}/settings`);
         if (res.data?.success && res.data.data?.videoUrl) {
-          setVideoUrl(res.data.data.videoUrl);
+          const rawVideo = res.data.data.videoUrl;
+          const cleanVideo = rawVideo && rawVideo.includes("?") ? rawVideo.split("?")[0] : rawVideo;
+          setVideoUrl(cleanVideo);
         }
       } catch (err) {
         // use fallback

@@ -123,10 +123,9 @@ export default function Header() {
           setBubbleText(message);
           speakText(message);
         } catch (error) {
-          console.error("❌ Fetch Error:", error);
-          console.error("❌ Error details:", error.message);
-          setBubbleText("Sorry, I'm having trouble connecting.");
-          speakText("Sorry, I'm having trouble connecting.");
+          console.error("❌ Backend chat call failed:", error);
+          setBubbleText("Sorry, I'm having trouble connecting to my local AI server (Ollama). Please check if it is running!");
+          speakText("Sorry, I'm having trouble connecting to my local AI server. Please check if it is running.");
         }
       };
 

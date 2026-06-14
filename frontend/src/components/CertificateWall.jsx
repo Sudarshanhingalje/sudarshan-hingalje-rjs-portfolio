@@ -69,11 +69,15 @@ const CertificateWall = () => {
       try {
         const res = await axios.get(`${API_URL}/certifications`);
         if (res.data?.success && Array.isArray(res.data.data)) {
-          const mapped = res.data.data.map(c => ({
-            id: c.id,
-            src: c.imageUrl,
-            caption: c.name
-          }));
+          const mapped = res.data.data.map(c => {
+            const rawSrc = c.imageUrl;
+            const cleanSrc = rawSrc && rawSrc.includes("?") ? rawSrc.split("?")[0] : rawSrc;
+            return {
+              id: c.id,
+              src: cleanSrc,
+              caption: c.name
+            };
+          });
           setCerts(mapped);
         } else {
           setCerts(fallbackCertificateData);

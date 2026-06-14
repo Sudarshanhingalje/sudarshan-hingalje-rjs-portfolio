@@ -41,7 +41,7 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/projects", "/skills", "/experience", "/certifications", "/resumes/active").permitAll()
+                .requestMatchers(HttpMethod.GET, "/projects", "/skills", "/experience", "/certifications", "/resumes/active", "/ai/debug").permitAll()
                 .requestMatchers(HttpMethod.POST, "/contacts", "/webhook/chat", "/analytics/track").permitAll()
                 .requestMatchers(HttpMethod.GET, "/system/health").permitAll()
                 .requestMatchers("/upload/**").authenticated()

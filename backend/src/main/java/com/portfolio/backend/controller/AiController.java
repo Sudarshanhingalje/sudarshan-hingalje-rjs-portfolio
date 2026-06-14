@@ -20,13 +20,14 @@ public class AiController {
     private final SettingsRepository settingsRepository;
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${app.gemini.key}")
-    private String geminiKey;
+    @Value("${app.ollama.url}")
+    private String ollamaUrl;
 
-    @Value("${app.gemini.url}")
-    private String geminiUrl;
+    @Value("${app.ollama.model}")
+    private String ollamaModel;
 
     private boolean isChatbotActive = true;
+    private String lastError = "None";
 
     public AiController(ChatLogRepository chatLogRepository, SettingsRepository settingsRepository) {
         this.chatLogRepository = chatLogRepository;
@@ -56,32 +57,28 @@ public class AiController {
                             .systemPrompt("You are an assistant for Sudarshan's portfolio. Be concise and professional.")
                             .build());
 
-            // Build full Gemini API URL with key
-            String targetUrl = geminiUrl + "?key=" + geminiKey;
+            // Format Ollama request body
+            Map<String, Object> systemMsg = new HashMap<>();
+            systemMsg.put("role", "system");
+            systemMsg.put("content", settings.getSystemPrompt());
 
-            // Format Gemini request body
-            Map<String, Object> textPart = new HashMap<>();
-            textPart.put("text", "System instructions:\n" + settings.getSystemPrompt()
-                    + "\n\nUser Message:\n" + userQuery);
-
-            Map<String, Object> partContainer = new HashMap<>();
-            partContainer.put("parts", List.of(textPart));
+            Map<String, Object> userMsg = new HashMap<>();
+            userMsg.put("role", "user");
+            userMsg.put("content", userQuery);
 
             Map<String, Object> requestBody = new HashMap<>();
-            requestBody.put("contents", List.of(partContainer));
+            requestBody.put("model", ollamaModel);
+            requestBody.put("messages", List.of(systemMsg, userMsg));
+            requestBody.put("stream", false);
 
-            // Call Google AI Studio Gemini API
-            ResponseEntity<Map> response = restTemplate.postForEntity(targetUrl, requestBody, Map.class);
+            // Call local Ollama API
+            ResponseEntity<Map> response = restTemplate.postForEntity(ollamaUrl, requestBody, Map.class);
             Map<?, ?> body = response.getBody();
 
-            if (body != null && body.containsKey("candidates")) {
-                List<?> candidates = (List<?>) body.get("candidates");
-                if (!candidates.isEmpty()) {
-                    Map<?, ?> candidate = (Map<?, ?>) candidates.get(0);
-                    Map<?, ?> content = (Map<?, ?>) candidate.get("content");
-                    List<?> parts = (List<?>) content.get("parts");
-                    Map<?, ?> part = (Map<?, ?>) parts.get(0);
-                    aiResponse = (String) part.get("text");
+            if (body != null && body.containsKey("message")) {
+                Map<?, ?> messageObj = (Map<?, ?>) body.get("message");
+                if (messageObj != null && messageObj.containsKey("content")) {
+                    aiResponse = (String) messageObj.get("content");
                 }
             }
 
@@ -90,7 +87,11 @@ public class AiController {
                     (userQuery.split("\\s+").length + aiResponse.split("\\s+").length) * 1.3);
 
         } catch (Exception e) {
-            System.err.println("⚠️ AiController: Gemini API call failed: " + e.getMessage());
+            System.err.println("⚠️ AiController: Ollama API call failed: " + e.getMessage());
+            this.lastError = e.getClass().getSimpleName() + ": " + e.getMessage();
+            if (e instanceof org.springframework.web.client.HttpStatusCodeException) {
+                this.lastError += " | Body: " + ((org.springframework.web.client.HttpStatusCodeException) e).getResponseBodyAsString();
+            }
             aiResponse = "I'm having trouble reaching my AI right now, but Sudarshan Hingalje is a "
                     + "Full Stack Java Developer. Contact: sudarshanhigalje1@gmail.com";
         } finally {
@@ -128,7 +129,8 @@ public class AiController {
                 "data", Map.of(
                         "systemPrompt", settings.getSystemPrompt(),
                         "chatLogs", logs.subList(0, Math.min(logs.size(), 20)),
-                        "stats", stats
+                        "stats", stats,
+                        "lastError", lastError
                 )
         ));
     }
@@ -160,6 +162,17 @@ public class AiController {
         return ResponseEntity.ok(Map.of(
                 "success", true,
                 "message", "Chatbot status updated to: " + (active ? "ENABLED" : "DISABLED")
+        ));
+    }
+
+    // Debug: Get last Gemini API call error
+    @GetMapping("/ai/debug")
+    public ResponseEntity<?> getAiDebug() {
+        return ResponseEntity.ok(Map.of(
+                "success", true,
+                "lastError", lastError != null ? lastError : "None",
+                "ollamaUrl", ollamaUrl,
+                "ollamaModel", ollamaModel
         ));
     }
 }
