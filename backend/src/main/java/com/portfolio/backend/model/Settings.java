@@ -36,4 +36,9 @@ public class Settings {
 
     @Column(nullable = false, name = "system_prompt", columnDefinition = "TEXT")
     private String systemPrompt;
+
+    // Portfolio context injected into every Ollama prompt.
+    // Editable from the Admin AI Management page.
+    @Column(name = "portfolio_context", columnDefinition = "LONGTEXT")
+    private String portfolioContext;
 }

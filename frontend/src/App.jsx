@@ -36,6 +36,11 @@ function App() {
 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
+  // Reset first-visit state on every page refresh
+  useEffect(() => {
+    localStorage.removeItem("portfolio_first_visit");
+  }, []);
+
   // Admin routes should never show the portfolio loader
   const isAdminRoute = location.pathname.startsWith("/admin");
 

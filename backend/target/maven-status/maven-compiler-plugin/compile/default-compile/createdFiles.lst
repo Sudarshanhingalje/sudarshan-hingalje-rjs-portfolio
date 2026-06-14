@@ -56,6 +56,7 @@ com\portfolio\backend\security\SecurityConfig.class
 com\portfolio\backend\security\AdminDetailsService.class
 com\portfolio\backend\controller\ExperienceController.class
 com\portfolio\backend\model\Settings.class
+com\portfolio\backend\service\OllamaService.class
 com\portfolio\backend\controller\FileUploadController.class
 com\portfolio\backend\model\VisitorLog.class
 com\portfolio\backend\model\Admin.class

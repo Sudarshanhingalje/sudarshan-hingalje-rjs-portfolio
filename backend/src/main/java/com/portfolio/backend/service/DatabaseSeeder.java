@@ -85,6 +85,39 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
 
     private void seedSettings() {
         if (settingsRepository.count() == 0) {
+            String portfolioContext =
+                "Name: Sudarshan Hingalje\n" +
+                "Role: Full Stack Java Developer & Software Engineer\n\n" +
+                "=== SKILLS ===\n" +
+                "Frontend: React.js, HTML, CSS, JavaScript, Redux, Tailwind CSS, Next.js, Vite\n" +
+                "Backend: Java, Spring Boot, Spring Security, JWT, REST APIs, Node.js\n" +
+                "Database: MySQL, MongoDB, Supabase\n" +
+                "Cloud & Tools: AWS EC2, Git, GitHub, Vercel, Netlify, Postman\n\n" +
+                "=== PROJECTS ===\n" +
+                "1. Wild Oasis Hotel Suite — Next.js + Supabase full-stack hotel booking & admin dashboard\n" +
+                "2. ScrapSavvy — Java Spring Boot + React waste management platform (AWS EC2 deployed)\n" +
+                "3. Fast React Pizza — React + Redux real-time pizza ordering app\n" +
+                "4. Pizza Delivery App — Full stack MERN with Razorpay payment integration\n" +
+                "5. Elevora AI — AI-powered business automation platform\n" +
+                "6. Denta AI — Smart dental clinic management system\n\n" +
+                "=== EXPERIENCE ===\n" +
+                "- Full Stack Developer (Project Work) — Wild Oasis Project (2025–Present)\n" +
+                "- Frontend Developer Intern — Harshad Enterprises, Pune (Jan–Jun 2023)\n" +
+                "- CDAC Trainee (PG-DAC) — Advanced Computing, Pune (Jan–Sep 2024)\n\n" +
+                "=== EDUCATION ===\n" +
+                "- Post Graduate Diploma in Advanced Computing (PG-DAC) — CDAC Pune, 2024\n" +
+                "- Bachelor of Engineering — Computer Engineering\n\n" +
+                "=== CONTACT & LINKS ===\n" +
+                "Email: sudarshanhigalje1@gmail.com\n" +
+                "GitHub: https://github.com/Sudarshanhingalje\n" +
+                "LinkedIn: https://linkedin.com/in/sudarshan-hingalje-b07993158\n" +
+                "WhatsApp: +91 9579853955\n" +
+                "Location: Pune, Maharashtra, India\n\n" +
+                "=== ABOUT ===\n" +
+                "Sudarshan is a passionate Full Stack Java Developer with expertise in building scalable " +
+                "web applications. He has strong fundamentals in both frontend (React) and backend (Java/Spring Boot) " +
+                "development, with hands-on experience in REST APIs, JWT authentication, MySQL, and cloud deployment.";
+
             Settings settings = Settings.builder()
                     .ownerName("Sudarshan Hingalje")
                     .tagline("Full Stack Java Developer & Software Engineer")
@@ -93,11 +126,13 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
                     .whatsappNumber("9579853955")
                     .videoUrl("/assets/projectvideo.mp4")
                     .systemPrompt("You are an AI assistant on Sudarshan Hingalje's portfolio website. He is a Full Stack Developer specializing in Java, Spring Boot, MySQL, and React. Answer visitor questions concisely, highlight his projects including Wild Oasis Hotel Suite, ScrapSavvy, and Pizza Delivery App. Be professional and encouraging. Guide interested visitors to use the contact form.")
+                    .portfolioContext(portfolioContext)
                     .build();
             settingsRepository.save(settings);
-            System.out.println("🌱 Seeded: Site settings");
+            System.out.println("🌱 Seeded: Site settings with portfolio context");
         }
     }
+
 
     // Real projects from src/data/projects/ProjectDone.jsx
     private void seedProjects() {

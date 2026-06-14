@@ -31,7 +31,7 @@ export default function Sidebar() {
       title: "Interactions & System",
       items: [
         { label: "Contacts", path: "/admin/contacts", icon: "✉️" },
-        { label: "Gemini AI", path: "/admin/ai", icon: "🤖" },
+        { label: "AI Assistant", path: "/admin/ai", icon: "🤖" },
         { label: "Workflows (n8n)", path: "/admin/workflows", icon: "⚙️" },
         { label: "Security Center", path: "/admin/security", icon: "🔒" },
         { label: "System Settings", path: "/admin/settings", icon: "🛠️" },

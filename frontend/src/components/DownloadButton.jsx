@@ -39,12 +39,10 @@ export default function DownloadButton({
   const fileName = activeResume ? activeResume.fileName : propFileName;
 
   const triggerDownload = () => {
-    const link = document.createElement("a");
-    link.href = resumeUrl;
-    link.setAttribute("download", fileName);
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    // Use window.open to avoid cross-origin sandbox restrictions.
+    // For raw.githubusercontent.com PDFs, the browser will download the file.
+    const cleanUrl = resumeUrl && resumeUrl.includes("?") ? resumeUrl.split("?")[0] : resumeUrl;
+    window.open(cleanUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleDownload = () => {

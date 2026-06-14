@@ -18,12 +18,38 @@ const sections = [
 export default function Wheel() {
   const rotation = useMotionValue(0);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showBouncingArrow, setShowBouncingArrow] = useState(false);
   const centerRef = useRef(null);
   const isDragging = useRef(false);
   const lastAngle = useRef(null);
   const lastTime = useRef(null);
   const velocity = useRef(0);
   const anglePerSection = 360 / sections.length;
+
+  useEffect(() => {
+    // Only show if it's the first visit
+    const isFirstVisit = localStorage.getItem("portfolio_first_visit") !== "false";
+    setShowBouncingArrow(isFirstVisit);
+
+    // Hide arrow once user starts interacting with the page
+    const handleInteraction = () => {
+      setShowBouncingArrow(false);
+      localStorage.setItem("portfolio_first_visit", "false");
+    };
+
+    // Listen only to explicit user inputs to ignore browser layout scroll restoration on load
+    window.addEventListener("wheel", handleInteraction, { passive: true });
+    window.addEventListener("touchmove", handleInteraction, { passive: true });
+    window.addEventListener("pointerdown", handleInteraction, { passive: true });
+    window.addEventListener("keydown", handleInteraction, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleInteraction);
+      window.removeEventListener("touchmove", handleInteraction);
+      window.removeEventListener("pointerdown", handleInteraction);
+      window.removeEventListener("keydown", handleInteraction);
+    };
+  }, []);
 
   const playClick = () => {
     const audio = new Audio(clickSoundFile);
@@ -145,20 +171,46 @@ export default function Wheel() {
   };
 
   return (
-    <motion.div
-      ref={centerRef}
-      className="fixed bottom-10 right-10 z-50 w-32 h-32 md:w-40 md:h-40 cursor-grab active:cursor-grabbing select-none"
-      style={{ rotate: rotation }}
-      onWheel={handleManualWheel}
-      onPointerDown={handlePointerDown}
-      onClick={handleClick}
-    >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full z-20 shadow" />
-      <img
-        src={wheelImg}
-        alt="Navigation Wheel"
-        className="w-full h-full object-contain pointer-events-auto"
-      />
-    </motion.div>
+    <>
+      {/* Bouncing arrow — fixed independently above the wheel */}
+      {showBouncingArrow && (
+        <div className="fixed bottom-[9.5rem] right-[3.5rem] md:bottom-[11.5rem] md:right-[4rem] z-[60] flex flex-col items-center pointer-events-none animate-bounce">
+          <span className="text-[10px] font-black uppercase tracking-wider text-yellow-400 bg-slate-950/90 border border-yellow-400/30 px-2.5 py-0.5 rounded-full shadow-lg mb-1 whitespace-nowrap animate-pulse">
+            Sudarshan Chakra
+          </span>
+          <svg
+            className="w-7 h-7 text-yellow-400 drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.5"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 14l-7 7-7-7m14-6l-7 7-7-7"
+            />
+          </svg>
+        </div>
+      )}
+
+      {/* Original wheel — untouched fixed position */}
+      <motion.div
+        ref={centerRef}
+        className="fixed bottom-10 right-10 z-50 w-32 h-32 md:w-40 md:h-40 cursor-grab active:cursor-grabbing select-none"
+        style={{ rotate: rotation }}
+        onWheel={handleManualWheel}
+        onPointerDown={handlePointerDown}
+        onClick={handleClick}
+      >
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-red-500 rounded-full z-20 shadow" />
+        <img
+          src={wheelImg}
+          alt="Navigation Wheel"
+          className="w-full h-full object-contain pointer-events-auto"
+        />
+      </motion.div>
+    </>
   );
 }
