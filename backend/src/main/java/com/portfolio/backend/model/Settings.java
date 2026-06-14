@@ -41,4 +41,16 @@ public class Settings {
     // Editable from the Admin AI Management page.
     @Column(name = "portfolio_context", columnDefinition = "LONGTEXT")
     private String portfolioContext;
+
+    @Builder.Default
+    @Column(name = "ad_enabled", nullable = false)
+    private boolean adEnabled = true;
+
+    @Builder.Default
+    @Column(name = "ad_mode", nullable = false)
+    private String adMode = "LATEST"; // "LATEST" or "SPECIFIC"
+
+    @Column(name = "ad_project_id")
+    private Long adProjectId;
 }
+

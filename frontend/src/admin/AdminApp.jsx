@@ -24,6 +24,7 @@ import AiManagement from "./pages/AiManagement";
 import Workflows from "./pages/Workflows";
 import Security from "./pages/Security";
 import Settings from "./pages/Settings";
+import AdManagement from "./pages/AdManagement";
 
 // ─── Admin App Root ──────────────────────────────────────────────────────────
 // All admin routes live under /admin/* in the portfolio's React Router.
@@ -64,6 +65,7 @@ export default function AdminApp() {
             <Route path="workflows"       element={<Workflows />} />
             <Route path="security"        element={<Security />} />
             <Route path="settings"        element={<Settings />} />
+            <Route path="ads"             element={<AdManagement />} />
           </Route>
         </Routes>
       </AuthProvider>

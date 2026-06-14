@@ -43,7 +43,9 @@ public class ProjectController {
                     proj.setDisplayOrder(updated.getDisplayOrder());
                     proj.setFeatured(updated.isFeatured());
                     proj.setTechStack(updated.getTechStack());
+                    proj.setCredentials(updated.getCredentials());
                     Project saved = projectRepository.save(proj);
+
                     return ResponseEntity.ok(Map.of("success", true, "data", saved));
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());

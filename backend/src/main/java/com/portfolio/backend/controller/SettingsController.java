@@ -1,7 +1,9 @@
 package com.portfolio.backend.controller;
 
 import com.portfolio.backend.model.Settings;
+import com.portfolio.backend.model.Project;
 import com.portfolio.backend.repository.SettingsRepository;
+import com.portfolio.backend.repository.ProjectRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +14,13 @@ import java.util.Map;
 public class SettingsController {
 
     private final SettingsRepository settingsRepository;
+    private final ProjectRepository projectRepository;
 
-    public SettingsController(SettingsRepository settingsRepository) {
+    public SettingsController(SettingsRepository settingsRepository, ProjectRepository projectRepository) {
         this.settingsRepository = settingsRepository;
+        this.projectRepository = projectRepository;
     }
+
 
     @GetMapping
     public ResponseEntity<?> getSettings() {
@@ -47,6 +52,9 @@ public class SettingsController {
         data.put("whatsappNumber", settings.getWhatsappNumber());
         data.put("videoUrl", settings.getVideoUrl());
         data.put("systemPrompt", settings.getSystemPrompt());
+        data.put("adEnabled", settings.isAdEnabled());
+        data.put("adMode", settings.getAdMode());
+        data.put("adProjectId", settings.getAdProjectId());
         data.put("dbPort", dbPort);
         data.put("smtpPort", smtpPort);
 
@@ -64,6 +72,23 @@ public class SettingsController {
         settings.setLinkedinUrl((String) payload.get("linkedinUrl"));
         settings.setWhatsappNumber((String) payload.get("whatsappNumber"));
         settings.setVideoUrl((String) payload.get("videoUrl"));
+
+        if (payload.containsKey("adEnabled")) {
+            settings.setAdEnabled(Boolean.TRUE.equals(payload.get("adEnabled")));
+        }
+        if (payload.containsKey("adMode") && payload.get("adMode") != null) {
+            settings.setAdMode((String) payload.get("adMode"));
+        }
+        if (payload.containsKey("adProjectId")) {
+            Object projId = payload.get("adProjectId");
+            if (projId == null) {
+                settings.setAdProjectId(null);
+            } else if (projId instanceof Number) {
+                settings.setAdProjectId(((Number) projId).longValue());
+            } else {
+                try { settings.setAdProjectId(Long.parseLong(projId.toString())); } catch (Exception ignored) {}
+            }
+        }
 
         if (settings.getSystemPrompt() == null) {
             settings.setSystemPrompt("You are an assistant for Sudarshan's portfolio.");
@@ -86,10 +111,40 @@ public class SettingsController {
         data.put("whatsappNumber", saved.getWhatsappNumber());
         data.put("videoUrl", saved.getVideoUrl());
         data.put("systemPrompt", saved.getSystemPrompt());
+        data.put("adEnabled", saved.isAdEnabled());
+        data.put("adMode", saved.getAdMode());
+        data.put("adProjectId", saved.getAdProjectId());
         data.put("dbPort", dbPort != null ? dbPort : System.getProperty("DB_PORT", "3306"));
         data.put("smtpPort", smtpPort != null ? smtpPort : System.getProperty("SMTP_PORT", "587"));
 
         return ResponseEntity.ok(Map.of("success", true, "data", data));
+    }
+
+    /**
+     * Public endpoint — resolves the active advertisement project for the portfolio homepage.
+     * No auth required so the public portfolio page can fetch it.
+     */
+    @GetMapping("/ad")
+    public ResponseEntity<?> getAdProject() {
+        Settings settings = settingsRepository.findAll().stream().findFirst().orElse(null);
+
+        if (settings == null || !settings.isAdEnabled()) {
+            return ResponseEntity.ok(Map.of("success", true, "adEnabled", false));
+        }
+
+        Project project = null;
+        if ("SPECIFIC".equalsIgnoreCase(settings.getAdMode()) && settings.getAdProjectId() != null) {
+            project = projectRepository.findById(settings.getAdProjectId()).orElse(null);
+        }
+        if (project == null) {
+            project = projectRepository.findTopByOrderByIdDesc();
+        }
+
+        if (project == null) {
+            return ResponseEntity.ok(Map.of("success", true, "adEnabled", false));
+        }
+
+        return ResponseEntity.ok(Map.of("success", true, "adEnabled", true, "project", project));
     }
 
     private void updateEnvFile(String dbPort, String smtpPort) {

@@ -50,4 +50,8 @@ public class Project {
     @Column(name = "technology")
     @Builder.Default
     private List<String> techStack = new ArrayList<>();
+
+    @Column(name = "credentials")
+    private String credentials;
 }
+

@@ -25,6 +25,7 @@ export default function Sidebar() {
         { label: "Skills", path: "/admin/skills", icon: "⚡" },
         { label: "Certifications", path: "/admin/certifications", icon: "🎓" },
         { label: "Resumes", path: "/admin/resumes", icon: "📄" },
+        { label: "Project Ads", path: "/admin/ads", icon: "📢" },
       ]
     },
     {

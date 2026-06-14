@@ -1,6 +1,6 @@
 import { Award, Code, MonitorPlay, Users } from "lucide-react";
 import { useEffect, useState } from "react";
-import myImage from "../assets/own.webp";
+import PolaroidFlickThrough from "../components/ui/PolaroidFlickThrough";
 import IntroPopup from "../videoads/IntroPopup";
 const About = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -56,13 +56,8 @@ const About = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="flex justify-center lg:justify-end">
               <div className="relative group ">
-                <div className="relative w-80 h-80 sm:w-96 sm:h-96 ">
-                  <div className="w-full h-full overflow-hidden shadow-2xl ">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <img src={myImage} alt="my image" />
-                    </div>
-                  </div>
-                </div>
+                <PolaroidFlickThrough className="w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center" />
+
 
                 <div className="mt-8">
                   <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">

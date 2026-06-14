@@ -20,6 +20,7 @@ export default function Projects() {
   const [displayOrder, setDisplayOrder] = useState(0);
   const [techStack, setTechStack] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
+  const [credentials, setCredentials] = useState("");
 
   useEffect(() => { loadProjects(); }, []);
 
@@ -44,6 +45,7 @@ export default function Projects() {
     setDisplayOrder(proj ? proj.displayOrder || 0 : projects.length + 1);
     setTechStack(proj && proj.techStack ? proj.techStack.join(", ") : "");
     setIsFeatured(proj ? proj.isFeatured || false : false);
+    setCredentials(proj ? proj.credentials || "" : "");
     setModalOpen(true);
   }
 
@@ -55,6 +57,7 @@ export default function Projects() {
       displayOrder: parseInt(displayOrder),
       techStack: techStack.split(",").map((s) => s.trim()).filter(Boolean),
       isFeatured,
+      credentials,
     };
     try {
       if (currentProject) {
@@ -181,6 +184,10 @@ export default function Projects() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                 <input className="ember-input" value={liveUrl} onChange={(e) => setLiveUrl(e.target.value)} placeholder="Live link" />
                 <input className="ember-input" value={githubUrl} onChange={(e) => setGithubUrl(e.target.value)} placeholder="GitHub link" />
+              </div>
+              <div>
+                <label className="ember-label">Demo Credentials (optional)</label>
+                <input className="ember-input" value={credentials} onChange={(e) => setCredentials(e.target.value)} placeholder="e.g. demo@gmail.com / demo@123" />
               </div>
               <div style={{ display: "flex", gap: 12, justifyContent: "flex-end", marginTop: 12 }}>
                 <button type="button" className="ember-btn ember-btn-secondary" onClick={() => setModalOpen(false)}>Cancel</button>
