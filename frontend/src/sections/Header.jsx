@@ -12,6 +12,9 @@ import { Component as LoaderComponent } from "../components/ui/ai-loader";
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 export default function Header() {
+  const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
+  const hasSpeech = typeof window !== "undefined" && !!window.speechSynthesis && !!window.SpeechSynthesisUtterance;
+
   const [showBubble, setShowBubble] = useState(false);
   const [bubbleText, setBubbleText] = useState("");
   const [aiState, setAiState]       = useState("idle"); // idle|listening|thinking|speaking
@@ -45,38 +48,52 @@ export default function Header() {
   // Chrome loads voices asynchronously. We cache them early so safeSpeak
   // never has to wait for voiceschanged mid-response.
   useEffect(() => {
+    if (!hasSpeech) return;
     const loadVoices = () => {
-      const v = window.speechSynthesis.getVoices();
-      if (v.length > 0) {
-        voicesRef.current = v;
-        console.log("✅ Voices loaded:", v.length);
+      try {
+        const v = synth.getVoices();
+        if (v.length > 0) {
+          voicesRef.current = v;
+          console.log("✅ Voices loaded:", v.length);
+        }
+      } catch (e) {
+        console.warn("Failed to load voices:", e);
       }
     };
     loadVoices();
-    window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
-    return () => window.speechSynthesis.removeEventListener("voiceschanged", loadVoices);
-  }, []);
+    synth.addEventListener("voiceschanged", loadVoices);
+    return () => synth.removeEventListener("voiceschanged", loadVoices);
+  }, [hasSpeech, synth]);
 
   // ─── Unlock speech synthesis (Chrome autoplay policy) ─────────────────────
   // Chrome blocks speechSynthesis.speak() until after a user gesture.
   // We call this once on the very first avatar click to "unlock" audio.
   const unlockSpeech = () => {
-    if (unlockedRef.current) return;
+    if (!hasSpeech || unlockedRef.current) return;
     unlockedRef.current = true;
-    const silent = new SpeechSynthesisUtterance(" ");
-    silent.volume = 0;
-    window.speechSynthesis.speak(silent);
-    console.log("🔓 Speech synthesis unlocked");
+    try {
+      const silent = new SpeechSynthesisUtterance(" ");
+      silent.volume = 0;
+      synth.speak(silent);
+      console.log("🔓 Speech synthesis unlocked");
+    } catch (e) {
+      console.warn("Failed to unlock speech:", e);
+    }
   };
 
   // ─── Chrome speech keepalive ──────────────────────────────────────────────
   // Chrome silently pauses speechSynthesis for long text. Pause+resume every 10s
   const startKeepAlive = () => {
+    if (!hasSpeech) return;
     clearInterval(keepAliveRef.current);
     keepAliveRef.current = setInterval(() => {
-      if (window.speechSynthesis.speaking) {
-        window.speechSynthesis.pause();
-        window.speechSynthesis.resume();
+      try {
+        if (synth.speaking) {
+          synth.pause();
+          synth.resume();
+        }
+      } catch (e) {
+        console.warn("Failed speech keepalive:", e);
       }
     }, 10000);
   };
@@ -120,9 +137,17 @@ export default function Header() {
 
   // ─── Core: speak text out loud ────────────────────────────────────────────
   const safeSpeak = (text, onDone) => {
+    if (!hasSpeech) {
+      if (onDone) onDone();
+      return;
+    }
     // Step 1: stop listening and cancel any leftover speech
     stopListening();
-    window.speechSynthesis.cancel();
+    try {
+      synth.cancel();
+    } catch (e) {
+      console.warn("Failed to cancel speech:", e);
+    }
     activeUtteranceRef.current = null;
     isSpeakingRef.current = false;
 
@@ -134,81 +159,109 @@ export default function Header() {
         return;
       }
 
-      const utter  = new SpeechSynthesisUtterance(text);
-      activeUtteranceRef.current = utter;
-      
-      // Detect language from response text (Devanagari check) and selectedLang state
-      let replyLang = "en-US";
-      const hasDevanagari = /[\u0900-\u097F]/.test(text);
-      if (hasDevanagari) {
-        if (selectedLangRef.current === "mr-IN" || /[\u0933]|आहे|नाव|माझे|करतो|प्रकल्प/.test(text)) {
-          replyLang = "mr-IN";
+      try {
+        const utter  = new SpeechSynthesisUtterance(text);
+        activeUtteranceRef.current = utter;
+        
+        // Detect language from response text (Devanagari check) and selectedLang state
+        let replyLang = "en-US";
+        const hasDevanagari = /[\u0900-\u097F]/.test(text);
+        if (hasDevanagari) {
+          if (selectedLangRef.current === "mr-IN" || /[\u0933]|आहे|नाव|माझे|करतो|प्रकल्प/.test(text)) {
+            replyLang = "mr-IN";
+          } else {
+            replyLang = "hi-IN";
+          }
         } else {
-          replyLang = "hi-IN";
+          replyLang = "en-US";
         }
-      } else {
-        replyLang = "en-US";
-      }
 
-      utter.lang   = replyLang;
-      utter.rate   = replyLang === "en-US" ? 0.92 : 0.95;
-      utter.pitch  = 1.0;
-      utter.volume = 1.0;
+        utter.lang   = replyLang;
+        utter.rate   = replyLang === "en-US" ? 0.92 : 0.95;
+        utter.pitch  = 1.0;
+        utter.volume = 1.0;
 
-      // Use preloaded voices (never empty at speak time)
-      const voices    = voicesRef.current.length > 0 ? voicesRef.current : window.speechSynthesis.getVoices();
-      let goodVoice = null;
+        // Use preloaded voices (never empty at speak time)
+        const voices    = voicesRef.current.length > 0 ? voicesRef.current : synth.getVoices();
+        let goodVoice = null;
 
-      if (replyLang === "mr-IN") {
-        goodVoice =
-          voices.find(v => v.lang === "mr-IN" && v.name.includes("Google")) ||
-          voices.find(v => v.lang === "mr-IN") ||
-          voices.find(v => v.lang.startsWith("mr"));
-      } else if (replyLang === "hi-IN") {
-        goodVoice =
-          voices.find(v => v.lang === "hi-IN" && v.name.includes("Google")) ||
-          voices.find(v => v.lang === "hi-IN") ||
-          voices.find(v => v.lang.startsWith("hi"));
-      } else {
-        goodVoice =
-          voices.find(v => v.name === "Google US English")                          ||
-          voices.find(v => v.name === "Microsoft Zira - English (United States)")   ||
-          voices.find(v => v.name.includes("David"))                                ||
-          voices.find(v => v.lang === "en-US" && !v.localService)                   ||
-          voices.find(v => v.lang === "en-US")                                      ||
-          voices.find(v => v.lang.startsWith("en"));
-      }
-
-      if (goodVoice) { 
-        utter.voice = goodVoice; 
-        console.log("🗣️ Using voice:", goodVoice.name, "for lang:", replyLang); 
-      } else {
-        console.log("🗣️ No matching voice found for:", replyLang, ", using default browser fallback");
-      }
-
-      utter.onstart = () => {
-        if (isShutdownRef.current) { window.speechSynthesis.cancel(); return; }
-        console.log("🔊 Voice started");
-        isSpeakingRef.current = true;
-        currentSpokenTextRef.current = text;
-        startKeepAlive();
-      };
-      utter.onend = () => {
-        if (isShutdownRef.current) return; // outside was clicked, do nothing
-        console.log("✅ Voice done");
-        isSpeakingRef.current = false;
-        activeUtteranceRef.current = null;
-        stopKeepAlive();
-        
-        // Start listening ONLY if we are still in a live conversation
-        if (isConversingRef.current && !isShutdownRef.current) {
-          startListening();
+        if (replyLang === "mr-IN") {
+          goodVoice =
+            voices.find(v => v.lang === "mr-IN" && v.name.includes("Google")) ||
+            voices.find(v => v.lang === "mr-IN") ||
+            voices.find(v => v.lang.startsWith("mr"));
+        } else if (replyLang === "hi-IN") {
+          goodVoice =
+            voices.find(v => v.lang === "hi-IN" && v.name.includes("Google")) ||
+            voices.find(v => v.lang === "hi-IN") ||
+            voices.find(v => v.lang.startsWith("hi"));
+        } else {
+          goodVoice =
+            voices.find(v => v.name === "Google US English")                          ||
+            voices.find(v => v.name === "Microsoft Zira - English (United States)")   ||
+            voices.find(v => v.name.includes("David"))                                ||
+            voices.find(v => v.lang === "en-US" && !v.localService)                   ||
+            voices.find(v => v.lang === "en-US")                                      ||
+            voices.find(v => v.lang.startsWith("en"));
         }
-        
+
+        if (goodVoice) { 
+          utter.voice = goodVoice; 
+          console.log("🗣️ Using voice:", goodVoice.name, "for lang:", replyLang); 
+        } else {
+          console.log("🗣️ No matching voice found for:", replyLang, ", using default browser fallback");
+        }
+
+        utter.onstart = () => {
+          if (isShutdownRef.current) { 
+            try { synth.cancel(); } catch (_) {}
+            return; 
+          }
+          console.log("🔊 Voice started");
+          isSpeakingRef.current = true;
+          currentSpokenTextRef.current = text;
+          startKeepAlive();
+        };
+        utter.onend = () => {
+          if (isShutdownRef.current) return; // outside was clicked, do nothing
+          console.log("✅ Voice done");
+          isSpeakingRef.current = false;
+          activeUtteranceRef.current = null;
+          stopKeepAlive();
+          
+          // Start listening ONLY if we are still in a live conversation
+          if (isConversingRef.current && !isShutdownRef.current) {
+            startListening();
+          }
+          
+          if (onDone) onDone();
+        };
+        utter.onerror = (e) => {
+          if (isShutdownRef.current) return; // outside was clicked, do nothing
+          isSpeakingRef.current = false;
+          activeUtteranceRef.current = null;
+          stopKeepAlive();
+          if (e.error === "interrupted" || e.error === "canceled") return;
+          console.warn("⚠️ Speech error:", e.error);
+          
+          // Start listening on error ONLY if still in conversation
+          if (isConversingRef.current && !isShutdownRef.current) {
+            startListening();
+          }
+          
+          if (onDone) onDone();
+        };
+
+        synth.speak(utter);
+        console.log("🔊 Speak queued:", text.slice(0, 60));
+      } catch (e) {
+        console.warn("Failed to speak:", e);
         if (onDone) onDone();
-      };
-      utter.onerror = (e) => {
-        if (isShutdownRef.current) return; // outside was clicked, do nothing
+      }
+    }, 200);
+
+    return () => clearTimeout(timer);
+  };ef.current) return; // outside was clicked, do nothing
         isSpeakingRef.current = false;
         activeUtteranceRef.current = null;
         stopKeepAlive();
@@ -244,7 +297,13 @@ export default function Header() {
   const stopAll = () => {
     stopKeepAlive();
     isSpeakingRef.current = false;
-    window.speechSynthesis.cancel();
+    if (hasSpeech) {
+      try {
+        synth.cancel();
+      } catch (e) {
+        console.warn("Failed to cancel speech in stopAll:", e);
+      }
+    }
     activeUtteranceRef.current = null;
     stopListening();
   };
@@ -283,7 +342,13 @@ export default function Header() {
         // Hard stop all audio and mic
         clearInterval(keepAliveRef.current);
         isSpeakingRef.current = false;
-        window.speechSynthesis.cancel();
+        if (hasSpeech) {
+          try {
+            synth.cancel();
+          } catch (e) {
+            console.warn("Failed to cancel speech in onOutside:", e);
+          }
+        }
         activeUtteranceRef.current = null;
 
         if (recognitionRef.current) {
