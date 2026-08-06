@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { BookOpen } from "lucide-react";
 import avatar from "../assets/yoga.svg";
 import DownloadButton from "../components/DownloadButton";
 import Navbar from "../components/Navbar";
@@ -616,8 +617,18 @@ export default function Header() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2, duration: 1.2 }}
+            className="flex flex-col sm:flex-row gap-4 items-center"
           >
             <DownloadButton />
+            <a
+              href="https://sudarshanhingalje.github.io/code-chai-with-sudarshan/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative select-none overflow-hidden flex items-center justify-center w-48 h-14 rounded-2xl px-6 gap-2 backdrop-blur-md bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 dark:from-purple-500 dark:via-blue-500 dark:to-cyan-500 border border-white/20 dark:border-white/10 hover:shadow-[0_0_18px_rgba(168,85,247,0.4)] shadow-[inset_2px_2px_5px_rgba(255,255,255,0.4)] text-white font-semibold tracking-wide text-sm"
+            >
+              <BookOpen size={20} className="text-purple-300 dark:text-cyan-300" />
+              <span>Read My Blog</span>
+            </a>
           </motion.div>
         </div>
 
@@ -773,8 +784,17 @@ export default function Header() {
           </div>
         )}
 
-        <div className="w-full flex justify-center">
+        <div className="w-full flex flex-col sm:flex-row gap-4 items-center justify-center">
           <DownloadButton />
+          <a
+            href="https://sudarshanhingalje.github.io/code-chai-with-sudarshan/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative select-none overflow-hidden flex items-center justify-center w-48 h-14 rounded-2xl px-6 gap-2 backdrop-blur-md bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 dark:from-purple-500 dark:via-blue-500 dark:to-cyan-500 border border-white/20 dark:border-white/10 hover:shadow-[0_0_18px_rgba(168,85,247,0.4)] shadow-[inset_2px_2px_5px_rgba(255,255,255,0.4)] text-white font-semibold tracking-wide text-sm"
+          >
+            <BookOpen size={20} className="text-purple-300 dark:text-cyan-300" />
+            <span>Read My Blog</span>
+          </a>
         </div>
       </div>
     </section>

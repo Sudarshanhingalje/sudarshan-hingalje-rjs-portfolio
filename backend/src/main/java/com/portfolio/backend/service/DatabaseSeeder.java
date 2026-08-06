@@ -53,7 +53,7 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
             System.out.println("🧹 Clearing skills table to reseed real data...");
             skillRepository.deleteAll();
         }
-        if (experienceRepository.count() < 3) {
+        if (experienceRepository.count() != 2) {
             System.out.println("🧹 Clearing experiences table to reseed real data...");
             experienceRepository.deleteAll();
         }
@@ -101,9 +101,8 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
                 "5. Elevora AI — AI-powered business automation platform\n" +
                 "6. Denta AI — Smart dental clinic management system\n\n" +
                 "=== EXPERIENCE ===\n" +
-                "- Full Stack Developer (Project Work) — Wild Oasis Project (2025–Present)\n" +
-                "- Frontend Developer Intern — Harshad Enterprises, Pune (Jan–Jun 2023)\n" +
-                "- CDAC Trainee (PG-DAC) — Advanced Computing, Pune (Jan–Sep 2024)\n\n" +
+                "- Full Stack Developer Intern — TechSpark Solutions Pvt. Ltd. (Oct 2025–Mar 2026)\n" +
+                "- Full Stack Developer Intern — Oasis Infobyte (Jan–Feb 2025)\n\n" +
                 "=== EDUCATION ===\n" +
                 "- Post Graduate Diploma in Advanced Computing (PG-DAC) — CDAC Pune, 2024\n" +
                 "- Bachelor of Engineering — Computer Engineering\n\n" +
@@ -265,42 +264,30 @@ public class DatabaseSeeder implements ApplicationListener<ApplicationReadyEvent
     private void seedExperience() {
         if (experienceRepository.count() == 0) {
             experienceRepository.save(Experience.builder()
-                    .role("Full Stack Developer (Project Work)")
-                    .company("The Wild Oasis Project")
+                    .role("Full Stack Developer Intern")
+                    .company("TechSpark Solutions Pvt. Ltd.")
                     .location("Remote")
-                    .startDate("2025-01").endDate("Present")
+                    .startDate("Oct 2025").endDate("Mar 2026")
                     .displayOrder(1)
                     .bullets(List.of(
-                        "Built a boutique hotel full-stack app using Next.js, Tailwind CSS, Supabase, and PostgreSQL.",
-                        "Includes full booking management, authentication, real-time data, and 3D animations.",
-                        "Designed and implemented complete hotel admin dashboard with analytics and user management."
+                        "Developed and maintained RESTful APIs using Spring Boot; reduced API response latency by 20% through query optimization and caching strategies.",
+                        "Built modular React.js + Redux frontend components, improving UI reusability across 5+ feature modules and reducing component duplication.",
+                        "Integrated AWS S3 for file/image storage and configured IAM roles for secure access control; contributed to Jenkins CI/CD pipelines, reducing deployment time by 30%.",
+                        "Participated in Agile sprints, daily standups, and code reviews; wrote JUnit and Postman tests achieving 85%+ coverage on core API endpoints."
                     )).build());
 
             experienceRepository.save(Experience.builder()
-                    .role("Frontend Developer (Internship)")
-                    .company("Harshad Enterprises")
-                    .location("Pune")
-                    .startDate("2023-01").endDate("2023-06")
+                    .role("Full Stack Developer Intern")
+                    .company("Oasis Infobyte")
+                    .location("Delhi (Remote)")
+                    .startDate("Jan 2025").endDate("Feb 2025")
                     .displayOrder(2)
                     .bullets(List.of(
-                        "Contributed to UI development, debugging, and code optimization in real-time web applications.",
-                        "Worked with HTML, CSS, JavaScript to create responsive and interactive interfaces.",
-                        "Collaborated with senior developers to resolve UI/UX issues and improve performance."
+                        "Built responsive interfaces with React.js and developed RESTful APIs using Node.js and Express.js with MongoDB/MySQL integration.",
+                        "Maintained version control via Git/GitHub, supported task tracking, and assisted in full-stack project deployment and testing activities."
                     )).build());
 
-            experienceRepository.save(Experience.builder()
-                    .role("CDAC Trainee - Advanced Computing")
-                    .company("CDAC Pune")
-                    .location("Pune")
-                    .startDate("2024-01").endDate("2024-09")
-                    .displayOrder(3)
-                    .bullets(List.of(
-                        "Completed Post Graduate Diploma in Advanced Computing (PG-DAC).",
-                        "Core focus areas: Java, Spring Boot, Data Structures, DBMS, and Web Technologies.",
-                        "Built multiple Java Spring Boot projects with full REST API architecture and MySQL integration."
-                    )).build());
-
-            System.out.println("🌱 Seeded: 3 real experiences");
+            System.out.println("🌱 Seeded: 2 real experiences");
         }
     }
 

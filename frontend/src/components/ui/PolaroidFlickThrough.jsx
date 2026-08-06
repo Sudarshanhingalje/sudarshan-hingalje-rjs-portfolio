@@ -33,9 +33,10 @@ const getDeterministicOffset = (index, id) => {
 const sampleImages = [
   {
     id: "img5",
-    src: "/assets/img5.JPG",
+    src: "/assets/img5.png",
     alt: "Sudarshan Hingalje",
-    caption: "Sudarshan Hingalje ✨"
+    caption: "Sudarshan Hingalje ✨",
+    objectPosition: "top"
   },
   {
     id: "img0",
@@ -51,7 +52,7 @@ const sampleImages = [
   },
   {
     id: "img2",
-    src: "/assets/img2.JPG",
+    src: "/assets/img2.jpg",
     alt: "Innovative Solutions",
     caption: "Creative Solutions 🧠"
   },
@@ -63,9 +64,22 @@ const sampleImages = [
   },
   {
     id: "img4",
-    src: "/assets/img4.JPG",
+    src: "/assets/img4.jpg",
     alt: "Collaboration & Success",
-    caption: "Teamwork & Success 🤝"
+    caption: "Teamwork & Success 🤝",
+    objectPosition: "top"
+  },
+  {
+    id: "img6",
+    src: "/assets/img6.jpg",
+    alt: "Development & Creation",
+    caption: "Dev & Design 💡"
+  },
+  {
+    id: "img7",
+    src: "/assets/img7.jpg",
+    alt: "Achievement",
+    caption: "Milestones & Progress 🏆"
   }
 ];
 
@@ -73,7 +87,29 @@ export default function PolaroidFlickThrough({ className = "" }) {
   const [stack, setStack] = React.useState(sampleImages);
   const [exitX, setExitX] = React.useState(0);
   const [exitY, setExitY] = React.useState(0);
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = false;
+
+  // Helper to programmatically swipe a card
+  const swipeCard = (dir) => {
+    setExitX(dir === "right" ? 450 : -450);
+    setExitY(0);
+    setTimeout(() => {
+      setStack((prev) => [...prev.slice(1), prev[0]]);
+      setExitX(0);
+      setExitY(0);
+    }, 350);
+  };
+
+  // Auto-shuffle timer (cycles cards every 2 seconds)
+  React.useEffect(() => {
+    if (shouldReduceMotion) return;
+
+    const timer = setInterval(() => {
+      swipeCard(Math.random() > 0.5 ? "right" : "left");
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, [stack, shouldReduceMotion]);
 
   // Track the offsets for each card in the stack
   const cardOffsets = React.useMemo(() => {
@@ -91,8 +127,8 @@ export default function PolaroidFlickThrough({ className = "" }) {
     const swipeY = info.offset.y;
 
     if (Math.abs(swipeX) > threshold || Math.abs(swipeY) > threshold) {
-      const dirX = swipeX > 0 ? 400 : -400;
-      const dirY = swipeY > 0 ? 400 : -400;
+      const dirX = swipeX > 0 ? 450 : -450;
+      const dirY = swipeY > 0 ? 450 : -450;
 
       if (Math.abs(swipeX) > Math.abs(swipeY)) {
         setExitX(dirX);
@@ -101,16 +137,13 @@ export default function PolaroidFlickThrough({ className = "" }) {
         setExitX(0);
         setExitY(dirY);
       }
-    } else {
-      setExitX(0);
-      setExitY(0);
-    }
-  };
 
-  const handleAnimationComplete = () => {
-    if (exitX !== 0 || exitY !== 0) {
-      // Cycle top card to the bottom of the stack
-      setStack((prev) => [...prev.slice(1), prev[0]]);
+      setTimeout(() => {
+        setStack((prev) => [...prev.slice(1), prev[0]]);
+        setExitX(0);
+        setExitY(0);
+      }, 350);
+    } else {
       setExitX(0);
       setExitY(0);
     }
@@ -146,7 +179,6 @@ export default function PolaroidFlickThrough({ className = "" }) {
               dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
               dragElastic={0.7}
               onDragEnd={handleDragEnd}
-              onAnimationComplete={isTop ? handleAnimationComplete : undefined}
               animate={
                 isTop
                   ? {
@@ -175,6 +207,7 @@ export default function PolaroidFlickThrough({ className = "" }) {
                   src={img.src}
                   alt={img.alt}
                   className="w-full h-full object-cover pointer-events-none"
+                  style={{ objectPosition: img.objectPosition || "center" }}
                   loading="eager"
                 />
               </div>
